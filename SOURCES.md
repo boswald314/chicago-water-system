@@ -7,7 +7,7 @@ title: "Master bibliography"
 Compiled July 2026 from the "## Sources" sections of all 14 documents in `docs/`, deduplicated by
 URL/work. Where the same report, fact sheet, or article is cited by more than one document, it
 appears once below, with every citing document listed under "Cited in" (two-digit doc numbers,
-`01`–`14`; see the [README](README.md) for what each document covers).
+`01`–`14`; see the [documents index](docs/index.md) for what each document covers).
 
 ## Total unique sources: 380
 

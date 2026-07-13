@@ -1,0 +1,20 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "jekyll",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": [
+        "-c",
+        "PATH=/opt/homebrew/opt/ruby/bin:$PATH exec bundle exec jekyll serve --host 127.0.0.1 --port 4000 --watch"
+      ],
+      "port": 4000
+    },
+    {
+      "name": "static-preview",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8743", "--bind", "127.0.0.1"],
+      "port": 8743
+    }
+  ]
+}

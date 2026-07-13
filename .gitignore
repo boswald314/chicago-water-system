@@ -3,3 +3,6 @@ images/
 sources/
 .DS_Store
 _site/
+vendor/
+.bundle/
+.jekyll-cache/

@@ -26,6 +26,8 @@ defaults:
 # local-only material is not part of the site
 exclude:
   - images/
+  - vendor/
+  - .bundle/
   - sources/
   - README.md
   - Gemfile
