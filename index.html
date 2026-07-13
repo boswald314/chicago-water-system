@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chicago Water System — Interactive Flow Map</title>
+<meta name="description" content="Interactive map of how water moves through Chicago: cribs, purification, sewers, Deep Tunnel, treatment plants, and the reversed river.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💧</text></svg>">
+<style>
+  :root {
+    --bg: #f7f8fa; --panel: #ffffff; --ink: #1a202c; --ink2: #4a5568; --line: #d8dde5;
+    --raw: #6da9d2; --potable: #2b6cb0; --waste: #b7791f; --effluent: #2c9a8f;
+    --storm: #c53030; --waterway: #64748b; --lake: #bfdcf0; --deep: #ede4f7;
+    --accent: #2b6cb0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12161d; --panel: #1b222c; --ink: #e8edf3; --ink2: #a7b2c0; --line: #2e3947;
+      --raw: #5b93bd; --potable: #5ea0e0; --waste: #d4a04a; --effluent: #46b8ab;
+      --storm: #e06666; --waterway: #8b9bb0; --lake: #1d3a52; --deep: #2a2338;
+      --accent: #5ea0e0;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; background: var(--bg); color: var(--ink); }
+  .sitenav { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+    gap: 8px; padding: 10px 22px; background: var(--panel); border-bottom: 1px solid var(--line);
+    position: sticky; top: 0; z-index: 50; }
+  .sitenav .brand { font-weight: 700; color: var(--ink); text-decoration: none; font-size: 16px; }
+  .sitenav .links { display: flex; gap: 16px; flex-wrap: wrap; }
+  .sitenav .links a { color: var(--ink2); text-decoration: none; font-size: 14px; }
+  .sitenav .links a:hover { color: var(--accent); }
+  header { padding: 22px 28px 10px; }
+  header h1 { margin: 0 0 4px; font-size: 24px; letter-spacing: -0.3px; }
+  header p { margin: 0; color: var(--ink2); max-width: 900px; }
+  .glance { display: flex; flex-wrap: wrap; gap: 10px; padding: 14px 28px; }
+  .glance div { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 8px 14px; font-size: 13px; color: var(--ink2); }
+  .glance b { display: block; font-size: 17px; color: var(--ink); }
+  .controls { padding: 4px 28px 10px; display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+  .controls label { display: flex; gap: 7px; align-items: center; cursor: pointer; user-select: none; font-size: 14px; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--ink2); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .swatch { width: 22px; height: 4px; border-radius: 2px; display: inline-block; }
+  .swatch.dashed { background: repeating-linear-gradient(90deg, currentColor 0 5px, transparent 5px 9px); height: 3px; }
+  .scalenote { padding: 0 28px 8px; color: var(--ink2); font-size: 12.5px; }
+  .wrap { display: flex; align-items: flex-start; gap: 0; }
+  .mapbox { flex: 1; overflow-x: auto; padding: 0 0 40px 16px; }
+  svg { display: block; }
+  .node rect { fill: var(--panel); stroke: var(--line); stroke-width: 1.4; rx: 9; cursor: pointer; transition: stroke .15s, filter .15s; }
+  .node:hover rect, .node.sel rect { stroke: var(--accent); stroke-width: 2.2; filter: drop-shadow(0 2px 6px rgba(0,0,0,.18)); }
+  .node.inactive rect { stroke-dasharray: 5 4; }
+  .node text { pointer-events: none; }
+  .nlabel { font-size: 13.5px; font-weight: 650; fill: var(--ink); }
+  .nsub { font-size: 11.5px; fill: var(--ink2); }
+  .bandlabel { font-size: 11px; font-weight: 700; letter-spacing: 1.6px; fill: var(--ink2); text-transform: uppercase; }
+  .edge { fill: none; opacity: .8; }
+  .edge.raw { stroke: var(--raw); }
+  .edge.potable { stroke: var(--potable); }
+  .edge.waste { stroke: var(--waste); }
+  .edge.effluent { stroke: var(--effluent); }
+  .edge.waterway { stroke: var(--waterway); opacity: .7; }
+  .edge.storm { stroke: var(--storm); stroke-dasharray: 7 5; }
+  .elabel { font-size: 10.5px; fill: var(--ink2); }
+  .stormonly { display: none; }
+  body.storm .stormonly { display: initial; }
+  body.storm .edge.storm { animation: dashmove 1.1s linear infinite; }
+  @keyframes dashmove { to { stroke-dashoffset: -24; } }
+  .lakeband rect { fill: var(--lake); stroke: none; }
+  .deepband { fill: var(--deep); opacity: .55; }
+  .bandline { stroke: var(--line); stroke-dasharray: 2 6; }
+  #panel { position: sticky; top: 52px; width: 380px; min-width: 300px; max-height: calc(100vh - 52px); overflow-y: auto; padding: 18px 22px 40px; background: var(--panel); border-left: 1px solid var(--line); }
+  #panel h2 { margin: 0 0 2px; font-size: 18px; }
+  #panel .tag { font-size: 12px; color: var(--ink2); margin-bottom: 12px; }
+  #panel dl { margin: 0 0 12px; }
+  #panel dt { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--ink2); margin-top: 10px; }
+  #panel dd { margin: 2px 0 0; font-size: 14px; }
+  #panel ul { margin: 6px 0 0; padding-left: 18px; font-size: 13.5px; }
+  #panel li { margin-bottom: 5px; }
+  #panel a { color: var(--accent); text-decoration: none; }
+  #panel a:hover { text-decoration: underline; }
+  #panel .links { margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 13.5px; display: flex; flex-direction: column; gap: 6px; }
+  .hint { color: var(--ink2); font-size: 13.5px; }
+  @media (max-width: 900px) { .wrap { flex-direction: column; } #panel { position: static; width: 100%; max-height: none; border-left: none; border-top: 1px solid var(--line); } }
+</style>
+</head>
+<body>
+<nav class="sitenav">
+  <a class="brand" href="#">💧 Chicago's Water System</a>
+  <div class="links" id="navlinks"></div>
+</nav>
+<header>
+  <h1>How Water Moves Through Chicago</h1>
+  <p>The full cycle: Lake Michigan → intake cribs → purification → pumping stations → 5&nbsp;million taps → combined sewers → interceptors &amp; Deep Tunnel → treatment plants → the reversed river system → the Mississippi. Click any box for capacities, construction history, its research document, and its image gallery.</p>
+</header>
+
+<div class="glance">
+  <div><b>2 of 9</b> intake cribs still active (built 1865–1935)</div>
+  <div><b>~2.1 BGD</b> purification capacity (Jardine + Sawyer)</div>
+  <div><b>12</b> water pumping stations · ~4,400 mi of mains</div>
+  <div><b>~4,400 mi</b> city combined sewers · 560 mi MWRD interceptors</div>
+  <div><b>110.4 mi</b> TARP tunnels · 17.5 BG storage at buildout</div>
+  <div><b>7</b> treatment plants · ~2.0 BGD design capacity</div>
+  <div><b>3,200 cfs</b> Lake Michigan diversion cap (US Supreme Court)</div>
+</div>
+
+<div class="controls">
+  <label><input type="checkbox" id="stormToggle"> <b>Extreme-storm mode</b> — show CSO outfalls &amp; river→lake reversals</label>
+  <div class="legend">
+    <span><i class="swatch" style="background:var(--raw)"></i> raw lake water</span>
+    <span><i class="swatch" style="background:var(--potable)"></i> drinking water</span>
+    <span><i class="swatch" style="background:var(--waste)"></i> sewage / combined flow</span>
+    <span><i class="swatch" style="background:var(--effluent)"></i> treated effluent</span>
+    <span><i class="swatch dashed" style="color:var(--storm)"></i> CSO / reversal (storm)</span>
+    <span><i class="swatch" style="background:var(--waterway);height:6px"></i> waterways</span>
+  </div>
+</div>
+<div class="scalenote">Line width scales with √(documented capacity, MGD) — hairlines mean the capacity of that link isn't published. Treatment-plant boxes scale with design flow (MGD) and reservoir boxes with storage (BG), floored so labels stay readable; tunnels hold storage rather than rated flow, so their lines aren't scaled.</div>
+
+<div class="wrap">
+  <div class="mapbox"><svg id="map" width="1460" height="2440" viewBox="0 0 1460 2440" xmlns="http://www.w3.org/2000/svg"></svg></div>
+  <aside id="panel">
+    <h2>Chicago's water cycle</h2>
+    <div class="tag">Click a facility on the map</div>
+    <p class="hint">This diagram is schematic — vertical position means position in the flow, not geography. Everything above the purple band is the drinking-water system (City of Chicago Dept. of Water Management); the purple band is TARP, 150–300&nbsp;ft underground; treatment and waterways belong to the MWRD and partner agencies.</p>
+    <p class="hint">Toggle <b>extreme-storm mode</b> to see what happens when the tunnels and reservoirs fill: pumping stations and outfalls discharge combined sewage to the rivers, and in the worst storms the lakefront gates open and the system deliberately "re-reverses" into Lake Michigan.</p>
+    <p class="hint" id="panelIntroLinks"></p>
+  </aside>
+</div>
+
+<script>
+// On the published site, docs are Jekyll-rendered .html and images live in gallery pages;
+// opened from a local checkout (file://), fall back to the raw .md files and image folders.
+const LOCAL = location.protocol === 'file:';
+const doc = slug => LOCAL ? 'docs/' + slug + '.md' : 'docs/' + slug + '.html';
+const gal = subj => LOCAL ? 'images/' + subj + '/' : 'gallery/' + subj + '.html';
+
+document.getElementById('navlinks').innerHTML = [
+  ['Flow map', '#'],
+  ['Overview', LOCAL ? '00-SYSTEM-OVERVIEW.md' : '00-SYSTEM-OVERVIEW.html'],
+  ['Documents', LOCAL ? 'docs/' : 'docs/'],
+  ['Galleries', LOCAL ? 'images/' : 'gallery/'],
+  ['Sources', LOCAL ? 'SOURCES.md' : 'SOURCES.html'],
+  ['Rights', LOCAL ? 'ATTRIBUTION.md' : 'ATTRIBUTION.html'],
+].map(([t, h]) => `<a href="${h}">${t}</a>`).join('');
+document.getElementById('panelIntroLinks').innerHTML =
+  `Companion reading: <a href="${LOCAL ? 'docs/' : 'docs/'}">the 14 research documents</a>, ` +
+  `<a href="${LOCAL ? 'images/' : 'gallery/'}">the image galleries</a>, and ` +
+  `<a href="${LOCAL ? '00-SYSTEM-OVERVIEW.md' : '00-SYSTEM-OVERVIEW.html'}">the synthesis overview</a>.`;
+
+// --- capacity scaling ---------------------------------------------------
+// edges: stroke width ∝ sqrt(documented MGD); undocumented links get a thin default
+const EW = mgd => mgd ? Math.min(12, 1.2 + Math.sqrt(mgd) / 4.5) : 2.2;
+// treatment plants: size ∝ design flow (MGD); reservoirs: ∝ storage (BG). Floors keep labels readable.
+const sizeWRP = cap => [Math.max(150, Math.min(420, 9.2 * Math.sqrt(cap))),
+                        Math.max(58, Math.min(150, 3.2 * Math.sqrt(cap)))];
+const sizeBG  = bg  => [Math.max(140, Math.min(360, 100 * Math.sqrt(bg))),
+                        Math.max(54, Math.min(130, 34 * Math.sqrt(bg)))];
+
+const NODES = [
+  { id:'lake', x:730, y:60, w:1240, h:52, cls:'lakeband', label:'LAKE MICHIGAN', sub:'Drinking-water source for 5M+ people — protected by the 1900 river reversal',
+    details:{ built:'—', capacity:'Diversion capped at 3,200 cfs (~2.1 BGD) 40-yr avg, US Supreme Court decree', notes:[
+      'Every drop Chicago takes is charged against the Supreme Court diversion cap (Wisconsin v. Illinois).',
+      'Also the emergency relief valve: in extreme storms the waterway is allowed to flow back INTO the lake at three control points.'],
+      doc:'02-river-reversal-canals', gal:'waterways-locks' } },
+
+  { id:'dever', x:250, y:206, w:220, h:64, label:'William E. Dever Crib', sub:'1935 · ACTIVE → Jardine',
+    details:{ built:'1934–35', capacity:'8 intake ports; feeds 16-ft dia., 11.5-mi Chicago Ave. lake tunnel (1936), 130–200 ft deep', notes:[
+      'Steel-and-concrete crib 2.6 mi off North Avenue Beach, built beside the older Harrison Crib.',
+      'One of only two cribs still in service; automated (last crib keepers withdrawn in the 1990s).'],
+      doc:'03-intake-cribs', gal:'cribs' } },
+  { id:'harrison', x:480, y:206, w:190, h:64, cls:'inactive', label:'Carter H. Harrison Crib', sub:'1900 · unusable since 1998',
+    details:{ built:'1900', capacity:'Intake depth 33.8 ft, 2.62 mi offshore', notes:[
+      'Stone crib faced with pressed brick; paired with Dever Crib.',
+      'Out of service since its tunnel collapsed in 1998; still standing.'],
+      doc:'03-intake-cribs', gal:'cribs' } },
+  { id:'retired', x:730, y:206, w:230, h:64, cls:'inactive', label:'5 retired cribs', sub:'Two-Mile 1865 · Four-Mile 1891 · Lake View 1896 · Lawrence Ave 1915 · Wilson Ave 1918',
+    details:{ built:'1865–1918', capacity:'—', notes:[
+      'Two-Mile Crib (1865–1936): Chesbrough\'s original — a pentagonal timber island feeding the first 2-mile lake tunnel (opened 1867), the engineering sensation of its era.',
+      'Intermediate Crib fire, Jan 20 1909: ~60–70 tunnel workers died — Chicago\'s deadliest construction disaster.',
+      'Four-Mile and Wilson Ave cribs still stand, inactive (demolition funded 2015–17 but never executed); Wilson Ave is now a cormorant/peregrine nesting site.'],
+      doc:'03-intake-cribs', gal:'cribs' } },
+  { id:'dunne', x:1000, y:206, w:200, h:64, label:'Edward F. Dunne Crib', sub:'1909/1911 · ACTIVE → Sawyer',
+    details:{ built:'1909 (city engineering records say 1911)', capacity:'110–112-ft dia., 8 ports 7×7 ft, intake depth 32 ft', notes:[
+      'Connected by a steel footbridge to the inactive 68th Street Crib (1892), 50 ft away.',
+      'Supplies the Sawyer plant via the South District tunnel network.'],
+      doc:'03-intake-cribs', gal:'cribs' } },
+  { id:'c68', x:1220, y:206, w:170, h:64, cls:'inactive', label:'68th Street Crib', sub:'1892 · standing, inactive',
+    details:{ built:'1892', capacity:'Intake depth 32 ft, 2.0–2.3 mi offshore', notes:['Pyramidal steel light tower; fog bell electrified 1923.'],
+      doc:'03-intake-cribs', gal:'cribs' } },
+
+  { id:'jardine', x:330, y:356, w:300, h:74, label:'Jardine Water Purification Plant', sub:'1964 · 1.4 BGD — world\'s largest conventional filtration plant',
+    details:{ built:'1955–1964 (full completion cited as 1968)', capacity:'1.4 BGD rated; 96 rapid sand filters; ~500–700 MGD typical output', notes:[
+      'Built as the Central District Filtration Plant on a 61-acre man-made peninsula north of Navy Pier.',
+      'Chicago had NO filtration before Sawyer (1947) and Jardine — only chlorination (from 1912).',
+      'Serves the north/central city and northern & western suburbs.'],
+      doc:'04-water-purification-plants', gal:'purification-plants' } },
+  { id:'sawyer', x:1000, y:356, w:300, h:74, label:'Sawyer Water Purification Plant', sub:'1947 · ~720 MGD — first filtration plant in Chicago',
+    details:{ built:'1930–1947 (approved by voters 1930; Depression and WWII stretched construction; partial treatment Oct 1945, full operation May 14, 1947 as South Water Filtration Plant); expanded 1964; renamed 2016 for Mayor Eugene Sawyer', capacity:'280 MGD original → 480–720 MGD today; 80 filters', notes:[
+      'World\'s largest filtration plant when it opened.',
+      'Serves the South Side and southern suburbs; $74.5M renovation approved 2020.'],
+      doc:'04-water-purification-plants', gal:'purification-plants' } },
+
+  { id:'pumps', x:560, y:512, w:560, h:80, label:'12 Water Pumping Stations + 65 mi of tunnels', sub:'Chicago Ave 1869 · Springfield 1901 · Roseland 1911 · Mayfair 1918 · Western 1927 · T. Jefferson 1928 · Cermak 1935 · Lexington 1992 …',
+    details:{ built:'1854–1992 (Chicago Ave. station is the oldest continuously operating, rebuilt 1869 next to the Water Tower)', capacity:'Combined installed capacity ~2.4 BGD (1956 figure, 49 pumps); Western Ave was "world\'s largest municipal pumping station" at 300 MGD in 1933', notes:[
+      'Steam-to-electric conversion ran from the 1930s (Cermak, all-electric from birth, 1935) to 2017 (Springfield) and ~2020s (Central Park, ~$115M).',
+      'No water towers: Chicago relies on continuous pumping through pressure districts.',
+      'Water reaches ~2.7M city residents + ~125 wholesale suburbs (DuPage Water Commission taps in at Central Park → Lexington via a 12-ft tunnel).'],
+      doc:'05-water-pumping-distribution', gal:'water-pumping-stations' } },
+  { id:'suburbs', x:1240, y:512, w:220, h:80, label:'Wholesale suburbs', sub:'~125 communities · DuPage & Grand Prairie commissions',
+    details:{ built:'contracts from mid-20th c.', capacity:'Suburbs take roughly a third of pumpage', notes:[
+      'DuPage Water Commission: 2.4-mi, 12-ft-dia. bedrock tunnel from Central Park Ave. PS to Lexington PS, then 90-in/72-in mains west.',
+      'Chicago–Grand Prairie pipeline (2024– ) will extend service to Joliet area via the Southwest PS.'],
+      doc:'05-water-pumping-distribution', gal:'water-pumping-stations' } },
+
+  { id:'users', x:730, y:660, w:900, h:56, label:'5+ MILLION PEOPLE — homes, industry, streets', sub:'~4,400 mi water mains in · house drains + 200,000+ catch basins out',
+    details:{ built:'—', capacity:'~750 MGD average potable delivery; everything used returns as sewage', notes:[
+      'The pivot point of the whole system: drinking water (city DWM) becomes wastewater (city sewers → MWRD).',
+      'Stormwater from roofs and streets joins sewage in the SAME pipes — >95% of the city is combined-sewered.'],
+      doc:'06-city-sewer-network', gal:'sewer-construction' } },
+
+  { id:'citysewers', x:730, y:810, w:760, h:74, label:'City of Chicago Combined Sewers — ~4,400 miles', sub:'Dept. of Water Management · brick/clay/concrete, 1856–present · 184 permitted CSO outfalls',
+    details:{ built:'From 1856 (Chesbrough plan — first comprehensive sewer system in the US); streets raised up to 10+ ft to make room', capacity:'Pipes from 6 in. to giant trunk sewers; >95% combined', notes:[
+      'The city owns everything from your house connection to the MWRD interceptor.',
+      'NPDES permit IL0045012 covers 184 city CSO outfalls; 73 telemetrically monitored jointly with MWRD.',
+      'Modern work: extensive relining, green alleys, downspout disconnection, the 2006 Stormwater Management Ordinance (effective 2008) and 2014 Green Stormwater Infrastructure Strategy.'],
+      doc:'06-city-sewer-network', gal:'sewer-construction' } },
+
+  { id:'interceptors', x:730, y:962, w:760, h:70, label:'MWRD Intercepting Sewers — 560 miles', sub:'1906–present · 6 in–27 ft dia. · ~10,000 local connections from 129 municipalities',
+    details:{ built:'From 1906; ~31% installed 1900–1940, ~37% 1961–1980', capacity:'882-sq-mi service area', notes:[
+      '"The superhighway of sewers" — gathers what city & suburban sewers collect and carries it to the 7 treatment plants.',
+      'Built by the Sanitary District after the lakefront interceptors (1900–07) sealed sewage away from Lake Michigan.'],
+      doc:'07-mwrd-interceptors-pumping-stations', gal:'mwrd-pumping-stations' } },
+
+  { id:'nbps', x:220, y:1112, w:300, h:82, label:'★ North Branch Pumping Station', sub:'"Lawrence Ave PS" · 1928–30 · 5 × 300 cfs pumps (~970 MGD)',
+    details:{ built:'1928–29, in service 1930 (predecessor works 1907); Art Deco pump house at 4860 N. Francisco Ave., cantilevered over the river at the Lawrence Ave. bridge', capacity:'5 storm/CSO pumps × 300 cfs ≈ 970 MGD to the river; separate dry-weather lift pumps send sanitary flow to O\'Brien WRP', notes:[
+      'Dry weather: lifts flow from the North Side interceptors (via a tunnel under the North Shore Channel) toward O\'Brien WRP.',
+      'Storms: MWRD activates its pumps to lower sewer levels and prevent surges as TARP fills — an *active* CSO point (outfall 107, structures DS-M90/M91), unlike most outfalls which spill by gravity.',
+      'The TARP Mainstream Tunnel passes nearby (North Branch leg, contract 73-060-2H, $167.9M) with a drop shaft across the river in Ronan Park — the station does NOT pump into the tunnel.',
+      '1972–79: site hosted 4 KSB submersible tunnel-dewatering demonstration pumps (EPA grant era).',
+      'Rehabs: columns/deck 2018–20 after erosion; exterior, deck and dock reconstruction 2023–26.'],
+      doc:'08-north-branch-pumping-station', gal:'mwrd-pumping-stations' } },
+  { id:'raps', x:590, y:1112, w:280, h:82, label:'Racine Avenue Pumping Station', sub:'1939 / rebuilt 1964 · 3,125 cfs (~2,019 MGD)',
+    details:{ built:'1939; major rebuild/expansion 1964; 33,000-sq-ft building at Racine & Pershing/39th', capacity:'3,125 cfs — the muscle that lifts a 36-sq-mi swath of the South Side into the interceptors feeding Stickney', notes:[
+      'Like North Branch PS, activated during extreme storms to control sewer elevations when TARP is filling.',
+      'Green roof retrofit 2015.'],
+      doc:'07-mwrd-interceptors-pumping-stations', gal:'mwrd-pumping-stations' } },
+  { id:'calpumps', x:930, y:1112, w:280, h:82, label:'Calumet-area Pumping Stations', sub:'95th St 1925 (855 cfs) · 122nd St (375 cfs) · 125th St (1,140 cfs)',
+    details:{ built:'95th St: 1924–25; others early-to-mid 20th c.', capacity:'Combined ~2,370 cfs (~1,532 MGD) lifting far-South-Side flow to Calumet WRP', notes:[
+      '125th St PS got a boiler/energy retrofit in 2017.',
+      'CSO outfalls 151 & 752 at the 95th & 122nd St stations discharge to the Little Calumet in extreme events.'],
+      doc:'07-mwrd-interceptors-pumping-stations', gal:'mwrd-pumping-stations' } },
+  { id:'wilmette', x:1250, y:1112, w:200, h:82, label:'Wilmette Pumping Station', sub:'1910 · 4 screw pumps · lake gate',
+    details:{ built:'1908–1910 with the North Shore Channel; lock 1912', capacity:'4 × 250 cfs screw pumps (2 in service); $17.5M renovation 2012', notes:[
+      'Dual role: pulls lake water INTO the North Shore Channel to freshen it — and in extreme storms its gates open the other way, releasing storm flow to the lake.'],
+      doc:'02-river-reversal-canals', gal:'waterways-locks' } },
+
+  { id:'dropshafts', x:730, y:1268, w:360, h:56, label:'~256 drop shafts + 400–600 connecting structures', sub:'Excess combined flow plunges 150–300 ft',
+    details:{ built:'1972–2006, with each tunnel contract', capacity:'"Chicago-style" plunge drop shaft is now an industry-standard design', notes:[
+      'Gated connecting structures route normal flow to the interceptors; storm surplus spills down the shafts into the deep rock tunnels.'],
+      doc:'09-tarp-deep-tunnel', gal:'tarp-tunnels' } },
+  { id:'udp', x:120, y:1400, w:180, h:80, label:'Upper Des Plaines Tunnel', sub:'1981 (first online) · 6.6 mi · 70 MG',
+    details:{ built:'Online 1981 — the first TARP segment in service', capacity:'6.6 mi, 9–20 ft dia., 70 MG; 11-sq-mi O\'Hare-area service basin', notes:['Feeds Majewski Reservoir, then back to Kirie WRP.'],
+      doc:'09-tarp-deep-tunnel', gal:'tarp-tunnels' } },
+  { id:'desplaines', x:330, y:1400, w:190, h:80, label:'Des Plaines Tunnel', sub:'25.6–26.6 mi · 405–420 MG',
+    details:{ built:'1975–2006', capacity:'10–33 ft dia.', notes:['Drains the west/northwest suburbs along the Des Plaines corridor into McCook.'],
+      doc:'09-tarp-deep-tunnel', gal:'tarp-tunnels' } },
+  { id:'mainstream', x:560, y:1400, w:220, h:80, label:'Mainstream Tunnel', sub:'1975–2006 · 40.5 mi · 1.2 BG · 8–33 ft dia.',
+    details:{ built:'First leg online 1985; full system 2006; bored 240–300 ft down in Silurian dolomite', capacity:'40.5 mi, 1.2 BG — the spine of TARP, Wilmette to Hodgkins under the river branches (220-sq-mi tributary area)', notes:[
+      'TARP total: 110.4 mi, 2.32 BG; Phase I contracts $2.33B (bid-year dollars), $3.86B cumulative with the reservoirs — one of the largest civil-engineering projects on Earth.',
+      'Captures ~85% of CSO pollution from the combined-sewer area.'],
+      doc:'09-tarp-deep-tunnel', gal:'tarp-tunnels' } },
+  { id:'calumettunnel', x:1000, y:1400, w:200, h:80, label:'Calumet Tunnel', sub:'1986–2006 · 36.7 mi · 630 MG',
+    details:{ built:'1986–2006, 9–30 ft dia.', capacity:'91-sq-mi far-South-Side / south-suburban basin', notes:['Feeds Thornton Composite Reservoir.'],
+      doc:'09-tarp-deep-tunnel', gal:'tarp-tunnels' } },
+
+  { id:'majewski', x:120, y:1548, scaleBG:0.35, label:'Majewski Reservoir', sub:'1998 · 0.35 BG · open basin',
+    details:{ built:'1998, at Kirie WRP (O\'Hare)', capacity:'350 MG; ~8 BG captured through mid-2025', notes:['First TARP reservoir completed.'],
+      doc:'10-tarp-reservoirs', gal:'tarp-reservoirs' } },
+  { id:'mccook', x:450, y:1548, scaleBG:3.5, label:'McCook Reservoir', sub:'Stage 1 2017 (3.5 BG) → 10 BG by ~2032',
+    details:{ built:'Stage 1 operational Dec 2017; Stage 2 ~72% excavated (2025), consent-decree date 2029, revised 2032; mined by Vulcan Materials', capacity:'3.5 BG now (box scaled to current stage), 10 BG at completion; ~300 ft deep; ~130 BG captured through mid-2025', notes:[
+      'Double-row grout curtain to ~350–370 ft around a 3-mi perimeter keeps sewage out of the aquifer.',
+      'Serves Mainstream + Des Plaines tunnels — central Chicago + 36 suburbs, 3.1M people.'],
+      doc:'10-tarp-reservoirs', gal:'tarp-reservoirs' } },
+  { id:'thornton', x:1000, y:1548, scaleBG:7.9, label:'Thornton Composite Reservoir', sub:'2015 · 7.9 BG · converted quarry',
+    details:{ built:'Operational end of 2015 in the Thornton Quarry north lobe; predecessor Transitional Reservoir 2003–2022', capacity:'7.9 BG (4.8 BG CSO + 3.1 BG Thorn Creek flood storage); ~62 BG captured 2015–25', notes:[
+      'No CSO in its service area since 2020.',
+      'Fill events fill in hours; drawdown takes weeks (limited by Calumet WRP throughput).'],
+      doc:'10-tarp-reservoirs', gal:'tarp-reservoirs' } },
+
+  { id:'mainstreamps', x:560, y:1692, w:250, h:70, label:'Mainstream Pumping Station', sub:'Hodgkins · 1985 · lifts flow ~300 ft to Stickney',
+    details:{ built:'1970s–85 under three contracts (~$262M); pump floor ~300 ft below grade', capacity:'8 pumps in 2 pump houses, largest 17,500 hp; informally "world\'s largest" sewage pumping station', notes:[
+      'Dewaters the Mainstream & Des Plaines tunnels and McCook Reservoir back up to Stickney WRP after storms.',
+      '$23.4M pump overhaul awarded 2021.'],
+      doc:'07-mwrd-interceptors-pumping-stations', gal:'mwrd-pumping-stations' } },
+  { id:'caltarpps', x:1000, y:1692, w:230, h:70, label:'Calumet TARP Pumping Station', sub:'~365 ft below grade — lowest inhabited point in Chicago',
+    details:{ built:'1970s, contract 74-206-2H ($54.8M)', capacity:'Dewaters the Calumet tunnels & Thornton Reservoir to Calumet WRP', notes:[],
+      doc:'07-mwrd-interceptors-pumping-stations', gal:'mwrd-pumping-stations' } },
+
+  { id:'obrien', x:150, y:1852, scaleWRP:333, label:'O\'Brien WRP (North Side)', sub:'1928 · 333 MGD design / 450 max · UV since 2016',
+    details:{ built:'Opened Oct 3, 1928 as the North Side Sewage Treatment Works; renamed 2012 for Terrence J. O\'Brien', capacity:'333 MGD design avg, 450 MGD max; ~230 MGD actual; 143 sq mi, ~1.3M people', notes:[
+      'Receives the North Branch PS lift + north interceptors; discharges to the North Shore Channel.',
+      '2016: world\'s largest wastewater UV disinfection facility (896 lamps, $61.7M).',
+      'Battery E activated-sludge expansion under construction (awarded 2026, ~$409M).',
+      'Its sludge goes to Stickney by pipeline.'],
+      doc:'12-calumet-obrien-wrp', gal:'treatment-plants-obrien' } },
+  { id:'stickney', x:480, y:1852, scaleWRP:1200, label:'Stickney WRP — world\'s largest', sub:'1930/1939 · 1,200 MGD design / 1,440 peak',
+    details:{ built:'West Side works opened June 2, 1930 (per MWRD; 1931 per some sources); Southwest works Sept 1939; consolidated as "Stickney" 1988; 413 acres in Cicero', capacity:'1.2 BGD design, 1.44 BGD peak; 685 MGD 2024 average; 260 sq mi, ~2.3M people', notes:[
+      'Fed by the Racine Ave PS and the West Side/Southwest interceptors; also digests solids from Egan, Kirie, O\'Brien & Lemont.',
+      'Ostara nutrient-recovery facility (2016) — world\'s largest, turning phosphorus into fertilizer.',
+      'No effluent disinfection (secondary-contact waterway) — discharges to the Sanitary & Ship Canal.',
+      'Biosolids: LASMA/HASMA drying & composting; historically barged 200 mi to Fulton County strip-mine reclamation.'],
+      doc:'11-stickney-wrp', gal:'treatment-plants-stickney' } },
+  { id:'calumetwrp', x:1000, y:1852, scaleWRP:354, label:'Calumet WRP', sub:'1922 · 354 MGD design / 430 max · oldest operating',
+    details:{ built:'In service since 1922 — MWRD\'s oldest continuously operating plant; 130th & Doty, on the Little Calumet', capacity:'354 MGD design avg, 430 MGD max; ~300 sq mi, ~1M people', notes:[
+      'Receives far-South-Side flow via the 95th/122nd/125th St pumping stations + Thornton Reservoir pumpback.',
+      'Chlorination/dechlorination disinfection added 2013–15 (operational 2016).',
+      '2009 master plan: ~$507M of rebuilds (new 600-MGD influent pumping station, Battery D, etc.).'],
+      doc:'12-calumet-obrien-wrp', gal:'treatment-plants-calumet' } },
+  { id:'suburbanwrps', x:1290, y:1852, scaleWRP:96, label:'4 suburban WRPs', sub:'Kirie 1980 (52 MGD) · Egan 1976 (30) · Hanover Pk 1963 (12) · Lemont 1961 (2.3)',
+    details:{ built:'Lemont 1961 · Hanover Park 1963 · Egan 1975–76 · Kirie 1980', capacity:'Combined ~96 MGD design (box scaled to the combined figure)', notes:[
+      'Kirie (Des Plaines) → Higgins Creek; ships raw sludge to Egan — no digestion on site.',
+      'Egan (Schaumburg) → Upper Salt Creek; tertiary filters + 2016 ANITA-Mox sidestream nitrogen removal.',
+      'Hanover Park → West Branch DuPage River; biosolids injected into its own 200-acre Fischer Farm since 1969.',
+      'Lemont → Sanitary & Ship Canal; 5-MG wet-weather reservoir added ($29.7M).'],
+      doc:'13-suburban-wrps', gal:'treatment-plants-suburban' } },
+
+  { id:'lakegateN', x:110, y:2030, w:170, h:60, cls:'lakeband', label:'Lake gates (N & C)', sub:'Wilmette gate · Chicago Harbor Lock / CRCW 1938',
+    details:{ built:'Chicago River Controlling Works & Harbor Lock: 1938 (USACE-operated)', capacity:'Admit lake water for navigation & dilution — and open in reverse during extreme storms', notes:[],
+      doc:'02-river-reversal-canals', gal:'waterways-locks' } },
+  { id:'nsc', x:330, y:2030, w:190, h:60, label:'North Shore Channel + North Branch', sub:'dug 1907–10 · joins river at Foster/Lawrence',
+    details:{ built:'1907–1910', capacity:'Receives O\'Brien WRP effluent at Howard St', notes:['The North Branch Pumping Station sits right at the junction area of channel and river.'],
+      doc:'02-river-reversal-canals', gal:'canals-river-reversal' } },
+  { id:'mainstem', x:560, y:2030, w:180, h:60, label:'Main Stem + South Branch', sub:'REVERSED Jan 2, 1900',
+    details:{ built:'Reversal accomplished by the Sanitary & Ship Canal, opened Jan 2, 1900', capacity:'—', notes:['Flows backwards, away from the lake, by design — "the river that runs uphill".'],
+      doc:'02-river-reversal-canals', gal:'canals-river-reversal' } },
+  { id:'cssc', x:790, y:2030, w:210, h:60, label:'Sanitary & Ship Canal', sub:'1892–1900 · 28 mi · the reversal machine',
+    details:{ built:'Dug 1892–1900 by ~8,500 workers; more earth moved than the Panama Canal to that date ("the Chicago school of earth-moving")', capacity:'28 mi, joined by the Cal-Sag at Sag Junction; receives Stickney & Lemont effluent', notes:[
+      'Electric fish barrier near Romeoville guards against Asian carp moving between basins.'],
+      doc:'02-river-reversal-canals', gal:'canals-river-reversal' } },
+  { id:'calsag', x:1030, y:2030, w:170, h:60, label:'Cal-Sag Channel', sub:'1911–22 · 16 mi',
+    details:{ built:'1911–1922', capacity:'Reverses the Little Calumet/Calumet toward Sag Junction', notes:['Receives Calumet WRP effluent.'],
+      doc:'02-river-reversal-canals', gal:'canals-river-reversal' } },
+  { id:'lakegateS', x:1270, y:2030, w:190, h:60, cls:'lakeband', label:'Lake gate (S)', sub:'T.J. O\'Brien Lock & Dam · 1960s',
+    details:{ built:'1960s (USACE)', capacity:'Controls the Calumet River connection to Lake Michigan', notes:[],
+      doc:'02-river-reversal-canals', gal:'waterways-locks' } },
+
+  { id:'lockport', x:560, y:2180, w:300, h:70, label:'Lockport Powerhouse & Controlling Works', sub:'1907 · the single downstream throat · ~40-ft drop',
+    details:{ built:'Powerhouse 1907 — generated hydroelectricity from sewage-diluted lake water', capacity:'Entire CAWS exits here to the Des Plaines River above Joliet', notes:['MWRD-owned; USACE Lockport Lock adjacent.'],
+      doc:'02-river-reversal-canals', gal:'waterways-locks' } },
+  { id:'downstream', x:730, y:2320, w:700, h:56, label:'Des Plaines River → Illinois River → Mississippi → Gulf of Mexico', sub:'Chicago\'s treated water (and Fulton County biosolids barges, historically) go south, not into the lake',
+    details:{ built:'—', capacity:'—', notes:['The entire design goal since 1900: send it away from the drinking water.'],
+      doc:'14-cso-outfalls-discharges', gal:'waterways-locks' } },
+];
+
+// apply capacity scaling to node sizes
+for (const n of NODES) {
+  if (n.scaleWRP) { const [w, h] = sizeWRP(n.scaleWRP); n.w = w; n.h = h; }
+  if (n.scaleBG) { const [w, h] = sizeBG(n.scaleBG); n.w = w; n.h = h; }
+}
+
+const EDGES = [
+  { f:'lake', t:'dever', c:'raw' }, { f:'lake', t:'dunne', c:'raw' },
+  { f:'lake', t:'harrison', c:'raw', dash:1 }, { f:'lake', t:'c68', c:'raw', dash:1 }, { f:'lake', t:'retired', c:'raw', dash:1 },
+  { f:'dever', t:'jardine', c:'raw', lbl:'11.5-mi lake tunnel, gravity' },
+  { f:'dunne', t:'sawyer', c:'raw', lbl:'lake tunnels, gravity' },
+  { f:'jardine', t:'pumps', c:'potable', mgd:1400, lbl:'1,400 MGD rated' },
+  { f:'sawyer', t:'pumps', c:'potable', mgd:720, lbl:'720 MGD rated' },
+  { f:'pumps', t:'users', c:'potable', mgd:750, lbl:'~750 MGD avg delivered' },
+  { f:'pumps', t:'suburbs', c:'potable' },
+  { f:'suburbs', t:'users', c:'potable' },
+  { f:'users', t:'citysewers', c:'waste', mgd:750, lbl:'house drains + catch basins' },
+  { f:'citysewers', t:'interceptors', c:'waste', mgd:750, lbl:'gravity, ~10,000 connections' },
+  { f:'interceptors', t:'nbps', c:'waste' },
+  { f:'interceptors', t:'raps', c:'waste' },
+  { f:'interceptors', t:'calpumps', c:'waste' },
+  { f:'nbps', t:'obrien', c:'waste', lbl:'dry-weather lift (capacity unpublished)' },
+  { f:'raps', t:'stickney', c:'waste', mgd:2019, lbl:'3,125 cfs ≈ 2,019 MGD' },
+  { f:'calpumps', t:'calumetwrp', c:'waste', mgd:1532, lbl:'~2,370 cfs ≈ 1,532 MGD' },
+  { f:'interceptors', t:'suburbanwrps', c:'waste', mgd:96, lbl:'suburban interceptors' },
+  { f:'citysewers', t:'dropshafts', c:'waste', lbl:'storm surplus' },
+  { f:'dropshafts', t:'udp', c:'waste' }, { f:'dropshafts', t:'desplaines', c:'waste' },
+  { f:'dropshafts', t:'mainstream', c:'waste' }, { f:'dropshafts', t:'calumettunnel', c:'waste' },
+  { f:'udp', t:'majewski', c:'waste' },
+  { f:'desplaines', t:'mccook', c:'waste' },
+  { f:'mainstream', t:'mccook', c:'waste' },
+  { f:'calumettunnel', t:'thornton', c:'waste' },
+  { f:'mccook', t:'mainstreamps', c:'waste' },
+  { f:'mainstream', t:'mainstreamps', c:'waste' },
+  { f:'thornton', t:'caltarpps', c:'waste' },
+  { f:'mainstreamps', t:'stickney', c:'waste', mgd:1000, lbl:'pumped back ~300 ft up · ~1 BGD' },
+  { f:'caltarpps', t:'calumetwrp', c:'waste' },
+  { f:'majewski', t:'suburbanwrps', c:'waste', mgd:110, lbl:'pumpback to Kirie (110 MGD max)' },
+  { f:'obrien', t:'nsc', c:'effluent', mgd:333, lbl:'333 MGD design → North Shore Channel' },
+  { f:'stickney', t:'cssc', c:'effluent', mgd:1200, lbl:'1,200 MGD design → the Canal' },
+  { f:'calumetwrp', t:'calsag', c:'effluent', mgd:354, lbl:'354 MGD design → Little Calumet' },
+  { f:'suburbanwrps', t:'calsag', c:'effluent', mgd:96, dash:1, lbl:'Higgins Cr · Salt Cr · DuPage R · CSSC' },
+  { f:'lakegateN', t:'nsc', c:'waterway', ww:1 }, { f:'nsc', t:'mainstem', c:'waterway', ww:1 },
+  { f:'mainstem', t:'cssc', c:'waterway', ww:1 }, { f:'calsag', t:'cssc', c:'waterway', ww:1 },
+  { f:'lakegateS', t:'calsag', c:'waterway', ww:1 },
+  { f:'cssc', t:'lockport', c:'waterway', ww:1 }, { f:'lockport', t:'downstream', c:'waterway', ww:1 },
+  { f:'nbps', t:'nsc', c:'storm', storm:1, mgd:970, lbl:'CSO outfall 107 → North Branch · 970 MGD' },
+  { f:'raps', t:'cssc', c:'storm', storm:1, mgd:2019, lbl:'CSO → canal · 2,019 MGD' },
+  { f:'calpumps', t:'calsag', c:'storm', storm:1, mgd:1532, lbl:'CSO 151/752 → Little Calumet' },
+  { f:'citysewers', t:'mainstem', c:'storm', storm:1, lbl:'184 city CSO outfalls' },
+  { f:'wilmette', t:'lake', c:'storm', storm:1, lbl:'reversal to lake' },
+  { f:'lakegateN', t:'lake', c:'storm', storm:1, lbl:'reversal (CRCW gates open)' },
+  { f:'lakegateS', t:'lake', c:'storm', storm:1, lbl:'reversal (O\'Brien Lock)' },
+  { f:'interceptors', t:'wilmette', c:'waste', dash:1 },
+];
+
+const svg = document.getElementById('map');
+const NS = 'http://www.w3.org/2000/svg';
+const byId = Object.fromEntries(NODES.map(n => [n.id, n]));
+
+function el(tag, attrs, parent) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  (parent || svg).appendChild(e); return e;
+}
+
+const bands = [
+  { y: 130, h: 150, label: 'INTAKE CRIBS — Lake Michigan, 2–3 miles offshore' },
+  { y: 300, h: 150, label: 'PURIFICATION — Dept. of Water Management' },
+  { y: 460, h: 320, label: 'DISTRIBUTION & USE' },
+  { y: 780, h: 300, label: 'COLLECTION — combined sewers & interceptors' },
+  { y: 1230, h: 550, label: 'TARP "DEEP TUNNEL" — 150–300 FT UNDERGROUND', deep: 1 },
+  { y: 1800, h: 200, label: 'TREATMENT — 7 MWRD water reclamation plants' },
+  { y: 2000, h: 420, label: 'THE REVERSED WATERWAYS — away from the lake since 1900' },
+];
+for (const b of bands) {
+  if (b.deep) el('rect', { x: 10, y: b.y, width: 1440, height: b.h, class: 'deepband', rx: 12 });
+  el('line', { x1: 10, y1: b.y, x2: 1450, y2: b.y, class: 'bandline' });
+  const t = el('text', { x: 18, y: b.y + 18, class: 'bandlabel' }); t.textContent = b.label;
+}
+
+const edgeLayer = el('g', {});
+function anchor(n, other) {
+  const dy = other.y - n.y;
+  if (Math.abs(dy) > (n.h + other.h) / 2 + 20) return [n.x, n.y + (dy > 0 ? n.h / 2 : -n.h / 2)];
+  return [n.x + (other.x > n.x ? n.w / 2 : -n.w / 2), n.y];
+}
+for (const e of EDGES) {
+  const a = byId[e.f], b = byId[e.t];
+  const [x1, y1] = anchor(a, b), [x2, y2] = anchor(b, a);
+  const midy = (y1 + y2) / 2;
+  const path = `M ${x1} ${y1} C ${x1} ${midy}, ${x2} ${midy}, ${x2} ${y2}`;
+  const cls = 'edge ' + e.c + (e.storm ? ' stormonly' : '');
+  const p = el('path', { d: path, class: cls }, edgeLayer);
+  p.setAttribute('stroke-width', e.ww ? 5 : EW(e.mgd));
+  if (e.dash && !e.storm) p.setAttribute('stroke-dasharray', '5 5');
+  if (e.lbl) {
+    const t = el('text', { x: (x1 + x2) / 2 + 6, y: midy - 4, class: 'elabel' + (e.storm ? ' stormonly' : '') }, edgeLayer);
+    t.textContent = e.lbl;
+  }
+}
+
+const panel = document.getElementById('panel');
+function showDetails(n) {
+  document.querySelectorAll('.node.sel').forEach(x => x.classList.remove('sel'));
+  document.getElementById('n-' + n.id).classList.add('sel');
+  const d = n.details || {};
+  panel.innerHTML = `
+    <h2>${n.label.replace('★ ', '')}</h2>
+    <div class="tag">${n.sub || ''}</div>
+    <dl>
+      <dt>Built</dt><dd>${d.built || '—'}</dd>
+      <dt>Capacity / scale</dt><dd>${d.capacity || '—'}</dd>
+    </dl>
+    ${d.notes && d.notes.length ? '<dt style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--ink2)">Notes</dt><ul>' + d.notes.map(x => '<li>' + x + '</li>').join('') + '</ul>' : ''}
+    <div class="links">
+      ${d.doc ? `<a href="${doc(d.doc)}">📄 Full research doc: ${d.doc}</a>` : ''}
+      ${d.gal ? `<a href="${gal(d.gal)}">🖼 Image gallery: ${d.gal}</a>` : ''}
+    </div>`;
+}
+for (const n of NODES) {
+  const g = el('g', { class: 'node' + (n.cls ? ' ' + n.cls : ''), id: 'n-' + n.id });
+  el('rect', { x: n.x - n.w / 2, y: n.y - n.h / 2, width: n.w, height: n.h, rx: 9 }, g);
+  const lbl = el('text', { x: n.x, y: n.y - n.h / 2 + 22, 'text-anchor': 'middle', class: 'nlabel' }, g);
+  lbl.textContent = n.label;
+  if (n.sub) {
+    const words = n.sub.split(' ');
+    const maxChars = Math.floor(n.w / 6.2);
+    let lines = [''], li = 0;
+    for (const w of words) {
+      if ((lines[li] + ' ' + w).trim().length > maxChars) { lines.push(w); li++; }
+      else lines[li] = (lines[li] + ' ' + w).trim();
+    }
+    lines = lines.slice(0, Math.max(1, Math.floor((n.h - 30) / 14)));
+    lines.forEach((ln, i) => {
+      const t = el('text', { x: n.x, y: n.y - n.h / 2 + 38 + i * 14, 'text-anchor': 'middle', class: 'nsub' }, g);
+      t.textContent = ln;
+    });
+  }
+  g.addEventListener('click', () => showDetails(n));
+}
+
+document.getElementById('stormToggle').addEventListener('change', e => {
+  document.body.classList.toggle('storm', e.target.checked);
+});
+</script>
+</body>
+</html>

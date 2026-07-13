@@ -1,0 +1,5 @@
+# local-only material (see README): image album is its own repo, sources stay offline
+images/
+sources/
+.DS_Store
+_site/

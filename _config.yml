@@ -1,0 +1,32 @@
+title: Chicago's Water System
+description: >-
+  A complete, cited research archive of how water moves through Chicago —
+  intake cribs to the Deep Tunnel to the Mississippi.
+url: "https://boswald314.github.io"
+baseurl: "/chicago-water-system"
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+plugins:
+  - jekyll-relative-links
+
+relative_links:
+  enabled: true
+  collections: false
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+# local-only material is not part of the site
+exclude:
+  - images/
+  - sources/
+  - README.md
+  - Gemfile
+  - "*.py"

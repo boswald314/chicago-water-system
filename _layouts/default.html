@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page.title | default: site.title }} · {{ site.title }}</title>
+<meta name="description" content="{{ page.description | default: site.description }}">
+<link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💧</text></svg>">
+</head>
+<body>
+<nav class="sitenav">
+  <a class="brand" href="{{ '/' | relative_url }}">💧 Chicago's Water System</a>
+  <div class="links">
+    <a href="{{ '/' | relative_url }}">Flow map</a>
+    <a href="{{ '/00-SYSTEM-OVERVIEW.html' | relative_url }}">Overview</a>
+    <a href="{{ '/docs/' | relative_url }}">Documents</a>
+    <a href="{{ '/gallery/' | relative_url }}">Galleries</a>
+    <a href="{{ '/SOURCES.html' | relative_url }}">Sources</a>
+    <a href="{{ '/ATTRIBUTION.html' | relative_url }}">Rights</a>
+  </div>
+</nav>
+<main class="content">
+{{ content }}
+</main>
+<footer class="sitefoot">
+  Research archive compiled July 2026 · every claim cited ·
+  <a href="{{ '/ATTRIBUTION.html' | relative_url }}">image rights &amp; attribution</a> ·
+  <a href="https://github.com/boswald314/chicago-water-system">source repo</a>
+</footer>
+</body>
+</html>
