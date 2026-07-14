@@ -4,9 +4,11 @@ title: The detail documents
 
 # The detail documents
 
-Fourteen fully-cited research documents, each with a facilities/capacities table, construction
-narrative, upgrade timeline, and open questions. All were adversarially fact-checked against
-their cited sources (369 claims verified, 63 corrections) and cross-audited for consistency.
+Fifteen fully-cited research documents, each with a facilities/capacities table, construction
+narrative, upgrade timeline, and open questions. Docs 01–14 were adversarially fact-checked against
+their cited sources (369 claims verified, 63 corrections) and cross-audited for consistency; doc 15
+was researched and cited to the same standard but added in a later pass and not yet run through that
+same adversarial audit.
 Start with the [system overview](../00-SYSTEM-OVERVIEW.md) if you want the whole picture first.
 
 | Doc | Covers |
@@ -25,3 +27,4 @@ Start with the [system overview](../00-SYSTEM-OVERVIEW.md) if you want the whole
 | [12 — Calumet & O'Brien WRPs](12-calumet-obrien-wrp.md) | The 1922 and 1928 plants, 2016 disinfection additions, current expansions |
 | [13 — Suburban WRPs](13-suburban-wrps.md) | Kirie, Egan, Hanover Park, Lemont — capacities, service areas, the suburban solids chain |
 | [14 — CSOs, outfalls & discharges](14-cso-outfalls-discharges.md) | Where everything discharges, every river→lake reversal year, the "does Deep Tunnel work?" debate |
+| [15 — The Calumet-region lakes](15-calumet-lakes-transformation.md) | Lake Calumet's harbor dredging and slag/dredge-spoil filling, Wolf Lake's dikes and causeways, vanished Hyde Lake (formed ~1872–81, filled by 1927), and where the Cal-Sag Channel's spoil actually went |

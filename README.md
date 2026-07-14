@@ -22,7 +22,7 @@ and local-history sources. Every factual claim in the documents carries a number
 | **[00-SYSTEM-OVERVIEW.md](00-SYSTEM-OVERVIEW.md)** | The whole system in one readable document — facility tables, "follow a drop of water" narratives, construction eras, ownership boundaries |
 | **[index.html](index.html)** | Interactive flow diagram (the site homepage) — click any facility for details, toggle *extreme-storm mode* to see CSOs and lake reversals; lines scale with documented capacity, plant/reservoir boxes with design flow/storage |
 | **[SOURCES.md](SOURCES.md)** | Master bibliography of every source used, by tier, with which docs cite it |
-| **[images/INDEX.md](images/INDEX.md)** | Catalog of all ~640 archival images with captions, dates, and provenance links |
+| **[images/INDEX.md](images/INDEX.md)** | Catalog of all ~810 archival images with captions, dates, and provenance links |
 
 ## The detail documents (`docs/`)
 
@@ -47,6 +47,7 @@ cross-checked against each other for consistency.
 | [12 — Calumet & O'Brien WRPs](docs/12-calumet-obrien-wrp.md) | The 1922 and 1928 plants, 2016 disinfection additions (chlorination / world's-largest UV), current expansions |
 | [13 — Suburban WRPs](docs/13-suburban-wrps.md) | Kirie, Egan, Hanover Park, Lemont — capacities, service areas, the suburban solids chain |
 | [14 — CSOs, outfalls & discharges](docs/14-cso-outfalls-discharges.md) | Where everything discharges, every river→lake reversal year, the "does Deep Tunnel work?" debate, green infrastructure |
+| [15 — The Calumet-region lakes](docs/15-calumet-lakes-transformation.md) | Lake Calumet's harbor dredging and slag filling, Wolf Lake's dikes, vanished Hyde Lake, and where the Cal-Sag spoil went |
 
 ## Images (`images/`)
 
@@ -85,5 +86,5 @@ Listed with descriptions at the end of [SOURCES.md](SOURCES.md).
   needed) — its links automatically fall back to the raw `.md` files and image folders when
   opened from disk. The published site serves rendered pages and galleries instead.
 - `images/` (its own repo, [chicago-water-images](https://github.com/boswald314/chicago-water-images))
-  and `sources/` are not part of this repo: ~33 rights-restricted images and the 262 MB of
-  source PDFs stay local-only. See [ATTRIBUTION.md](ATTRIBUTION.md) for the rights policy.
+  and `sources/` are not part of this repo: ~54 rights-restricted images and the ~2.8 GB of
+  source documents stay local-only. See [ATTRIBUTION.md](ATTRIBUTION.md) for the rights policy.

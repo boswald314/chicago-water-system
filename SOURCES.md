@@ -524,6 +524,11 @@ A July 2026 archival research sweep (six document-hunting agents) added 91 furth
 
 ## Downloaded documents
 
+### Added July 2026 — HathiTrust page-image harvest
+
+- `sanitary-district-reports/1928-engineering-works-sanitary-district-of-chicago.pdf` — Sanitary District of Chicago, *Engineering Works* (1928), 126 pp. The District's own illustrated engineering summary of the entire system as built. Harvested page-by-page from the HathiTrust full-view copy (uc1.$b114399); public domain (1928 municipal publication).
+- `sanitary-district-reports/1928-north-side-sewage-treatment-project-outline.pdf` — Sanitary District of Chicago, *North Side Sewage Treatment Project: An Outline of Its Construction, Operation and Effect* (1928), 60 pp. Construction/operation case study of today's O'Brien WRP. HathiTrust full view (uiug.30112118445284); public domain.
+
 > **Note:** these files live in the `sources/` folder of the local research archive and are *not included in the published site* — use the URLs in the tiers above to reach each document online.
 
 All 182 PDF/TXT files saved to `sources/`, organized by topic folder (folder name usually

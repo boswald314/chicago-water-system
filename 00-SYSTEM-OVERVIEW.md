@@ -4,7 +4,7 @@ title: "System overview — the complete picture"
 
 # Chicago's Water System: The Complete Picture
 
-*Synthesis of the 14 detail documents in `docs/`. Compiled July 2026. Every figure below is traceable to a cited source in the detail docs; citations here point to the doc (and where useful, its numbered sources) rather than re-numbering the bibliography.*
+*Synthesis of the detail documents in `docs/` (now 15 — docs/15 on the Calumet-region lakes, incl. vanished Hyde Lake, was added after this synthesis). Compiled July 2026. Every figure below is traceable to a cited source in the detail docs; citations here point to the doc (and where useful, its numbered sources) rather than re-numbering the bibliography.*
 
 ---
 
