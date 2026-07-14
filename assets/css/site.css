@@ -3,8 +3,8 @@
   --accent: #2b6cb0; --lake: #e3eff8;
 }
 @media (prefers-color-scheme: dark) {
-  :root { --bg: #12161d; --panel: #1b222c; --ink: #e8edf3; --ink2: #a7b2c0; --line: #2e3947;
-    --accent: #5ea0e0; --lake: #1d3a52; }
+  :root { --bg: #171c23; --panel: #1f2630; --ink: #c6cfd9; --ink2: #8f9aa8; --line: #313c4a;
+    --accent: #6ba3d6; --lake: #1e3a50; }
 }
 * { box-sizing: border-box; }
 body { margin: 0; font: 16px/1.65 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;

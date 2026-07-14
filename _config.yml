@@ -26,6 +26,7 @@ defaults:
 # local-only material is not part of the site
 exclude:
   - images/
+  - rag/
   - vendor/
   - .bundle/
   - sources/

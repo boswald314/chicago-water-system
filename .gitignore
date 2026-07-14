@@ -6,3 +6,5 @@ _site/
 vendor/
 .bundle/
 .jekyll-cache/
+rag/.venv/
+rag/data/
