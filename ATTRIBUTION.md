@@ -4,7 +4,7 @@ title: Image rights & attribution
 
 # Image rights & attribution
 
-The [image galleries](gallery/) reproduce ~611 photographs, maps, and diagrams collected during
+The [image galleries](gallery/) reproduce ~755 photographs, maps, and diagrams collected during
 this research. Every image's provenance — source page, date, and rights status — is recorded
 per-image in the gallery captions and in the master
 [image index](https://github.com/boswald314/chicago-water-images/blob/main/INDEX.md).
@@ -23,9 +23,10 @@ per-image in the gallery captions and in the master
   or "research use," reproduced in reduced form for non-commercial research and education,
   always with a link to the holding institution.
 
-**What is deliberately NOT published:** ~33 images whose rights holders reserve all rights
-(including David Schalliol's MAS Context photo essay and Chicago History Museum Hedrich-Blessing
-previews). The image index lists them with links to view them at the source.
+**What is deliberately NOT published:** ~54 images whose rights holders reserve all rights or
+explicitly assert copyright (including David Schalliol's MAS Context photo essay, Chicago History
+Museum Hedrich-Blessing previews, engineering-firm portfolio images, and trade-press photography).
+The image index lists them with links to view them at the source.
 
 This is a non-commercial research and education project. If you are a rights holder and would
 like an image removed or the attribution corrected, please

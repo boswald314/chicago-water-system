@@ -9,15 +9,17 @@ URL/work. Where the same report, fact sheet, or article is cited by more than on
 appears once below, with every citing document listed under "Cited in" (two-digit doc numbers,
 `01`–`14`; see the [documents index](docs/index.md) for what each document covers).
 
-## Total unique sources: 380
+## Total unique sources: 471
 
 | Tier | Description | Count |
 |---|---|---|
-| 1 | City of Chicago & MWRD official (agency web pages, fact sheets, permits, press releases, Chicago Public Library) | 103 |
-| 2 | Federal & archival (LOC/HAER/HABS, archive.org, HathiTrust, USACE, EPA/Illinois EPA, USGS, GAO, Illinois DNR, court records) | 50 |
-| 3 | Encyclopedic & academic (Wikipedia, Encyclopedia of Chicago, theses, journal articles, professional-society proceedings) | 59 |
-| 4 | Journalism, blogs & local history (newspapers, trade press, local-history blogs, museums, contractor/vendor pages) | 168 |
-| — | **Total** | **380** |
+| 1 | City of Chicago & MWRD official (agency web pages, fact sheets, permits, press releases, Chicago Public Library) | 108 |
+| 2 | Federal & archival (LOC/HAER/HABS, archive.org, HathiTrust, USACE, EPA/Illinois EPA, USGS, GAO, Illinois DNR, ISWS/ISGS, court records) | 122 |
+| 3 | Encyclopedic & academic (Wikipedia, Encyclopedia of Chicago, theses, journal articles, professional-society proceedings) | 71 |
+| 4 | Journalism, blogs & local history (newspapers, trade press, local-history blogs, museums, contractor/vendor pages) | 170 |
+| — | **Total** | **471** |
+
+**Downloaded files:** 182 PDFs/TXTs locally archived in `sources/` (see "Downloaded documents" below; run `find sources -type f | grep -v _new | wc -l` to reproduce).
 
 Notes on method: sources are deduplicated by canonical URL. Where a document cites two different
 dated editions of the same recurring MWRD report (e.g. the TARP Status Report, published roughly
@@ -27,24 +29,29 @@ archive frequently rely on the specific figures in one edition versus another. T
 follows the URL's hosting domain (e.g. a historical Sanitary District report hosted on archive.org
 is filed under Tier 2 even though its original author was a city body).
 
-### Tier 1 — City of Chicago & MWRD Official  (103 sources)
+A July 2026 archival research sweep (six document-hunting agents) added 91 further sources located directly on archive.org/HathiTrust, EPA's NEPIS library, GAO, USACE/USGS digital libraries, the Illinois State Water/Geological Survey via the University of Illinois IDEALS repository, and MWRD/professional-society historical publications. These rows use **archive** in the "Cited in" column rather than a doc number: they were pulled into the local archive for reference support and have not yet been cited by a specific numbered document. See "Added July 2026 archival sweep" below for the corresponding downloaded files.
+
+### Tier 1 — City of Chicago & MWRD Official  (108 sources)
 
 | Source | URL | Cited in |
 |---|---|---|
 | 04-128-3P West Side Primary Settling Tanks 1-9 and Aerated Grit Facility, MWRD | https://mwrd.org/media/04-128-3p2016pdf | 11 |
 | 18-144-3M, Mainstream TARP Pumps Rehabilitation (bid document), MWRD | https://mwrd.org/media/18-144-3m-2021pdf | 09 |
+| 2022 Agency Brochure — "Our History: Reversing the Chicago River, Revitalizing a Community" (2022), MWRD | https://mwrd.org/sites/default/files/documents/2022_Agency_Brochure_0.pdf | archive |
 | 2022 Update Stormwater Management Plan (MS4 SWMP), City of Chicago DWM | https://www.chicago.gov/content/dam/city/depts/water/general/Engineering/MS4/DWM_StormwaterManagementPlan_2022_Update.pdf | 06 |
 | 2022-2026 Capital Improvement Program — Water System, City of Chicago DWM | https://www.chicago.gov/content/dam/city/depts/obm/general/CIP/CIPDocs/Water%20System%20Summary.pdf | 04, 05 |
 | 2023 Water Quality Report (Consumer Confidence Report), City of Chicago DWM | https://www.chicago.gov/content/dam/city/depts/water/ConsumerConfidenceReports/2024_WaterQuality%20Report_CCR.pdf | 03, 04 |
 | 2024 Regulations for Sewer Construction and Stormwater Management, City of Chicago DWM | https://www.chicago.gov/content/dam/city/depts/water/general/Engineering/SewerConstStormReq/2024Regulations.pdf | 06 |
 | 2nd Annual Chicago River Swim Returns Sept. 20, City of Chicago Mayor's Press Office (2026) | https://www.chicago.gov/city/en/depts/mayor/press_room/press_releases/2026/march/second-river-swim.html | 14 |
 | A decade of watershed protection, MWRD News | https://mwrd.org/news/decade-watershed-protection-mwrd-ordinance-records-10-years-accomplishments-stormwater-management | 14 |
+| A History of Extreme Rain Events Impacting Chicago — Monitoring and Research Seminar Series (2025), MWRD | https://mwrd.org/media/16081 | archive |
 | A History of Protecting Our Water Environment, MWRD | https://mwrd.org/what-we-do/history-protecting-our-water-environment | 01, 02, 06, 07, 09, 11, 12 |
 | A River Reversed: How 19th Century Engineering Saved Chicago, Plain Communities Business Exchange (2021, republished by MWRD) | https://mwrd.org/sites/default/files/documents/A_River_Reversed_090821.pdf | 14 |
 | Aggregated MWRD facility fact sheets and NPDES permit listings, MWRD | https://mwrd.org/what-we-do/documents-and-data/permits-mwrd-facilities | 14 |
 | Aggregated web search: Egan/Hanover Park/Kirie/Lemont WRPs, MWRD | https://mwrd.org/locations/james-c-kirie-water-reclamation-plant | 13, 14 |
 | Annual Biosolids Management Report for 2024, MWRD Monitoring and Research Dept. | https://mwrd.org/sites/default/files/2025-08/25-28_2024_Annual_Biosolids_Management_Report.pdf | 11 |
 | Atlases, MWRD | https://mwrd.org/what-we-do/documents-and-data/atlases | 06 |
+| Cal-Sag Channel, Calumet Water Reclamation Plant Turn 100 (centennial press release, 2022), MWRD | https://mwrd.org/media/3954 | archive |
 | Cal-Sag Channel, Calumet Water Reclamation Plant turn 100, MWRD News | https://mwrd.org/news/cal-sag-channel-calumet-water-reclamation-plant-turn-100 | 02, 12 |
 | Calumet Water Reclamation Plant (fact sheet), MWRD | https://mwrd.org/sites/default/files/2025-03/FactSheet_WRPs_Calumet_250326.pdf | 12 |
 | Calumet Water Reclamation Plant Facility Improvements (Calumet Master Plan), MWRD | https://mwrd.org/sites/default/files/documents/CWRP%20full%20document.pdf | 12 |
@@ -75,6 +82,7 @@ is filed under Tier 2 even though its original author was a city body).
 | Green Stormwater Infrastructure Strategy (2014), City of Chicago | https://www.chicago.gov/content/dam/city/progs/env/ChicagoGreenStormwaterInfrastructureStrategy.pdf | 06 |
 | Hanover Park Water Reclamation Plant Fact Sheet, MWRD | https://mwrd.org/sites/default/files/documents/Fact_Sheet_Hanover_Park.pdf | 13 |
 | Hanover Park Water Reclamation Plant, MWRD | https://mwrd.org/locations/hanover-park-water-reclamation-plant | 13, 14 |
+| Hydraulic Modeling of Transient Events in the MWRDGC Tunnel and Reservoir Plan System — Monitoring and Research Seminar Series (2024), MWRD | https://mwrd.org/media/16911 | archive |
 | James C. Kirie Water Reclamation Plant Fact Sheet, MWRD | https://mwrd.org/sites/default/files/2024-09/FactSheet_WRPs_Kirie_230517.pdf | 09, 13 |
 | John E. Egan Water Reclamation Plant Fact Sheet, MWRD | https://mwrd.org/sites/default/files/2025-03/FactSheet_WRPs_Egan_250326.pdf | 13 |
 | John E. Egan Water Reclamation Plant fact sheet, MWRD | https://mwrd.org/sites/default/files/documents/FactSheet_WRPs_Egan_230511.pdf | 14 |
@@ -126,6 +134,7 @@ is filed under Tier 2 even though its original author was a city body).
 | Terrence J. O'Brien Water Reclamation Plant (fact sheet), MWRD | https://mwrd.org/sites/default/files/documents/Fact_Sheet_O'Brien.pdf | 08, 12 |
 | Terrence J. O'Brien Water Reclamation Plant (fact sheet, Oct 2025 edition), MWRD | https://mwrd.org/sites/default/files/2025-10/FactSheet_WRPs_O%27Brien_2510808.pdf | 12 |
 | Terrence J. O'Brien Water Reclamation Plant (locations page), MWRD | https://mwrd.org/locations/terrence-j-obrien-water-reclamation-plant | 12, 14 |
+| The 50 Year History of the Tunnel and Reservoir Plan (TARP) — Monitoring and Research Seminar Series (2023), MWRD | https://mwrd.org/media/113 | archive |
 | Thornton Reservoir Fact Sheet, MWRD (May 2025) | https://mwrd.org/sites/default/files/2025-06/FactSheet_Thornton_250515.pdf | 06, 10, 12 |
 | Tunnel and Reservoir Plan (TARP) Fact Sheet (rev. 230508), MWRD | https://mwrd.org/sites/default/files/documents/FactSheet_TARP_230508.pdf | 07, 09, 12, 13, 14 |
 | Tunnel and Reservoir Plan (TARP) Fact Sheet, March 2025, MWRD | https://mwrd.org/sites/default/files/2025-03/FactSheet_TARP_250312.pdf | 10 |
@@ -135,7 +144,7 @@ is filed under Tier 2 even though its original author was a city body).
 | Water and Sewer Rates, City of Chicago Dept. of Finance | https://www.chicago.gov/city/en/depts/fin/supp_info/utility-billing/water-and-sewer-rates.html | 04 |
 | Water Supply / Water Quality Reports, City of Chicago DWM | https://www.chicago.gov/city/en/depts/water/provdrs/supply.html | 03, 04, 05 |
 
-### Tier 2 — Federal & Archival  (50 sources)
+### Tier 2 — Federal & Archival  (122 sources)
 
 | Source | URL | Cited in |
 |---|---|---|
@@ -143,10 +152,15 @@ is filed under Tier 2 even though its original author was a city body).
 | A Report to the Board of Health... Necessity of an Extension of the Sewerage (1873) | https://archive.org/details/reporttoboardofh00chic | 01 |
 | A Short History of the Chicago Diversion, LSU Law | https://biotech.law.lsu.edu/cases/environment/ChicagoDiversionHistoryMarch5.pdf | 02 |
 | Activated Sludge, Inc. v. Sanitary District of Chicago, 64 F. Supp. 25 (1946), Justia | https://law.justia.com/cases/federal/district-courts/FSupp/64/25/1953020/ | 12 |
+| Adequacy and Economics of Water Supply in Northeastern Illinois, 1985-2010 (ISWS Report of Investigation 97, 1980), J. Rodger Adams / Illinois State Water Survey | https://www.ideals.illinois.edu/items/79010 | archive |
+| Annual Budget Report to the Board of Trustees, Making Recommendations (various years, early 20th c.), Sanitary District of Chicago | https://onlinebooks.library.upenn.edu/webbin/book/lookupname?key=Chicago+Sanitary+District (HathiTrust, US access only, no direct record link) | archive |
+| Annual Report on Lake Michigan Diversion: Accounting Years 1981 & 1982 (1983), USACE Chicago District | https://usace.contentdm.oclc.org/digital/api/collection/p266001coll1/id/11019/download | archive |
 | Asian Carp, Illinois DNR | https://dnr.illinois.gov/waterresources/asiancarp.html | 02 |
 | Bowes v. City of Chicago, 3 Ill. 2d 175 (1954), Justia | https://law.justia.com/cases/illinois/supreme-court/1954/33122-5.html | 04 |
 | Bubbly Creek Sampling, US EPA Great Lakes program | https://www.epa.gov/greatlakes/bubbly-creek-sampling | 14 |
+| Chicago Area Water Supply: A Symposium Presented Before the Western Society of Engineers (ISWS Circular 29, 1950), Illinois State Water Survey | https://www.ideals.illinois.edu/items/103684 | archive |
 | Chicago Harbor Lock, USACE Great Lakes & Ohio River Division | https://www.lrd.usace.army.mil/Missions/Projects/Display/Article/3638585/chicago-harbor-lock/ | 02 |
+| Chicago Hydrometeorological Area Project: A Comprehensive New Study of Urban Hydrometeorology (ISWS Contract Report 207, 1978), John L. Vogel / Illinois State Water Survey | https://www.ideals.illinois.edu/items/56105 | archive |
 | Chicago Sanitary and Ship Canal (Main Channel & Extension), HAER No. IL-197 | https://www.loc.gov/item/il0976/ | 02 |
 | Chicago Sanitary and Ship Canal, Lockport Controlling Works, HAER No. IL-197-A | https://www.loc.gov/item/il0977/ | 02 |
 | Chicago Sanitary and Ship Canal, Lockport Power House and Dam, HAER No. IL-197-C | https://www.loc.gov/item/il0979/ | 02 |
@@ -155,48 +169,116 @@ is filed under Tier 2 even though its original author was a city body).
 | Chicago Water System: A Description of the System and Its Sanitary Protection (1956) | https://archive.org/details/chicagowatersystOOchic | 04 |
 | Chicago Water Tower, HABS No. IL-1041 | https://www.loc.gov/item/il0097/ | 05 |
 | Chicago's Tunnel and Reservoir Plan — Costs Continue To Rise (CED-81-51, 1981), GAO | https://www.gao.gov/products/ced-81-51 | 09 |
+| Combined Sewer Flooding and Pollution — A National Problem. The Search for Solutions in Chicago (CED-79-77, 1979, six volumes), GAO | https://www.gao.gov/assets/ced-79-77.pdf | archive |
+| Combined Sewer Overflow Loadings Inventory for Great Lakes Basin — Final Report (1983), GCA Corporation for US EPA Great Lakes National Program Office | https://nepis.epa.gov/Exe/ZyPDF.cgi/94001CIH.PDF?Dockey=94001CIH.PDF | archive |
 | Combined Sewer Overflow Real-Time Notification, US EPA | https://www.epa.gov/npdes/combined-sewer-overflow-real-time-notification | 14 |
 | Comparison of Bulletin 70 with Atlas 14, Illinois State Climatologist Office | https://www.isws.illinois.edu/statecli/RF/rf-update.htm | 14 |
+| Consent Decree, United States and State of Illinois v. Metropolitan Water Reclamation District of Greater Chicago (2011), US EPA / US Dept. of Justice | https://www.epa.gov/sites/default/files/documents/mwrd-cd_0.pdf | archive |
+| Control-Structure Ratings on the Chicago Sanitary and Ship Canal near Lockport, Illinois (SIR 2012-5131), USGS | https://pubs.usgs.gov/sir/2012/5131/pdf/sir2012-5131_080112.pdf | archive |
+| Deep Tunnel's Twists and Turns -- CSO Control in Metro Chicago (1998 conference paper), OSTI | https://www.osti.gov/biblio/20014867-deep-tunnel-twists-turns-cso-control-metro-chicago | archive |
+| Engineering Data on the Sanitary District of Chicago (1921), Sanitary District of Chicago | https://archive.org/details/engineeringdatao00chicrich | archive |
+| Engineering Data on the Sanitary District of Chicago, 1910 edition, Sanitary District of Chicago | https://onlinebooks.library.upenn.edu/webbin/book/lookupname?key=Chicago+Sanitary+District (HathiTrust, US access only, no direct record link) | archive |
+| Engineering Facts Concerning the Sanitary District of Chicago (undated, early 20th c.), Sanitary District of Chicago | https://onlinebooks.library.upenn.edu/webbin/book/lookupname?key=Chicago+Sanitary+District (HathiTrust, US access only, no direct record link) | archive |
+| Engineering Works (1928), Sanitary District of Chicago | https://onlinebooks.library.upenn.edu/webbin/book/lookupname?key=Chicago+Sanitary+District (HathiTrust, US access only, no direct record link) | archive |
+| Environmental Impact Statement for the Tunnel Component of TARP — Mainstream Tunnel System, 59th Street to Addison Street, Draft (1976), US EPA Region V | https://nepis.epa.gov/Exe/ZyPDF.cgi/2000QUYA.PDF?Dockey=2000QUYA.PDF | archive |
+| Environmental Impact Statement: Chicagoland Underflow Plan, O'Hare Reservoir, Illinois, Phase II General Design Memorandum (1990, 2 volumes), USACE | https://usace.contentdm.oclc.org/digital/collection/p16021coll7/id/26558 ; https://usace.contentdm.oclc.org/digital/collection/p16021coll7/id/26584 | archive |
 | Environmental Impact Statement: Sludge Disposal and Land Reclamation in Fulton County, Illinois, US EPA NEPIS | https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=2000QVC8.TXT | 11 |
+| Environmental Impact Statement: Tunnel Component of TARP — Calumet Tunnel System, Draft (1976), US EPA Region V | https://nepis.epa.gov/Exe/ZyPDF.cgi/2000QVOH.PDF?Dockey=2000QVOH.PDF | archive |
+| Environmental Impact Statement: Tunnel Component of the Tunnel and Reservoir Plan — Lower Des Plaines Tunnel System, Final (1977), US EPA Region V / Booz Allen & Hamilton | https://nepis.epa.gov/Exe/ZyPDF.cgi/94001NTD.PDF?Dockey=94001NTD.PDF | archive |
+| Fifteenth Annual Report of the Department of Public Works, City of Chicago, Fiscal Year Ending December 31, 1890 (1891), City of Chicago Dept. of Public Works | https://archive.org/details/258unkngoog | archive |
 | Flood of September 13-16, 2008, in Northeastern Illinois, USGS Data Series 726 | https://pubs.usgs.gov/ds/726/pdf/dss726_fazio_508.pdf | 06 |
 | G.P. Brown, Drainage Channel and Waterway (1894) | https://archive.org/details/drainagechannel01browgoog | 01 |
+| Geology of the Chicago Region, Parts I (General) and II (The Pleistocene) (Illinois State Geological Survey Bulletin 65, 1939), J Harlen Bretz | https://www.ideals.illinois.edu/items/43575 | archive |
 | History of Flood Control & Drainage in Northeastern Illinois, Illinois DNR | https://dnr.illinois.gov/waterresources/historyoffloodcontroldrainageinnortheasternillinois.html | 01 |
 | History, DuPage Water Commission | https://dpwc.org/about-us/history/ | 05 |
+| Hydrology of and Current Monitoring Issues for the Chicago Area Waterway System, Northeastern Illinois (SIR 2015-5115), USGS | https://pubs.usgs.gov/sir/2015/5115/sir20155115.pdf | archive |
 | Illinois Waterway Locks & Dams (Rock Island District, 2018), USACE | https://usace.contentdm.oclc.org/digital/api/collection/p16021coll11/id/2968/download | 02 |
 | Illinois Waterway, Thomas J. O'Brien Lock and Control Works, HAER No. IL-164-I | https://www.loc.gov/item/il0933/ | 02 |
+| Industrial Wastes in the Calumet Area, 1869-1970: An Historical Geography (Illinois State Geological Survey Report RR-E01, 1985), Craig E. Colten | https://www.ideals.illinois.edu/items/2348 | archive |
+| Journal of the Western Society of Engineers, Vol. 1 (1896), Western Society of Engineers (Chicago) | https://archive.org/details/journalw01west | archive |
+| Journal of the Western Society of Engineers, Vol. 12 (1906/1907), Western Society of Engineers (Chicago) | https://archive.org/details/journalw12west | archive |
+| Journal of the Western Society of Engineers, Vol. 16 (1911), Western Society of Engineers (Chicago) | https://archive.org/details/journalw16west | archive |
+| Journal of the Western Society of Engineers, Vol. 17 (1912), Western Society of Engineers (Chicago) | https://archive.org/details/journalw17west | archive |
+| Journal of the Western Society of Engineers, Vol. 18 (1913), Western Society of Engineers (Chicago) | https://archive.org/details/journalw18west | archive |
+| Journal of the Western Society of Engineers, Vol. 19 (1914), Western Society of Engineers (Chicago) | https://archive.org/details/journalw19west | archive |
+| Journal of the Western Society of Engineers, Vol. 5 (1900), Western Society of Engineers (Chicago) | https://archive.org/details/journalw05west | archive |
+| Journal of the Western Society of Engineers, Vol. 6 (1901), Western Society of Engineers (Chicago) | https://archive.org/details/journalw06west | archive |
+| Journal of the Western Society of Engineers, Vol. 7 (1902), Western Society of Engineers (Chicago) | https://archive.org/details/journalw07west | archive |
 | Lake Michigan Comes to You, DuPage Water Commission | https://dpwc.org/lake-michigan-comes-to-you/ | 04, 05 |
+| Lake Michigan Diversion Accounting - 1986 Annual Report (1987), USACE Chicago District | https://usace.contentdm.oclc.org/digital/api/collection/p266001coll1/id/11009/download | archive |
+| Lake Michigan Diversion Accounting - 1988 Annual Report ([1990]), USACE Chicago District | https://usace.contentdm.oclc.org/digital/api/collection/p266001coll1/id/11002/download | archive |
+| Lake Michigan Diversion Accounting Water Year 1993 Annual Report ([1995]), USACE Chicago District | https://usace.contentdm.oclc.org/digital/api/collection/p266001coll1/id/11004/download | archive |
+| Lake Michigan Diversion Accounting Water Year 1994 Annual Report ([1996]), USACE Chicago District | https://usace.contentdm.oclc.org/digital/api/collection/p266001coll1/id/11000/download | archive |
+| Lake Michigan Diversion: Findings of the Second Technical Committee for Review of Diversion Flow Measurements and Accounting Procedures (1987), USACE Chicago District | https://usace.contentdm.oclc.org/digital/api/collection/p266001coll1/id/11017/download | archive |
+| Lake Michigan Diversion: Findings of the Technical Committee for Review of Diversion Flow Measurements and Accounting Procedures (1981), USACE Chicago District | https://usace.contentdm.oclc.org/digital/api/collection/p266001coll1/id/11015/download | archive |
 | Lake Michigan Water Allocation, Illinois DNR | https://dnr.illinois.gov/waterresources/lakemichiganwaterallocation.html | 02 |
 | Lakeview Pumping Station, HAER No. IL-4 | https://www.loc.gov/item/il0420/ | 03, 05 |
 | Lawrence Avenue Underflow Sewer System, Interim Report (EPA-600/2-80-014, 1980) | https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=30000AAQ.TXT | 06, 08 |
 | Lockport Lock & Dam Water Control Manual (2024, redacted), USACE | https://water.usace.army.mil/cda/documents/wc/3363/Lockport%20WCM%202024_Redacted.pdf | 02 |
+| Lockport Power Plant Sluice Gate and Control Works Discharge Evaluation (1985), USACE/DTIC | https://archive.org/details/DTIC_ADA161426 | archive |
+| Message of President Robert R. McCormick (1907), Sanitary District of Chicago | https://archive.org/details/messageofpreside00mcco | archive |
+| Metropolitan Chicago's Combined Water Cleanup and Flood Control Program: Status and Problems (PSAD-78-94, 1978), GAO | https://www.gao.gov/assets/psad-78-94.pdf | archive |
+| Metropolitan Sanitary District of Greater Chicago O'Hare Water Reclamation Plant and Solids Pipeline — Final EIS, Volume I (1975), US EPA Region V | https://nepis.epa.gov/Exe/ZyPDF.cgi/2000PFQK.PDF?Dockey=2000PFQK.PDF | archive |
+| Metropolitan Sanitary District of Greater Chicago O'Hare Water Reclamation Plant and Solids Pipeline — Final EIS, Volume II (1975), US EPA Region V | https://nepis.epa.gov/Exe/ZyPDF.cgi/2000PFZL.PDF?Dockey=2000PFZL.PDF | archive |
+| Metropolitan Sanitary District of Greater Chicago Tunnel and Reservoir Plan — Special Evaluation Project, Interim Report (1988), US EPA Region V | https://nepis.epa.gov/Exe/ZyPDF.cgi/9100LEK8.PDF?Dockey=9100LEK8.PDF | archive |
 | Metropolitan Water Reclamation District of Greater Chicago Settlement, US EPA | https://www.epa.gov/enforcement/metropolitan-water-reclamation-district-greater-chicago-settlement | 06, 10, 14 |
 | Metropolitan Water Reclamation District of Greater Chicago Settlement, US EPA (settlement detail) | https://www.epa.gov/archive/epapages/newsroom_archive/newsreleases/494b0626149a9def85257966006e3a44.html | 14 |
 | Missouri v. Illinois, 180 U.S. 208 / 200 U.S. 496, Justia | https://supreme.justia.com/cases/federal/us/200/496/ | 02 |
+| Nineteenth Semi-Annual Report of the Board of Water Commissioners to the Common Council of the City of Chicago (1861), Chicago Board of Water Commissioners | https://archive.org/details/semiannualreport19chic | archive |
+| North Branch Chicago River: Phase 1 General Design Memorandum (1983), USACE Chicago District | https://usace.contentdm.oclc.org/digital/api/collection/p16021coll7/id/22909/download | archive |
+| North Side Sewage Treatment Project: An Outline of Its Construction, Operation and Effect (1928), Sanitary District of Chicago | https://onlinebooks.library.upenn.edu/webbin/book/lookupname?key=Chicago+Sanitary+District (HathiTrust, US access only, no direct record link) | archive |
 | NPDES Permit No. IL0047741 — James Kirie WRP, Illinois EPA | https://epa.illinois.gov/content/dam/soi/en/web/epa/documents/public-notices/2013/mwrdgc-kirie.pdf | 13 |
 | One-dimensional simulation of stratification and dissolved oxygen in McCook Reservoir, USGS WRI 00-4258 (2000) | https://pubs.usgs.gov/publication/wri004258 | 10 |
 | Photo of the Reversal of the Chicago River (1900), Illinois Secretary of State Archives | https://www.ilsos.gov/departments/archives/online-exhibits/100-documents/1900-photo-reverse-chicago-river.html | 02 |
+| Physical Features of the Des Plaines Valley (Illinois State Geological Survey Bulletin 11, 1909), James Walter Goldthwait | https://www.ideals.illinois.edu/items/43213 | archive |
+| Pollution of Streams in Illinois (ISWS Bulletin No. 24, 1927), Arthur M. Buswell / Illinois State Water Survey | https://www.ideals.illinois.edu/items/103847 | archive |
+| Preliminary Geologic Investigations of Rock Tunnel Sites for Flood and Pollution Control in the Greater Chicago Area (1972), George E. Heim / Illinois State Geological Survey | https://www.ideals.illinois.edu/items/80238 | archive |
+| Proceedings of the Board of Trustees of the Sanitary District of Chicago (1900), Sanitary District of Chicago | https://archive.org/details/proceedings02trusgoog | archive |
+| Proceedings of the Board of Trustees of the Sanitary District of Chicago (1902), Sanitary District of Chicago | https://archive.org/details/proceedings01trusgoog | archive |
+| Proceedings of the Board of Trustees of the Sanitary District of Chicago (1903), Sanitary District of Chicago | https://archive.org/details/proceedings03trusgoog | archive |
+| Proceedings of the Board of Trustees of the Sanitary District of Chicago (1922), Sanitary District of Chicago | https://archive.org/details/proceedingsboar00distgoog | archive |
 | Projecting Illinois' Rainfall Due to Climate Change (Bulletin 76, 2025), Illinois State Water Survey | https://www.illinoisfloods.org/content/documents/3b-1_projecting_il_rainfall_due_to_climate_change.pdf | 14 |
+| Proposal, Contract, Specifications and Bond for North Side Sewage Treatment Works, Division P: Pump and Blower House at Niles Center, Illinois (1925), Chicago Sanitary District Board of Trustees | https://archive.org/details/proposalcontract00chic | archive |
+| Reduction in Peak Flows and Improvement in Water Quality in the Illinois Waterway Downstream of Lockport Due to Implementation of Phases I and II of TARP, Vol. 1 (ISWS Contract Report 512, 1991), Krishan P. Singh / Illinois State Water Survey | https://www.ideals.illinois.edu/items/77100 | archive |
+| Reduction in Peak Flows and Improvements in Water Quality in the Illinois Waterway Downstream of Lockport Dam Due to Implementation of Phases I and II of TARP (ISWS Contract Report 526, 1992), Dana B. Shackleford / Illinois State Water Survey | https://www.ideals.illinois.edu/items/77131 | archive |
 | Report and Plan of Sewerage for the City of Chicago (1855), archive.org | https://archive.org/details/2546005R.nlm.nih.gov | 01, 06 |
+| Report of Streams Examination, Chemic and Bacteriologic, of the Waters within the Jurisdiction of the Sanitary District of Chicago (1902), Arthur R. Reynolds / Sanitary District of Chicago | https://books.google.com/books?id=Qv4NAAAAYAAJ | archive |
 | Report of the Board of Sewerage Commissioners... Half Year Ending Dec 31 1860 | https://archive.org/details/101688649.nlm.nih.gov | 01 |
+| Report of the Engineering Board of Review of the Sanitary District of Chicago on the Lake Lowering Controversy and a Program of Remedial Measures, Parts I-III (1925-1927), Chicago Sanitary District, Engineering Board of Review | https://catalog.hathitrust.org/Record/009205703 | archive |
 | Report of the Main Drainage Committee to the Citizens' Association of Chicago (1880) | https://archive.org/details/reportofmaindrai00chic | 01 |
+| Report Upon the Chicago Drainage Canal (1907), International Engineering Congress | https://archive.org/details/reportuponchicag00interich | archive |
 | Responsiveness Summary: City of Chicago CSOs, NPDES Permit IL0045012, Illinois EPA | https://epa.illinois.gov/content/dam/soi/en/web/epa/documents/public-notices/2015/city-of-chicago/responsiveness-summary-chicago-cfo-npdes-20240326.pdf | 06 |
 | Sanitary District of Chicago v. United States, 266 U.S. 405 (1925), Cornell LII | https://www.law.cornell.edu/supremecourt/text/266/405 | 02 |
+| Sanitary District of Chicago v. United States, 266 U.S. 405 (1925), official U.S. Reports via GovInfo | https://www.govinfo.gov/content/pkg/USREPORTS-266/pdf/USREPORTS-266-405.pdf | archive |
 | Schuringa v. City of Chicago, 30 Ill. 2d 504 (1964), Justia | https://law.justia.com/cases/illinois/supreme-court/1964/37592-5.html | 04 |
+| Significant Storm Distribution in Chicago, 1949-1978 (ISWS Contract Report 388, 1986), John L. Vogel / Illinois State Water Survey | https://www.ideals.illinois.edu/items/73580 | archive |
 | Summary and Agency Statement (Triennial Review, 2024), Illinois EPA | https://epa.illinois.gov/content/dam/soi/en/web/epa/topics/water-quality/standards/documents/summary-and-agency-statement-20240119.pdf | 11 |
 | TARP, 60 Minutes program responses, 1982 (finding aid), DePaul University Special Collections | https://archives.depaul.edu/repositories/2/archival_objects/42030 | 09 |
+| The Disposal of the Sewage of the Sanitary District of Chicago (1927), Alvord, Burdick & Howson | https://archive.org/details/disposalofsewage23alvo | archive |
+| The Disposal of the Sewage of the Sanitary District of Chicago (ISWS Bulletin No. 23, 1927), Arthur M. Buswell / Illinois State Water Survey | https://www.ideals.illinois.edu/items/97433 | archive |
 | The Great Chicago Lake Tunnel (J.M. Wing & Co., 1867) | https://archive.org/details/greatchicagolake00chic | 03 |
+| The Sanitary District of Chicago: History of its Growth and Development as Shown by Decisions of the Courts and Work of its Law Department (1919), Sanitary District of Chicago (Law Dept.) | https://archive.org/details/sanitarydistrict00chicrich | archive |
+| The Sanitary District of Chicago: History, Purposes and Projects (1915), Sanitary District of Chicago | https://archive.org/details/sanitarydistrict00trin | archive |
 | The Sewerage System of Chicago, Journal of the Western Society of Engineers (1911) | https://archive.org/details/seweragesystemc00hillgoog | 01 |
+| The Story of the Metropolitan Sanitary District of Greater Chicago: The Seventh Wonder of America (1956), Ward Walker | https://archive.org/details/storyofmetropoli00walk | archive |
+| Those Army Engineers: A History of the Chicago District (1979), USACE Chicago District | https://usace.contentdm.oclc.org/digital/collection/p16021coll4/id/33 | archive |
 | Tunnel and Reservoir Plan (TARP) Fact Sheet (2017/2023 editions), MWRD | https://www.illinoisfloods.org/content/documents/factsheet_tarp_171213.pdf | 08 |
+| Uncertainty Analysis of Index-Velocity Meters and Discharge Computations at the Chicago Sanitary and Ship Canal near Lemont, Illinois, Water Years 2006-16 (OFR 2022-1007), USGS | https://pubs.usgs.gov/of/2022/1007/ofr20221007.pdf | archive |
+| Urban Water Damage Study, the Chicagoland Underflow Plan: Revised Draft Environmental Impact Statement (1975), USACE Chicago District | https://usace.contentdm.oclc.org/digital/api/collection/p16021coll7/id/18183/download | archive |
+| Water Quality Characteristics of Storm Sewer Discharges and Combined Sewer Overflows (ISWS Contract Report 109, 1972), Veerasamy Kothandaraman / Illinois State Water Survey | https://www.ideals.illinois.edu/items/97361 | archive |
 | Wisconsin v. Illinois 1967 decree summary, Michigan EGLE | https://www.michigan.gov/-/media/Project/Websites/egle/Documents/Programs/WRD/Great-Lakes/diversions-1967-decree.pdf | 02 |
+| Wisconsin v. Illinois, 388 U.S. 426 (1967), official U.S. Reports via GovInfo | https://www.govinfo.gov/content/pkg/USREPORTS-388/pdf/USREPORTS-388-426.pdf | archive |
 | Wisconsin v. Illinois, 449 U.S. 48 (1980), Justia | https://supreme.justia.com/cases/federal/us/449/48/ | 02 |
+| Wisconsin v. Illinois, 449 U.S. 48 (1980), official U.S. Reports via GovInfo | https://www.govinfo.gov/content/pkg/USREPORTS-449/pdf/USREPORTS-449-48.pdf | archive |
 
-### Tier 3 — Encyclopedic & Academic  (59 sources)
+### Tier 3 — Encyclopedic & Academic  (71 sources)
 
 | Source | URL | Cited in |
 |---|---|---|
 | A Brief History of Chicago's Water Management, Daniel Simantob / U Chicago | https://humanities-web.s3.us-east-2.amazonaws.com/college/chicagostudies-prod/s3fs-public/2021-04/DanielPaper.pdf | 05, 06 |
 | A Century of Progress in Water Works, 1833-1933, Bureau of Engineering, U Chicago Library | https://www.lib.uchicago.edu/ead/pdf/century0291.pdf | 04, 05 |
 | A Reversal of the Chicago River, Linda Hall Library | https://www.lindahall.org/experience/digital-exhibitions/centuries-of-civil-engineering/02-water-supply/a-reversal-of-the-chicago-river/ | 02 |
+| Analysis of Ground-Liner Interaction for Tunnels (Ph.D. dissertation, 1978), Randall Eugene Ranken / University of Illinois at Urbana-Champaign | https://www.ideals.illinois.edu/items/67024 | archive |
 | Bubbly Creek, Wikipedia | https://en.wikipedia.org/wiki/Bubbly_Creek | 14 |
 | Cal-Sag Channel, Wikipedia | https://en.wikipedia.org/wiki/Cal-Sag_Channel | 02 |
 | Calumet Sag Channel, Blue Island... Approach to Chicago Midway Airport, Wikimedia Commons | https://commons.wikimedia.org/wiki/File:Calumet_Sag_Channel,_Blue_Island,_Illinois_on_Approach_to_Chicago_Midway_Airport_(7238214986).jpg | 12 |
@@ -209,17 +291,22 @@ is filed under Tier 2 even though its original author was a city body).
 | Chicago River, Wikipedia | https://en.wikipedia.org/wiki/Chicago_River | 14 |
 | Chicago Sanitary and Ship Canal, Wikipedia | https://en.wikipedia.org/wiki/Chicago_Sanitary_and_Ship_Canal | 02 |
 | Chicago Water Tower, Wikipedia | https://en.wikipedia.org/wiki/Chicago_Water_Tower | 05 |
+| Conveyance Analysis of Chicago's "Deep Tunnel" System (2006/2007), ASCE World Environmental and Water Resources Congress | https://ascelibrary.org/doi/10.1061/40856(200)10 | archive |
 | Crib Tenders — Solitary Lives photo essay, Encyclopedia of Chicago | http://www.encyclopedia.chicagohistory.org/pages/300035.html | 03 |
 | Deep Tunnel, Encyclopedia of Chicago | http://www.encyclopedia.chicagohistory.org/pages/367.html | 09 |
 | Deep Tunnels: Lessons Learned from Around the World (WSEC-2018-TR-002), Water Environment Federation | https://www.wef.org/globalassets/assets-wef/direct-download-library/public/03---resources/wsec-2018-tr-002-lift-deep-tunnels-lessons-learned---final.pdf | 09 |
 | Demographics of Chicago, Wikipedia | https://en.wikipedia.org/wiki/Demographics_of_Chicago | 01 |
 | Development and Application of the Kirie Wastewater Treatment Plant Model (M.S. thesis, 2012), Illinois Institute of Technology | https://repository.iit.edu/islandora/object/islandora:9003 | 13 |
 | Ellis S. Chesbrough, Wikipedia | https://en.wikipedia.org/wiki/Ellis_S._Chesbrough | 01, 06 |
+| Engineering Properties of Chicago Subsoils (University of Illinois Engineering Experiment Station Bulletin, 1954), William C. Reed | https://www.ideals.illinois.edu/items/5183 | archive |
 | Epidemics, Encyclopedia of Chicago | http://www.encyclopedia.chicagohistory.org/pages/432.html | 01 |
 | Ericson, John. Chlorination of Chicago's Water Supply, American Journal of Public Health (1918) | https://ajph.aphapublications.org/doi/pdf/10.2105/AJPH.8.10.772 | 04 |
 | February 6, 1970, Richard Nixon Presidential Library and Museum | https://www.nixonlibrary.gov/research/almanac/february-6-1970 | 13 |
 | Genesis and Evolution of Activated Sludge Technology, Iowa State University | https://home.engineering.iastate.edu/~jea/w3-class/456/article/article-aswisconsin.html | 12 |
+| GIS-Based Support System for Modeling Chicago's "Deep Tunnel" System (2006/2007), ASCE World Environmental and Water Resources Congress | https://ascelibrary.org/doi/10.1061/40856(200)12 | archive |
+| Hydraulic Modelling of Chicago Area Waterways System (CAWS) to Assess the Impact of Hydrologic Separation on Water Levels and Potential Flooding During Extreme Rainfall Events in Chicago, Illinois (M.S. thesis, 2014), Santiago Santacruz Salazar / University of Illinois at Urbana-Champaign | https://www.ideals.illinois.edu/items/49449 | archive |
 | Hydrologic and Hydraulic Modeling of the TARP System, Schmidt/Fitzpatrick et al. (2009), UCOWR | https://opensiuc.lib.siu.edu/ucowrconfs_2009/2/ | 09 |
+| Immediate and Long-Term Behavior of the Evanston Tunnel in Chicago Clay (Ph.D. dissertation, 1998), Nelson Kawamura / University of Illinois at Urbana-Champaign | https://www.ideals.illinois.edu/items/84745 | archive |
 | Jardine Water Purification Plant (Chicago, 1968), Structurae | https://structurae.net/en/structures/jardine-water-purification-plant | 04 |
 | Jardine Water Purification Plant, Grokipedia | https://grokipedia.com/page/Jardine_Water_Purification_Plant | 04 |
 | Jardine Water Purification Plant, Wikipedia | https://en.wikipedia.org/wiki/Jardine_Water_Purification_Plant | 03, 04, 05 |
@@ -234,6 +321,7 @@ is filed under Tier 2 even though its original author was a city body).
 | Milton Lee Olive Park, The Cultural Landscape Foundation | https://www.tclf.org/sites/default/files/microsites/kiley-legacy/MiltonLeeOlivePark.html | 04 |
 | Milton Lee Olive Park, Wikipedia | https://en.wikipedia.org/wiki/Milton_Lee_Olive_Park | 04 |
 | North Shore Channel, Wikipedia | https://en.wikipedia.org/wiki/North_Shore_Channel | 02 |
+| Observed and Computed Settlements of Structures in Chicago (University of Illinois Engineering Experiment Station Bulletin, 1955), Mehmet Ensar Uyanik | https://www.ideals.illinois.edu/items/5168 | archive |
 | Phosphorus Recovery at the Stickney Water Reclamation Plant, MWEA 2015 Annual Conference | https://www.mi-wea.org/docs/Koch_Lefler_Britton-Phosphorus_Recovery.pdf | 11 |
 | Piped Water and Sewer Access... 19th Century Chicago, Federal Reserve Bank of Philadelphia | https://www.philadelphiafed.org/the-economy/regional-economics/piped-water-and-sewer-access-measuring-its-benefits-for-19th-century-chicago-and-its-relevance-today | 06 |
 | Raising of Chicago, Wikipedia | https://en.wikipedia.org/wiki/Raising_of_Chicago | 01, 06 |
@@ -243,10 +331,15 @@ is filed under Tier 2 even though its original author was a city body).
 | Start-Up of Sidestream Deammonification at MWRDGC's John E. Egan WRP, WEF Proceedings (2017) | https://www.accesswater.org/publications/proceedings/-279535/start-up-of-sidestream-deammonification-at-mwrdgc-s-john-e-egan-water-reclamation-plant | 13 |
 | Students identify Chicago neighborhoods most at risk of urban flooding, University of Chicago News (2022) | https://news.uchicago.edu/story/students-identify-chicago-neighborhoods-most-risk-urban-flooding | 14 |
 | T.J. O'Brien Lock and Dam, Wikipedia | https://en.wikipedia.org/wiki/T.J._O%27Brien_Lock_and_Dam | 02 |
+| TARP — The Des Plaines Tunnel System (North Leg): A Case History (1997), Robert Rautenberg & Paul McDermott / SME OneMine | https://www.onemine.org/documents/tarp-the-des-plaines-tunnel-system-north-leg-a-case-history | archive |
 | The Chicago River: An Illustrated History and Guide (2006), David M. Solzman | (no URL — print monograph) | 08 |
+| The Effect of Gas House Waste on the Biochemical Oxidation of Sewage (University of Illinois thesis, 1917), Chester William Lenzing | https://www.ideals.illinois.edu/items/52299 | archive |
+| The Emergency Butterfly Dam on the Chicago Drainage Canal at Lockport, Illinois (1909), Frank A. Randall / University of Illinois Engineering Experiment Station | https://www.ideals.illinois.edu/items/52396 | archive |
 | The Lake Tunnel in Chicago, Linda Hall Library | https://www.lindahall.org/experience/digital-exhibitions/centuries-of-civil-engineering/02-water-supply/ | 03 |
+| The Use of Concrete in Sewer Construction (University of Illinois thesis, 1917), George Edward Warren | https://www.ideals.illinois.edu/items/54519 | archive |
 | Thornton Quarry, Wikipedia | https://en.wikipedia.org/wiki/Thornton_Quarry | 10 |
 | Tunnel and Reservoir Plan (Upper Des Plaines 1981), Wikipedia | https://en.wikipedia.org/wiki/Tunnel_and_Reservoir_Plan | 07, 09, 10, 13, 14 |
+| Tunnel and Reservoir Plan Solution to Chicago's Combined Sewer Overflow, Basement Flooding, and Pollution (1988), W.A. Bergman & D.H. Kapadia, Canadian Journal of Civil Engineering 15(3):389-396 | https://doi.org/10.1139/l88-054 | archive |
 | Tunnel and Reservoir Plan, Ven Te Chow Hydrosystems Laboratory, UIUC | https://vtchl.illinois.edu/tunnel-and-reservoir-plan/ | 09 |
 | Victims of the January 1909 68th Street Water Intake Crib Disaster, Encyclopedia of Chicago | http://www.encyclopedia.chicagohistory.org/pages/10825.html | 03 |
 | Water Cribs in Chicago (image gallery), Wikimedia Commons | https://commons.wikimedia.org/wiki/Water_Cribs_in_Chicago | 03 |
@@ -254,7 +347,7 @@ is filed under Tier 2 even though its original author was a city body).
 | Water, Typhoid Rates, and the Columbian Exposition in Chicago, Northwestern Public Health Review | https://sites.northwestern.edu/nphr/journal-volume-2-issue-2-2015/water-typhoid-rates-and-the-columbian-exposition-in-chicago/ | 01 |
 | Wonder of America and of the World: The Great Chicago Lake Tunnel, Northwestern University Press blog | https://nupress.northwestern.edu/blog/2017/09/13/wonder-of-america-and-of-the-world-the-great-chicago-lake-tunnel/ | 03 |
 
-### Tier 4 — Journalism, Blogs & Local History  (168 sources)
+### Tier 4 — Journalism, Blogs & Local History  (170 sources)
 
 | Source | URL | Cited in |
 |---|---|---|
@@ -311,6 +404,7 @@ is filed under Tier 2 even though its original author was a city body).
 | Chicago's Tunnel and Reservoir Plan (TARP), The Robbins Company | https://www.robbinstbm.com/projects/chicagos-tunnel-reservoir-plan-tarp/ | 09 |
 | Chicago's Water Intake Cribs Are A Marvel That Keep Our Water Flowing, Block Club Chicago | https://blockclubchicago.org/2025/06/23/chicagos-water-intake-cribs-are-a-marvel-that-keep-our-water-flowing/ | 03, 04 |
 | Chicago's Wilson Avenue Lighthouse & Water Crib History, Digital Research Library of Illinois History Journal | https://drloihjournal.blogspot.com/2023/02/history-of-wilson-avenue-water-crib-chicago.html | 03 |
+| Chicago-TARP-Aug09-McCook Reservoir Connection Tunnel Design, TunnelTalk | https://www.tunneltalk.com/Chicago-TARP-Aug09-McCook-Reservoir-connection-tunnel-design.php | archive |
 | Chicago: 150 Years of Flooding and Excrement, Chicago Magazine | https://www.chicagomag.com/city-life/april-2013/chicago-150-years-of-flooding-and-excrement/ | 06, 12 |
 | Combined Sewer Overflows policy page, Friends of the Chicago River | https://www.chicagoriver.org/issues/policy/combined-sewer-overflows | 06 |
 | Cook County stormwater reservoirs at record capacity after torrential rain, NBC Chicago (2026) | https://www.nbcchicago.com/news/local/cook-county-stormwater-reservoirs-at-record-capacity-after-torrential-rain/3958100/ | 07, 10, 14 |
@@ -415,6 +509,7 @@ is filed under Tier 2 even though its original author was a city body).
 | Water intake crib on Lake Michigan at Lawrence Avenue, Explore Chicago Collections | https://explore.chicagocollections.org/image/chicagohistory/71/3b5wj5s/ | 03 |
 | Water Management commissioner promises to 'ramp up'..., The Daily Line | https://www.thedailyline.com/chicago-department-water-management-2026-budget-hearing-commissioner-randy-conner-west-south-side-flooding-lead-service-line-replacement | 04 |
 | Water Works III, Chicagology | https://chicagology.com/rebuilding/rebuilding206/ | 05 |
+| West by Southwest to Stickney: Draining the Central Area of Chicago and Exorcising Clout / Draining Chicago / Building the Canal to Save Chicago / Calumet: First and Forever (2012-2020, 4-book series), Richard Lanyon | https://www.dicklanyon.com/books | archive |
 | Wet Weather Treatment Facility and Reservoir, Lemont WRP, Contract 10-716-3P, Joseph J. Henderson & Son | https://www.jjhenderson.com/projects/portfolio/lemont/ | 13 |
 | What's The Deal With This Smokestack Near The Expressway?, DNAinfo Chicago | https://www.dnainfo.com/chicago/20170117/mayfair/mayfair-pumping-station-chicago-history-junction-smokestack-edens-kennedy/ | 05 |
 | When it rains, stench soars near Thornton Reservoir, Chicago Sun-Times (2026) | https://chicago.suntimes.com/environment/2026/07/09/residents-businesses-near-thornton-reservoir-endure-very-unpleasant-stench-after-heavy-rainfall | 07 |
@@ -431,9 +526,9 @@ is filed under Tier 2 even though its original author was a city body).
 
 > **Note:** these files live in the `sources/` folder of the local research archive and are *not included in the published site* — use the URLs in the tiers above to reach each document online.
 
-Every PDF/TXT saved to `sources/`, organized by topic folder (folder name matches the `docs/`
-document that downloaded it). `.txt` files are plain-text extracts of the same-named `.pdf`, used
-for full-text search/citation-checking during research.
+All 182 PDF/TXT files saved to `sources/`, organized by topic folder (folder name usually
+matches the `docs/` document that downloaded it). `.txt` files are plain-text extracts of the
+same-named `.pdf`, used for full-text search/citation-checking during research.
 
 ### calumet-obrien-wrp (doc 12 — Calumet & O'Brien WRPs)
 
@@ -582,3 +677,231 @@ for full-text search/citation-checking during research.
 | `ccr.txt` | Text extract of the Consumer Confidence Report |
 | `chicago_water_system_UIUC.pdf` / `.txt` | *Chicago Water System: A Description of the System and Its Sanitary Protection* (1956), UIUC-digitized copy |
 | `cip.txt` | Text extract of the Water System CIP summary |
+
+### Added July 2026 archival sweep
+
+> A follow-up wave of six document-hunting research agents mined archive.org/HathiTrust (Sanitary
+> District of Chicago annual reports and proceedings, Board of Public Works reports), the *Journal
+> of the Western Society of Engineers* and other period engineering-society volumes, EPA's NEPIS
+> library and GAO's oversight-report archive, USACE/USGS digital libraries (Lake Michigan diversion
+> accounting, Chicagoland Underflow Plan, McCook/North Branch design memoranda, CAWS hydrology) and
+> official U.S. Reports court filings, the Illinois State Water/Geological Survey backfile via the
+> University of Illinois IDEALS repository, and MWRD/professional-society historical publications.
+> Below, files added to **existing** topic folders are listed first, followed by entirely **new**
+> topic folders.
+
+#### New files added to existing topic folders
+
+##### cso-outfalls-discharges (doc 14 — CSOs, Outfalls & Discharges)
+
+| File | Description |
+|---|---|
+| `1983-epa-cso-phosphorus-loadings-inventory-great-lakes-basin.pdf` | 1983 EPA/GCA Corporation Great Lakes-wide CSO/bypass phosphorus loading study, with a dedicated Chicago chapter (Ch. 7) covering backflow-event history, volumes, water quality, and phosphorus loadings |
+
+##### suburban-wrps (doc 13 — Suburban WRPs)
+
+| File | Description |
+|---|---|
+| `1975-epa-final-eis-ohare-wrp-solids-pipeline-vol1.pdf` | 1975 EPA final EIS for the O'Hare-area water reclamation plant and its solids pipeline, Vol. I — siting, land use, and design narrative |
+| `1975-epa-final-eis-ohare-wrp-solids-pipeline-vol2.pdf` | 1975 EPA final EIS for the O'Hare WRP and solids pipeline, Vol. II — appendices and technical backup |
+
+##### river-reversal-canals (doc 02 — River Reversal, Canals, Locks & Controlling Works)
+
+| File | Description |
+|---|---|
+| `1894-brown-drainage-channel-and-waterway.pdf` | George P. Brown's 1894 retrospective history of the political/engineering effort to secure the Sanitary and Ship Canal |
+| `1907-report-upon-chicago-drainage-canal-intl-engineering-congress.pdf` | International Engineering Congress's 1907 independent technical evaluation of the completed Drainage Canal, ~7 years after opening |
+| `1985-lockport-power-plant-sluice-gate-discharge-evaluation-dtic.pdf` | 1985 USACE/DTIC technical evaluation of Lockport discharge control performance, complementing the Lockport Water Control Manual |
+
+##### water-pumping-distribution (doc 05 — Water Pumping Stations & Distribution Tunnels)
+
+| File | Description |
+|---|---|
+| `1861-board-of-water-commissioners-19th-semiannual-report.pdf` | 1861 pre-fire, construction-era report of the Chicago Board of Water Commissioners — staff rosters and works status, predecessor of the Dept. of Public Works annual reports |
+
+##### tarp-deep-tunnel (doc 09 — TARP Phase I: The Deep Tunnel System)
+
+| File | Description |
+|---|---|
+| `1976-epa-draft-eis-tarp-calumet-tunnel-system.pdf` | 1976 EPA draft EIS for the Calumet-area TARP tunnel segment |
+| `1976-epa-draft-eis-tarp-mainstream-tunnel-system.pdf` | 1976 EPA draft EIS for TARP's original Mainstream tunnel segment, 59th Street to Addison Street |
+| `1977-epa-final-eis-tarp-lower-des-plaines-tunnel-system.pdf` | 1977 EPA final EIS for the Lower Des Plaines TARP tunnel segment — alternatives, construction methods, spoil disposal, socioeconomic impacts |
+| `1988-epa-tarp-special-evaluation-project-interim-report.pdf` | 1988 EPA interim evaluation of TARP roughly a decade into construction, assessing project performance to date |
+
+#### New topic folders
+
+##### sanitary-district-annual-reports (Sanitary District of Chicago primary-source annual reports, proceedings, and retrospectives, 1900s–1956)
+
+| File | Description |
+|---|---|
+| `1900-sd-chicago-proceedings-board-of-trustees.pdf` | Board proceedings/chief engineer reports for the year the Drainage Canal opened |
+| `1902-sd-chicago-proceedings-board-of-trustees.pdf` | Board proceedings shortly after the 1900 Chicago Sanitary and Ship Canal opening |
+| `1903-sd-chicago-proceedings-board-of-trustees.pdf` | Board proceedings/chief engineer reports for the 1903 operating year |
+| `1907-mccormick-presidents-annual-message-sd-chicago.pdf` | Annual presidential message of Robert R. McCormick to the Sanitary District board — narrative status of finances and works |
+| `1915-sd-chicago-history-purposes-projects.pdf` | W.H. Trinkaus's 1915 Armour Institute thesis synthesizing the District's history and works to 1915 |
+| `1919-sd-chicago-history-growth-development-law-dept.pdf` | 1919 institutional/legal history of the District's formation and expansion, by its Law Department |
+| `1921-sd-chicago-engineering-data.pdf` | 1921 compiled engineering statistics/design data for the canal and works system |
+| `1922-sd-chicago-proceedings-board-of-trustees.pdf` | 1920s board proceedings covering the North Side/Calumet sewage treatment planning era |
+| `1927-disposal-of-sewage-sd-chicago-alvord-burdick-howson.pdf` | Alvord, Burdick & Howson's 1927 consulting-engineer evaluation of sewage disposal methods/capacity, for the State Water Survey series |
+| `1956-story-of-metropolitan-sanitary-district-seventh-wonder.pdf` | Ward Walker's 1956 mid-century retrospective case history of the District's engineering achievements |
+
+##### public-works-annual-reports (City of Chicago Dept. of Public Works annual reports, pre-Sanitary-District era)
+
+| File | Description |
+|---|---|
+| `1891-dept-public-works-15th-annual-report-fy1890.pdf` | Fifteenth Annual Report of the Chicago Dept. of Public Works (FY1890) — water, sewers, streets, with Mayor's message |
+
+##### period-engineering-journals (Journal of the Western Society of Engineers volumes and related period engineering-society/state-survey publications, 1896–1985)
+
+| File | Description |
+|---|---|
+| `1896-journal-western-society-engineers-v1-drainage-canal.pdf` | JWSE Vol. 1 (1896) — core Drainage Canal papers (Potter, Keating, Guthrie, Ford, Hill) |
+| `1900-journal-western-society-engineers-v5-drainage-canal-opening-wisner.pdf` | JWSE Vol. 5 (1900) — Geo. M. Wisner's eyewitness engineering account of the January 1900 river reversal |
+| `1900-proceedings-board-trustees-sanitary-district-chicago.pdf` | Sanitary District Trustees' proceedings for 1900, the year the Drainage Canal opened and Missouri v. Illinois began (duplicate copy also in sanitary-district-annual-reports/) |
+| `1901-journal-western-society-engineers-v6-chicago-water-works-tunnels.pdf` | JWSE Vol. 6 (1901) — Brown on tunnel/crib construction, Guthrie on controlling works, Spengler on the water works system |
+| `1902-journal-western-society-engineers-v7-designing-chicago-sewers-hill.pdf` | JWSE Vol. 7 (1902) — C.D. Hill's "Notes on Designing Chicago Sewers" and Jackson's telephone/freight tunnel conduits paper |
+| `1907-international-waterways-commission-report-chicago-drainage-canal.pdf` | International Waterways Commission's 1907 formal evaluation of the Drainage Canal's effect on Great Lakes levels/navigation (duplicate copy also in river-reversal-canals/) |
+| `1907-journal-western-society-engineers-v12-sanitary-district-randolph.pdf` | JWSE Vol. 12 (1906/1907) — Isham Randolph's comprehensive retrospective on the Sanitary District's work |
+| `1909-goldthwait-physical-features-des-plaines-valley.pdf` | Goldthwait's 1909 ISGS Bulletin 11 survey of the Des Plaines Valley corridor followed by the Canal and later TARP tunnels |
+| `1909-randall-emergency-butterfly-dam-chicago-drainage-canal-lockport.pdf` | Frank A. Randall's construction-era account of the emergency dam built at Lockport on the Sanitary & Ship Canal |
+| `1911-journal-western-society-engineers-v16-sewerage-system-chicago-hill.pdf` | JWSE Vol. 16 (1911) — C.D. Hill's full-system "The Sewerage System of Chicago" design/operations narrative |
+| `1912-journal-western-society-engineers-v17-sewered-areas-sherman-sewage-purification.pdf` | JWSE Vol. 17 (1912) — L.K. Sherman's landmark "Run Off from Sewered Areas" hydrograph paper and Lederer on sewage chemistry |
+| `1913-journal-western-society-engineers-v18-chicago-water-works-ericson.pdf` | JWSE Vol. 18 (1913) — John Ericson's "Chicago Water Works" status report and Fuller on sewage dilution policy |
+| `1914-journal-western-society-engineers-v19-future-sanitary-problem-symposium.pdf` | JWSE Vol. 19 (1914) — multi-author symposium debating dilution vs. treatment for Chicago's sewage disposal strategy |
+| `1915-trinkaus-sanitary-district-chicago-history-thesis.pdf` | Trinkaus's 1915 Armour Institute thesis history of the Sanitary District (duplicate copy also in sanitary-district-annual-reports/) |
+| `1921-engineering-data-sanitary-district-chicago.pdf` | 1921 engineering data summary for the Main Channel, North Shore Channel, Cal-Sag Channel, and pumping works (duplicate copy also in sanitary-district-annual-reports/) |
+| `1927-alvord-burdick-howson-disposal-sewage-sanitary-district-chicago.pdf` | Alvord, Burdick & Howson's 1927 sewage-disposal evaluation study (duplicate copy also in sanitary-district-annual-reports/) |
+| `1939-bretz-geology-chicago-region-part1-general-igs-bulletin65.pdf` | J Harlen Bretz's ISGS Bulletin 65, Part I (1939) — foundational bedrock/surficial geology of the Chicago region |
+| `1939-bretz-geology-chicago-region-part2-pleistocene-igs-bulletin65.pdf` | Bretz's ISGS Bulletin 65, Part II (1939) — Pleistocene glacial geology governing Chicago tunnel/sewer excavation conditions |
+| `1954-reed-engineering-properties-chicago-subsoils.pdf` | Reed's 1954 UIUC Engineering Experiment Station bulletin on Chicago's soft clay subsoils, later tunneled through for TARP |
+| `1955-uyanik-observed-computed-settlements-structures-chicago.pdf` | Uyanik's 1955 UIUC bulletin on settlement case studies for Chicago structures on soft clay |
+| `1985-colten-industrial-wastes-calumet-area-1869-1970-historical-geography.pdf` | Colten's century-long historical geography of industrial/sewage waste disposal in the Calumet region |
+
+##### court-consent-decrees (Official court opinions and consent decrees governing the Lake Michigan diversion and MWRD's CWA obligations)
+
+| File | Description |
+|---|---|
+| `1925-sanitary-district-chicago-v-united-states-266us405.pdf` | Official U.S. Reports text of Sanitary District of Chicago v. United States, 266 U.S. 405 (1925) — the legal origin of the federal diversion-limit regime |
+| `1967-wisconsin-v-illinois-388us426-supreme-court-decree.pdf` | Original 1967 consent decree establishing the 3,200 cfs long-term average diversion limit |
+| `1980-wisconsin-v-illinois-449us48-modified-decree.pdf` | 1980 modified decree switching to a 40-year running average diversion-accounting standard |
+| `2011-epa-doj-mwrd-consent-decree.pdf` | 2011 federal Clean Water Act consent decree compelling MWRD to finish McCook/Thornton and eliminate CSOs by 2029 |
+| `undated-short-history-chicago-diversion.pdf` | Illustrated narrative history of the Chicago Diversion from the 1670s portage through the Asian-carp-era control-structure debates |
+
+##### gao-oversight-reports (GAO cost/program oversight reports on TARP and Chicago's combined-sewer cleanup program)
+
+| File | Description |
+|---|---|
+| `1978-gao-psad-78-94-chicago-combined-water-cleanup-flood-control.pdf` | 1978 GAO review of TARP status, EPA/Corps funding roles, and program risks (report PSAD-78-94) |
+| `1981-gao-ced-81-51-tarp-costs-continue-to-rise.pdf` | 1981 GAO cost-oversight update finding TARP Phase I cost had escalated to $10.2 billion (report CED-81-51) |
+
+##### docs-societies-mwrd-misc (MWRD historical publications and professional-society (WEF) TARP case-history material)
+
+| File | Description |
+|---|---|
+| `1925-north-side-sewage-treatment-works-division-p-contract-specs.pdf` | 1925 construction-era contract/specifications (654 pp.) for the North Side plant complex that preceded today's O'Brien WRP |
+| `2018-wef-deep-tunnels-lessons-learned.pdf` | WEF technical report (WSEC-2018-TR-002) synthesizing design/construction/O&M lessons from major deep-tunnel CSO systems worldwide, with a Chicago TARP case-history section |
+| `2021-mwrd-a-river-reversed-19th-century-engineering.pdf` | MWRD's short illustrated retrospective on the Chicago River reversal and Sanitary and Ship Canal |
+| `2022-mwrd-agency-brochure-history.pdf` | MWRD's 2022 corporate history/overview brochure — founding, river reversal, canal expansion, TARP |
+| `2022-mwrd-calumet-wrp-cal-sag-channel-centennial-press-release.pdf` | MWRD centennial press release marking the 1922 completion of the Calumet WRP and Cal-Sag Channel |
+| `2023-mwrd-seminar-50-year-history-tarp.pdf` | 136-slide MWRD in-house seminar retrospective covering TARP's full history from 1972 adoption through construction and performance |
+| `2024-mwrd-seminar-hydraulic-modeling-transient-events-tarp.pdf` | MWRD technical seminar (50 pp.) on hydraulic transient/surge modeling within the operating TARP tunnel network |
+| `2025-mwrd-seminar-history-extreme-rain-events-chicago.pdf` | 74-slide MWRD historical review of major Chicago-area storm events and their infrastructure impact |
+
+##### isws-bulletins (Illinois State Water Survey bulletins, circulars, and contract reports on Chicago-area sewage disposal, storms, and water supply)
+
+| File | Description |
+|---|---|
+| `1927-buswell-isws-bulletin23-disposal-sewage-sanitary-district-chicago.pdf` | Buswell's landmark ISWS Bulletin 23 on Sanitary District sewage-disposal practice and stream-pollution effects |
+| `1927-buswell-isws-bulletin24-pollution-streams-illinois.pdf` | Buswell's companion ISWS Bulletin 24 statewide stream-pollution survey, including Chicago-area waterways |
+| `1950-isws-circular29-chicago-area-water-supply-symposium.pdf` | 1950 ISWS Circular 29 — mid-century symposium on Chicago-area water-supply engineering and planning |
+| `1980-adams-isws-ri97-adequacy-economics-water-supply-northeastern-illinois-1985-2010.pdf` | Adams's 1980 ISWS long-range planning study projecting NE Illinois water-supply needs and costs through 2010 |
+| `1986-vogel-isws-contract-report388-significant-storm-distribution-chicago-1949-1978.pdf` | Vogel's 1986 ISWS statistical rainfall-event study used in TARP-era hydrologic design work |
+
+##### tarp-case-studies (pre- and post-construction TARP evaluation studies — ISWS/ISGS hydrology, geology, GAO case history)
+
+| File | Description |
+|---|---|
+| `1972-heim-preliminary-geologic-investigations-rock-tunnel-sites-flood-pollution-control-chicago.pdf` | Heim's 1972 ISGS pre-construction geological siting study for what became the TARP deep-rock tunnels |
+| `1972-kothandaraman-water-quality-storm-sewer-discharges-combined-sewer-overflows.pdf` | Kothandaraman's 1972 ISWS baseline CSO/storm-sewer water-quality data preceding the TARP decision |
+| `1978-vogel-chicago-hydrometeorological-area-project-urban-hydrometeorology.pdf` | Vogel's 1978 ISWS urban rainfall/hydrometeorology study feeding design-storm assumptions for TARP sizing |
+| `1979-gao-ced-79-77-combined-sewer-flooding-chicago-6vols.pdf` | 1979 GAO six-volume case study (report CED-79-77) of Chicago flooding/CSO pollution and TARP's role, incl. neighborhood-level flooding case summaries |
+| `1991-singh-reduction-peak-flows-water-quality-illinois-waterway-tarp-phases1-2-vol1.pdf` | Singh's 1991 ISWS early post-construction evaluation of TARP Phase I/II's measured effect on peak flows and water quality |
+| `1992-shackleford-reduction-peak-flows-water-quality-illinois-waterway-tarp-phases1-2.pdf` | Shackleford's 1992 ISWS follow-on companion TARP effectiveness evaluation |
+
+##### theses (University of Illinois theses on sewer construction, sewage chemistry, and CAWS hydraulic modeling)
+
+| File | Description |
+|---|---|
+| `1917-lenzing-effect-gashouse-waste-biochemical-oxidation-sewage.pdf` | Lenzing's 1917 University of Illinois thesis on sewage-treatment chemistry, from the era of early Chicago treatment-plant design debates |
+| `1917-warren-use-of-concrete-in-sewer-construction.pdf` | Warren's 1917 University of Illinois thesis on concrete sewer construction methods, contemporaneous with Chicago's major interceptor-building era |
+| `2014-santacruz-salazar-hydraulic-modelling-caws-hydrologic-separation-flooding.pdf` | Santacruz Salazar's 2014 UIUC M.S. thesis modeling the CAWS "hydrologic separation" flood-control proposal |
+
+##### usace-chicagoland-underflow-plan (USACE Chicagoland Underflow Plan (TARP Phase II precursor) planning/design documents)
+
+| File | Description |
+|---|---|
+| `1975-usace-cup-urban-water-damage-study-draft-eis.pdf` | 1975 USACE revised draft EIS for the Chicagoland Underflow Plan — foundational federal planning document predating TARP Phase II by over a decade |
+| `1990-cup-ohare-reservoir-phase2-gdm-eis-vol1.pdf` | 1990 USACE Chicagoland Underflow Plan, O'Hare (Majewski) Reservoir Phase II General Design Memorandum/EIS, Vol. 1 |
+| `1990-cup-ohare-reservoir-phase2-gdm-eis-vol2.pdf` | 1990 USACE Chicagoland Underflow Plan, O'Hare (Majewski) Reservoir Phase II GDM/EIS, Vol. 2 |
+
+##### usace-lake-michigan-diversion (USACE Chicago District annual Lake Michigan Diversion Accounting reports and technical-committee audits)
+
+| File | Description |
+|---|---|
+| `1981-usace-first-technical-committee-diversion-findings.pdf` | First independent technical audit (1981) of Illinois's diversion-measurement methodology after the 1980 modified decree |
+| `1983-usace-lake-michigan-diversion-accounting-1981-1982.pdf` | Earliest annual diversion-accounting report on file, covering accounting years 1981 & 1982 |
+| `1987-usace-lake-michigan-diversion-accounting-1986-annual-report.pdf` | Certified diversion accounting for water year 1986 |
+| `1987-usace-second-technical-committee-diversion-findings.pdf` | Second periodic outside-expert audit (1987) of gaging methods and accounting procedures at the CSSC/Lockport structures |
+| `1990-usace-lake-michigan-diversion-accounting-1988-annual-report.pdf` | Certified diversion accounting for water year 1988 |
+| `1993-usace-lake-michigan-diversion-accounting-annual-report.pdf` | Certified diversion accounting for water year 1993 |
+| `1994-usace-lake-michigan-diversion-accounting-annual-report.pdf` | Certified diversion accounting for water year 1994 |
+
+##### usace-mccook-hydraulic-model (USACE Waterways Experiment Station hydraulic model study of the McCook Reservoir inlet/outlet structure)
+
+| File | Description |
+|---|---|
+| `1991-usace-wes-mccook-reservoir-hydraulic-model-investigation.pdf` | 1991 USACE Waterways Experiment Station physical hydraulic scale-model study of McCook Reservoir's morning-glory inlet/outlet spillway (Technical Report HL-91-11) |
+
+##### usace-north-branch-gdm (USACE North Branch Chicago River flood-control design memorandum)
+
+| File | Description |
+|---|---|
+| `1983-usace-north-branch-chicago-river-phase1-gdm.pdf` | 1983 USACE flood-control design memorandum for North Branch Chicago River channel/relief works, near the North Branch Pumping Station |
+
+##### usgs-caws-hydrology (USGS technical reports on Chicago Area Waterway System hydrology and streamgage uncertainty)
+
+| File | Description |
+|---|---|
+| `2012-usgs-sir-cssc-control-structure-ratings-lockport.pdf` | USGS SIR 2012-5131 — rating equations for the Lockport controlling-works gates used in official diversion accounting |
+| `2015-usgs-sir-caws-hydrology-monitoring-issues.pdf` | USGS SIR 2015-5115 — comprehensive survey of CAWS reversed-flow hydraulics, gaging network, and monitoring challenges |
+| `2022-usgs-ofr-uncertainty-analysis-lemont-gage-wy2006-16.pdf` | USGS OFR 2022-1007 — ten-year uncertainty analysis of the Lemont streamgage feeding official USACE diversion-accounting figures |
+
+##### usace-chicago-district-history (USACE Chicago District's official district history)
+
+| File | Description |
+|---|---|
+| `1979-those-army-engineers-chicago-district-history.pdf` | USACE Chicago District's official 1979 district history, narrating early flood-control and Deep Tunnel planning |
+
+#### Cataloged but not downloadable (login/paywall/size)
+
+Sources the research agents located and cataloged but could not save as local files
+(HathiTrust US-access-only records, embargoed university dissertations, paywalled
+society/journal papers, or pages that could not be fetched). All are also listed in the
+tier tables above.
+
+- **Engineering Works (1928), Sanitary District of Chicago** — https://onlinebooks.library.upenn.edu/webbin/book/lookupname?key=Chicago+Sanitary+District — HathiTrust, US access only — no direct record link found
+- **Engineering Data on the Sanitary District of Chicago, 1910 edition, Sanitary District of Chicago** — https://onlinebooks.library.upenn.edu/webbin/book/lookupname?key=Chicago+Sanitary+District — HathiTrust, US access only (the 1921 edition is downloaded instead)
+- **Engineering Facts Concerning the Sanitary District of Chicago, Sanitary District of Chicago** — https://onlinebooks.library.upenn.edu/webbin/book/lookupname?key=Chicago+Sanitary+District — HathiTrust, US access only — no direct record link found
+- **North Side Sewage Treatment Project: An Outline of Its Construction, Operation and Effect (1928), Sanitary District of Chicago** — https://onlinebooks.library.upenn.edu/webbin/book/lookupname?key=Chicago+Sanitary+District — HathiTrust, catalog link not directly resolvable without login
+- **Annual Budget Report to the Board of Trustees, Making Recommendations, Sanitary District of Chicago** — https://onlinebooks.library.upenn.edu/webbin/book/lookupname?key=Chicago+Sanitary+District — HathiTrust, US access only — no direct record link found
+- **Report of Streams Examination, Chemic and Bacteriologic... (1902), Arthur R. Reynolds / Sanitary District of Chicago** — https://books.google.com/books?id=Qv4NAAAAYAAJ — Google Books preview only, not on archive.org/HathiTrust full view
+- **Deep Tunnel's Twists and Turns -- CSO Control in Metro Chicago (1998 conference paper), OSTI** — https://www.osti.gov/biblio/20014867-deep-tunnel-twists-turns-cso-control-metro-chicago — OSTI record is metadata/abstract only; full text needs library/ASCE proceedings access
+- **Immediate and Long-Term Behavior of the Evanston Tunnel in Chicago Clay (Ph.D. dissertation, 1998), Nelson Kawamura / UIUC** — https://www.ideals.illinois.edu/items/84745 — IDEALS item embargoed — bitstream not retrievable
+- **Analysis of Ground-Liner Interaction for Tunnels (Ph.D. dissertation, 1978), Randall Eugene Ranken / UIUC** — https://www.ideals.illinois.edu/items/67024 — IDEALS item embargoed — bitstream not retrievable
+- **Conveyance Analysis of Chicago's "Deep Tunnel" System (2006/2007), ASCE World Environmental and Water Resources Congress** — https://ascelibrary.org/doi/10.1061/40856(200)10 — paywalled ASCE Library conference paper
+- **GIS-Based Support System for Modeling Chicago's "Deep Tunnel" System (2006/2007), ASCE World Environmental and Water Resources Congress** — https://ascelibrary.org/doi/10.1061/40856(200)12 — paywalled ASCE Library conference paper
+- **TARP — The Des Plaines Tunnel System (North Leg): A Case History (1997), Rautenberg & McDermott / SME OneMine** — https://www.onemine.org/documents/tarp-the-des-plaines-tunnel-system-north-leg-a-case-history — paywalled ($25 or SME membership)
+- **Tunnel and Reservoir Plan Solution to Chicago's Combined Sewer Overflow, Basement Flooding, and Pollution (1988), Bergman & Kapadia, Canadian J. Civil Eng. 15(3):389-396** — https://doi.org/10.1139/l88-054 — paywalled behind Canadian Science Publishing
+- **Chicago-TARP-Aug09-McCook Reservoir Connection Tunnel Design, TunnelTalk** — https://www.tunneltalk.com/Chicago-TARP-Aug09-McCook-Reservoir-connection-tunnel-design.php — page could not be fetched (connection blocked/timed out)
+- **Report of the Engineering Board of Review of the Sanitary District of Chicago on the Lake Lowering Controversy and a Program of Remedial Measures, Parts I-III (1925-1927)** — https://catalog.hathitrust.org/Record/009205703 ; https://catalog.hathitrust.org/Record/102360266 — HathiTrust records exist but full-view/download status blocked by Cloudflare bot-challenge; no free copy on archive.org
+- **West by Southwest to Stickney / Draining Chicago / Building the Canal to Save Chicago / Calumet: First and Forever (2012-2020, 4-book series), Richard Lanyon** — https://www.dicklanyon.com/books — commercially published (Lake Claremont Press), no free/open PDF — purchase or library loan only

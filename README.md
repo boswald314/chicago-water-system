@@ -50,7 +50,7 @@ cross-checked against each other for consistency.
 
 ## Images (`images/`)
 
-~640 images organized **by subject, then era** (e.g. `cribs/1850-1899/`,
+~810 images organized **by subject, then era** (e.g. `cribs/1850-1899/`,
 `tarp-tunnels/2000-present/`). Highlights: 1890s glass-negative photos of the canal
 excavation, 1925–1960 Chicago Sewers Collection construction photos, HAER documentation
 of the locks and pumping stations, 1928–1930 North Branch Pumping Station construction
@@ -65,11 +65,14 @@ Subjects: `cribs` · `purification-plants` · `water-pumping-stations` · `sewer
 
 ## Primary documents (`sources/`)
 
-Key PDFs downloaded for offline reference, organized by topic: MWRD TARP status reports,
-plant fact sheets, HAER data reports (canal, locks, powerhouse), the 1855 Chesbrough sewerage
-report, 1980 EPA Lawrence Avenue Underflow report, the North Branch PS 2018 rehab contract,
-the Collection System O&M Manual, and more. Listed with descriptions at the end of
-[SOURCES.md](SOURCES.md).
+~180 documents (2.5 GB) downloaded for offline reference, organized by topic. Beyond the agency
+fact sheets and HAER reports: Sanitary District annual reports and board proceedings (1900–1922),
+Brown's 1894 *Drainage Channel and Waterway*, nine volumes of the Journal of the Western Society
+of Engineers (1896–1914) with the Chicago papers pinpointed by page, ISWS Bulletin 23 (1927),
+the 1976–77 TARP environmental impact statements, the 1988 EPA TARP evaluation, GAO's 1979
+six-volume Chicago flooding case study, USACE diversion-accounting reports back to 1981, the
+1990 CUP O'Hare design memorandum, and the Supreme Court opinions behind the diversion cap.
+Listed with descriptions at the end of [SOURCES.md](SOURCES.md).
 
 ## Method & caveats
 
