@@ -27,9 +27,12 @@ and local-history sources. Every factual claim in the documents carries a number
 ## The detail documents (`docs/`)
 
 Each is fully cited, with a facilities/capacities table, construction narrative,
-upgrade timeline, and open questions. All were adversarially fact-checked against
+upgrade timeline, and open questions. Docs 01–14 were adversarially fact-checked against
 their cited sources (369 claims verified, 63 corrections applied) and then
-cross-checked against each other for consistency.
+cross-checked against each other for consistency; docs 15 and 16 were researched and
+cited to the same standard but added in later passes and not yet run through that audit.
+Doc 16 is also different in kind from the rest: a dated (July 2026) snapshot of active
+construction and contracts rather than a finished-history narrative.
 
 | Doc | Covers |
 |---|---|
@@ -48,6 +51,7 @@ cross-checked against each other for consistency.
 | [13 — Suburban WRPs](docs/13-suburban-wrps.md) | Kirie, Egan, Hanover Park, Lemont — capacities, service areas, the suburban solids chain |
 | [14 — CSOs, outfalls & discharges](docs/14-cso-outfalls-discharges.md) | Where everything discharges, every river→lake reversal year, the "does Deep Tunnel work?" debate, green infrastructure |
 | [15 — The Calumet-region lakes](docs/15-calumet-lakes-transformation.md) | Lake Calumet's harbor dredging and slag filling, Wolf Lake's dikes, vanished Hyde Lake, and where the Cal-Sag spoil went |
+| [16 — Current capital projects (2026 snapshot)](docs/16-current-capital-projects.md) | **A dated snapshot, not a finished history** — McCook Reservoir Stage 2, O'Brien's $409M Battery E (MWRD's largest contract ever), North Branch PS rehab, Thornton odor control, Stickney/Calumet/Kirie contracts, CAMP interceptor rehab, DWM water main & lead-line pace, Central Park PS electrification, the Chicago–Grand Prairie pipeline, Brandon Road, Chicago Harbor Lock |
 
 ## Images (`images/`)
 

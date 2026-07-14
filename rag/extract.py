@@ -69,7 +69,31 @@ def already_done(s):
             pass
     return done
 
+def process_file(args):
+    path, rel, outp = args
+    rec = {'file': rel, 'status': 'error', 'pages': 0, 'ocr_pages': 0, 'chars': 0}
+    try:
+        with open(outp, 'w') as fo:
+            if path.lower().endswith('.pdf'):
+                np = pdf_pages(path)
+                for i in range(1, np + 1):
+                    text, method = extract_pdf_page(path, i)
+                    if method == 'ocr':
+                        rec['ocr_pages'] += 1
+                    rec['pages'] += 1
+                    rec['chars'] += len(text)
+                    fo.write(json.dumps({'page': i, 'method': method, 'text': text}) + '\n')
+            else:
+                text = extract_plain(path)
+                rec.update(pages=1, chars=len(text))
+                fo.write(json.dumps({'page': 1, 'method': 'plain', 'text': text}) + '\n')
+        rec['status'] = 'done'
+    except Exception as e:
+        rec['error'] = str(e)[:200]
+    return rec
+
 def main():
+    import multiprocessing as mp
     files = []
     for root, dirs, fs in os.walk(SRC):
         dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
@@ -79,35 +103,20 @@ def main():
             if f.lower().endswith(('.pdf', '.txt', '.html', '.htm', '.md')):
                 files.append(os.path.join(root, f))
     done = already_done(files)
-    mf = open(MANIFEST, 'a')
-    total_pages = total_ocr = 0
-    for n, path in enumerate(files, 1):
+    jobs = []
+    for path in files:
         rel = os.path.relpath(path, ROOT)
-        if rel in done:
-            continue
-        outp = os.path.join(OUT, slug(rel) + '.jsonl')
-        rec = {'file': rel, 'status': 'error', 'pages': 0, 'ocr_pages': 0, 'chars': 0}
-        try:
-            with open(outp, 'w') as fo:
-                if path.lower().endswith('.pdf'):
-                    np = pdf_pages(path)
-                    for i in range(1, np + 1):
-                        text, method = extract_pdf_page(path, i)
-                        if method == 'ocr':
-                            rec['ocr_pages'] += 1
-                        rec['pages'] += 1
-                        rec['chars'] += len(text)
-                        fo.write(json.dumps({'page': i, 'method': method, 'text': text}) + '\n')
-                else:
-                    text = extract_plain(path)
-                    rec.update(pages=1, chars=len(text))
-                    fo.write(json.dumps({'page': 1, 'method': 'plain', 'text': text}) + '\n')
-            rec['status'] = 'done'
-        except Exception as e:
-            rec['error'] = str(e)[:200]
-        total_pages += rec['pages']; total_ocr += rec['ocr_pages']
-        mf.write(json.dumps(rec) + '\n'); mf.flush()
-        print(f"[{n}/{len(files)}] {rel}: {rec['pages']}p ({rec['ocr_pages']} ocr) {rec['status']}", flush=True)
+        if rel not in done:
+            jobs.append((path, rel, os.path.join(OUT, slug(rel) + '.jsonl')))
+    print(f'{len(done)} already done; {len(jobs)} to process with 6 workers', flush=True)
+    mf = open(MANIFEST, 'a')
+    total_pages = total_ocr = n = 0
+    with mp.Pool(6) as pool:
+        for rec in pool.imap_unordered(process_file, jobs):
+            n += 1
+            total_pages += rec['pages']; total_ocr += rec['ocr_pages']
+            mf.write(json.dumps(rec) + '\n'); mf.flush()
+            print(f"[{n}/{len(jobs)}] {rec['file']}: {rec['pages']}p ({rec['ocr_pages']} ocr) {rec['status']}", flush=True)
     print(f"DONE: {total_pages} pages, {total_ocr} OCR'd", flush=True)
 
 if __name__ == '__main__':

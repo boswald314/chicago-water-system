@@ -4,11 +4,13 @@ title: The detail documents
 
 # The detail documents
 
-Fifteen fully-cited research documents, each with a facilities/capacities table, construction
+Sixteen fully-cited research documents, each with a facilities/capacities table, construction
 narrative, upgrade timeline, and open questions. Docs 01–14 were adversarially fact-checked against
-their cited sources (369 claims verified, 63 corrections) and cross-audited for consistency; doc 15
-was researched and cited to the same standard but added in a later pass and not yet run through that
-same adversarial audit.
+their cited sources (369 claims verified, 63 corrections) and cross-audited for consistency; docs 15
+and 16 were researched and cited to the same standard but added in later passes and not yet run
+through that same adversarial audit. Doc 16 differs from the rest in kind: it's a dated snapshot
+(July 2026) of active construction and contracts rather than a finished-history narrative, and its
+figures will drift as projects complete or contracts are rebid.
 Start with the [system overview](../00-SYSTEM-OVERVIEW.md) if you want the whole picture first.
 
 Every bracketed citation like [3] is clickable — it jumps to that numbered entry in the
@@ -31,3 +33,4 @@ document's Sources section, where the link to the original document lives.
 | [13 — Suburban WRPs](13-suburban-wrps.md) | Kirie, Egan, Hanover Park, Lemont — capacities, service areas, the suburban solids chain |
 | [14 — CSOs, outfalls & discharges](14-cso-outfalls-discharges.md) | Where everything discharges, every river→lake reversal year, the "does Deep Tunnel work?" debate |
 | [15 — The Calumet-region lakes](15-calumet-lakes-transformation.md) | Lake Calumet's harbor dredging and slag/dredge-spoil filling, Wolf Lake's dikes and causeways, vanished Hyde Lake (formed ~1872–81, filled by 1927), and where the Cal-Sag Channel's spoil actually went |
+| [16 — Current capital projects (2026 snapshot)](16-current-capital-projects.md) | What's being built right now — McCook Reservoir Stage 2, O'Brien's $409M Battery E, North Branch PS rehab, Thornton odor control, Stickney/Calumet/Kirie contracts, CAMP interceptor rehab, DWM water main & lead-line pace, Central Park PS electrification, the Chicago–Grand Prairie pipeline, Brandon Road, Chicago Harbor Lock |
