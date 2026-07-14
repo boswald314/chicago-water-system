@@ -11,6 +11,9 @@ was researched and cited to the same standard but added in a later pass and not 
 same adversarial audit.
 Start with the [system overview](../00-SYSTEM-OVERVIEW.md) if you want the whole picture first.
 
+Every bracketed citation like [3] is clickable — it jumps to that numbered entry in the
+document's Sources section, where the link to the original document lives.
+
 | Doc | Covers |
 |---|---|
 | [01 — Early sewerage history](01-early-sewerage-history.md) | Chesbrough's 1855 plan (first comprehensive US sewer system), raising the city, the 1885 storm myth, creation of the Sanitary District |
