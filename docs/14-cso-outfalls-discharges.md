@@ -105,6 +105,9 @@ Combined sewage that cannot be captured discharges through the ≈370 CSO outfal
 
 Green infrastructure is now a standing MWRD program rather than a one-off mitigation. As of the mid-2020s, the Space to Grow partnership has transformed more than 40 CPS schoolyards, each typically capturing 200,000-plus gallons per storm event — collectively equivalent to more than 13 Olympic pools [\[29\]](#src-29)[\[30\]](#src-30). RainReady (Center for Neighborhood Technology) runs parallel household- and community-scale retrofit programs, including the Calumet Corridor initiative funded by Cook County [\[28\]](#src-28)[\[34\]](#src-34). All of it sits under the Cook County Watershed Management Ordinance framework MWRD has administered since gaining countywide stormwater authority in 2004 [\[21\]](#src-21)[\[22\]](#src-22).
 
+
+For the six MWRD pumping stations that discharge CSOs directly (North Branch, Racine Avenue, 95th St., 122nd St., 125th St., and Westchester), the District's own *Pumping Station Activity* log provides an event-level record — 988 confirmed discharge events from 2000 through July 2026, totaling ≈230 billion gallons, three-quarters of it at Racine Avenue alone — reproduced in this archive's [data section](../data/) as a flagged, faithful CSV [\[62\]](#src-62).
+
 ## Notable events & incidents
 
 - **April 13, 1992 — Great Chicago (Loop) Flood.** A contractor's piling, driven near the Kinzie Street bridge in September 1991, punctured the roof of a disused turn-of-the-century freight-tunnel network beneath the Chicago River. The breach went undiscovered for months; when it failed, an estimated 250 million gallons of river water flooded Loop basements and the underground Pedway, shutting down the financial district for days. Crews eventually drained the flooded freight tunnels into the still-unfinished Deep Tunnel network below. Remediation and business-interruption costs have been estimated at roughly $2 billion in 1992 dollars [\[45\]](#src-45)[\[46\]](#src-46).
@@ -193,3 +196,4 @@ Green infrastructure is now a standing MWRD program rather than a one-off mitiga
 - `lake-michigan-reversals-mwrd.pdf` — MWRD, *Reversals to Lake Michigan (1985–Present)* official data table (source 12)
 - `tarp-status-report-dec2024-mwrd.pdf` — MWRD, *TARP Status Report as of December 31, 2024* (source 16)
 - `chicago-cso-om-plan.pdf` — City of Chicago DWM, *Combined Sewer Operations & Maintenance Plan*, NPDES Permit IL0045012 (source 1)
+62. <a id="src-62"></a>MWRD, *Pumping Station Activity* workbook (data updated July 6, 2026) — per-event CSO discharge volumes for the six MWRD CSO pumping stations; obtained July 2026; CSV conversion at `data/mwrd-ps-cso-activity.csv`. Accessed July 2026.

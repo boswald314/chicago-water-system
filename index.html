@@ -139,6 +139,7 @@ document.getElementById('navlinks').innerHTML = [
   ['Overview', LOCAL ? '00-SYSTEM-OVERVIEW.md' : '00-SYSTEM-OVERVIEW.html'],
   ['Documents', LOCAL ? 'docs/' : 'docs/'],
   ['Galleries', LOCAL ? 'images/' : 'gallery/'],
+  ['Data', LOCAL ? 'data/' : 'data/'],
   ['Sources', LOCAL ? 'SOURCES.md' : 'SOURCES.html'],
   ['Rights', LOCAL ? 'ATTRIBUTION.md' : 'ATTRIBUTION.html'],
 ].map(([t, h]) => `<a href="${h}">${t}</a>`).join('');

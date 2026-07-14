@@ -23,6 +23,7 @@ and local-history sources. Every factual claim in the documents carries a number
 | **[index.html](index.html)** | Interactive flow diagram (the site homepage) — click any facility for details, toggle *extreme-storm mode* to see CSOs and lake reversals; lines scale with documented capacity, plant/reservoir boxes with design flow/storage |
 | **[SOURCES.md](SOURCES.md)** | Master bibliography of every source used, by tier, with which docs cite it |
 | **[images/INDEX.md](images/INDEX.md)** | Catalog of all ~810 archival images with captions, dates, and provenance links |
+| **[data/](data/index.md)** | Datasets — MWRD's per-event CSO pumping-station discharge log (2000–2026) as flagged CSV with charts |
 
 ## The detail documents (`docs/`)
 
