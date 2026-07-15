@@ -103,15 +103,20 @@ def main():
             if f.lower().endswith(('.pdf', '.txt', '.html', '.htm', '.md')):
                 files.append(os.path.join(root, f))
     done = already_done(files)
+    part = os.environ.get('PARTITION')
+    pn, pm = (int(x) for x in part.split('/')) if part else (0, 1)
     jobs = []
     for path in files:
         rel = os.path.relpath(path, ROOT)
-        if rel not in done:
-            jobs.append((path, rel, os.path.join(OUT, slug(rel) + '.jsonl')))
+        if rel in done:
+            continue
+        if pm > 1 and int(hashlib.sha1(rel.encode()).hexdigest(), 16) % pm != pn:
+            continue
+        jobs.append((path, rel, os.path.join(OUT, slug(rel) + '.jsonl')))
     print(f'{len(done)} already done; {len(jobs)} to process with 6 workers', flush=True)
     mf = open(MANIFEST, 'a')
     total_pages = total_ocr = n = 0
-    with mp.Pool(6) as pool:
+    with mp.Pool(int(os.environ.get('WORKERS', '6'))) as pool:
         for rec in pool.imap_unordered(process_file, jobs):
             n += 1
             total_pages += rec['pages']; total_ocr += rec['ocr_pages']

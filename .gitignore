@@ -8,3 +8,5 @@ vendor/
 .jekyll-cache/
 rag/.venv/
 rag/data/
+scratchpad/
+scripts/__pycache__/

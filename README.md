@@ -72,14 +72,16 @@ Subjects: `cribs` · `purification-plants` · `water-pumping-stations` · `sewer
 
 ## Primary documents (`sources/`)
 
-~180 documents (2.5 GB) downloaded for offline reference, organized by topic. Beyond the agency
+1,834 documents (~12 GB) downloaded for offline reference, organized into 49 topic folders —
+most added by the July 2026 archival closure hunt. Beyond the agency
 fact sheets and HAER reports: Sanitary District annual reports and board proceedings (1900–1922),
 Brown's 1894 *Drainage Channel and Waterway*, nine volumes of the Journal of the Western Society
 of Engineers (1896–1914) with the Chicago papers pinpointed by page, ISWS Bulletin 23 (1927),
 the 1976–77 TARP environmental impact statements, the 1988 EPA TARP evaluation, GAO's 1979
 six-volume Chicago flooding case study, USACE diversion-accounting reports back to 1981, the
 1990 CUP O'Hare design memorandum, and the Supreme Court opinions behind the diversion cap.
-Listed with descriptions at the end of [SOURCES.md](SOURCES.md).
+Summarized per folder in [SOURCES.md](SOURCES.md); the full file-by-file listing with titles
+and source URLs is in [SOURCES-MANIFEST.md](SOURCES-MANIFEST.md).
 
 ## Method & caveats
 
