@@ -11,7 +11,7 @@ DB = os.path.join(ROOT, 'rag', 'data', 'index.db')
 OLLAMA = os.environ.get('OLLAMA_URL', 'http://bigmantower.local:11434')
 MODEL = os.environ.get('EMBED_MODEL', 'hf.co/Qwen/Qwen3-Embedding-4B-GGUF:Q8_0')
 DIM = 2560
-BATCH = 16
+BATCH = int(os.environ.get('BATCH', '32'))
 
 def serialize(vec):
     return struct.pack(f'{len(vec)}f', *vec)
