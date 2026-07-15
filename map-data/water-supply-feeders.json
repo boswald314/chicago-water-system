@@ -1,0 +1,185 @@
+{
+  "type": "water-supply-feeders",
+  "generated": "2026-07",
+  "note": "Finished-water supply tunnels/feeders from Chicago's two purification plants to its 12 pumping stations. Routed onto the historic land-tunnel corridors documented in the 1917 Bureau of Public Efficiency report and the city's own 1956 'Chicago Water System' technical report (which groups the pre-Jardine pumping stations into 'North', 'Central' and 'South' Districts, each fed by its own tunnel network) wherever those corridors are named; straight-line plant-to-station approximation elsewhere. All 12 stations covered. See docs/05-water-pumping-distribution.md for narrative discussion.",
+  "connections": [
+    {
+      "id": "jardine-chicago-ave",
+      "kind": "water-supply",
+      "from": 1964,
+      "to": null,
+      "sourcePlant": "jardine",
+      "waypoints": [
+        [41.8947, -87.6060],
+        [41.8972, -87.6239]
+      ],
+      "label": "Jardine → Chicago Avenue Pumping Station supply tunnel",
+      "source": "Doc 05 states explicitly that Chicago Avenue is 'still active, fed today from Jardine plant rather than a lake tunnel directly.' The 1956 city report ('Chicago Water System: A Description of the System and Its Sanitary Protection,' Table 3, p.7) groups Chicago Avenue under the pre-Jardine 'Central District,' the district Jardine's predecessor (Central District Filtration Plant) was built to serve. The two facilities are ~1.3 mi apart. No modern engineering drawing of the connector's exact path was found, so this is a straight line between the two documented points.",
+      "approx": true
+    },
+    {
+      "id": "sawyer-68th-street",
+      "kind": "water-supply",
+      "from": 1947,
+      "to": null,
+      "sourcePlant": "sawyer",
+      "waypoints": [
+        [41.7548, -87.5453],
+        [41.7620, -87.5560],
+        [41.7712, -87.5678]
+      ],
+      "label": "Sawyer → 68th Street Pumping Station supply tunnel",
+      "source": "Sawyer (South District) Filtration Plant 'served three South Side pumping stations — 68th Street, Roseland, and Western Avenue — supplying 1,543,000 people by 1955' (doc 04, sourced to the 1956 city report). The same 1956 report's Table 2 ('Tunnels,' p.6) lists a South District tunnel network reaching 68th St. via the 1911 Southwest Lake and Land Tunnel plus a dedicated '68th St. Connection to S.W. Tunnel' completed 1916 (0.63 mi), and a 2.80-mi, 1945 'Connection to Filtration Plant' tunnel physically linking that South District network to the new Sawyer plant. The intermediate waypoint approximates the old Dunne/68th St. crib tunnel junction near the shore; exact modern alignment not documented.",
+      "approx": true
+    },
+    {
+      "id": "jardine-central-park",
+      "kind": "water-supply",
+      "from": 1964,
+      "to": null,
+      "sourcePlant": "jardine",
+      "waypoints": [
+        [41.8947, -87.6060],
+        [41.8915, -87.6480],
+        [41.8684, -87.7149]
+      ],
+      "label": "Jardine → Central Park Pumping Station supply tunnel",
+      "source": "The 1917 Bureau of Public Efficiency report ('The Water Works System of Chicago,' pp.55-56) describes the Northwest Land and Lake Tunnel (completed 1900): a 10-ft main from the Carter H. Harrison crib southwest to Green Street & Grand Avenue, from which an 8-ft branch runs southwest to the Central Park Avenue station. The 1956 city report's Table 3 groups Central Park Ave. under the 'Central District,' the district Jardine's predecessor plant was built to serve. The Green & Grand waypoint is computed from the 1917 street description (no coordinates given in source); the Jardine-to-junction leg is an inferred connector — no document found states how the old crib-fed Central District network was physically tied into the new Jardine plant after 1964.",
+      "approx": true
+    },
+    {
+      "id": "jardine-springfield",
+      "kind": "water-supply",
+      "from": 1964,
+      "to": null,
+      "sourcePlant": "jardine",
+      "waypoints": [
+        [41.8947, -87.6060],
+        [41.8915, -87.6480],
+        [41.9131, -87.7235]
+      ],
+      "label": "Jardine → Springfield Pumping Station supply tunnel",
+      "source": "Same Northwest Land and Lake Tunnel system as Central Park (1917 Bureau of Public Efficiency report, pp.55-56): from the Green St. & Grand Ave. junction, a second 8-ft branch runs northwest to the Springfield Avenue station. Central Park and Springfield were built together (1899-1901) at the terminus of this same tunnel system per doc 05. Jardine-to-junction leg inferred as with Central Park; see that connection's note.",
+      "approx": true
+    },
+    {
+      "id": "jardine-mayfair",
+      "kind": "water-supply",
+      "from": 1964,
+      "to": null,
+      "sourcePlant": "jardine",
+      "waypoints": [
+        [41.8947, -87.6060],
+        [41.9654, -87.6493],
+        [41.9654, -87.7496]
+      ],
+      "label": "Jardine → Mayfair Pumping Station supply tunnel",
+      "source": "Mayfair was built (1913/1918) 'at the end of an eight-mile, hand-dug rock tunnel from the new Wilson Avenue crib' (doc 05, citing DNAinfo Chicago 2017). The Wilson Avenue Tunnel (1918, 8.62 mi) is grouped under the pre-Jardine 'North District' in the 1956 city report's Table 2/3. Mayfair's given coordinate [41.9654,-87.7496] sits on the identical latitude as the old tunnel's lakefront terminus near the Lakeview station site [41.9654,-87.6493], consistent with a due-west tunnel along the Wilson Ave. corridor. Jardine-to-lakefront leg is an inferred connector (no source documents how the old North District network was tied to Jardine after 1964); the lakefront-to-Mayfair leg follows the documented historic corridor.",
+      "approx": true
+    },
+    {
+      "id": "sawyer-western",
+      "kind": "water-supply",
+      "from": 1947,
+      "to": null,
+      "sourcePlant": "sawyer",
+      "waypoints": [
+        [41.7548, -87.5453],
+        [41.7497, -87.5726],
+        [41.7497, -87.6278],
+        [41.8038, -87.6844]
+      ],
+      "label": "Sawyer → Western Avenue Pumping Station supply tunnel",
+      "source": "Doc 04 states directly that the Sawyer (South District) plant 'served three South Side pumping stations — 68th Street, Roseland, and Western Avenue' by 1955. The 1956 city report's Table 2 lists a dedicated 'Western Avenue' tunnel segment (1927, 6.02 mi) within the South District network, plus the 2.80-mi 1945 tunnel connecting that whole network to the new Sawyer plant. The 1917 Bureau of Public Efficiency report (p.57) describes the underlying Southwest Land and Lake Tunnel's lake section running from the Dunne crib area southwest to 73rd St. & Yates Ave., then a branch west along 73rd St. to State St. — used here as intermediate waypoints, extended northwest to Western Ave.'s actual built location (4933 S. Western, west of the station originally proposed 'near 61st St. and Western Ave.' in the 1917 source).",
+      "approx": true
+    },
+    {
+      "id": "jardine-thomas-jefferson",
+      "kind": "water-supply",
+      "from": 1964,
+      "to": null,
+      "sourcePlant": "jardine",
+      "waypoints": [
+        [41.8947, -87.6060],
+        [41.9654, -87.6493],
+        [41.9661, -87.6857]
+      ],
+      "label": "Jardine → Thomas Jefferson Pumping Station supply tunnel",
+      "source": "The 1956 city report's Table 3 groups Thomas Jefferson (1928) with Lake View and Mayfair under the pre-Jardine 'North District,' the Wilson Avenue Tunnel district; Thomas Jefferson sits roughly along the same Wilson/Eastwood Ave. corridor as that tunnel, about a third of the way from the lake to Mayfair. No source names a specific branch tunnel to Thomas Jefferson (unlike the documented 1913/1918 Clarendon Ave. branch to Lake View), so this route is inferred by analogy to the other two North District stations on the same corridor. Jardine-to-corridor leg inferred as with Mayfair/Lakeview.",
+      "approx": true
+    },
+    {
+      "id": "sawyer-roseland",
+      "kind": "water-supply",
+      "from": 1947,
+      "to": null,
+      "sourcePlant": "sawyer",
+      "waypoints": [
+        [41.7548, -87.5453],
+        [41.7497, -87.5726],
+        [41.7497, -87.6278],
+        [41.7047, -87.6325]
+      ],
+      "label": "Sawyer → Roseland Pumping Station supply tunnel",
+      "source": "Doc 04 states directly that the Sawyer plant served Roseland (with 68th St. and Western Ave.) by 1955. This is the best-documented historic route of the set: the 1917 Bureau of Public Efficiency report (p.57) describes the Southwest Land and Lake Tunnel (completed 1911, 'designed to supply the Roseland pumping station') running from the Edward F. Dunne crib southwest to 73rd St. & Yates Ave. (14-ft lake section), then a 12-ft branch west along 73rd St. to State St., then a 9-ft branch south along the State St. corridor to the Roseland station — all used directly as waypoints here. The 1956 city report's Table 2 additionally lists a 'Stewart Avenue' tunnel segment (1943, 4.28 mi, matching Roseland's Stewart Ave. address) extending this network, and the 2.80-mi 1945 connector tying the whole South District network to the new Sawyer plant. Only the Sawyer-to-crib-junction leg is a straight-line simplification.",
+      "approx": true
+    },
+    {
+      "id": "sawyer-southwest",
+      "kind": "water-supply",
+      "from": 1947,
+      "to": null,
+      "sourcePlant": "sawyer",
+      "waypoints": [
+        [41.7548, -87.5453],
+        [41.7497, -87.6278],
+        [41.7397, -87.7259]
+      ],
+      "label": "Sawyer → Southwest Pumping Station supply tunnel",
+      "source": "Southwest Pumping Station's construction date is undocumented (doc 05 Open Questions places it between 1933 and 2009); no historic tunnel table names a direct 1940s-era connection as it does for 68th St./Roseland/Western. However, the City's FY2025-2029 Capital Improvement Program (sources/current-projects/chicago-2025-2029-cip-report.pdf, pp.73-75, project #44019 'Southwest Pumping Station - Joliet Tunnel Connection,' design 2022-2023/construction 2023-2026) is listed under the WATER SYSTEM - SAWYER WATER PURIFICATION PLANT capital program specifically, directly tying Southwest PS to Sawyer via a new/upgraded tunnel connection built to deliver water onward to the Chicago-Grand Prairie Water Commission regional pipeline (also documented in doc 05 and doc 16). The 'from' year is set conservatively to Sawyer's 1947 opening because Southwest's original (pre-2022) supply-tunnel connection date is undocumented; the #44019 project is understood as a new/expanded connector, not the station's first link to Sawyer.",
+      "approx": true
+    },
+    {
+      "id": "jardine-lexington",
+      "kind": "water-supply",
+      "from": 1992,
+      "to": null,
+      "sourcePlant": "jardine",
+      "waypoints": [
+        [41.8684, -87.7149],
+        [41.8700, -87.7616]
+      ],
+      "label": "Jardine (via Central Park Pumping Station) → Lexington Pumping Station supply tunnel",
+      "source": "Best-sourced connection in this set. Doc 04, citing the DuPage Water Commission ('Lake Michigan Comes to You'), states the Commission 'taps Chicago's system at the city's Central Park Avenue Pumping Station, sends water 2.4 miles through a 12-foot-diameter bedrock tunnel to the Lexington Pumping Station.' The straight-line distance between the given Central Park [41.8684,-87.7149] and Lexington [41.8700,-87.7616] coordinates computes to ~2.40 mi, matching the sourced figure almost exactly. Lexington did not exist before its ~1990-92 construction (doc 05), so 'from' is set to 1992 rather than Jardine's 1964 opening; Central Park itself is Jardine-fed (see jardine-central-park), making Jardine the ultimate source plant reflected in sourcePlant.",
+      "approx": false
+    },
+    {
+      "id": "jardine-cermak",
+      "kind": "water-supply",
+      "from": 1964,
+      "to": null,
+      "sourcePlant": "jardine",
+      "waypoints": [
+        [41.8947, -87.6060],
+        [41.8739, -87.6453]
+      ],
+      "label": "Jardine → Cermak Pumping Station supply tunnel",
+      "source": "Cermak (built 1934-35 as the 'Central Pumping Station,' replacing the obsolete 22nd St., Harrison St. and 14th St. stations, per doc 05) is grouped under the 'Central District' in the 1956 city report's Table 3, the district Jardine's predecessor plant was built to serve. The predecessor Harrison St. and 14th St. stations 'were part of the Four Mile tunnel project' (Century of Progress, 1933, pp.17-18), itself fed from the Four Mile Crib — which doc 04 states 'historically supplied the Central District/Jardine plant.' No modern source documents the exact post-1964 connector path from Jardine to Cermak's Harrison St. site, so this is a straight line between the two documented points.",
+      "approx": true
+    },
+    {
+      "id": "jardine-lakeview",
+      "kind": "water-supply",
+      "from": 1964,
+      "to": null,
+      "sourcePlant": "jardine",
+      "waypoints": [
+        [41.8947, -87.6060],
+        [41.9654, -87.6493]
+      ],
+      "label": "Jardine → Lakeview Pumping Station supply tunnel",
+      "source": "Well-documented historic branch, undocumented modern connector. The Century of Progress booklet (1933, pp.15-16) states a branch tunnel in Clarendon Ave. from the Wilson Avenue Tunnel to the Lake View Pumping Station was built in 1913 (1,381 ft, 8 ft dia.), with the full spur completed 1918, making the old Lake View crib unnecessary. The 1956 city report's Table 3 groups Lake View under the pre-Jardine 'North District' (Wilson Avenue Tunnel network). Jardine-to-North-District-network connector is inferred, as with Mayfair and Thomas Jefferson; no source documents how the old North District tunnels were tied into Jardine's output after 1964.",
+      "approx": true
+    }
+  ]
+}
