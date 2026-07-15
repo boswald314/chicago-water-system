@@ -728,6 +728,7 @@ same-named `.pdf`, used for full-text search/citation-checking during research.
 | File | Description |
 |---|---|
 | `1861-board-of-water-commissioners-19th-semiannual-report.pdf` | 1861 pre-fire, construction-era report of the Chicago Board of Water Commissioners — staff rosters and works status, predecessor of the Dept. of Public Works annual reports |
+| `1917-bureau-public-efficiency-water-works-system-chicago.pdf` | Chicago Bureau of Public Efficiency's 1917 independent efficiency audit of the water works system — financial, operational, and engineering critique |
 
 ##### tarp-deep-tunnel (doc 09 — TARP Phase I: The Deep Tunnel System)
 
@@ -760,6 +761,7 @@ same-named `.pdf`, used for full-text search/citation-checking during research.
 | File | Description |
 |---|---|
 | `1891-dept-public-works-15th-annual-report-fy1890.pdf` | Fifteenth Annual Report of the Chicago Dept. of Public Works (FY1890) — water, sewers, streets, with Mayor's message |
+| `1900-dept-public-works-25th-annual-report.pdf` | Twenty-Fifth Annual Report of the Chicago Dept. of Public Works (FY1900), incl. Mayor's Annual Message — 580pp; part of an 88-year (1876–1963) HathiTrust run, see SOURCES-MANUAL-RETRIEVAL notes for the rest |
 
 ##### period-engineering-journals (Journal of the Western Society of Engineers volumes and related period engineering-society/state-survey publications, 1896–1985)
 
