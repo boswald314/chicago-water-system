@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chicago Water System — Geographic Timeline Map</title>
+<meta name="description" content="Every component of Chicago's water and sewer system on a real map, with a year slider from 1850 to today — watch the river reverse, canals appear, and Hyde Lake vanish.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗺️</text></svg>">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="map-data/bundle.js"></script>
+<style>
+  :root {
+    --bg:#f7f8fa; --panel:#ffffff; --ink:#1a202c; --ink2:#4a5568; --line:#d8dde5; --accent:#2b6cb0;
+    --raw:#6da9d2; --potable:#2b6cb0; --waste:#b7791f; --effluent:#2c9a8f; --storm:#c53030;
+    --water:#8fb8d8; --lakefill:#bcd6ea;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#171c23; --panel:#1f2630; --ink:#c6cfd9; --ink2:#8f9aa8; --line:#313c4a; --accent:#6ba3d6;
+      --raw:#5b93bd; --potable:#6ba3d6; --waste:#c69a52; --effluent:#4aae9f; --storm:#d97070;
+      --water:#4a7699; --lakefill:#24435c; }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin:0; height:100%; font:15px/1.5 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif; background:var(--bg); color:var(--ink); }
+  .sitenav { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;
+    padding:10px 22px; background:var(--panel); border-bottom:1px solid var(--line); position:relative; z-index:1200; }
+  .sitenav .brand { font-weight:700; color:var(--ink); text-decoration:none; font-size:16px; }
+  .sitenav .links { display:flex; gap:16px; flex-wrap:wrap; }
+  .sitenav .links a { color:var(--ink2); text-decoration:none; font-size:14px; }
+  .sitenav .links a:hover { color:var(--accent); }
+  #wrap { display:flex; flex-direction:column; height:calc(100% - 49px); }
+  #map { flex:1; background:var(--bg); }
+  #timebar { padding:10px 20px 6px; background:var(--panel); border-top:1px solid var(--line); z-index:1100; }
+  #timerow { display:flex; align-items:center; gap:14px; }
+  #year { font-size:30px; font-weight:750; min-width:96px; letter-spacing:.5px; font-variant-numeric:tabular-nums; }
+  #slider { flex:1; accent-color:var(--accent); height:6px; }
+  #play { width:42px; height:34px; border-radius:8px; border:1px solid var(--line); background:var(--panel);
+    color:var(--ink); font-size:15px; cursor:pointer; }
+  #play:hover { border-color:var(--accent); }
+  #milestone { min-height:22px; font-size:13.5px; color:var(--ink2); padding:4px 2px 2px; }
+  #milestone b { color:var(--ink); }
+  #legend { display:flex; gap:14px; flex-wrap:wrap; font-size:12px; color:var(--ink2); padding:2px 2px 4px; }
+  #legend span { display:inline-flex; align-items:center; gap:5px; }
+  .sw { width:18px; height:4px; border-radius:2px; display:inline-block; }
+  .dot { width:10px; height:10px; border-radius:50%; display:inline-block; border:2px solid; }
+  .leaflet-popup-content-wrapper, .leaflet-popup-tip { background:var(--panel); color:var(--ink); }
+  .leaflet-popup-content { font:13.5px/1.45 -apple-system,sans-serif; }
+  .leaflet-popup-content a { color:var(--accent); }
+  .pop-t { font-weight:700; font-size:14.5px; margin-bottom:2px; }
+  .pop-y { color:var(--ink2); font-size:12px; margin-bottom:6px; }
+  .flow-anim { animation: flowdash 1.4s linear infinite; }
+  .flow-anim.rev { animation-direction: reverse; }
+  @keyframes flowdash { to { stroke-dashoffset: -26; } }
+  .approx-note { font-size:11.5px; color:var(--ink2); font-style:italic; }
+  #basenote { position:absolute; bottom:84px; left:8px; z-index:1000; background:var(--panel); border:1px solid var(--line);
+    border-radius:6px; padding:4px 9px; font-size:11px; color:var(--ink2); max-width:300px; opacity:.92; }
+</style>
+</head>
+<body>
+<nav class="sitenav">
+  <a class="brand" href="#">💧 Chicago's Water System</a>
+  <div class="links" id="navlinks"></div>
+</nav>
+<div id="wrap">
+  <div id="map"></div>
+  <div id="basenote">Street basemap is modern-day. Dashed features and hollow markers are approximate reconstructions — see each popup's note.</div>
+  <div id="timebar">
+    <div id="timerow">
+      <button id="play" title="Play through time">▶</button>
+      <span id="year">1850</span>
+      <input id="slider" type="range" min="1850" max="2026" value="1850" step="1">
+    </div>
+    <div id="milestone"></div>
+    <div id="legend">
+      <span><i class="sw" style="background:var(--water);height:6px"></i> waterways (flow direction animated)</span>
+      <span><i class="sw" style="background:var(--raw)"></i> lake/water tunnels</span>
+      <span><i class="sw" style="background:var(--waste)"></i> sewage conduits &amp; TARP</span>
+      <span><i class="dot" style="border-color:var(--potable)"></i> water supply</span>
+      <span><i class="dot" style="border-color:var(--waste)"></i> sewage/treatment</span>
+      <span><i class="dot" style="border-color:var(--effluent)"></i> reservoirs</span>
+      <span><i class="dot" style="border-color:var(--ink2)"></i> locks/dams/works</span>
+      <span style="opacity:.75">hollow = approximate · faded = standing but retired</span>
+    </div>
+  </div>
+</div>
+
+<script>
+const LOCAL = location.protocol === 'file:';
+const doc = p => LOCAL ? p.replace('.html', '.md') : p;
+document.getElementById('navlinks').innerHTML = [
+  ['Flow map', LOCAL ? 'index.html' : './'],
+  ['Geographic map', 'geo.html'],
+  ['Overview', LOCAL ? '00-SYSTEM-OVERVIEW.md' : '00-SYSTEM-OVERVIEW.html'],
+  ['Documents', 'docs/'], ['Galleries', LOCAL ? 'images/' : 'gallery/'], ['Data', 'data/'],
+  ['Sources', LOCAL ? 'SOURCES.md' : 'SOURCES.html'],
+].map(([t, h]) => `<a href="${h}">${t}</a>`).join('');
+
+const D = window.MAPDATA;
+const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+const map = L.map('map', { zoomSnap: 0.25 }).setView([41.82, -87.75], 10.25);
+L.tileLayer(`https://{s}.basemaps.cartocdn.com/${dark ? 'dark_all' : 'light_all'}/{z}/{x}/{y}{r}.png`, {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+  subdomains: 'abcd', maxZoom: 17,
+}).addTo(map);
+
+// ---------- milestones ----------
+const MILESTONES = [
+  [1856, 'Chesbrough\'s combined sewers begin — the first comprehensive sewer system in the U.S., draining to the river (and so to the lake).'],
+  [1865, 'Two-Mile Crib built; its lake tunnel opens 1867 — drinking water finally drawn beyond the sewage field.'],
+  [1867, 'The two-mile lake tunnel opens to the Chicago Avenue pumping station.'],
+  [1871, 'I&M Canal "deep cut" + Bridgeport pumps try to pull the river away from the lake. The Great Fire idles the waterworks for eight days.'],
+  [1889, 'The Sanitary District of Chicago is chartered to solve the sewage crisis for good.'],
+  [1892, '"Shovel Day": 8,500 men begin digging the Sanitary & Ship Canal.'],
+  [1900, 'JANUARY 2: the canal opens and the Chicago River permanently REVERSES — watch the main stem\'s flow flip direction.'],
+  [1904, 'The 39th Street conduit opens; straightening of the North Branch (Belmont→Lawrence) begins.'],
+  [1907, 'Lawrence Avenue conduit & inland pumping station complete (16-ft lake-to-river conduit); Lockport Powerhouse generates from canal flow; lakefront interceptors seal the shoreline.'],
+  [1910, 'North Shore Channel opens (Wilmette→Lawrence Ave) with the North Branch Dam at River Park holding the levels apart.'],
+  [1922, 'Cal-Sag Channel opens — the Calumet system reverses. Calumet WRP begins treating (the oldest plant still operating).'],
+  [1928, 'North Side Treatment Works (today\'s O\'Brien) opens; the riverside North Branch Pumping Station rises at the Lawrence Ave conduit outfall.'],
+  [1930, 'West Side works (Stickney\'s first half) opens; NBPS takes over from the 1907 inland station — treatment replaces raw discharge.'],
+  [1938, 'Chicago Harbor Lock closes the river mouth: the lakefront is now fully controlled.'],
+  [1939, 'Southwest works completes Stickney; Racine Avenue Pumping Station lifts the South Side.'],
+  [1947, 'Sawyer (South) filtration plant opens — Chicago\'s first filtered water.'],
+  [1955, 'Cal-Sag widening begins (60 ft → 225 ft, through ~1974); Wolf Lake diked for Skyway fill in the late 1950s.'],
+  [1960, 'T.J. O\'Brien Lock & Dam controls the Calumet River; Blue Island Lock retired (demolished 1965).'],
+  [1964, 'Jardine Water Purification Plant opens — the world\'s largest conventional filtration plant.'],
+  [1975, 'TARP construction begins: drop shafts and deep rock tunnels under the waterways.'],
+  [1981, 'First TARP segment (Upper Des Plaines) goes into service.'],
+  [1985, 'Mainstream Tunnel & Pumping Station come online — CSOs start going underground.'],
+  [1998, 'Majewski Reservoir (first TARP reservoir) opens; the Harrison Crib tunnel collapses.'],
+  [2002, 'Electric fish barrier energized near Romeoville.'],
+  [2006, 'TARP Phase I complete: 110 miles of tunnel.'],
+  [2015, 'Thornton Composite Reservoir (7.9 BG) comes online in the quarry.'],
+  [2017, 'McCook Reservoir Stage 1 (3.5 BG) online.'],
+  [2018, 'North Branch Dam removed at River Park — the river\'s only waterfall becomes a riffle.'],
+  [2026, 'Today: McCook Stage 2 digging toward ~2032, O\'Brien\'s $409M Battery E under construction, NBPS being re-decked and re-docked.'],
+];
+
+// ---------- styling ----------
+const TYPECOLOR = {
+  crib: '--raw', 'water-tunnel-portal': '--raw', purification: '--potable', 'water-ps': '--potable',
+  'sewage-ps': '--waste', wrp: '--waste', reservoir: '--effluent', solids: '--waste',
+  lock: '--ink2', dam: '--ink2', 'controlling-works': '--ink2', barrier: '--storm', 'conduit-intake': '--raw',
+};
+const KINDSTYLE = {
+  river:   { colorVar: '--water', weight: 3.5 },
+  canal:   { colorVar: '--water', weight: 4 },
+  channel: { colorVar: '--water', weight: 3.5 },
+  'lake-outline': { colorVar: '--water', weight: 1.5, fill: true },
+  lake:    { colorVar: '--water', weight: 1.5, fill: true },
+  marsh:   { colorVar: '--water', weight: 1, fill: true, fillOp: 0.25 },
+  'lake-tunnel': { colorVar: '--raw', weight: 2, dash: '4 5' },
+  'land-tunnel': { colorVar: '--raw', weight: 2, dash: '4 5' },
+  conduit: { colorVar: '--waste', weight: 2.5, dash: '4 5' },
+  tarp:    { colorVar: '--waste', weight: 3, dash: '7 6' },
+  interceptor: { colorVar: '--waste', weight: 2, dash: '3 4' },
+};
+
+// flows: waterway/tunnel id -> eras with destination point (nearest polyline end gets the arrow)
+const FLOWS = [
+  { id: 'chicago-river-main-stem', from: 1850, to: 1899, dest: [41.8887, -87.6050], label: 'to the lake' },
+  { id: 'chicago-river-main-stem', from: 1900, to: null, dest: [41.8860, -87.6400], label: 'REVERSED — away from the lake' },
+  { id: 'north-branch-chicago-river', from: 1850, to: null, dest: [41.8860, -87.6320] },
+  { id: 'south-branch-chicago-river', from: 1850, to: 1899, dest: [41.8850, -87.6330] },
+  { id: 'south-branch-chicago-river', from: 1900, to: null, dest: [41.8390, -87.6560] },
+  { id: 'north-shore-channel', from: 1910, to: null, dest: [41.9740, -87.7080] },
+  { id: 'chicago-sanitary-and-ship-canal', from: 1900, to: null, dest: [41.5680, -88.0780] },
+  { id: 'cal-sag-channel', from: 1974, to: null, dest: [41.6960, -87.9350] },
+  { id: 'cal_sag_original_width', from: 1922, to: 1973, dest: [41.6960, -87.9350], historic: true },
+  { id: 'calumet-river', from: 1850, to: 1921, dest: [41.7300, -87.5250] },
+  { id: 'calumet-river', from: 1922, to: null, dest: [41.6550, -87.6070] },
+  { id: 'des-plaines-river-lyons-lockport', from: 1850, to: null, dest: [41.5680, -88.0780] },
+  { id: 'two_mile_lake_tunnel', from: 1867, to: 1936, dest: [41.8970, -87.6220], tunnel: true },
+  { id: 'sixty_eighth_st_lake_tunnel', from: 1892, to: 1947, dest: [41.7690, -87.5660], tunnel: true },
+  { id: 'lake_view_lake_tunnel', from: 1896, to: 1918, dest: [41.9660, -87.6440], tunnel: true },
+  { id: 'harrison_lake_tunnel', from: 1900, to: 1998, dest: [41.9080, -87.6240], tunnel: true },
+  { id: 'wilson_avenue_land_tunnel', from: 1918, to: null, dest: [41.9650, -87.7470], tunnel: true },
+  { id: 'dever_lake_tunnel', from: 1936, to: null, dest: [41.8990, -87.6130], tunnel: true },
+  { id: 'dunne_lake_tunnel', from: 1909, to: null, dest: [41.7590, -87.5480], tunnel: true },
+  { id: 'lawrence_avenue_conduit', from: 1907, to: 1929, dest: [41.9687, -87.7050], tunnel: true },
+  { id: 'thirtyninth_street_conduit', from: 1904, to: 1938, dest: [41.8230, -87.6560], tunnel: true },
+  { id: 'tarp_mainstream', from: 1985, to: null, dest: [41.7660, -87.8320], tunnel: true },
+  { id: 'tarp_des_plaines', from: 1999, to: null, dest: [41.7660, -87.8320], tunnel: true },
+  { id: 'tarp_calumet', from: 1986, to: null, dest: [41.6620, -87.6030], tunnel: true },
+  { id: 'tarp_upper_des_plaines_ohare', from: 1981, to: null, dest: [42.0090, -87.9110], tunnel: true },
+];
+
+// ---------- build layers ----------
+const layers = [];   // {leaflet, from, to, kindGroup, flowSpecs, elClassBase}
+function addLine(f, group) {
+  const st = KINDSTYLE[f.kind] || { colorVar: '--water', weight: 2 };
+  const color = css(st.colorVar);
+  const opts = { color, weight: st.weight, opacity: 0.85 };
+  if (st.dash || f.approx) opts.dashArray = st.dash || '2 5';
+  let lyr;
+  if (st.fill) {
+    lyr = L.polygon(f.geometry, { ...opts, fillColor: color, fillOpacity: st.fillOp ?? 0.35 });
+  } else {
+    lyr = L.polyline(f.geometry, opts);
+  }
+  lyr.bindPopup(`<div class="pop-t">${f.name}</div><div class="pop-y">${f.from}–${f.to || 'present'}${f.approx ? ' · approximate geometry' : ''}</div>${f.note ? `<div>${f.note}</div>` : ''}${f.doc ? `<div><a href="${doc(f.doc)}">📄 research doc</a></div>` : ''}`);
+  const flowSpecs = FLOWS.filter(fl => fl.id === f.id);
+  layers.push({ leaflet: lyr, from: f.from, to: f.to || null, flowSpecs, feature: f });
+}
+D.waterways.forEach(f => addLine(f, 'waterway'));
+D.historic.forEach(f => addLine(f, 'historic'));
+D.tunnels.forEach(f => addLine(f, 'tunnel'));
+
+D.facilities.forEach(f => {
+  const color = css(TYPECOLOR[f.type] || '--ink2');
+  const mk = L.circleMarker([f.lat, f.lng], {
+    radius: f.type === 'wrp' || f.type === 'purification' ? 8 : f.type === 'reservoir' ? 9 : 6,
+    color, weight: 2.2, fillColor: color,
+    fillOpacity: f.approx ? 0 : 0.75,
+  });
+  const yrs = `${f.from}–${f.to || 'present'}` + (f.activeTo && !f.to ? ` (inactive since ~${f.activeTo})` : '');
+  mk.bindPopup(`<div class="pop-t">${f.name}</div><div class="pop-y">${yrs}${f.approx ? ' · <span class="approx-note">location approximate</span>' : ''}</div>${f.note ? `<div>${f.note}</div>` : ''}${f.doc ? `<div><a href="${doc(f.doc)}">📄 research doc</a></div>` : ''}`);
+  layers.push({ leaflet: mk, from: f.from, to: f.to || null, activeTo: f.activeTo || null, isMarker: true });
+});
+
+// ---------- time engine ----------
+let YEAR = 1850;
+function distSq(a, b) { return (a[0]-b[0])**2 + (a[1]-b[1])**2; }
+function applyYear(y) {
+  YEAR = y;
+  document.getElementById('year').textContent = y;
+  for (const l of layers) {
+    const visible = l.from <= y && (l.to === null || y <= l.to);
+    const on = map.hasLayer(l.leaflet);
+    if (visible && !on) l.leaflet.addTo(map);
+    if (!visible && on) map.removeLayer(l.leaflet);
+    if (!visible) continue;
+    if (l.isMarker) {
+      const retired = l.activeTo && y > l.activeTo;
+      l.leaflet.setStyle({ opacity: retired ? 0.35 : 1, fillOpacity: retired ? 0.15 : (l.leaflet.options.fillOpacity === 0 ? 0 : 0.75) });
+      continue;
+    }
+    // flow animation
+    const spec = (l.flowSpecs || []).find(s => s.from <= y && (s.to === null || y <= s.to));
+    const el = l.leaflet.getElement && l.leaflet.getElement();
+    if (!el) continue;
+    if (spec) {
+      const g = l.feature.geometry;
+      const lastCloser = distSq(g[g.length - 1], spec.dest) < distSq(g[0], spec.dest);
+      el.classList.add('flow-anim');
+      el.classList.toggle('rev', !lastCloser);
+      if (!el.getAttribute('stroke-dasharray')) el.setAttribute('stroke-dasharray', '9 7');
+    } else {
+      el.classList.remove('flow-anim', 'rev');
+      const st = KINDSTYLE[l.feature.kind] || {};
+      if (!st.dash && !l.feature.approx) el.removeAttribute('stroke-dasharray');
+    }
+  }
+  // milestone
+  let msg = '';
+  for (const [my, mt] of MILESTONES) if (my <= y) msg = `<b>${my}:</b> ${mt}`;
+  document.getElementById('milestone').innerHTML = msg;
+}
+
+const slider = document.getElementById('slider');
+slider.addEventListener('input', () => applyYear(+slider.value));
+
+let playTimer = null;
+document.getElementById('play').addEventListener('click', () => {
+  const btn = document.getElementById('play');
+  if (playTimer) { clearInterval(playTimer); playTimer = null; btn.textContent = '▶'; return; }
+  if (+slider.value >= 2026) slider.value = 1850;
+  btn.textContent = '⏸';
+  playTimer = setInterval(() => {
+    slider.value = +slider.value + 1;
+    applyYear(+slider.value);
+    if (+slider.value >= 2026) { clearInterval(playTimer); playTimer = null; btn.textContent = '▶'; }
+  }, 220);
+});
+
+applyYear(1850);
+</script>
+</body>
+</html>
