@@ -524,6 +524,11 @@ A July 2026 archival research sweep (six document-hunting agents) added 91 furth
 
 ## Downloaded documents
 
+### Added July 2026 — user-contributed documents
+
+- `river-reversal-canals/2016-hansen-reversal-of-the-chicago-river-flushing-the-system.pdf` — Hansen (2016), *The Reversal of the Chicago River: Flushing the System* — illustrated historical article (Library of Congress imagery). User-contributed July 2026.
+- `city-sewer-network/2019-handwerk-albany-park-stormwater-diversion-tunnel-construction-management.pdf` — Handwerk, D. (Spaan Tech), *Albany Park Stormwater Tunnel: A Construction Management Perspective*, Illinois Association for Stormwater and Floodplain Management 2019 Conference — construction case study of the 2016–18 CDOT diversion tunnel. User-contributed July 2026.
+
 ### Added July 2026 — HathiTrust page-image harvest
 
 - `sanitary-district-reports/1928-engineering-works-sanitary-district-of-chicago.pdf` — Sanitary District of Chicago, *Engineering Works* (1928), 126 pp. The District's own illustrated engineering summary of the entire system as built. Harvested page-by-page from the HathiTrust full-view copy (uc1.$b114399); public domain (1928 municipal publication).
