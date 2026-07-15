@@ -110,6 +110,7 @@ document.getElementById('navlinks').innerHTML = [
   ['Geographic map', 'geo.html'],
   ['Overview', LOCAL ? '00-SYSTEM-OVERVIEW.md' : '00-SYSTEM-OVERVIEW.html'],
   ['Documents', 'docs/'], ['Galleries', LOCAL ? 'images/' : 'gallery/'], ['Data', 'data/'],
+  ['Search', LOCAL ? 'search.md' : 'search.html'],
   ['Sources', LOCAL ? 'SOURCES.md' : 'SOURCES.html'],
 ].map(([t, h]) => `<a href="${h}">${t}</a>`).join('');
 
