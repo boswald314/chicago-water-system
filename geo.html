@@ -52,6 +52,17 @@
   .flow-anim.rev { animation-direction: reverse; }
   @keyframes flowdash { to { stroke-dashoffset: -26; } }
   .approx-note { font-size:11.5px; color:var(--ink2); font-style:italic; }
+  #layerpanel { position:absolute; top:10px; right:10px; z-index:1000; background:var(--panel); border:1px solid var(--line);
+    border-radius:8px; font-size:12.5px; max-width:230px; box-shadow:0 2px 10px rgba(0,0,0,.15); }
+  #layerpanel .hd { padding:7px 11px; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center; user-select:none; }
+  #layerpanel .hd:hover { color:var(--accent); }
+  #layerbody { padding:2px 11px 9px; max-height:52vh; overflow-y:auto; }
+  #layerbody.collapsed { display:none; }
+  #layerbody label { display:flex; gap:7px; align-items:center; padding:2.5px 0; cursor:pointer; }
+  #layerbody label span.ct { color:var(--ink2); font-size:11px; margin-left:auto; }
+  #layerbody .allrow { border-bottom:1px solid var(--line); margin-bottom:4px; padding-bottom:4px; font-weight:600; }
+  #layerbody .sw2 { width:16px; height:3px; border-radius:2px; flex:none; }
+  @media (max-width:640px) { #layerpanel { max-width:180px; font-size:11.5px; } }
   #basenote { position:absolute; bottom:84px; left:8px; z-index:1000; background:var(--panel); border:1px solid var(--line);
     border-radius:6px; padding:4px 9px; font-size:11px; color:var(--ink2); max-width:300px; opacity:.92; }
 </style>
@@ -63,6 +74,10 @@
 </nav>
 <div id="wrap">
   <div id="map"></div>
+  <div id="layerpanel">
+    <div class="hd" id="layerhd">Layers <span id="layercaret">▾</span></div>
+    <div id="layerbody"></div>
+  </div>
   <div id="basenote">Street basemap is modern-day. Dashed features and hollow markers are approximate reconstructions — see each popup's note.</div>
   <div id="timebar">
     <div id="timerow">
@@ -146,6 +161,7 @@ const TYPECOLOR = {
   crib: '--raw', 'water-tunnel-portal': '--raw', purification: '--potable', 'water-ps': '--potable',
   'sewage-ps': '--waste', wrp: '--waste', reservoir: '--effluent', solids: '--waste',
   lock: '--ink2', dam: '--ink2', 'controlling-works': '--ink2', barrier: '--storm', 'conduit-intake': '--raw',
+  'external-water': '--potable', 'external-ps': '--ink2', 'external-wrp': '--effluent', 'industrial-intake': '--ink2',
 };
 const KINDSTYLE = {
   river:   { colorVar: '--water', weight: 3.5 },
@@ -163,7 +179,42 @@ const KINDSTYLE = {
   sludge: { colorVar: '--waste', weight: 1.8, dash: '2 6' },
   pumpback: { colorVar: '--effluent', weight: 2, dash: '6 4' },
   diversion: { colorVar: '--storm', weight: 3, dash: '9 5' },
+  'water-supply': { colorVar: '--potable', weight: 2.4, dash: '5 4' },
+  intake: { colorVar: '--raw', weight: 2.4, dash: '5 4' },
+  stormwater: { colorVar: '--storm', weight: 2.2, dash: '4 4' },
 };
+
+// ---------- layer categories (for toggles) ----------
+const EXT_TYPES = new Set(['external-water', 'external-ps', 'external-wrp', 'industrial-intake']);
+const EXT_CONN_PREFIX = ['wilmette-lake', 'wilmette-village', 'nswrd-', 'bp-', 'hammond-', 'citgo-', 'state-line-'];
+const CATS = [
+  ['waterways', 'Rivers & canals'], ['historic', 'Former waterways'],
+  ['watertun', 'Water & lake tunnels'], ['watersup', 'Plant → station feeders'],
+  ['sewertun', 'Sewers & Deep Tunnel'], ['shafts', 'Drop shafts & vents'],
+  ['sewerconn', 'Effluent / sludge lines'], ['fwater', 'Water facilities'],
+  ['fsewage', 'Sewage & treatment'], ['reservoirs', 'Reservoirs'],
+  ['control', 'Locks & control works'], ['external', 'External / boundary'],
+];
+function catOf(f, group) {
+  if (group === 'historic') return 'historic';
+  if (group === 'shaft') return 'shafts';
+  const t = f.type, k = f.kind, id = f.id || '';
+  if (t) {
+    if (EXT_TYPES.has(t)) return 'external';
+    if (t === 'reservoir') return 'reservoirs';
+    if (['lock', 'dam', 'controlling-works', 'barrier'].includes(t)) return 'control';
+    if (['sewage-ps', 'wrp', 'solids'].includes(t)) return 'fsewage';
+    return 'fwater';
+  }
+  if (['river', 'canal', 'channel', 'lake-outline', 'lake', 'marsh'].includes(k)) return 'waterways';
+  if (['lake-tunnel', 'land-tunnel'].includes(k)) return 'watertun';
+  if (['conduit', 'tarp', 'diversion'].includes(k)) return 'sewertun';
+  if (k === 'water-supply') return 'watersup';
+  if (k === 'interceptor') return id && !id.match(/tunnel|crossing/) ? 'sewerconn' : 'sewertun';
+  if (['intake', 'stormwater'].includes(k) || EXT_CONN_PREFIX.some(p => id.startsWith(p))) return 'external';
+  return 'sewerconn';
+}
+const catOn = new Set(CATS.map(c => c[0]));
 
 // flows: waterway/tunnel id -> eras with destination point (nearest polyline end gets the arrow)
 const FLOWS = [
@@ -215,7 +266,7 @@ function addLine(f, group) {
   }
   lyr.bindPopup(`<div class="pop-t">${f.name}</div><div class="pop-y">${f.from}–${f.to || 'present'}${f.approx ? ' · approximate geometry' : ''}</div>${f.note ? `<div>${f.note}</div>` : ''}${f.doc ? `<div><a href="${doc(f.doc)}">📄 research doc</a></div>` : ''}`);
   const flowSpecs = FLOWS.filter(fl => fl.id === f.id);
-  layers.push({ leaflet: lyr, from: f.from, to: f.to || null, flowSpecs, feature: f });
+  layers.push({ leaflet: lyr, from: f.from, to: f.to || null, flowSpecs, feature: f, cat: catOf(f, group) });
 }
 D.waterways.forEach(f => addLine(f, 'waterway'));
 D.historic.forEach(f => addLine(f, 'historic'));
@@ -225,7 +276,7 @@ D.tunnels.forEach(f => addLine(f, 'tunnel'));
   const color = css(s.type === 'air-vent' ? '--storm' : '--waste');
   const mk = L.circleMarker([s.lat, s.lng], { radius: 3.2, color, weight: 1.6, fillColor: color, fillOpacity: s.approx ? 0 : 0.85 });
   mk.bindPopup(`<div class="pop-t">${s.name}</div><div class="pop-y">${s.type} · from ${s.from}${s.approx ? ' · location approximate' : ''}</div>${s.note ? `<div class="approx-note">${s.note}</div>` : ''}`);
-  layers.push({ leaflet: mk, from: s.from, to: null, isMarker: true });
+  layers.push({ leaflet: mk, from: s.from, to: null, isMarker: true, cat: 'shafts' });
 });
 (D.connections || []).forEach(c => addLine({
   id: c.id, name: c.label || c.id, kind: c.kind, from: c.from || 1850, to: c.to || null,
@@ -240,8 +291,9 @@ D.facilities.forEach(f => {
     fillOpacity: f.approx ? 0 : 0.75,
   });
   const yrs = `${f.from}–${f.to || 'present'}` + (f.activeTo && !f.to ? ` (inactive since ~${f.activeTo})` : '');
-  mk.bindPopup(`<div class="pop-t">${f.name}</div><div class="pop-y">${yrs}${f.approx ? ' · <span class="approx-note">location approximate</span>' : ''}</div>${f.note ? `<div>${f.note}</div>` : ''}${f.doc ? `<div><a href="${doc(f.doc)}">📄 research doc</a></div>` : ''}`);
-  layers.push({ leaflet: mk, from: f.from, to: f.to || null, activeTo: f.activeTo || null, isMarker: true });
+  const own = f.owner ? `<div class="pop-y">${f.owner}</div>` : '';
+  mk.bindPopup(`<div class="pop-t">${f.name}</div><div class="pop-y">${yrs}${f.approx ? ' · <span class="approx-note">location approximate</span>' : ''}</div>${own}${f.note ? `<div>${f.note}</div>` : ''}${f.doc ? `<div><a href="${doc(f.doc)}">📄 research doc</a></div>` : ''}`);
+  layers.push({ leaflet: mk, from: f.from, to: f.to || null, activeTo: f.activeTo || null, isMarker: true, cat: catOf(f, 'facility') });
 });
 
 // ---------- time engine ----------
@@ -251,7 +303,7 @@ function applyYear(y) {
   YEAR = y;
   document.getElementById('year').textContent = y;
   for (const l of layers) {
-    const visible = l.from <= y && (l.to === null || y <= l.to);
+    const visible = catOn.has(l.cat) && l.from <= y && (l.to === null || y <= l.to);
     const on = map.hasLayer(l.leaflet);
     if (visible && !on) l.leaflet.addTo(map);
     if (!visible && on) map.removeLayer(l.leaflet);
@@ -309,6 +361,42 @@ document.getElementById('outfallToggle').addEventListener('change', e => {
   }
   if (outfallGroup) { e.target.checked ? outfallGroup.addTo(map) : map.removeLayer(outfallGroup); }
 });
+
+// ---------- layer toggle panel ----------
+(function buildLayerPanel() {
+  const CATCOLOR = {
+    waterways: '--water', historic: '--water', watertun: '--raw', watersup: '--potable',
+    sewertun: '--waste', shafts: '--waste', sewerconn: '--effluent', fwater: '--potable',
+    fsewage: '--waste', reservoirs: '--effluent', control: '--ink2', external: '--ink2',
+  };
+  const counts = {};
+  for (const l of layers) counts[l.cat] = (counts[l.cat] || 0) + 1;
+  const body = document.getElementById('layerbody');
+  const present = CATS.filter(([k]) => counts[k]);
+  let html = `<label class="allrow"><input type="checkbox" id="cat-all" checked> <b>All layers</b></label>`;
+  for (const [k, label] of present) {
+    html += `<label><input type="checkbox" class="catbox" data-cat="${k}" checked>`
+      + `<i class="sw2" style="background:${css(CATCOLOR[k] || '--ink2')}"></i>`
+      + `<span>${label}</span><span class="ct">${counts[k]}</span></label>`;
+  }
+  body.innerHTML = html;
+  body.querySelectorAll('.catbox').forEach(cb => cb.addEventListener('change', () => {
+    cb.checked ? catOn.add(cb.dataset.cat) : catOn.delete(cb.dataset.cat);
+    document.getElementById('cat-all').checked = [...body.querySelectorAll('.catbox')].every(x => x.checked);
+    applyYear(YEAR);
+  }));
+  document.getElementById('cat-all').addEventListener('change', e => {
+    body.querySelectorAll('.catbox').forEach(cb => {
+      cb.checked = e.target.checked;
+      cb.checked ? catOn.add(cb.dataset.cat) : catOn.delete(cb.dataset.cat);
+    });
+    applyYear(YEAR);
+  });
+  document.getElementById('layerhd').addEventListener('click', () => {
+    body.classList.toggle('collapsed');
+    document.getElementById('layercaret').textContent = body.classList.contains('collapsed') ? '▸' : '▾';
+  });
+})();
 
 applyYear(1850);
 </script>
