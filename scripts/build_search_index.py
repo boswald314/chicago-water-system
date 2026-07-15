@@ -5,8 +5,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def kramdown_anchor(h):
     a = h.strip().lower()
-    a = re.sub(r'[^\w\s-]', '', a)      # drop punctuation
-    a = re.sub(r'\s+', '-', a.strip())
+    a = re.sub(r'[^a-z0-9 _-]', '', a)     # drop punctuation, keep spaces
+    a = a.strip().replace(' ', '-')        # each space -> one hyphen (kramdown: no collapse)
     return a
 
 def clean(t):
