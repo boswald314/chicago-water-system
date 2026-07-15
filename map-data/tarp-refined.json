@@ -1,0 +1,974 @@
+{
+  "dropshafts": [
+    {
+      "id": "ds_m76_fullerton",
+      "name": "Drop shaft DS-M76, Fullerton Ave",
+      "lat": 41.92503,
+      "lng": -87.6748,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M76', LOCATION='Fullerton Ave (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m79_diversey",
+      "name": "Drop shaft DS-M79, Diversey Ave",
+      "lat": 41.93223,
+      "lng": -87.68317,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M79', LOCATION='Diversey Ave (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m80_leavitt",
+      "name": "Drop shaft DS-M80, Leavitt St (east bank)",
+      "lat": 41.93384,
+      "lng": -87.68319,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M80', LOCATION='Leavitt St East Bank (N), Southwest of DS-M80'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "tg_m81_western",
+      "name": "Tide gate TG-M81, Western Ave (east bank)",
+      "lat": 41.93632,
+      "lng": -87.68797,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='TG-M81', LOCATION='Western Ave East Bank (N)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m82_belmont",
+      "name": "Drop shaft DS-M82, Belmont Ave",
+      "lat": 41.93926,
+      "lng": -87.69273,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M82', LOCATION='Belmont Ave (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m83_melrose_rockwell",
+      "name": "Drop shaft DS-M83, Melrose St & N Rockwell St",
+      "lat": 41.94049,
+      "lng": -87.69336,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M83', LOCATION='Melrose St & North Rockwell St (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m84_roscoe",
+      "name": "Drop shaft DS-M84, Roscoe St",
+      "lat": 41.94279,
+      "lng": -87.6956,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M84', LOCATION='Roscoe St (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m85_addison",
+      "name": "Drop shaft DS-M85, Addison St (inside ComEd property)",
+      "lat": 41.94649,
+      "lng": -87.69577,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M85', LOCATION='Addison St (Inside ComEd's property) (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m86_grace",
+      "name": "Drop shaft DS-M86, Grace St",
+      "lat": 41.95019,
+      "lng": -87.69708,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M86', LOCATION='Grace St (W), North of DS-M86'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m87_irving_park",
+      "name": "Drop shaft DS-M87, Irving Park Rd",
+      "lat": 41.954,
+      "lng": -87.69423,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M87', LOCATION='Irving Park Rd (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m88_berteau",
+      "name": "Drop shaft DS-M88, Berteau Ave",
+      "lat": 41.95748,
+      "lng": -87.69456,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M88', LOCATION='Berteau Ave (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m89_montrose",
+      "name": "Drop shaft DS-M89, Montrose Ave",
+      "lat": 41.96132,
+      "lng": -87.69458,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M89', LOCATION='Montrose Ave (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "i86_giddings_lapointe",
+      "name": "Connecting structure I-86, Giddings St \u2014 best-sourced match for the LaPointe Park tunnel line",
+      "lat": 41.96762,
+      "lng": -87.70033,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='I-86', LOCATION='Giddings St (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": true,
+      "note": "User's ground truth: a Deep Tunnel line 'goes through the property and actually ends up at LaPointe Park' south of Ronan Park. Primary source: Block Club Chicago, 'Albany Park Riverside Development Would Be Bigger If Deep Tunnel Sewer Wasn't Nearby' (blockclubchicago.org/2023/11/27/..., Alex V. Hernandez, Nov 27 2023) \u2014 developer's attorney Rolando Acosta on the 2919 W. Lawrence Ave. site: 'There's a Deep Tunnel shaft in Ronan Park here and there's deep tunnel lines...that go through the property and actually end up at LaPointe Park.' LaPointe Park itself (Arthur J. LaPointe Park) sits at N Manor Ave & W Giddings St in Ravenswood Manor \u2014 NOT at Foster/Kedzie in Albany Park as hypothesized; that was a mis-location. It is MWRD-owned land leased to NeighborSpace/Ravenswood Manor Improvement Assn since ~1914, kept unbuildable by 'water management drain lines located underground' (neighbor-space.org/lapointe-park/, ravenswoodmanor.com/community/community-garden/). I-86 ('Indirect' connection, not a full DS- drop shaft) at Giddings St is the nearest MWRD-catalogued structure to that park (~150-250 m away \u2014 Giddings St runs from the park east to the river, where I-86 sits); no MWRD structure is plotted with an address literally reading 'Manor & Giddings'. Treat the LaPointe Park tie as geographically corroborated (same block, same MWRD ownership pattern, matches the attorney's description of a line running south from Ronan Park) but not pinned to an exact shaft ID."
+    },
+    {
+      "id": "ds_lat_ronan_park",
+      "name": "Drop shaft DS-LAT, Lawrence Ave (Ronan Park)",
+      "lat": 41.96879,
+      "lng": -87.70164,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-LAT', LOCATION='Lawrence Ave (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false,
+      "note": "This is the shaft in Ronan Park. Primary source: Block Club Chicago (see I-86 note) \u2014 attorney Rolando Acosta: 'There's a Deep Tunnel shaft in Ronan Park [across the street] here.' Ronan (George) Park polygon centroid 41.970348,-87.702741 (OSM relation 18157600, addr 3000 W Argyle St, operator Chicago Park District); this DS-LAT point sits at the park's south end near the Lawrence Ave bridge, ~150 m south of the park centroid, directly across the North Branch of the Chicago River from the North Branch (Lawrence Ave) Pumping Station."
+    },
+    {
+      "id": "nbps_dropshaft",
+      "name": "Drop shafts DS-M90 & DS-M91, North Branch Pumping Station (NBPS)",
+      "lat": 41.96917,
+      "lng": -87.70111,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M90 & DS-M91 (NBPS)', LOCATION='North Branch P.S. (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false,
+      "note": "MWRD-owned; co-located with the North Branch (Lawrence Avenue) Pumping Station, 4860 N Francisco Ave (facilities.json id mwrd-north-branch, 41.9705/-87.7013 \u2014 that marker is the building's geocoded address, this point is the GIS structure location, ~150 m apart, same facility). Confirms NBPS sits directly across the river (east bank) from the Ronan Park drop shaft (west bank)."
+    },
+    {
+      "id": "i88_kedzie_confluence",
+      "name": "Connecting structure I-88, Kedzie Ave \u2014 North Branch/North Shore Channel confluence area",
+      "lat": 41.97462,
+      "lng": -87.70873,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='I-88', LOCATION='Kedzie Ave (S)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_n01_st_louis",
+      "name": "Drop shaft DS-N01, St. Louis Ave",
+      "lat": 41.97202,
+      "lng": -87.71593,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-N01', LOCATION='St. Louis Ave (N)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_n02_foster_keeler",
+      "name": "Drop shaft DS-N02, Foster Ave & Keeler Ave",
+      "lat": 41.97552,
+      "lng": -87.73101,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-N02', LOCATION='Foster Ave & Keeler (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_n03_brynmawr_kilbourn",
+      "name": "Drop shaft DS-N03, Bryn Mawr Ave & Kilbourn Ave",
+      "lat": 41.98134,
+      "lng": -87.74129,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-N03', LOCATION='Kilbourn Ave & Bryn Mawr (N)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_n04_cicero_forestglen",
+      "name": "Drop shaft DS-N04, Cicero Ave, S of Forest Glen Ave",
+      "lat": 41.9838,
+      "lng": -87.74804,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-N04', LOCATION='Cicero Ave (N), South of Forest Glen'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_n05_forestglen_cicero",
+      "name": "Drop shaft DS-N05, Forest Glen Ave, W of Cicero Ave",
+      "lat": 41.98315,
+      "lng": -87.75249,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-N05', LOCATION='Forest Glen Ave (S), West of Cicero'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_n06_indian_ardmore",
+      "name": "Drop shaft DS-N06, Ardmore Ave (Indian Rd & Ardmore Ave)",
+      "lat": 41.98432,
+      "lng": -87.7075,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-N06', LOCATION='Ardmore Ave (Indian & Ardmore)  (W) '. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false,
+      "note": "Flagged for archive maintainers: this point's GIS geometry sits ~1.07 km from the MWRD 'North Branch of the Chicago River' centerline (mwrd-waterways.geojson) \u2014 every neighboring DS-N/DS-M point in this dataset sits within 10-50 m of that centerline, so DS-N06 is an outlier, either a genuine local sewer-connection offset or a GIS digitizing error in MWRD's own layer. Coordinate reproduced as-supplied; treat the along-the-river sequence position (between the confluence and DS-N03) as more reliable than its absolute placement."
+    },
+    {
+      "id": "ds_n07_central",
+      "name": "Drop shaft DS-N07, Central Ave (5900-6100 N)",
+      "lat": 41.99031,
+      "lng": -87.76611,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-N07', LOCATION='Central Ave (5900 - 6100 North) (N) '. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_n08_peterson",
+      "name": "Drop shaft DS-N08, Peterson Ave (Leonard & Miltmore)",
+      "lat": 41.9902,
+      "lng": -87.77185,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-N08', LOCATION='Peterson Ave (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_n09_indian_monitor",
+      "name": "Drop shaft DS-N09, Miami Ave (Indian Rd & Monitor Ave)",
+      "lat": 41.99214,
+      "lng": -87.77336,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-N09', LOCATION='Miami Ave (Indian & Monitor) (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_n10a_caldwell_tonty",
+      "name": "Drop shaft DS-N10A, Wildwood Ave ext. (Caldwell Ave & Tonty Ave)",
+      "lat": 42.00302,
+      "lng": -87.78118,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-N10A', LOCATION='Wildwood Ave ext. (Caldwell & Tonty) (E) '. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_n10b_imlay_milwaukee",
+      "name": "Drop shaft DS-N10B, Imlay St & Milwaukee Ave",
+      "lat": 41.99974,
+      "lng": -87.78852,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-N10B', LOCATION='Imlay St & Milwaukee (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_n11_forestview_riverside",
+      "name": "Drop shaft DS-N11, Forestview Lane & Riverside Dr, Niles",
+      "lat": 42.00727,
+      "lng": -87.7923,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-N11', LOCATION='Forestview Lane & Riverside Dr  (E of Milwaukee) (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_n12_caldwell_touhy_niles",
+      "name": "Drop shaft DS-N12, Caldwell Ave & Touhy Ave (Harts Rd), Niles",
+      "lat": 42.00858,
+      "lng": -87.79248,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-N12', LOCATION='Caldwell Ave & Touhy Ave (Harts Rd & Touhy Ave) (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_n13r_touhy",
+      "name": "Drop shaft DS-N13R, Touhy Ave (Franks & Nieman)",
+      "lat": 42.01213,
+      "lng": -87.79604,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-N13R', LOCATION='6872 Touhy Ave (Franks and Nieman) (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_n16_nordica_dobson",
+      "name": "Drop shaft DS-N16, Dobson St & Nordica Ave, Niles",
+      "lat": 42.0199,
+      "lng": -87.79565,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-N16', LOCATION='Dobson St and Nordica Ave (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_n17_cleveland_caldwell",
+      "name": "Drop shaft DS-N17, Cleveland St, E of Caldwell Ave, Niles",
+      "lat": 42.03025,
+      "lng": -87.79367,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-N17', LOCATION='Cleveland St east of Caldwell Ave (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_n18_main_caldwell",
+      "name": "Drop shaft DS-N18, Main St ext., E of Caldwell Ave, Niles",
+      "lat": 42.0335,
+      "lng": -87.79458,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-N18', LOCATION='East of Caldwell Ave at Main St ext.(W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_n19_dempster_lincoln",
+      "name": "Drop shaft DS-N19, Dempster St near Lincoln Ave, Morton Grove",
+      "lat": 42.04127,
+      "lng": -87.7882,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-N19', LOCATION='Dempster St near Lincoln Ave (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_n20_church_austin",
+      "name": "Drop shaft DS-N20, Church St (Austin Ave), Morton Grove",
+      "lat": 42.05048,
+      "lng": -87.78067,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-N20', LOCATION='Church St (Austin Avenue) (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "tg_m94_ardmore",
+      "name": "Tide gate TG-M94, Ardmore Ave",
+      "lat": 41.98652,
+      "lng": -87.7076,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='TG-M94', LOCATION='Ardmore Ave (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m95_peterson",
+      "name": "Drop shaft DS-M95, Peterson Ave",
+      "lat": 41.99028,
+      "lng": -87.70887,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M95', LOCATION='Peterson Ave (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m96_devon",
+      "name": "Drop shaft DS-M96, Devon Ave",
+      "lat": 41.9973,
+      "lng": -87.71044,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M96', LOCATION='Devon Ave (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m97_pratt",
+      "name": "Drop shaft DS-M97, Pratt Ave",
+      "lat": 42.00428,
+      "lng": -87.71024,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M97', LOCATION='Pratt Ave (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m98_touhy",
+      "name": "Drop shaft DS-M98, Touhy Ave",
+      "lat": 42.01179,
+      "lng": -87.71027,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M98', LOCATION='Touhy Ave (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m99_birchwood",
+      "name": "Drop shaft DS-M99, Birchwood Ave",
+      "lat": 42.01708,
+      "lng": -87.71018,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M99', LOCATION='Birchwood Ave (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m100_howard",
+      "name": "Drop shaft DS-M100, Howard St",
+      "lat": 42.01917,
+      "lng": -87.71056,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M100', LOCATION='Howard St (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m101_mulford",
+      "name": "Drop shaft DS-M101, Mulford St, Evanston",
+      "lat": 42.02254,
+      "lng": -87.70997,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M101', LOCATION='Mulford St (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m103_cleveland_evanston",
+      "name": "Drop shaft DS-M103, Cleveland St, Evanston",
+      "lat": 42.02934,
+      "lng": -87.70981,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M103', LOCATION='Cleveland St (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m104e_main_evanston",
+      "name": "Drop shaft DS-M104E, Main St (east bank), Evanston",
+      "lat": 42.03345,
+      "lng": -87.70953,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M104E', LOCATION='Main St (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m104w_main_skokie",
+      "name": "Drop shaft DS-M104W, Main St (west bank), Skokie",
+      "lat": 42.03347,
+      "lng": -87.71015,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M104W', LOCATION='Main St (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "tg_m105e_greenleaf",
+      "name": "Tide gate TG-M105E, Greenleaf St, Evanston",
+      "lat": 42.03741,
+      "lng": -87.70943,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='TG-M105E', LOCATION='Greenleaf St (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m105w_greenwood",
+      "name": "Drop shaft DS-M105W, Greenwood St & McCormick Blvd, Skokie",
+      "lat": 42.04273,
+      "lng": -87.70992,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M105W', LOCATION='Greenwood St & McCormick Blvd (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m106e_lake",
+      "name": "Drop shaft DS-M106E, Lake St, Evanston",
+      "lat": 42.04415,
+      "lng": -87.70942,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M106E', LOCATION='Lake St (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m106w_bridge",
+      "name": "Drop shaft DS-M106W, Bridge St",
+      "lat": 42.05635,
+      "lng": -87.70084,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M106W', LOCATION='Bridge St (N)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m107_1_emerson_skokie",
+      "name": "Drop shaft DS-M107-1, Emerson St (west bank), Skokie",
+      "lat": 42.05185,
+      "lng": -87.70889,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M107-1', LOCATION='Emerson St (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m108_emerson",
+      "name": "Drop shaft DS-M108, Emerson St (east bank)",
+      "lat": 42.05258,
+      "lng": -87.70829,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M108', LOCATION='Emerson St (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m107_2_emerson_evanston",
+      "name": "Drop shaft DS-M107-2, Elgin Rd/Emerson St, Evanston",
+      "lat": 42.05297,
+      "lng": -87.70787,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M107-2', LOCATION='Elgin Road (Emerson St) (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m109n_greenbay",
+      "name": "Drop shaft DS-M109N, Green Bay Rd & McCormick Blvd",
+      "lat": 42.05889,
+      "lng": -87.695,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M109N', LOCATION='Green Bay Rd & McCormick (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m109s_greenbay_evanston",
+      "name": "Drop shaft DS-M109S, Green Bay Rd & McCormick Blvd, Evanston",
+      "lat": 42.05875,
+      "lng": -87.69596,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M109S', LOCATION='Green Bay Rd & McCormick (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m110_asbury",
+      "name": "Drop shaft DS-M110, Asbury Ave, Evanston",
+      "lat": 42.06136,
+      "lng": -87.68938,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M110', LOCATION='Asbury Ave (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m113_laurel",
+      "name": "Drop shaft DS-M113, Laurel Ave, Wilmette",
+      "lat": 42.07252,
+      "lng": -87.68609,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M113', LOCATION='Laurel (E)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m114n2_sheridan",
+      "name": "Drop shaft DS-M114N-2, Sheridan Rd, Wilmette",
+      "lat": 42.0752,
+      "lng": -87.6855,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M114N-2', LOCATION='Sheridan Rd (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "ds_m114n_wilmette_ps",
+      "name": "Drop shaft DS-M114N, Sheridan Rd (Wilmette Pumping Station)",
+      "lat": 42.07528,
+      "lng": -87.68528,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='DS-M114N', LOCATION='Sheridan Rd (Wilmette P.S.) (W)'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "wilmette_gate",
+      "name": "Wilmette Gate (North Shore Channel outlet to Lake Michigan)",
+      "lat": 42.07596,
+      "lng": -87.68456,
+      "system": "mainstream",
+      "from": 1985,
+      "source": "MWRD CSO_Points ArcGIS Feature Service (public, unauthenticated) \u2014 item https://www.arcgis.com/home/item.html?id=7e6f111a69d84972993ef52ad986dc80 , service https://services.arcgis.com/R2OqRHzOVTbwcOgY/arcgis/rest/services/CSO_Points/FeatureServer/0 (also mirrored in this repo at map-data/gis/cso-outfall-points.geojson, see map-data/gis/SOURCES.md); field TARP_CONNECTION='Wilmette Gate', LOCATION='Wilmette Gate'. Cross-checked against the DS-*/TG-* street-cross-reference table in sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf pp.97-100 and the CSO-outfall table (Receiving Water: North Branch Chicago River / North Shore Channel) in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf pp.231-234.",
+      "approx": false
+    },
+    {
+      "id": "lau_outfall_river",
+      "name": "Lawrence Avenue Underflow Sewer \u2014 Contract No. 3 pumping station & outfall",
+      "lat": 41.9692,
+      "lng": -87.7011,
+      "system": "mainstream",
+      "from": 1972,
+      "approx": true,
+      "source": "EPA-600/2-80-014, 'Lawrence Avenue Underflow Sewer System' (City of Chicago Dept. of Public Works, Bureau of Engineering, with Harza Engineering Co.; USEPA Demonstration Grant 11020 EMD, 1980) \u2014 sources/north-branch-pumping-station/EPA_600-2-80-014_Lawrence_Ave_Underflow_Sewer_1980.pdf (duplicate: sources/city-sewer-network/LawrenceAvenueUnderflow_1980_EPA.pdf), p.59: Contract No. 3 'Location: Lawrence Avenue at North Branch of Chicago River,' construction started April 17, 1972. Coordinate = the North Branch (Lawrence Ave) Pumping Station site (same address, 4860 N Francisco Ave); the report doesn't distinguish a separate outfall coordinate from the pumping station building.",
+      "note": "Pre-TARP City of Chicago demonstration project (not an MWRD TARP contract) \u2014 the first deep-tunnel combined-sewer-overflow storage system built in Chicago, later cited as direct precedent for TARP's own drop-shaft design (EPA-600/2-80-014 p.13: 'the air entraining dropshaft of the Type E-15, used for the Lawrence Avenue System' \u2014 the same E-15 shaft type appears in the 1976 Mainstream EIS's own drop-shaft table). Its tunnel physically ties into the Mainstream system at DS-LAT in Ronan Park."
+    },
+    {
+      "id": "lau_kildare_lawrence",
+      "name": "Lawrence Avenue Underflow Sewer \u2014 bore transition point, Kildare Ave",
+      "lat": 41.9683,
+      "lng": -87.7353,
+      "system": "mainstream",
+      "from": 1967,
+      "approx": true,
+      "source": "EPA-600/2-80-014, 'Lawrence Avenue Underflow Sewer System' (City of Chicago Dept. of Public Works, Bureau of Engineering, with Harza Engineering Co.; USEPA Demonstration Grant 11020 EMD, 1980) \u2014 sources/north-branch-pumping-station/EPA_600-2-80-014_Lawrence_Ave_Underflow_Sewer_1980.pdf (duplicate: sources/city-sewer-network/LawrenceAvenueUnderflow_1980_EPA.pdf), p.40: the 12-ft finished-diameter tunnel ran 'in Harding Avenue and in Lawrence Avenue (west of Kildare Avenue).' Intersection geocoded via OpenStreetMap/Nominatim ('Lawrence & Kildare,' West Lawrence Avenue, Mayfair, Albany Park, Chicago)."
+    },
+    {
+      "id": "lau_milwaukee_lawrence",
+      "name": "Lawrence Avenue Underflow Sewer \u2014 tunnel curve point, Milwaukee Ave (Jefferson Park)",
+      "lat": 41.9678,
+      "lng": -87.7603,
+      "system": "mainstream",
+      "from": 1967,
+      "approx": true,
+      "source": "EPA-600/2-80-014, 'Lawrence Avenue Underflow Sewer System' (City of Chicago Dept. of Public Works, Bureau of Engineering, with Harza Engineering Co.; USEPA Demonstration Grant 11020 EMD, 1980) \u2014 sources/north-branch-pumping-station/EPA_600-2-80-014_Lawrence_Ave_Underflow_Sewer_1980.pdf (duplicate: sources/city-sewer-network/LawrenceAvenueUnderflow_1980_EPA.pdf), p.51 (Contract No. 1 modifications): 'The radius of the tunnel curve at Milwaukee Avenue was increased from 180 to 500 to accommodate the Contractor.' Intersection geocoded via OpenStreetMap/Nominatim ('Lawrence & Milwaukee,' West Lawrence Avenue, Portage Park, Chicago). West of this point the main tunnel continued to its documented terminus at Melvina Avenue (16,638 ft total from the river per p.39 quantities, consistent with reaching roughly this longitude); Melvina Ave itself was not independently geocoded, so it is omitted as its own point rather than guessed."
+    },
+    {
+      "id": "lau_harding_lawrence",
+      "name": "Lawrence Avenue Underflow Sewer \u2014 Harding Ave branch, north end (at Lawrence Ave)",
+      "lat": 41.9683,
+      "lng": -87.7265,
+      "system": "mainstream",
+      "from": 1967,
+      "approx": true,
+      "source": "EPA-600/2-80-014, 'Lawrence Avenue Underflow Sewer System' (City of Chicago Dept. of Public Works, Bureau of Engineering, with Harza Engineering Co.; USEPA Demonstration Grant 11020 EMD, 1980) \u2014 sources/north-branch-pumping-station/EPA_600-2-80-014_Lawrence_Ave_Underflow_Sewer_1980.pdf (duplicate: sources/city-sewer-network/LawrenceAvenueUnderflow_1980_EPA.pdf), p.39: Contract No.1 also ran 'in Harding Avenue from Lawrence Avenue to Berteau Avenue,' 4,000 ft, 12-ft diameter (p.32). Coordinate is a composite: Harding Ave's true longitude (-87.7265) taken from its OpenStreetMap way geometry ('North Harding Avenue,' Overpass query), combined with Lawrence Ave's latitude in this reach (~41.968, consistent across independently geocoded points on Lawrence Ave from the river to Milwaukee Ave); Harding Ave and Lawrence Ave do not share a common OSM node at their crossing, so a direct intersection lookup was not possible."
+    },
+    {
+      "id": "lau_harding_berteau",
+      "name": "Lawrence Avenue Underflow Sewer \u2014 Harding Ave branch, south end (at Berteau Ave)",
+      "lat": 41.9575,
+      "lng": -87.7265,
+      "system": "mainstream",
+      "from": 1967,
+      "approx": true,
+      "source": "EPA-600/2-80-014, 'Lawrence Avenue Underflow Sewer System' (City of Chicago Dept. of Public Works, Bureau of Engineering, with Harza Engineering Co.; USEPA Demonstration Grant 11020 EMD, 1980) \u2014 sources/north-branch-pumping-station/EPA_600-2-80-014_Lawrence_Ave_Underflow_Sewer_1980.pdf (duplicate: sources/city-sewer-network/LawrenceAvenueUnderflow_1980_EPA.pdf), p.39/p.32 (see lau_harding_lawrence). Coordinate is a composite: Harding Ave's true longitude (-87.7265, OpenStreetMap way geometry) combined with Berteau Ave's latitude (41.9575) taken from the MWRD-catalogued drop shaft DS-M88 at Berteau Ave & the North Branch of the Chicago River (map-data/gis/cso-outfall-points.geojson) \u2014 i.e. Berteau Ave runs essentially due east-west at this latitude across the whole width of the neighborhood."
+    }
+  ],
+  "alignments": [
+    {
+      "id": "mainstream_north_branch_main_stem",
+      "system": "mainstream",
+      "waypoints": [
+        [
+          41.92503,
+          -87.6748
+        ],
+        [
+          41.93223,
+          -87.68317
+        ],
+        [
+          41.93384,
+          -87.68319
+        ],
+        [
+          41.93632,
+          -87.68797
+        ],
+        [
+          41.93926,
+          -87.69273
+        ],
+        [
+          41.94049,
+          -87.69336
+        ],
+        [
+          41.94279,
+          -87.6956
+        ],
+        [
+          41.94649,
+          -87.69577
+        ],
+        [
+          41.95019,
+          -87.69708
+        ],
+        [
+          41.954,
+          -87.69423
+        ],
+        [
+          41.95748,
+          -87.69456
+        ],
+        [
+          41.96132,
+          -87.69458
+        ],
+        [
+          41.96762,
+          -87.70033
+        ],
+        [
+          41.96879,
+          -87.70164
+        ],
+        [
+          41.96917,
+          -87.70111
+        ]
+      ],
+      "basis": "Chain of 15 MWRD-catalogued drop shafts/tide gates (DS-M76 through DS-M90&91/NBPS) along the North Branch of the Chicago River, in along-the-river order (each point sits within 15-47 m of the MWRD 'North Branch Chicago River' surface centerline, map-data/gis/mwrd-waterways.geojson, per a distance-along-polyline projection). Matches the shaft-by-shaft route description in the 1976 EPA draft EIS for the TARP Mainstream System (sources/tarp-deep-tunnel/1976-epa-draft-eis-tarp-mainstream-tunnel-system.pdf, Table V-1/V-2, shafts 82 Belmont / 83 Melrose-Rockwell / 84 Roscoe / 85 Addison, p.252-259) for its southern end; the EIS itself explicitly excludes the segment north of Addison ('North Branch of the Chicago River, Addison Street to Wilmette' is out of scope for that document, p.246), so DS-M86 northward is sourced only from the MWRD GIS structure list and the 2024 MWRD system map (images/maps-diagrams/2000-present/2024-tarp-mainstream-des-plaines-system-map-figure2-mwrd.jpg, Figure 2), which shows the completed tunnel following this exact river corridor from Belmont through Addison, Lawrence, and Foster to the Skokie/Evanston border.",
+      "approx": true,
+      "note": "Underground tunnel runs 150-300 ft below this surface corridor per TARP design convention (drop shafts connect the surface collecting structures straight down to the tunnel); waypoints trace the surface drop-shaft chain, not a surveyed tunnel centerline."
+    },
+    {
+      "id": "mainstream_north_branch_west_fork",
+      "system": "mainstream",
+      "waypoints": [
+        [
+          41.97462,
+          -87.70873
+        ],
+        [
+          41.98432,
+          -87.7075
+        ],
+        [
+          41.97202,
+          -87.71593
+        ],
+        [
+          41.97552,
+          -87.73101
+        ],
+        [
+          41.98134,
+          -87.74129
+        ],
+        [
+          41.9838,
+          -87.74804
+        ],
+        [
+          41.98315,
+          -87.75249
+        ],
+        [
+          41.99031,
+          -87.76611
+        ],
+        [
+          41.9902,
+          -87.77185
+        ],
+        [
+          41.99214,
+          -87.77336
+        ],
+        [
+          42.00302,
+          -87.78118
+        ],
+        [
+          41.99974,
+          -87.78852
+        ],
+        [
+          42.00727,
+          -87.7923
+        ],
+        [
+          42.00858,
+          -87.79248
+        ],
+        [
+          42.01213,
+          -87.79604
+        ],
+        [
+          42.0199,
+          -87.79565
+        ],
+        [
+          42.03025,
+          -87.79367
+        ],
+        [
+          42.0335,
+          -87.79458
+        ],
+        [
+          42.04127,
+          -87.7882
+        ],
+        [
+          42.05048,
+          -87.78067
+        ]
+      ],
+      "basis": "Chain of 20 MWRD-catalogued 'DS-N' drop shafts along the actual North Branch of the Chicago River (the natural West Fork corridor through the Forest Glen/Edgebrook forest preserves and Niles/Morton Grove \u2014 a DIFFERENT waterway from the man-made North Shore Channel, per MWRD's own waterway naming in map-data/gis/mwrd-waterways.geojson: 'North Branch of the Chicago River,' lat 41.972-42.088). Order derived by projecting each drop shaft's coordinate onto that MWRD waterway centerline and sorting by distance along it (offsets mostly 5-25 m, confirming shafts sit essentially on the corridor); see the DS-N06 caveat on that point's own entry. Confirmed against the 2024 MWRD system map (Figure 2, cited above), which shows a separate completed-tunnel branch running from the Devon/Lawrence confluence area northwest through Morton Grove to Church St, distinct from the North Shore Channel branch.",
+      "approx": true,
+      "note": "This is the leg the user asked about explicitly ('does the Mainstream alignment follow the North Shore Channel, or run under streets, north of the confluence') \u2014 it is neither: it follows the actual North Branch river channel through the forest preserves, a corridor distinct from both the North Shore Channel and the street grid."
+    },
+    {
+      "id": "mainstream_north_shore_channel",
+      "system": "mainstream",
+      "waypoints": [
+        [
+          41.96917,
+          -87.70111
+        ],
+        [
+          41.98652,
+          -87.7076
+        ],
+        [
+          41.99028,
+          -87.70887
+        ],
+        [
+          41.9973,
+          -87.71044
+        ],
+        [
+          42.00428,
+          -87.71024
+        ],
+        [
+          42.01179,
+          -87.71027
+        ],
+        [
+          42.01708,
+          -87.71018
+        ],
+        [
+          42.01917,
+          -87.71056
+        ],
+        [
+          42.02254,
+          -87.70997
+        ],
+        [
+          42.02934,
+          -87.70981
+        ],
+        [
+          42.03347,
+          -87.71015
+        ],
+        [
+          42.03345,
+          -87.70953
+        ],
+        [
+          42.03741,
+          -87.70943
+        ],
+        [
+          42.04273,
+          -87.70992
+        ],
+        [
+          42.04415,
+          -87.70942
+        ],
+        [
+          42.05185,
+          -87.70889
+        ],
+        [
+          42.05258,
+          -87.70829
+        ],
+        [
+          42.05297,
+          -87.70787
+        ],
+        [
+          42.05635,
+          -87.70084
+        ],
+        [
+          42.05875,
+          -87.69596
+        ],
+        [
+          42.05889,
+          -87.695
+        ],
+        [
+          42.06136,
+          -87.68938
+        ],
+        [
+          42.07252,
+          -87.68609
+        ],
+        [
+          42.0752,
+          -87.6855
+        ],
+        [
+          42.07528,
+          -87.68528
+        ],
+        [
+          42.07596,
+          -87.68456
+        ]
+      ],
+      "basis": "Chain of 26 MWRD-catalogued drop shafts/tide gates (TG-M94 through DS-M114N/Wilmette PS) along the North Shore Channel, ordered by projecting each onto the MWRD 'North Shore Channel' waterway centerline (map-data/gis/mwrd-waterways.geojson) and sorting by distance along it (offsets 11-51 m for all points except NBPS itself, which sits on the North Branch, not the Channel, and is included only as the shared junction point with the other two legs). Matches the 2024 MWRD system map (Figure 2, cited above), which shows the completed tunnel running the length of the North Shore Channel from the confluence to the Wilmette Pumping Station.",
+      "approx": true,
+      "note": "Terminates at the Wilmette Pumping Station / Wilmette Gate, consistent with the 1980 EPA report's statement that awarded Mainstream contracts covered tunnel 'from 59th Street...to Wilmette Harbour on the north end' (sources/city-sewer-network/LawrenceAvenueUnderflow_1980_EPA.pdf p.88)."
+    },
+    {
+      "id": "lawrence_avenue_underflow_main",
+      "system": "mainstream",
+      "waypoints": [
+        [
+          41.96917,
+          -87.70111
+        ],
+        [
+          41.9692,
+          -87.7011
+        ],
+        [
+          41.9683,
+          -87.7353
+        ],
+        [
+          41.9678,
+          -87.7603
+        ]
+      ],
+      "basis": "Contract No. 1 main tunnel, 'In Lawrence Avenue from North Branch of the Chicago River to Melvina Avenue' (EPA-600/2-80-014 p.39) \u2014 16,638 ft of 12-ft-dia. + 9,126 ft of 17-ft-dia. rock tunnel, built 1967-1973, discharging via the Contract No.3 pumping station/outfall at Lawrence Ave & the North Branch (Contract 3 started April 1972). This is the pre-TARP City of Chicago demonstration tunnel whose outfall structure sits at/adjacent to today's DS-LAT (Ronan Park) shaft and North Branch Pumping Station \u2014 i.e. this is almost certainly the physical tunnel line the Block Club Chicago article describes running from Ronan Park to LaPointe Park (see i86_giddings_lapointe note), since it long predates TARP and runs directly under Lawrence Ave through this stretch.",
+      "approx": true,
+      "note": "West end (Melvina Ave, ~5,300 ft further west of the Milwaukee Ave point per the contract's total tunnel-length figure) not plotted \u2014 no independently sourced coordinate for that intersection."
+    },
+    {
+      "id": "lawrence_avenue_underflow_harding_branch",
+      "system": "mainstream",
+      "waypoints": [
+        [
+          41.9683,
+          -87.7265
+        ],
+        [
+          41.9575,
+          -87.7265
+        ]
+      ],
+      "basis": "Contract No. 1 branch tunnel, 'in Harding Avenue from Lawrence Avenue to Berteau Avenue,' 4,000 ft, 12-ft diameter (EPA-600/2-80-014 pp.32,39).",
+      "approx": true
+    }
+  ],
+  "notes": "Built for the request to replace the North Side's crude 'reuse the surface waterway path' approximation in map-data/tunnels.json (feature id tarp_mainstream) with sourced drop-shaft points and shaft-to-shaft alignment chains. All dropshafts[] coordinates trace to one of: (1) MWRD's own public CSO_Points ArcGIS Feature Service (map-data/gis/cso-outfall-points.geojson, provenance in map-data/gis/SOURCES.md) \u2014 the 'TARP_CONNECTION' field is MWRD's own drop-shaft/tide-gate identifier, cross-checked against the same identifiers in the 2011 EPA/DOJ/MWRD consent decree and the 2022/2026 Collection System O&M Manuals already in sources/; (2) the 1980 EPA report on the pre-TARP Lawrence Avenue Underflow Sewer System, for that separate historic tunnel; (3) OpenStreetMap/Nominatim/Overpass street-intersection geocoding, only used for points not directly in the MWRD GIS layer (Ronan Park polygon, Lawrence Ave Underflow endpoints). Alignment waypoints[] are the corresponding drop-shaft chains ordered by projecting each point onto MWRD's own surface-waterway centerlines (map-data/gis/mwrd-waterways.geojson, layer 'MWRD Waterways') and sorting by distance-along-line \u2014 this is a materially better proxy than the OpenStreetMap-traced waterway the existing tunnels.json uses, since MWRD's own layer is presumably what their engineers reference, but it is still a surface corridor, not a surveyed tunnel centerline (no such centerline is published anywhere; see map-data/gis/SOURCES.md 'Bottom-line finding'). KEY CORRECTIONS TO THE TASK'S STARTING HYPOTHESIS: (1) The Mainstream tunnel north of the Devon/Lawrence confluence area does NOT run under streets, and does not stay on a single waterway \u2014 it splits into two separate legs on two separate MWRD-named waterways: the North Shore Channel (Rogers Park/West Ridge through Evanston/Skokie to the Wilmette Pumping Station) and the actual North Branch of the Chicago River, a physically distinct channel that winds northwest through the Forest Glen/Edgebrook forest preserves to Niles/Morton Grove (DS-N01 through DS-N20). Both are confirmed by MWRD's own 2024 system map (Figure 2) showing two separate completed-tunnel lines north of Devon. (2) LaPointe Park is NOT at Foster & Kedzie in Albany Park \u2014 it is Arthur J. LaPointe Park at N Manor Ave & W Giddings St in Ravenswood Manor, about 1.4 km south of the Foster/Kedzie confluence and about 400 m south of Ronan Park/DS-LAT, on MWRD-owned land leased to NeighborSpace. This matches the geometry implied by the phrase 'toward LaPointe Park' (i.e. downstream/south of Ronan Park along the same river corridor, not further north/west toward Albany Park proper) much better than the original Foster/Kedzie guess. (3) Ronan Park's drop shaft is DS-LAT ('lateral'), sitting at the park's south end near the Lawrence Ave bridge, directly across the North Branch of the Chicago River from the North Branch (Lawrence Ave) Pumping Station (NBPS) at 4860 N Francisco Ave \u2014 this part of the user's ground truth is confirmed exactly, both by the MWRD GIS data and independently by a Block Club Chicago (Nov 2023) news article quoting the site attorney for an adjacent development. The North Branch main stem also connects at its south end (Fullerton Ave, ~41.925/-87.675) to the segment already covered street-by-street in the 1976 draft EIS's 59th-to-Addison description (sources/tarp-deep-tunnel/1976-epa-draft-eis-tarp-mainstream-tunnel-system.pdf); that EIS explicitly states its scope EXCLUDES 'the North Branch of the Chicago River, Addison Street to Wilmette' (p.246), which is exactly the segment this file fills in from MWRD GIS + the system map instead."
+}

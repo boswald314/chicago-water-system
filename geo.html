@@ -72,10 +72,12 @@
     </div>
     <div id="milestone"></div>
     <div id="legend">
+      <label style="display:inline-flex;gap:5px;align-items:center;cursor:pointer"><input type="checkbox" id="outfallToggle"> <span>show all 441 CSO outfalls (MWRD GIS, current-day)</span></label>
       <span><i class="sw" style="background:var(--water);height:6px"></i> waterways (flow direction animated)</span>
       <span><i class="sw" style="background:var(--raw)"></i> lake/water tunnels</span>
       <span><i class="sw" style="background:var(--waste)"></i> sewage conduits &amp; TARP</span>
       <span><i class="sw" style="background:var(--effluent)"></i> effluent/pumpback &middot; interceptor links</span>
+      <span><i class="dot" style="border-color:var(--waste);width:6px;height:6px"></i> TARP drop shafts</span>
       <span><i class="dot" style="border-color:var(--potable)"></i> water supply</span>
       <span><i class="dot" style="border-color:var(--waste)"></i> sewage/treatment</span>
       <span><i class="dot" style="border-color:var(--effluent)"></i> reservoirs</span>
@@ -160,6 +162,7 @@ const KINDSTYLE = {
   effluent: { colorVar: '--effluent', weight: 2.5 },
   sludge: { colorVar: '--waste', weight: 1.8, dash: '2 6' },
   pumpback: { colorVar: '--effluent', weight: 2, dash: '6 4' },
+  diversion: { colorVar: '--storm', weight: 3, dash: '9 5' },
 };
 
 // flows: waterway/tunnel id -> eras with destination point (nearest polyline end gets the arrow)
@@ -217,6 +220,13 @@ function addLine(f, group) {
 D.waterways.forEach(f => addLine(f, 'waterway'));
 D.historic.forEach(f => addLine(f, 'historic'));
 D.tunnels.forEach(f => addLine(f, 'tunnel'));
+// drop shafts & air vents (small markers)
+(D.shafts || []).forEach(s => {
+  const color = css(s.type === 'air-vent' ? '--storm' : '--waste');
+  const mk = L.circleMarker([s.lat, s.lng], { radius: 3.2, color, weight: 1.6, fillColor: color, fillOpacity: s.approx ? 0 : 0.85 });
+  mk.bindPopup(`<div class="pop-t">${s.name}</div><div class="pop-y">${s.type} · from ${s.from}${s.approx ? ' · location approximate' : ''}</div>${s.note ? `<div class="approx-note">${s.note}</div>` : ''}`);
+  layers.push({ leaflet: mk, from: s.from, to: null, isMarker: true });
+});
 (D.connections || []).forEach(c => addLine({
   id: c.id, name: c.label || c.id, kind: c.kind, from: c.from || 1850, to: c.to || null,
   approx: c.approx, geometry: c.waypoints, note: (c.note ? c.note + ' ' : '') + (c.source ? '(' + c.source + ')' : ''),
@@ -287,6 +297,17 @@ document.getElementById('play').addEventListener('click', () => {
     applyYear(+slider.value);
     if (+slider.value >= 2026) { clearInterval(playTimer); playTimer = null; btn.textContent = '▶'; }
   }, 220);
+});
+
+// CSO outfall overlay (toggle)
+let outfallGroup = null;
+document.getElementById('outfallToggle').addEventListener('change', e => {
+  if (e.target.checked && !outfallGroup) {
+    outfallGroup = L.layerGroup((D.outfalls || []).map(o =>
+      L.circleMarker([o[0], o[1]], { radius: 2.2, color: css('--storm'), weight: 1, fillColor: css('--storm'), fillOpacity: 0.55 })
+        .bindPopup(`<div class="pop-t">CSO outfall — ${o[2] || 'unnamed'}</div><div class="pop-y">${o[4]} · ${o[5]}</div>${o[3] ? `TARP connection: <b>${o[3]}</b>` : ''}<div class="approx-note">MWRD CSO_Points GIS layer (current configuration)</div>`)));
+  }
+  if (outfallGroup) { e.target.checked ? outfallGroup.addTo(map) : map.removeLayer(outfallGroup); }
 });
 
 applyYear(1850);
