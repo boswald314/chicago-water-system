@@ -406,13 +406,13 @@
   "id": "mwrd-westchester",
   "name": "Westchester Pumping Station",
   "type": "sewage-ps",
-  "lat": 41.8506,
-  "lng": -87.882,
-  "from": 1950,
+  "lat": 41.8649358,
+  "lng": -87.8679303,
+  "from": 1951,
   "to": null,
   "activeTo": null,
-  "approx": true,
-  "note": "MWRD internal facility #150, serving the western Cook County suburb of Westchester, IL. No construction date, precise site, or capacity figure was located in sources reviewed; coordinate is the town center of Westchester, IL, not a confirmed facility address -- flagged approximate. 1950 is an unconfirmed placeholder.",
+  "approx": false,
+  "note": "MWRD internal facility #150 (\"WCPS\"), 1140 Gardner Rd., Westchester, IL 60154. Built 1951 to relieve the Berkley-Hillside and Broadview-Bellwood Intercepting Sewers; discharges CSO to Addison Creek (Outfall 150, TARP structure DS-D34-AI). Dry-weather flow continues to Stickney WRP. Coordinate geocoded (Nominatim) from the primary-source street address given in MWRD's Contract 21-168-3S (Westchester Pumping Station Relief Sewer) SRF project notification.",
   "doc": "docs/07-mwrd-interceptors-pumping-stations.html"
  },
  {

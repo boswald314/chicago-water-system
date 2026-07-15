@@ -75,6 +75,7 @@
       <span><i class="sw" style="background:var(--water);height:6px"></i> waterways (flow direction animated)</span>
       <span><i class="sw" style="background:var(--raw)"></i> lake/water tunnels</span>
       <span><i class="sw" style="background:var(--waste)"></i> sewage conduits &amp; TARP</span>
+      <span><i class="sw" style="background:var(--effluent)"></i> effluent/pumpback &middot; interceptor links</span>
       <span><i class="dot" style="border-color:var(--potable)"></i> water supply</span>
       <span><i class="dot" style="border-color:var(--waste)"></i> sewage/treatment</span>
       <span><i class="dot" style="border-color:var(--effluent)"></i> reservoirs</span>
@@ -156,6 +157,9 @@ const KINDSTYLE = {
   conduit: { colorVar: '--waste', weight: 2.5, dash: '4 5' },
   tarp:    { colorVar: '--waste', weight: 3, dash: '7 6' },
   interceptor: { colorVar: '--waste', weight: 2, dash: '3 4' },
+  effluent: { colorVar: '--effluent', weight: 2.5 },
+  sludge: { colorVar: '--waste', weight: 1.8, dash: '2 6' },
+  pumpback: { colorVar: '--effluent', weight: 2, dash: '6 4' },
 };
 
 // flows: waterway/tunnel id -> eras with destination point (nearest polyline end gets the arrow)
@@ -213,6 +217,10 @@ function addLine(f, group) {
 D.waterways.forEach(f => addLine(f, 'waterway'));
 D.historic.forEach(f => addLine(f, 'historic'));
 D.tunnels.forEach(f => addLine(f, 'tunnel'));
+(D.connections || []).forEach(c => addLine({
+  id: c.id, name: c.label || c.id, kind: c.kind, from: c.from || 1850, to: c.to || null,
+  approx: c.approx, geometry: c.waypoints, note: (c.note ? c.note + ' ' : '') + (c.source ? '(' + c.source + ')' : ''),
+}, 'connection'));
 
 D.facilities.forEach(f => {
   const color = css(TYPECOLOR[f.type] || '--ink2');
