@@ -69,7 +69,7 @@ Geysering is not a solved, historical problem — MWRD engineers and outside mod
 | James C. Kirie WRP (Des Plaines) | Higgins Creek | 52 MGD avg. / 110 MGD max. (design maximum flow per NPDES permit) | 1980 (newest) | IL0047741 [\[17\]](#src-17)[\[58\]](#src-58) |
 | John E. Egan WRP (Schaumburg) | Upper Salt Creek | 30 MGD avg. / 50 MGD max. | 1975 (Dec. 16) | IL0036340 [\[17\]](#src-17)[\[59\]](#src-59) |
 | Hanover Park WRP | DuPage River | 12 MGD avg. / 22 MGD max. | 1963 (described in secondary sources as the nation's first — or one of the first — major tertiary-treatment plants; claim unverified at the primary-source level, see the suburban-WRPs document) | IL0036137 [\[17\]](#src-17)[\[60\]](#src-60) |
-| Lemont WRP | Des Plaines River area | 2.3 MGD avg. | 1961 | IL0028070 [\[17\]](#src-17) |
+| Lemont WRP | Chicago Sanitary and Ship Canal | 2.3 MGD avg. | 1961 | IL0028070 [\[17\]](#src-17) |
 | **MWRD system total** | — | **≈450 billion gallons/year across all 7 plants; >2.0 BGD combined capacity** | — | serving >5 million people, 882 sq. mi. [\[6\]](#src-6) |
 
 ### Non-MWRD stormwater pumping stations (village/municipal)

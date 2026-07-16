@@ -4,7 +4,7 @@ title: "Verification Report"
 
 # Claim-level verification of this archive
 
-*Verification pass completed July 16, 2026. 1,777 cited claims machine-checked against the 158,000-page source corpus; all 199 machine-flagged contradictions adjudicated against primary sources; 14 confirmed errors corrected (16 edit sites including duplicated sentences).*
+*Verification pass completed July 16, 2026. 1,777 cited claims machine-checked against the 158,000-page source corpus; all 199 machine-flagged contradictions adjudicated against primary sources (14 real errors), all 487 PARTIAL verdicts triaged and the 76 substantive ones fully adjudicated (7 more real errors), plus 1 residual error caught by re-verifying the fixes themselves — **22 confirmed errors corrected in total.***
 
 ## Why and how
 
@@ -52,6 +52,19 @@ The pipeline (all local, on the project's own hardware):
 | 16 | date | 17-273-4P "October 2024 completion, already finished" → awarded Oct. 2024, substantial completion target **May 2026** |
 
 Five of the fourteen are the directional/relational archetype the pass was designed to catch. Two required rendering the original scanned pages at high resolution because the OCR text was garbled at exactly the disputed digits.
+
+## The PARTIAL round: 7 more errors
+
+The 487 PARTIAL verdicts were screened by a triage pass (does the judge's complaint allege a *specific factual conflict*, or just a coverage gap?): 411 benign, 76 substantive. Full source-grounded adjudication of the 76 confirmed **7 additional real errors** (68 false flags — same pattern as before: the judge's evidence usually came from a source the sentence doesn't cite, describing a different event, era, or facility):
+
+| Doc | Class | Error → correction |
+|---|---|---|
+| 06 | citation | The "raised up to 14 feet" street-raising figure was real but cited to sources that top out at 10 ft — the supporting source ([24], contemporary Tribune coverage via Chicago Architecture History) added |
+| 11 ×2 | number | Stickney Imhoff tanks "Batteries A–D / 3–4 batteries" → **three batteries, A–C** (MWRD 2009 Master Plan; no source anywhere mentions a Battery D) |
+| 14 | name | Lemont WRP receiving waterway "Des Plaines River area" → **Chicago Sanitary and Ship Canal** (MWRD fact sheet, NPDES record) |
+| 15 | date | Cal-Sag groundbreaking: the Corps/Sanitary District's own reports date the start of work September 18, 1911; the "July 4, 1913" ceremony survives as an attributed local account rather than the start date |
+| 15 | location | CID Landfill placed at "122nd St and the Calumet River" → EPA's own site profile puts it near **138th St and the Calumet Expressway, Calumet City** (and its NPL status corrected) |
+| 16 | number | Contract 11-404-3S "estimated $11,500,000" → awarded to Benchmark Construction at an actual **$8,348,000** (2024 Budget Book superseded the pre-bid estimate) |
 
 ## Re-verification of the corrections
 
