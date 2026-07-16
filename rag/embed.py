@@ -39,13 +39,19 @@ def embed_batch(texts):
 
 def main():
     db = db_connect()
-    have = {r[0] for r in db.execute('SELECT id FROM chunks')}
-    todo = []
+    # "have" = ids fully present in BOTH chunks and vec (the constrained table),
+    # so any partially-inserted id gets redone. Dedupe todo by id.
+    in_chunks = {r[0] for r in db.execute('SELECT id FROM chunks')}
+    in_vec = {r[0] for r in db.execute('SELECT id FROM vec')}
+    have = in_chunks & in_vec
+    seen, todo = set(), []
     for line in open(CHUNKS):
         c = json.loads(line)
-        if c['id'] not in have:
-            todo.append(c)
-    print(f'{len(have)} already embedded; {len(todo)} to go', flush=True)
+        if c['id'] in have or c['id'] in seen:
+            continue
+        seen.add(c['id'])
+        todo.append(c)
+    print(f'{len(have)} fully embedded (chunks {len(in_chunks)}, vec {len(in_vec)}); {len(todo)} to go', flush=True)
     t0 = time.time()
     for i in range(0, len(todo), BATCH):
         batch = todo[i:i + BATCH]
@@ -55,7 +61,10 @@ def main():
                 raise RuntimeError(f'dim mismatch: {len(e)}')
             db.execute('INSERT OR REPLACE INTO chunks VALUES(?,?,?,?,?)',
                        (c['id'], c['file'], c['page_start'], c['page_end'], c['text']))
-            db.execute('INSERT OR REPLACE INTO vec(id, embedding) VALUES(?,?)', (c['id'], serialize(e)))
+            # vec0 doesn't honor INSERT OR REPLACE cleanly — delete-then-insert for idempotency
+            db.execute('DELETE FROM vec WHERE id=?', (c['id'],))
+            db.execute('INSERT INTO vec(id, embedding) VALUES(?,?)', (c['id'], serialize(e)))
+            db.execute('DELETE FROM fts WHERE id=?', (c['id'],))
             db.execute('INSERT INTO fts(id, text) VALUES(?,?)', (c['id'], c['text']))
         db.commit()
         done = i + len(batch)

@@ -101,23 +101,44 @@ JUDGE_SYS = ("You verify factual claims against retrieved source passages about 
              '{"verdict":"SUPPORTED|CONTRADICTED|NOT_FOUND|PARTIAL","confidence":0-1,'
              '"evidence":"<short quote from a passage, or empty>","issue":"<one line if not SUPPORTED>"}')
 
+def parse_verdict(content):
+    """Robustly extract the verdict JSON from a possibly-noisy model reply."""
+    content = re.sub(r'(?s)<think>.*?</think>', '', content).strip()
+    try:
+        return json.loads(content)
+    except Exception:
+        pass
+    m = re.search(r'\{.*\}', content, re.S)   # first {...} block
+    if m:
+        try:
+            return json.loads(m.group(0))
+        except Exception:
+            pass
+    # last resort: pull a verdict keyword out of the text
+    kw = re.search(r'(SUPPORTED|CONTRADICTED|NOT_FOUND|PARTIAL)', content)
+    if kw:
+        return {'verdict': kw.group(1), 'confidence': 0.5, 'evidence': '', 'issue': 'salvaged from non-JSON reply'}
+    return None
+
 def judge(claim, passages):
     ctx = '\n\n'.join(f'[{i+1}] ({r[0]} p.{r[1]}) {re.sub(chr(92)+"s+"," ",r[3])[:700]}' for i, r in enumerate(passages))
     prompt = f'CLAIM:\n{claim}\n\nRETRIEVED PASSAGES:\n{ctx}\n\nVerdict JSON:'
-    for attempt in range(4):
+    for attempt in range(3):
         try:
             r = requests.post(f'{OLLAMA}/api/chat', json={
-                'model': JUDGE_MODEL, 'stream': False, 'format': 'json',
-                'options': {'temperature': 0, 'num_ctx': 8192},
+                'model': JUDGE_MODEL, 'stream': False, 'format': 'json', 'think': False,
+                'options': {'temperature': 0, 'num_ctx': 8192, 'num_predict': 300},
                 'messages': [{'role': 'system', 'content': JUDGE_SYS}, {'role': 'user', 'content': prompt}],
             }, timeout=180)
             r.raise_for_status()
-            content = r.json()['message']['content']
-            v = json.loads(content)
-            return v
-        except Exception as e:
-            time.sleep(5 * (attempt + 1))
-    return {'verdict': 'ERROR', 'confidence': 0, 'evidence': '', 'issue': 'judge failed'}
+            v = parse_verdict(r.json()['message']['content'])
+            if v and v.get('verdict'):
+                return v
+        except requests.RequestException:
+            time.sleep(5 * (attempt + 1))       # network error — retry
+            continue
+        break                                    # parse failure is deterministic — don't retry identically
+    return {'verdict': 'ERROR', 'confidence': 0, 'evidence': '', 'issue': 'judge unparseable'}
 
 RETR = os.path.join(ROOT, 'rag', 'data', 'verify-retrieved.jsonl')
 
