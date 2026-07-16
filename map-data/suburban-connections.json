@@ -213,17 +213,30 @@
      -87.9346
     ],
     [
-     42.045,
-     -87.99
+     42.0221,
+     -87.9884
     ],
     [
-     42.0722,
-     -88.0439
+     42.0117,
+     -88.0032
+    ],
+    [
+     42.013,
+     -88.031
+    ],
+    [
+     42.0198,
+     -88.0317
+    ],
+    [
+     42.0198,
+     -88.0383
     ]
    ],
    "label": "Kirie-Egan Solids Pipeline (raw sludge, Kirie to Egan for digestion)",
-   "source": "MWRD fact sheets (docs/13); MWRD 2026 Major Contracts Book, \"Kirie-Egan Solids Pipeline Rehabilitation, Section No. 2\" ($12.5M) <https://mwrd.org/sites/default/files/2026-01/2026%20Major%20Contracts_Book%2011-25-25.pdf>. Exact pipeline alignment not documented in sources reviewed; straight-line approximation between the two plants.",
-   "approx": true
+   "source": "TRACED from the 1974 MSDGC as-built engineering contract map (Figure 4-2, 1975 O'Hare WRP/solids-pipeline EIS): Kirie WRP south to Oakton St; west on Oakton to (S) Arlington Heights Rd, Elk Grove Village; south on Arlington Heights Rd; west via Cosman Rd and the old Rohlwing Rd/Route 53 corridor north to Egan WRP. Every named street cross-checked against modern OSM. Confirmed still in active service by a 2026 MWRD rehabilitation contract. Confidence HIGH; corners simplified.",
+   "approx": false,
+   "traced": true
   },
   {
    "id": "egan-effluent-salt-creek",
@@ -296,7 +309,7 @@
     ]
    ],
    "label": "Egan digested biosolids to O'Brien WRP, en route to Stickney",
-   "source": "MWRD Egan WRP fact sheet; docs/13 of this archive. Exact pipeline/truck route not documented in sources reviewed; straight-line approximation along the I-90 corridor.",
+   "source": "MWRD Egan WRP fact sheet; docs/13 of this archive. Exact pipeline/truck route not documented in sources reviewed; straight-line approximation along the I-90 corridor. || ROUTE MINING (2026): street-level route GENUINELY UNDOCUMENTED \u2014 full 158k-page FTS corpus, MWRD FY2021-26 capital/major-contracts books, and the 2026 Collection System O&M Manual (which defines 'sludge and centrate lines' as a category without listing routes) all searched; web search likewise empty. Stays symbolic.",
    "approx": true
   },
   {
@@ -305,21 +318,26 @@
    "from": 1930,
    "waypoints": [
     [
-     42.0191,
-     -87.7143
+     42.0209,
+     -87.7161
     ],
     [
-     41.92,
-     -87.73
+     41.9973,
+     -87.7186
     ],
     [
-     41.8219,
-     -87.7537
+     41.9973,
+     -87.729
+    ],
+    [
+     41.9973,
+     -87.7483
     ]
    ],
-   "label": "O'Brien WRP to Stickney WRP (final dewatering and drying)",
-   "source": "MWRD fact sheets; docs/13 of this archive. Exact route not documented; straight-line approximation.",
-   "approx": true
+   "label": "O'Brien \u2192 Stickney sludge line, Section 1 (McCormick Blvd \u2192 Devon Ave, documented)",
+   "source": "MWRD 'North Side Sludge Pipeline Section 1' (three documented phases): O'Brien WRP south along McCormick Blvd (paralleling the North Shore Channel) through Lincolnwood to Devon Ave, then west on Devon; McCormick/Devon and Devon/Cicero junctions verified via OSM shared-node queries. The Pulaski/Crawford-area end waypoint is less certain. Continues as the symbolic segment toward Stickney \u2014 remainder of the route undocumented.",
+   "approx": true,
+   "traced": true
   },
   {
    "id": "hanoverpark-effluent-westbranch-dupage",
@@ -476,6 +494,24 @@
    ],
    "label": "Calumet TARP system \u2192 Thornton Composite Reservoir (bidirectional)",
    "source": "Final spur: a single 30-ft-I.D. concrete-lined connecting tunnel (~1,300 ft) from an existing Calumet-system stub, bifurcating through a four-gate wet-well shaft and recombining to the reservoir portal (KMI Architects/Engineers; gates ~100 tons each; live end of 2015). Southern corridor inferred to be the Little Calumet Leg (8.0 mi, 18.2-ft dia., bored 2003-04, operational ~2006, Jay Dee/Affholder JV) \u2014 no source explicitly maps its route, so this line is schematic. Gravity inflow; pumped return through the same corridor to the Calumet TARP PS and on to Calumet WRP."
+  },
+  {
+   "id": "obrien-stickney-sludge-remainder",
+   "kind": "sludge",
+   "from": 1930,
+   "approx": true,
+   "waypoints": [
+    [
+     41.9973,
+     -87.7483
+    ],
+    [
+     41.8171,
+     -87.7692
+    ]
+   ],
+   "label": "O'Brien \u2192 Stickney sludge line, remainder (route undocumented \u2014 symbolic)",
+   "source": "Continuation from the documented Devon Ave corridor (North Side Sludge Pipeline Section 1) to Stickney WRP for final dewatering/drying. No source documents the alignment south of the Devon corridor; drawn as a symbolic arc."
   }
  ]
 }

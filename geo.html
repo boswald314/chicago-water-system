@@ -260,6 +260,7 @@ const FLOWS = [
 // and long enough that a straight thread would read as a surveyed path it isn't.
 // Short runs and multi-point traced routes stay as literal threaded polylines.
 function isSymbolic(f) {
+  if (f.traced) return false;   // documented route — always draw its actual waypoints
   if (!f.approx) return false;
   const g = f.geometry;
   if (!g || g.length < 2 || g.length > 4) return false;
@@ -345,7 +346,7 @@ D.tunnels.forEach(f => addLine(f, 'tunnel'));
 });
 (D.connections || []).forEach(c => addLine({
   id: c.id, name: c.label || c.id, kind: c.kind, from: c.from || 1850, to: c.to || null,
-  approx: c.approx, geometry: c.waypoints, note: (c.note ? c.note + ' ' : '') + (c.source ? '(' + c.source + ')' : ''),
+  approx: c.approx, traced: c.traced, geometry: c.waypoints, note: (c.note ? c.note + ' ' : '') + (c.source ? '(' + c.source + ')' : ''),
 }, 'connection'));
 
 D.facilities.forEach(f => {
