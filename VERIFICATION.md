@@ -53,6 +53,10 @@ The pipeline (all local, on the project's own hardware):
 
 Five of the fourteen are the directional/relational archetype the pass was designed to catch. Two required rendering the original scanned pages at high resolution because the OCR text was garbled at exactly the disputed digits.
 
+## Re-verification of the corrections
+
+After the corrections were applied, the changed sentences were re-run through the same retrieve-and-judge pipeline. Four of six re-extracted claims cleared (PARTIAL — the usual retrieval ceiling); one flag was a judge conflation of TARP's *design* capacity (15.15 BG of reservoirs at full build-out) with the *currently on-line* capacity the sentence explicitly states (8.65 BG as of Dec. 2024) — a false flag; and one flag caught a **residual fifteenth error**: the corrected Lemont sentence still said solids are trucked "to the Calumet or Stickney WRPs," language inherited from the original text, while MWRD's annual biosolids reports consistently name Stickney — and only Stickney — as the destination. Fixed. The loop works in both directions: it confirms fixes and it catches what a fix preserves by accident.
+
 ## Limitations and next steps
 
 - The local judge's false-flag rate (89% of CONTRADICTED) is the price of strictness; every flag was human/frontier-adjudicated, so no false flag resulted in a change.
