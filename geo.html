@@ -252,22 +252,84 @@ const FLOWS = [
   { id: 'tarp_upper_des_plaines_ohare', from: 1981, to: null, dest: [42.0090, -87.9110], tunnel: true },
 ];
 
+// ---------- symbolic (schematic) connectors: arching arrow lines ----------
+// A line is drawn as a symbolic arc when we only know its endpoints: it is
+// approximate, a short 2–4 point schematic (not a traced/meandering route),
+// and long enough that a straight thread would read as a surveyed path it isn't.
+// Short runs and multi-point traced routes stay as literal threaded polylines.
+function isSymbolic(f) {
+  if (!f.approx) return false;
+  const g = f.geometry;
+  if (!g || g.length < 2 || g.length > 4) return false;
+  const dl = (g[g.length - 1][0] - g[0][0]) * 111, dn = (g[g.length - 1][1] - g[0][1]) * 85;
+  return Math.hypot(dl, dn) >= 3.0;   // km end-to-end
+}
+function arcPoints(a, b, n = 22) {
+  const dlat = b[0] - a[0], dlng = b[1] - a[1], len = Math.hypot(dlat, dlng);
+  if (len < 1e-6) return [a, b];
+  const bend = Math.min(0.16 * len, 0.03);           // perpendicular sag, capped (deg)
+  const cx = (a[0] + b[0]) / 2 + (-dlng / len) * bend;
+  const cy = (a[1] + b[1]) / 2 + (dlat / len) * bend;
+  const pts = [];
+  for (let i = 0; i <= n; i++) {
+    const t = i / n, u = 1 - t;
+    pts.push([u * u * a[0] + 2 * u * t * cx + t * t * b[0], u * u * a[1] + 2 * u * t * cy + t * t * b[1]]);
+  }
+  return pts;
+}
+const SVGNS = 'http://www.w3.org/2000/svg', arrowIds = {};
+function ensureArrowMarker(svg, colorHex) {
+  const key = colorHex.replace(/[^a-z0-9]/gi, ''), id = 'arw-' + key;
+  if (!svg.querySelector('#' + id)) {
+    let defs = svg.querySelector('defs');
+    if (!defs) { defs = document.createElementNS(SVGNS, 'defs'); svg.insertBefore(defs, svg.firstChild); }
+    const m = document.createElementNS(SVGNS, 'marker');
+    m.setAttribute('id', id); m.setAttribute('viewBox', '0 0 10 10');
+    m.setAttribute('refX', '8.5'); m.setAttribute('refY', '5');
+    m.setAttribute('markerWidth', '6'); m.setAttribute('markerHeight', '6');
+    m.setAttribute('orient', 'auto-start-reverse');
+    const p = document.createElementNS(SVGNS, 'path');
+    p.setAttribute('d', 'M0,0 L10,5 L0,10 L3.5,5 Z'); p.setAttribute('fill', colorHex);
+    m.appendChild(p); defs.appendChild(m);
+  }
+  arrowIds[key] = id; return id;
+}
+// re-apply on every 'add' — Leaflet recreates the <path> when a layer toggles by year
+function attachArrow(lyr, colorHex, atStart) {
+  const apply = () => {
+    const el = lyr.getElement && lyr.getElement();
+    if (!el || !el.ownerSVGElement) return;
+    const id = ensureArrowMarker(el.ownerSVGElement, colorHex);
+    el.setAttribute(atStart ? 'marker-start' : 'marker-end', 'url(#' + id + ')');
+  };
+  lyr.on('add', apply);
+  if (lyr._map) apply();
+}
+
 // ---------- build layers ----------
-const layers = [];   // {leaflet, from, to, kindGroup, flowSpecs, elClassBase}
+const layers = [];   // {leaflet, from, to, flowSpecs, feature, cat, symbolic}
 function addLine(f, group) {
   const st = KINDSTYLE[f.kind] || { colorVar: '--water', weight: 2 };
   const color = css(st.colorVar);
   const opts = { color, weight: st.weight, opacity: 0.85 };
   if (st.dash || f.approx) opts.dashArray = st.dash || '2 5';
+  // arcs are reserved for schematic conveyance connectors (sludge/effluent/feeder
+  // lines where only endpoints are known); tunnels & conduits stay threaded.
+  const symbolic = !st.fill && group === 'connection' && isSymbolic(f);
   let lyr;
   if (st.fill) {
     lyr = L.polygon(f.geometry, { ...opts, fillColor: color, fillOpacity: st.fillOp ?? 0.35 });
+  } else if (symbolic) {
+    lyr = L.polyline(arcPoints(f.geometry[0], f.geometry[f.geometry.length - 1]), opts);
+    attachArrow(lyr, color, f.arrowStart);
   } else {
     lyr = L.polyline(f.geometry, opts);
   }
-  lyr.bindPopup(`<div class="pop-t">${f.name}</div><div class="pop-y">${f.from}–${f.to || 'present'}${f.approx ? ' · approximate geometry' : ''}</div>${f.note ? `<div>${f.note}</div>` : ''}${f.doc ? `<div><a href="${doc(f.doc)}">📄 research doc</a></div>` : ''}`);
+  const geomNote = symbolic ? ' · schematic route — arrow shows flow direction, not the surveyed path'
+    : (f.approx ? ' · approximate geometry' : '');
+  lyr.bindPopup(`<div class="pop-t">${f.name}</div><div class="pop-y">${f.from}–${f.to || 'present'}${geomNote}</div>${f.note ? `<div>${f.note}</div>` : ''}${f.doc ? `<div><a href="${doc(f.doc)}">📄 research doc</a></div>` : ''}`);
   const flowSpecs = FLOWS.filter(fl => fl.id === f.id);
-  layers.push({ leaflet: lyr, from: f.from, to: f.to || null, flowSpecs, feature: f, cat: catOf(f, group) });
+  layers.push({ leaflet: lyr, from: f.from, to: f.to || null, flowSpecs, feature: f, cat: catOf(f, group), symbolic });
 }
 D.waterways.forEach(f => addLine(f, 'waterway'));
 D.historic.forEach(f => addLine(f, 'historic'));
@@ -314,6 +376,7 @@ function applyYear(y) {
       l.leaflet.setStyle({ opacity: retired ? 0.35 : 1, fillOpacity: retired ? 0.15 : (l.leaflet.options.fillOpacity === 0 ? 0 : 0.75) });
       continue;
     }
+    if (l.symbolic) continue;   // arc carries a static arrowhead; skip dash animation
     // flow animation
     const spec = (l.flowSpecs || []).find(s => s.from <= y && (s.to === null || y <= s.to));
     const el = l.leaflet.getElement && l.leaflet.getElement();
