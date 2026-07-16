@@ -1,90 +1,293 @@
 {
-  "type": "boundary-facilities",
-  "region": "north",
-  "generated": "2026-07",
-  "task": "TASK B -- north boundary audit: non-MWRD facilities touching the mapped northern waterways (North Shore Channel / North Branch Chicago River headwaters).",
-  "facilities": [
-    {
-      "id": "evanston-wtp",
-      "name": "Evanston Water Treatment Plant",
-      "type": "external-water",
-      "owner": "City of Evanston",
-      "lat": 42.0622431,
-      "lng": -87.6752781,
-      "from": 1914,
-      "to": null,
-      "approx": false,
-      "note": "555 Lincoln St., on the Lake Michigan lakefront (east side of Sheridan Rd.) north of downtown Evanston. Evanston pumped untreated lake water from 1874; the current filtration plant went into service July 1914 (12 MGD at opening) following a 1911-12 typhoid scare, and is now rated at 108 MGD (avg. ~46 MGD). Entirely independent of MWRD, which handles only sewage/stormwater, not drinking water. Evanston is the wholesale water source for the Village of Skokie (since 1941), Morton Grove, Niles, Lincolnwood, and the Northwest Water Commission (Arlington Heights, Buffalo Grove, Palatine, Wheeling, and part of Des Plaines) -- roughly 400,000 people total.",
-      "source": "City of Evanston, \"Water Treatment Plant\" <https://www.cityofevanston.org/government/departments/public-works/public-outreach/evanston-water-sewer-service/water-treatment-plant>; Evanston RoundTable, \"How does Lake Michigan water become Evanston's drinking water?\" (May 14, 2024) <https://evanstonroundtable.com/2024/05/14/how-does-lake-michigan-water-become-evanstons-drinking-water/>; Evanston RoundTable, \"Evanston and Skokie Enter New 20-Year Water Contract\" (Apr. 16, 2021) <https://evanstonroundtable.com/2021/04/16/evanston-and-skokie-enter-new-20-year-water-contract/>; coordinate geocoded (Nominatim/OSM, tagged \"Evanston Water Department\") from the sourced street address."
-    },
-    {
-      "id": "wilmette-wtp",
-      "name": "Wilmette Water Treatment Plant (Carbon P. Dubs Filtration Plant)",
-      "type": "external-water",
-      "owner": "Village of Wilmette",
-      "lat": 42.0810559,
-      "lng": -87.6904524,
-      "from": 1933,
-      "to": null,
-      "approx": false,
-      "note": "200 Lake Ave., Wilmette lakefront, roughly 1.3 mi north of the North Shore Channel's Wilmette Pumping Station (MWRD, mapped separately as wilmette-ps). Built 1933; named for then-Village President Carbon P. Dubs. Independent Lake Michigan intake/filtration plant, not an MWRD facility. Wholesales treated water to the Village of Kenilworth (which has no treatment plant of its own, under a 2016 intergovernmental agreement), plus Glenview, Golf, and portions of Prospect Heights, in addition to Wilmette itself.",
-      "source": "Village of Wilmette, \"Water Management\" <https://www.wilmette.gov/316/Water-Management> and \"History of Water Plant\" <https://www.wilmette.gov/319/History-of-Water-Plant>; Village of Kenilworth, \"Water Operations\" <https://www.vok.org/2502/Water-Operations>; Illinois State Fire Marshal UST Search, Facility ID 2046766, \"Village of Wilmette Water Treatment Plant,\" 200 Lake Ave., Wilmette, IL 60091 <https://webapps.sfm.illinois.gov/ustsearch/Facility.aspx?ID=2046766>; coordinate geocoded (Nominatim/OSM, tagged \"Wilmette Water Treatment Plant\") from that address."
-    },
-    {
-      "id": "winnetka-water-plant",
-      "name": "Winnetka Water Plant",
-      "type": "external-water",
-      "owner": "Village of Winnetka",
-      "lat": 42.115382,
-      "lng": -87.733265,
-      "from": 1893,
-      "to": null,
-      "approx": true,
-      "note": "At the foot of Tower Road on the Winnetka lakefront, beside Tower Road Beach/Park (899 Sheridan Rd.); the plant building's own precise footprint was not confirmed in sources reviewed, so the coordinate (Tower Rd./Sheridan Rd. area) is flagged approximate. Pumping station dedicated Oct. 10, 1893 with a 1,200-ft Lake Michigan intake line; chlorination added after 1912 typhoid deaths, filtration added 1922. Independent Lake Michigan water source and treatment plant, not an MWRD facility and not a wholesale customer of a neighboring town.",
-      "source": "Winnetka Historical Society, \"History of Winnetka's Water Plant\" <https://www.winnetkahistory.org/history-of-winnetkas-water-plant/>; Winnetka Historical Society, \"Tower Road's Original Tower\" <https://www.winnetkahistory.org/gazette/tower-roads-original-tower/>; The Record North Shore, \"Winnetka hopes to restore Tower Road pier by end of year\" (Apr. 2, 2026), describing the water plant/electric plant at the Tower Rd. lakefront site <https://www.therecordnorthshore.org/2026/04/02/winnetka-hopes-to-restore-tower-road-pier-by-end-of-year/>; coordinate geocoded (Nominatim/OSM) to 899 Sheridan Rd. (Tower Road Beach), the nearest sourced street address to the plant site."
-    },
-    {
-      "id": "glencoe-wtp",
-      "name": "Glencoe Water Filtration Plant",
-      "type": "external-water",
-      "owner": "Village of Glencoe",
-      "lat": 42.1382657,
-      "lng": -87.7509821,
-      "from": 1928,
-      "to": null,
-      "approx": true,
-      "note": "49 E. Park Ave., on a Lake Michigan bluff beside Glencoe's only public beach; coordinate is the documented street address geocoded via Nominatim/OSM, not a confirmed building footprint (flagged approx). Glencoe's sole water treatment facility -- will turn 100 years old in 2028, implying an ~1928 construction date. Produces ~1.7 MGD for Glencoe residents, schools, and businesses, and serves as an emergency backup source for neighboring municipalities. Independent of MWRD.",
-      "source": "Village of Glencoe, \"Water Utility Division\" and water system master plan materials <https://www.villageofglencoe.org/government/departments/public_works/water_utility/index.php>; Illinois State Fire Marshal UST Search, \"Glencoe Water Filtration Plant,\" 49 East Park Avenue, Glencoe, IL 60022 (Facility ID 2032749) <https://webapps.sfm.illinois.gov/ustsearch/Facility.aspx?ID=2032749>."
-    },
-    {
-      "id": "nswrd-clavey-road-wrf",
-      "name": "Clavey Road Water Reclamation Facility (North Shore Water Reclamation District)",
-      "type": "external-wrp",
-      "owner": "North Shore Water Reclamation District (Lake County, IL)",
-      "lat": 42.1579547,
-      "lng": -87.7966744,
-      "from": 1914,
-      "to": null,
-      "approx": true,
-      "note": "1210 Clavey Rd., Highland Park -- entirely in Lake County, upstream of and outside our map's drawn waterway lines, but hydrologically connected: NSWRD (created under the 1911 Illinois Sanitary District Act, in operation from 1914; the Clavey Road facility's own specific construction/expansion date was not confirmed in sources reviewed, so both 'from' and the coordinate-precision are flagged approx) treats wastewater for Highland Park, Deerfield, Highwood, Bannockburn, Lake Forest, Lake Bluff, and other North Shore communities and discharges treated effluent to the Skokie River. Design flow 17.8 MGD (excess flow to retention basins up to 28 MGD). The Skokie River is the same East Fork stream that continues south (through the Chicago Botanic Garden and Skokie Lagoons, then a confluence near Northfield) to form the North Branch of the Chicago River that our map draws starting around 42.088N -- see the nswrd-clavey-to-north-branch connection below. A wholly separate agency from MWRD, which has no jurisdiction in Lake County.",
-      "source": "North Shore Water Reclamation District, \"About\" and \"Facilities Atlas #2\" <https://northshorewrd.org/aboutus/> <https://northshorewrd.org/facilities-atlas/> (lists address 1210 Clavey Road, Highland Park, IL 60035); IWSS Dashboard, \"Clavey Road Water Reclamation Facility\" <https://iwss.uillinois.edu/wastewater-treatment-plant/151/>; CSWEA, \"North Shore Sanitary District\" history summary <https://cswea.org/wp-content/uploads/2017/09/North-Shore-Sanitary-District.pdf> (1911 Sanitary District Act, 1914 operation start); coordinate geocoded (Nominatim/OSM) from the sourced street address."
-    }
-  ],
-  "connections": [
-    {
-      "id": "nswrd-clavey-to-north-branch",
-      "kind": "effluent",
-      "from": 1914,
-      "waypoints": [
-        [42.1579547, -87.7966744],
-        [42.1477189, -87.7911164],
-        [42.1158055, -87.770568],
-        [42.0876, -87.7718]
-      ],
-      "label": "NSWRD Clavey Road WRF effluent -> Skokie River -> North Branch of the Chicago River (our mapped headwaters)",
-      "source": "Schematic route, NOT a surveyed river centerline -- no such centerline was located in sources reviewed. Waypoints are named landmarks along the Skokie River's documented course (NSWRD Clavey Road WRF outfall; Chicago Botanic Garden; Skokie Lagoons) per the river's route description in secondary sources, each geocoded individually (Nominatim/OSM), connected to the northernmost vertex of this project's own drawn 'north-branch-chicago-river' feature (map-data/waterways-modern.json). Flagged approx throughout.",
-      "approx": true
-    }
-  ],
-  "notes": "Built for TASK B (north boundary audit): every non-MWRD facility touching the mapped northern waterways (North Shore Channel / North Branch Chicago River). Covers (1) Evanston's independent Lake Michigan water plant, which wholesales to Skokie and other suburbs; (2) Winnetka's and Glencoe's own lakefront water plants; (3) Kenilworth, confirmed to have NO water plant of its own -- it buys from Wilmette's Carbon P. Dubs plant, which is included here instead since it is the actual non-MWRD facility on our map serving Kenilworth; (4) North Shore Water Reclamation District's Clavey Road WRF (Lake County), whose Skokie River effluent reaches our drawn North Branch headwaters -- NSWRD's other two plants (Gurnee, Waukegan) discharge to the Des Plaines River/Lake Michigan well outside our map area and are NOT included. Village stormwater pumping stations discharging to the North Branch/NSC: the Village of Wilmette's Storm Water Pumping Station (4000 Lake Ave., discharging to the North Branch) is the one confirmed example, and it is already filed separately in map-data/boundary-wilmette.json (facility id wilmette-village-swps, with a more detailed 1936-build/585-cfs sourcing than an earlier draft of this file carried) -- deliberately NOT duplicated here to avoid a double marker on the map. SEARCHED BUT NOT FOUND: a similarly documented, individually-named stormwater pumping station for Evanston or Skokie discharging to the North Shore Channel/North Branch -- both villages' own sites describe storm sewers draining to the channel/river by gravity through multiple distributed outfalls rather than a single named pumping facility, so no entry was added for those to avoid fabricating a location; Kenilworth's and Winnetka's stormwater systems were not confirmed to include a dedicated pumping station either. All coordinates geocoded via Nominatim/OpenStreetMap from sourced street addresses except where noted."
+ "type": "boundary-facilities",
+ "region": "north",
+ "generated": "2026-07",
+ "task": "TASK B -- north boundary audit: non-MWRD facilities touching the mapped northern waterways (North Shore Channel / North Branch Chicago River headwaters).",
+ "facilities": [
+  {
+   "id": "evanston-wtp",
+   "name": "Evanston Water Treatment Plant",
+   "type": "external-water",
+   "owner": "City of Evanston",
+   "lat": 42.0622431,
+   "lng": -87.6752781,
+   "from": 1914,
+   "to": null,
+   "approx": false,
+   "note": "555 Lincoln St., on the Lake Michigan lakefront (east side of Sheridan Rd.) north of downtown Evanston. Evanston pumped untreated lake water from 1874; the current filtration plant went into service July 1914 (12 MGD at opening) following a 1911-12 typhoid scare, and is now rated at 108 MGD (avg. ~46 MGD). Entirely independent of MWRD, which handles only sewage/stormwater, not drinking water. Evanston is the wholesale water source for the Village of Skokie (since 1941), Morton Grove, Niles, Lincolnwood, and the Northwest Water Commission (Arlington Heights, Buffalo Grove, Palatine, Wheeling, and part of Des Plaines) -- roughly 400,000 people total. Raw water arrives via three intakes threaded 5,000-6,000 ft offshore: a 48-in line (1956, extended to 5,300 ft in 1976), a 54-in line (1976, 5,340 ft, wooden crib), and the original 1909 exposed 36/42-in cast-iron pipes (5,946 ft) \u2014 replaced 2022-25 by a new buried 60-in intake (5,500 ft, $47.2M) and abandoned in place.",
+   "source": "City of Evanston, \"Water Treatment Plant\" <https://www.cityofevanston.org/government/departments/public-works/public-outreach/evanston-water-sewer-service/water-treatment-plant>; Evanston RoundTable, \"How does Lake Michigan water become Evanston's drinking water?\" (May 14, 2024) <https://evanstonroundtable.com/2024/05/14/how-does-lake-michigan-water-become-evanstons-drinking-water/>; Evanston RoundTable, \"Evanston and Skokie Enter New 20-Year Water Contract\" (Apr. 16, 2021) <https://evanstonroundtable.com/2021/04/16/evanston-and-skokie-enter-new-20-year-water-contract/>; coordinate geocoded (Nominatim/OSM, tagged \"Evanston Water Department\") from the sourced street address."
+  },
+  {
+   "id": "wilmette-wtp",
+   "name": "Wilmette Water Treatment Plant (Carbon P. Dubbs WTP)",
+   "type": "external-water",
+   "owner": "Village of Wilmette",
+   "lat": 42.0810559,
+   "lng": -87.6904524,
+   "from": 1933,
+   "to": null,
+   "approx": false,
+   "note": "200 Lake Ave., on the lakefront. Opened Jan 27, 1934 ($520,000, 6 MGD initially; 44 MGD since the 2002 expansion); named for Carbon Petroleum Dubbs \u2014 the Universal Oil Products co-founder elected Wilmette Village President in 1931, who championed its construction. Two lake intakes: a 30-in pipe (1933) running ~1/2 mi offshore to twin drum structures 65 ft apart, and a 42-in pipe (1971) ~1 mi offshore to a wooden crib \u2014 all in ~22 ft of water, unmarked at the surface. The 1971 line alone can meet full demand; a replacement-intake study is underway (RFP 24117).",
+   "source": "Village of Wilmette, \"Water Management\" <https://www.wilmette.gov/316/Water-Management> and \"History of Water Plant\" <https://www.wilmette.gov/319/History-of-Water-Plant>; Village of Kenilworth, \"Water Operations\" <https://www.vok.org/2502/Water-Operations>; Illinois State Fire Marshal UST Search, Facility ID 2046766, \"Village of Wilmette Water Treatment Plant,\" 200 Lake Ave., Wilmette, IL 60091 <https://webapps.sfm.illinois.gov/ustsearch/Facility.aspx?ID=2046766>; coordinate geocoded (Nominatim/OSM, tagged \"Wilmette Water Treatment Plant\") from that address."
+  },
+  {
+   "id": "winnetka-water-plant",
+   "name": "Winnetka Water Plant",
+   "type": "external-water",
+   "owner": "Village of Winnetka",
+   "lat": 42.1155414,
+   "lng": -87.7311904,
+   "from": 1893,
+   "to": null,
+   "approx": false,
+   "note": "725 Sheridan Rd at the foot of Tower Road, on the lakefront (location corrected ~170 m east onto the actual parcel; previously a placeholder). Combined municipal water-treatment + electric-power complex; pumping station dedicated Oct 10, 1893 with a 1,200-ft intake. Two documented lake intakes: a 3,000-ft, 20-in raw-water line exclusively supplying the WTP, and a 1,200-ft, 60-in condenser-cooling line for the (largely retired) power plant (IPCB case PCB 92-162, 1992). Sells water to Northfield (100% of its supply). Emergency interconnect with Glencoe.",
+   "source": "Winnetka Historical Society, \"History of Winnetka's Water Plant\" <https://www.winnetkahistory.org/history-of-winnetkas-water-plant/>; Winnetka Historical Society, \"Tower Road's Original Tower\" <https://www.winnetkahistory.org/gazette/tower-roads-original-tower/>; The Record North Shore, \"Winnetka hopes to restore Tower Road pier by end of year\" (Apr. 2, 2026), describing the water plant/electric plant at the Tower Rd. lakefront site <https://www.therecordnorthshore.org/2026/04/02/winnetka-hopes-to-restore-tower-road-pier-by-end-of-year/>; coordinate geocoded (Nominatim/OSM) to 899 Sheridan Rd. (Tower Road Beach), the nearest sourced street address to the plant site. | Coordinates: OSM/Nominatim geocode of 725 Sheridan Rd, Winnetka (lakefront parcel). Intakes: Illinois Pollution Control Board PCB 92-162 (Village of Winnetka v. IEPA, Oct 29, 1992); IEPA source-water assessment preserved in Northfield 2024 CCR."
+  },
+  {
+   "id": "glencoe-wtp",
+   "name": "Glencoe Water Filtration Plant",
+   "type": "external-water",
+   "owner": "Village of Glencoe",
+   "lat": 42.1382657,
+   "lng": -87.7509821,
+   "from": 1928,
+   "to": null,
+   "approx": true,
+   "note": "Village of Glencoe water plant, built 1928, expanded to 8 MGD in 1954 (avg demand ~1.6 MGD); still self-supplied as of 2025-26. Single Lake Michigan intake ('INTAKE 00106'): a 24-in pipe extending 3,300 ft NE of the plant (per Village CCR source-water table and a 2017 intake-cleaning news release). Facing its centenary, the Village approved a $150k Burns & McDonnell study (Sept 2025) weighing reinvestment vs. rebuilding vs. buying from Highland Park, Northbrook, or Wilmette. Emergency-only interconnections with Winnetka, Northbrook, Highland Park, and Northfield.",
+   "source": "Village of Glencoe, \"Water Utility Division\" and water system master plan materials <https://www.villageofglencoe.org/government/departments/public_works/water_utility/index.php>; Illinois State Fire Marshal UST Search, \"Glencoe Water Filtration Plant,\" 49 East Park Avenue, Glencoe, IL 60022 (Facility ID 2032749) <https://webapps.sfm.illinois.gov/ustsearch/Facility.aspx?ID=2032749>."
+  },
+  {
+   "id": "nswrd-clavey-road-wrf",
+   "name": "Clavey Road Water Reclamation Facility (North Shore Water Reclamation District)",
+   "type": "external-wrp",
+   "owner": "North Shore Water Reclamation District (Lake County, IL)",
+   "lat": 42.15744,
+   "lng": -87.797,
+   "from": 1914,
+   "to": null,
+   "approx": false,
+   "note": "1210 Clavey Rd, Highland Park \u2014 North Shore Water Reclamation District (formerly North Shore Sanitary District). NPDES permit IL0030171: 28 MGD design-max flow with 20.4 MG of excess-flow retention basins. Treated effluent is PIPED ~1.4 mi south (a diversion built after 1979 lagoons siltation/sewage problems) to main Outfall 010 on the Skokie River below Dundee Rd; Outfalls 011/012 at the plant discharge only during excess-flow/emergency events, entering the river upstream of the Botanic Garden and lagoons.",
+   "source": "North Shore Water Reclamation District, \"About\" and \"Facilities Atlas #2\" <https://northshorewrd.org/aboutus/> <https://northshorewrd.org/facilities-atlas/> (lists address 1210 Clavey Road, Highland Park, IL 60035); IWSS Dashboard, \"Clavey Road Water Reclamation Facility\" <https://iwss.uillinois.edu/wastewater-treatment-plant/151/>; CSWEA, \"North Shore Sanitary District\" history summary <https://cswea.org/wp-content/uploads/2017/09/North-Shore-Sanitary-District.pdf> (1911 Sanitary District Act, 1914 operation start); coordinate geocoded (Nominatim/OSM) from the sourced street address."
+  },
+  {
+   "id": "nswrd-dundee-effluent-lift",
+   "name": "NSWRD Dundee Road Effluent Lift Station (Clavey pipeline terminus)",
+   "type": "external-ps",
+   "lat": 42.13833,
+   "lng": -87.78556,
+   "from": 1980,
+   "to": null,
+   "activeTo": null,
+   "approx": true,
+   "owner": "North Shore Water Reclamation District",
+   "note": "Lift station on the Clavey Road WRF effluent diversion pipeline near its Skokie River discharge, just south of Dundee Rd. NPDES Outfall 013 ('Dundee Road Effluent Lift Station Bypass', emergency only) is here at 42\u00b008'18\"N 87\u00b047'08\"W; the main Outfall 010 discharge point sits ~100 m south at 42\u00b008'15\"N 87\u00b047'12\"W. From-year approximate \u2014 the diversion was implemented after 1979 (FPDCC/NIPC plan); exact construction year not located.",
+   "source": "IEPA NPDES Permit IL0030171 public notice (June 2020) outfall table; Winnetka Historical Society, Skokie Lagoons history."
+  }
+ ],
+ "connections": [
+  {
+   "id": "nswrd-clavey-effluent-pipeline",
+   "kind": "effluent",
+   "from": 1980,
+   "approx": true,
+   "waypoints": [
+    [
+     42.15744,
+     -87.797
+    ],
+    [
+     42.147,
+     -87.79
+    ],
+    [
+     42.1375,
+     -87.78667
+    ]
+   ],
+   "label": "Clavey Road WRF effluent pipeline \u2192 NPDES Outfall 010 (Skokie River below Dundee Rd)",
+   "source": "Endpoints documented: plant per EPA ECHO (IL0030171); Outfall 010 'Main WRF Outfall \u2014 Downstream of Skokie Lagoons' at 42\u00b008'15\"N 87\u00b047'12\"W per the permit's outfall table. Pipeline route between them inferred (river/Edens corridor). NOTE the permit label vs. geometry tension: 010's coordinate sits just below Dundee Rd \u2014 downstream of the Botanic Garden reach but at the head of the main FPDCC lagoon chain (north end 42.1343) \u2014 so effluent still transits the lagoons; the 1979-era diversion routed it around the Garden reach and the upstream river channel."
+  },
+  {
+   "id": "nswrd-clavey-plant-outfalls",
+   "kind": "effluent",
+   "from": 1914,
+   "approx": true,
+   "waypoints": [
+    [
+     42.15744,
+     -87.797
+    ],
+    [
+     42.15667,
+     -87.79583
+    ]
+   ],
+   "label": "Clavey Road WRF at-plant outfalls (primary until ~1980; now excess-flow/emergency only)",
+   "source": "Outfall 011 (WRF Excess Flow, 42\u00b009'24\"N 87\u00b047'45\"W) and 012 (Old STP Discharge, 42\u00b009'21\"N 87\u00b047'45\"W, 'upstream of Skokie Lagoons', emergency only) per NPDES IL0030171. Historically the plant's routine discharge entered the Skokie River here, upstream of the Botanic Garden and lagoons, until the post-1979 diversion pipeline."
+  },
+  {
+   "id": "glencoe-lake-intake-00106",
+   "kind": "intake",
+   "from": 1928,
+   "approx": true,
+   "waypoints": [
+    [
+     42.1384,
+     -87.7508
+    ],
+    [
+     42.1448,
+     -87.7422
+    ]
+   ],
+   "label": "Glencoe lake intake (24-in, 3,300 ft NE of plant)",
+   "source": "Village CCR source-water table: 'INTAKE (00106), 3,300 FT NE PLANT'; 24-in dia. per 2017 Village cleaning-project news. Offshore endpoint computed from documented distance/bearing (IEPA redacts intake GIS)."
+  },
+  {
+   "id": "winnetka-wtp-raw-intake",
+   "kind": "intake",
+   "from": 1893,
+   "approx": true,
+   "waypoints": [
+    [
+     42.1155414,
+     -87.7311904
+    ],
+    [
+     42.1155,
+     -87.7201
+    ]
+   ],
+   "label": "Winnetka WTP raw-water intake (20-in, 3,000 ft)",
+   "source": "IPCB case PCB 92-162 (1992): 3,000-ft, 20-in pipe 'exclusively supplies raw water for the water treatment plant.' Original 1893 station opened with a 1,200-ft line; current line's construction year undocumented. Endpoint computed from documented length."
+  },
+  {
+   "id": "winnetka-power-cooling-intake",
+   "kind": "intake",
+   "from": 1900,
+   "approx": true,
+   "waypoints": [
+    [
+     42.1155414,
+     -87.7311904
+    ],
+    [
+     42.1155,
+     -87.7268
+    ]
+   ],
+   "label": "Winnetka power-plant condenser cooling intake (60-in, 1,200 ft \u2014 not drinking water)",
+   "source": "IPCB PCB 92-162: 1,200-ft, 60-in condenser cooling line for the municipal electric plant (largely retired). Possibly the descendant of the original 1893 intake alignment; from-year approximate. Endpoint computed."
+  },
+  {
+   "id": "wilmette-intake-1933",
+   "kind": "intake",
+   "from": 1934,
+   "approx": true,
+   "waypoints": [
+    [
+     42.0811,
+     -87.6905
+    ],
+    [
+     42.0857,
+     -87.683
+    ]
+   ],
+   "label": "Wilmette/Dubbs 1933 intake (30-in, ~1/2 mi, twin drum structures)",
+   "source": "Village of Wilmette RFP 24117 (Raw Water Intake Replacement Study): 30-in pipe installed 1933, ~1/2 mi offshore, two drum structures 65 ft apart, ~22 ft water depth, no surface markings. Endpoint computed from distance; from-year set to plant opening (1934)."
+  },
+  {
+   "id": "wilmette-intake-1971",
+   "kind": "intake",
+   "from": 1971,
+   "approx": true,
+   "waypoints": [
+    [
+     42.0811,
+     -87.6905
+    ],
+    [
+     42.0903,
+     -87.6755
+    ]
+   ],
+   "label": "Wilmette/Dubbs 1971 intake (42-in, ~1 mi, wooden crib)",
+   "source": "Village of Wilmette RFP 24117: 42-in pipe installed 1971, ~1 mi offshore to a wooden crib, ~22 ft depth; alone can meet full plant demand. Endpoint computed from distance."
+  },
+  {
+   "id": "evanston-intake-1909",
+   "kind": "intake",
+   "from": 1914,
+   "approx": true,
+   "waypoints": [
+    [
+     42.0622,
+     -87.6753
+    ],
+    [
+     42.0597,
+     -87.6536
+    ]
+   ],
+   "label": "Evanston 1909 intake (36/42-in exposed pipes, 5,946 ft \u2014 abandoned 2025)",
+   "source": "City of Evanston 2010 Annual Report / 2021 IEPA 401 application: 1909 cast-iron 36-in and 42-in pipes lying exposed on the lakebed, 5,946 ft offshore, 28 ft depth; cut, cobble-plugged and abandoned in place 2025 when the 60-in replacement commissioned. Endpoint extrapolated along the documented corridor; offset slightly for map clarity. From-year set to plant opening (1914).",
+   "to": 2025
+  },
+  {
+   "id": "evanston-intake-48in",
+   "kind": "intake",
+   "from": 1956,
+   "approx": true,
+   "waypoints": [
+    [
+     42.0622,
+     -87.6753
+    ],
+    [
+     42.061,
+     -87.656
+    ]
+   ],
+   "label": "Evanston 48-in intake (1956, extended to 5,300 ft in 1976)",
+   "source": "Evanston 2010 Annual Report engineering timeline ('48\" intake and low lift pump station constructed' 1956; 'Extended 48\" intake 5,300 feet' 1976); a 2025 Council memo instead says 1957/1973. ~28 ft depth. Endpoint computed from length; offset slightly for map clarity."
+  },
+  {
+   "id": "evanston-intake-54in",
+   "kind": "intake",
+   "from": 1976,
+   "approx": true,
+   "waypoints": [
+    [
+     42.0622,
+     -87.6753
+    ],
+    [
+     42.0602,
+     -87.6558
+    ]
+   ],
+   "label": "Evanston 54-in intake (1976, 5,340 ft, wooden crib)",
+   "source": "Evanston 2010 Annual Report: 54-in buried concrete pipe, 1976, 5,340 ft. Sept 2025 repair memo documents its wooden crib (dislodged timber damaged heater cables). Endpoint computed from length."
+  },
+  {
+   "id": "evanston-intake-60in",
+   "kind": "intake",
+   "from": 2025,
+   "approx": true,
+   "waypoints": [
+    [
+     42.0622,
+     -87.6753
+    ],
+    [
+     42.0594,
+     -87.6552
+    ]
+   ],
+   "label": "Evanston 60-in replacement intake (2022-25, 5,500 ft)",
+   "source": "IEPA 401 cert (2021) + WIFIA loan records: 60-in prestressed-concrete cylinder pipe with upturned-cone inlet, 5,500 ft, buried near the 1909 alignment; marine work complete Sept 2025, substantially complete Oct 2025, $47.2M. Endpoint computed; offset slightly for map clarity."
+  }
+ ],
+ "notes": "Built for TASK B (north boundary audit): every non-MWRD facility touching the mapped northern waterways (North Shore Channel / North Branch Chicago River). Covers (1) Evanston's independent Lake Michigan water plant, which wholesales to Skokie and other suburbs; (2) Winnetka's and Glencoe's own lakefront water plants; (3) Kenilworth, confirmed to have NO water plant of its own -- it buys from Wilmette's Carbon P. Dubs plant, which is included here instead since it is the actual non-MWRD facility on our map serving Kenilworth; (4) North Shore Water Reclamation District's Clavey Road WRF (Lake County), whose Skokie River effluent reaches our drawn North Branch headwaters -- NSWRD's other two plants (Gurnee, Waukegan) discharge to the Des Plaines River/Lake Michigan well outside our map area and are NOT included. Village stormwater pumping stations discharging to the North Branch/NSC: the Village of Wilmette's Storm Water Pumping Station (4000 Lake Ave., discharging to the North Branch) is the one confirmed example, and it is already filed separately in map-data/boundary-wilmette.json (facility id wilmette-village-swps, with a more detailed 1936-build/585-cfs sourcing than an earlier draft of this file carried) -- deliberately NOT duplicated here to avoid a double marker on the map. SEARCHED BUT NOT FOUND: a similarly documented, individually-named stormwater pumping station for Evanston or Skokie discharging to the North Shore Channel/North Branch -- both villages' own sites describe storm sewers draining to the channel/river by gravity through multiple distributed outfalls rather than a single named pumping facility, so no entry was added for those to avoid fabricating a location; Kenilworth's and Winnetka's stormwater systems were not confirmed to include a dedicated pumping station either. All coordinates geocoded via Nominatim/OpenStreetMap from sourced street addresses except where noted."
 }

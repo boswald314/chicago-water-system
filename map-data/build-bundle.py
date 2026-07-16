@@ -18,7 +18,7 @@ FROM_OVERRIDE = {
     'grand-calumet-river-il': 1850, 'des-plaines-river-lyons-lockport': 1850,
     'bubbly-creek-south-fork': 1850, 'lake-calumet': 1980, 'wolf-lake': 1958,
     'salt-creek': 1850, 'addison-creek': 1850, 'higgins-creek': 1850,
-    'weller-creek': 1850, 'wb-dupage-river': 1850,
+    'weller-creek': 1850, 'wb-dupage-river': 1850, 'skokie-river': 1850, 'willow-creek': 1850,
 }
 
 fac = load('facilities.json', [])
