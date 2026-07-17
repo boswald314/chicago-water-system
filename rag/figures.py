@@ -24,7 +24,7 @@ EXTRACTED = os.path.join(ROOT, 'rag', 'data', 'extracted')
 CAND = os.path.join(ROOT, 'rag', 'data', 'figure-candidates.jsonl')
 FIGS = os.path.join(ROOT, 'rag', 'data', 'figures.jsonl')
 CHUNKS = os.path.join(ROOT, 'rag', 'data', 'chunks.jsonl')
-OLLAMA = os.environ.get('OLLAMA_URL', 'http://bigmantower.local:11434')
+OLLAMA = os.environ.get('OLLAMA_URL', 'http://bigmantower:11434')
 MODEL = os.environ.get('VISION_MODEL', 'qwen3.5:27b')
 MAXPAGES = int(os.environ.get('MAXPAGES', '0'))          # 0 = no cap
 FILTER = os.environ.get('FILTER', '')
