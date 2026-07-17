@@ -10,3 +10,4 @@ rag/.venv/
 rag/data/
 scratchpad/
 scripts/__pycache__/
+rag/__pycache__/

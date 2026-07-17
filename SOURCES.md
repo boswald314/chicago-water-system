@@ -19,7 +19,7 @@ appears once below, with every citing document listed under "Cited in" (two-digi
 | 4 | Journalism, blogs & local history (newspapers, trade press, local-history blogs, museums, contractor/vendor pages) | 170 |
 | — | **Total** | **485** |
 
-**Downloaded files:** 1,768 PDFs/TXTs/etc. locally archived in `sources/` (see "Downloaded documents" below and the full listing in [SOURCES-MANIFEST.md](SOURCES-MANIFEST.md); run `find sources -type f | grep -v _hunt | grep -v _new | wc -l` to reproduce). Most of this count comes from the July 2026 closure hunt described below — the original archive tied to the 485 cited sources above was ~210-240 files.
+**Downloaded files:** 1,951 PDFs/TXTs/etc. locally archived in `sources/` (see "Downloaded documents" below and the full listing in [SOURCES-MANIFEST.md](SOURCES-MANIFEST.md); run `find sources -type f | grep -v _hunt | grep -v _new | wc -l` to reproduce; count updated July 2026 after a HathiTrust priority-completion pass added the 1930-31 Sanitary District Proceedings volumes, 6 MANUAL-RETRIEVAL items, and 3 over-length diversion-controversy documents — see `sources/_hunt/final-hathitrust-priority-completion.md`). Most of this count comes from the July 2026 closure hunt described below — the original archive tied to the 485 cited sources above was ~210-240 files.
 
 Notes on method: sources are deduplicated by canonical URL. Where a document cites two different
 dated editions of the same recurring MWRD report (e.g. the TARP Status Report, published roughly
