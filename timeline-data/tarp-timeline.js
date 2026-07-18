@@ -56,7 +56,8 @@ window.TARPTIMELINE = {
      "quote": {
       "text": "This storm resulted in what was probably Chicago's most extensive flood on record. Total damage from the flood has been estimated to be approximately ten million dollars in Chicago and fifteen million dollars in suburban areas.",
       "attribution": "F.A. Huff, H.W. Hiser & G.E. Stout, The October 1954 Storm in Northern Illinois, Illinois State Water Survey Report of Investigation No. 27 (1955)",
-      "source": "sources/isws-bulletins/1955-huff-hiser-stout-isws-ri27-october-1954-storm-northern-illinois.pdf p.5"
+      "source": "sources/isws-bulletins/1955-huff-hiser-stout-isws-ri27-october-1954-storm-northern-illinois.pdf p.5",
+      "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1955-huff-hiser-stout-isws-ri27-october-1954-storm-northern-illinois/p0005.jpg"
      },
      "doc": "09-tarp-deep-tunnel",
      "sources": [
@@ -141,7 +142,8 @@ window.TARPTIMELINE = {
      "quote": {
       "text": "These backflows are now occurring at increasing frequencies, thus reinstating the basic problem of lake pollution which plagued the city government a century ago.",
       "attribution": "Flood Control Coordinating Committee, Development of a Flood and Pollution Control Plan for the Chicagoland Area (Dec. 1972)",
-      "source": "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf p.4"
+      "source": "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf p.4",
+      "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0004.jpg"
      },
      "doc": "09-tarp-deep-tunnel",
      "sources": [
@@ -168,7 +170,8 @@ window.TARPTIMELINE = {
      "quote": {
       "text": "A new and bold concept in design of urban drainage systems was developed as a step forward in the solution of combined sewer overflow problems.",
       "attribution": "Louis Koncza, Donald H. Churchill & G.L. Miller, Lawrence Avenue Underflow Sewer System Interim Report, EPA-600/2-80-014 (March 1980)",
-      "source": "sources/city-sewer-network/LawrenceAvenueUnderflow_1980_EPA.pdf p.5 (Abstract)"
+      "source": "sources/city-sewer-network/LawrenceAvenueUnderflow_1980_EPA.pdf p.5 (Abstract)",
+      "href": "https://boswald314.github.io/chicago-water-images/sources-pages/LawrenceAvenueUnderflow_1980_EPA/p0005.jpg"
      },
      "doc": "06-city-sewer-network",
      "sources": [
@@ -251,7 +254,8 @@ window.TARPTIMELINE = {
      "quote": {
       "text": "The plan visualized the development of an uninterrupted highway from Wilmette to 95th Street, a series of swimming, skating ponds, a local sight seeing highway and a series of small boat harbors and a depository for river dredgings.",
       "attribution": "Flood Control Coordinating Committee, describing the Leffler Plan (Alternate K), Development of a Flood and Pollution Control Plan for the Chicagoland Area (Dec. 1972)",
-      "source": "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf p.6"
+      "source": "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf p.6",
+      "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0006.jpg"
      },
      "doc": "09-tarp-deep-tunnel",
      "sources": [
@@ -272,7 +276,8 @@ window.TARPTIMELINE = {
      "quote": {
       "text": "The disruption of public streets and required plumbing alterations would be enormous and would result in no flood control.",
       "attribution": "Flood Control Coordinating Committee, Development of a Flood and Pollution Control Plan for the Chicagoland Area (Dec. 1972)",
-      "source": "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf p.8"
+      "source": "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf p.8",
+      "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0008.jpg"
      },
      "doc": "09-tarp-deep-tunnel",
      "sources": [
@@ -293,7 +298,8 @@ window.TARPTIMELINE = {
      "quote": {
       "text": "It will capture the total runoff from all of the record meteorological sequences of history, if they were to recur on future ultimate developed drainage basins, except for the peak few hours of three of the most severe storm events.",
       "attribution": "Flood Control Coordinating Committee, describing the Recommended Plan, Development of a Flood and Pollution Control Plan for the Chicagoland Area (Dec. 1972)",
-      "source": "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf p.13"
+      "source": "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf p.13",
+      "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0013.jpg"
      },
      "doc": "09-tarp-deep-tunnel",
      "sources": [
@@ -329,7 +335,8 @@ window.TARPTIMELINE = {
      "quote": {
       "text": "In order to comply with established waterway quality standards by the Illinois Pollution Control Board and the Metropolitan Sanitary District of Greater Chicago, and to eliminate the flooding and associated release of floodwater into Lake Michigan, a two-fold program of attack will be required.",
       "attribution": "Flood Control Coordinating Committee, Preface, Development of a Flood and Pollution Control Plan for the Chicagoland Area (Dec. 1972)",
-      "source": "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf p.1"
+      "source": "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf p.1",
+      "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0001.jpg"
      },
      "doc": "09-tarp-deep-tunnel",
      "sources": [
@@ -437,7 +444,8 @@ window.TARPTIMELINE = {
      "quote": {
       "text": "The tunnel segment will be excavated using full-faced, diesel driven, mechanical boring machines, or moles, and the inside diameters will range from 15 to 33 feet.",
       "attribution": "EPA Region V, Draft Environmental Impact Statement for the Mainstream Tunnel System, March 1976",
-      "source": "sources/tarp-deep-tunnel/1976-epa-draft-eis-tarp-mainstream-tunnel-system.pdf p.246"
+      "source": "sources/tarp-deep-tunnel/1976-epa-draft-eis-tarp-mainstream-tunnel-system.pdf p.246",
+      "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-draft-eis-tarp-mainstream-tunnel-system/p0246.jpg"
      },
      "doc": "09-tarp-deep-tunnel",
      "image": {
@@ -498,7 +506,8 @@ window.TARPTIMELINE = {
      "quote": {
       "text": "Everytime it rains, it floods somewhere in Evanston.",
       "attribution": "Unnamed Evanston city official, quoted in GAO's Combined Sewer Flooding in the Chicago Metropolitan Area (CED-79-77), May 15, 1979",
-      "source": "sources/tarp-case-studies/1979-gao-ced-79-77-combined-sewer-flooding-chicago-6vols.pdf p.62"
+      "source": "sources/tarp-case-studies/1979-gao-ced-79-77-combined-sewer-flooding-chicago-6vols.pdf p.62",
+      "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1979-gao-ced-79-77-combined-sewer-flooding-chicago-6vols/p0062.jpg"
      },
      "doc": "09-tarp-deep-tunnel",
      "sources": [
@@ -569,7 +578,8 @@ window.TARPTIMELINE = {
      "quote": {
       "text": "Our previous reports pointed out the staggering cost of the Metropolitan Sanitary District of Greater Chicago's solution to these problems and questioned whether the country could afford such an expensive and precedent-setting endeavor.",
       "attribution": "GAO, letter report to Sen. Charles H. Percy, Chicago's Tunnel and Reservoir Plan\u2014Costs Continue To Rise and Completion of Phase I Is Unlikely (CED-81-51), January 21, 1981",
-      "source": "sources/gao-oversight-reports/1981-gao-ced-81-51-tarp-costs-continue-to-rise.pdf p.1"
+      "source": "sources/gao-oversight-reports/1981-gao-ced-81-51-tarp-costs-continue-to-rise.pdf p.1",
+      "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1981-gao-ced-81-51-tarp-costs-continue-to-rise/p0001.jpg"
      },
      "doc": "09-tarp-deep-tunnel",
      "sources": [
@@ -759,7 +769,8 @@ window.TARPTIMELINE = {
      "quote": {
       "text": "An estimated 6,000 homes in the Village of Mount Prospect alone were damaged. During subsequent clean-up operations, the Village Public Works Department removed over 287,000 pounds of damaged goods set out along the curbs.",
       "attribution": "USACE Chicago District, Chicagoland Underflow Plan, O'Hare Reservoir Phase II General Design Memorandum/EIS, Vol. 1 (July 1989)",
-      "source": "sources/usace-chicagoland-underflow-plan/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1.pdf p.7"
+      "source": "sources/usace-chicagoland-underflow-plan/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1.pdf p.7",
+      "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0007.jpg"
      },
      "sources": [
       "docs/13-suburban-wrps.md",
@@ -794,7 +805,8 @@ window.TARPTIMELINE = {
      "quote": {
       "text": "Hydrogen sulfide poses problems from the standpoint of being a poisonous gas as well as the potential for corrosion in the sewer and at the treatment plant.",
       "attribution": "EPA Region V, Metropolitan Sanitary District of Greater Chicago Tunnel and Reservoir Plan Special Evaluation Project, Interim Report (March 1988)",
-      "source": "sources/tarp-deep-tunnel/1988-epa-tarp-special-evaluation-project-interim-report.pdf p.34"
+      "source": "sources/tarp-deep-tunnel/1988-epa-tarp-special-evaluation-project-interim-report.pdf p.34",
+      "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0034.jpg"
      },
      "image": {
       "src": "https://boswald314.github.io/chicago-water-images/maps-diagrams/1960-1999/1988-epa-cso-outfall-tunnel-connection.jpg",
@@ -852,7 +864,8 @@ window.TARPTIMELINE = {
      "quote": {
       "text": "on the average, overflows in the total service area would occur for about 29 days a year without the TARP, 9 days with Phase I, and only 1 day with Phase II",
       "attribution": "Durgunoglu, Singh, Butts & Shackleford, Reduction in Peak Flows and Improvements in Water Quality in the Illinois Waterway... Due to Implementation of Phases I and II of TARP (Illinois State Water Survey, 1992)",
-      "source": "sources/tarp-case-studies/1992-shackleford-reduction-peak-flows-water-quality-illinois-waterway-tarp-phases1-2.pdf p.4"
+      "source": "sources/tarp-case-studies/1992-shackleford-reduction-peak-flows-water-quality-illinois-waterway-tarp-phases1-2.pdf p.4",
+      "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1992-shackleford-reduction-peak-flows-water-quality-illinois-waterway-tarp-phase/p0004.jpg"
      },
      "image": {
       "src": "https://boswald314.github.io/chicago-water-images/maps-diagrams/2000-present/2023-how-tarp-works-diagram.jpg",
@@ -969,7 +982,8 @@ window.TARPTIMELINE = {
      "quote": {
       "text": "MWRDGC was unable to come to an agreement with Vulcan Materials Company (Vulcan) for purchase of the property.",
       "attribution": "U.S. and Illinois v. MWRD, Clean Water Act consent decree background section",
-      "source": "sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf p.78"
+      "source": "sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf p.78",
+      "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2011-epa-doj-mwrd-consent-decree/p0078.jpg"
      },
      "sources": [
       "sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf p.78",
@@ -1009,7 +1023,8 @@ window.TARPTIMELINE = {
      "quote": {
       "text": "The USACE was responsible for designing and constructing the reservoir features, and the District was responsible for providing the massive hole for the reservoir.",
       "attribution": "MWRD, TARP Status Report as of December 31, 2025",
-      "source": "sources/mwrd-interceptors-pumping-stations/TARP_Status_Report_Dec2025.pdf p.2"
+      "source": "sources/mwrd-interceptors-pumping-stations/TARP_Status_Report_Dec2025.pdf p.2",
+      "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_Dec2025/p0002.jpg"
      },
      "sources": [
       "docs/10-tarp-reservoirs.md",
@@ -1199,7 +1214,8 @@ window.TARPTIMELINE = {
      "quote": {
       "text": "Because of TARP, our waterways are thriving to conditions once unimagined.",
       "attribution": "Barbara McGowan, MWRD Vice President, MWRD press release, Oct. 31, 2022",
-      "source": "sources/tarp-deep-tunnel/TARP_50th_Anniversary.pdf p.2"
+      "source": "sources/tarp-deep-tunnel/TARP_50th_Anniversary.pdf p.2",
+      "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_50th_Anniversary/p0002.jpg"
      },
      "image": {
       "src": "https://boswald314.github.io/chicago-water-images/maps-diagrams/2000-present/2017-tarp-system-map-mwrd.jpg",
