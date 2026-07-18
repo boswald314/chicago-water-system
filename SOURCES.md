@@ -290,7 +290,7 @@ A July 2026 archival research sweep (six document-hunting agents) added 91 furth
 | Source | URL | Cited in |
 |---|---|---|
 | A Brief History of Chicago's Water Management, Daniel Simantob / U Chicago | <https://humanities-web.s3.us-east-2.amazonaws.com/college/chicagostudies-prod/s3fs-public/2021-04/DanielPaper.pdf> | 05, 06 |
-| A Century of Progress in Water Works, 1833-1933, Bureau of Engineering, U Chicago Library | <https://www.lib.uchicago.edu/ead/pdf/century0291.pdf> | 04, 05 |
+| A Century of Progress in Water Works, 1833-1933, Bureau of Engineering, U Chicago Library (local copy upgraded to the text-enabled/OCR'd edition from waterworkshistory.us — <http://www.waterworkshistory.us/IL/Chicago/1933WaterWorks.pdf> — for cleaner full-text indexing; a standalone commemorative booklet, not part of a multi-volume series) | <https://www.lib.uchicago.edu/ead/pdf/century0291.pdf> | 04, 05 |
 | A Reversal of the Chicago River, Linda Hall Library | <https://www.lindahall.org/experience/digital-exhibitions/centuries-of-civil-engineering/02-water-supply/a-reversal-of-the-chicago-river/> | 02 |
 | Analysis of Ground-Liner Interaction for Tunnels (Ph.D. dissertation, 1978), Randall Eugene Ranken / University of Illinois at Urbana-Champaign | <https://www.ideals.illinois.edu/items/67024> | archive |
 | Bubbly Creek, Wikipedia | <https://en.wikipedia.org/wiki/Bubbly_Creek> | 14 |
