@@ -538,7 +538,7 @@ A July 2026 archival research sweep (six document-hunting agents) added 91 furth
 
 ## Downloaded documents
 
-**1,768 files** are archived locally in `sources/`, organized into 49 topic folders. This section
+**~1,980 files** are archived locally in `sources/`, organized into 50 topic folders. This section
 used to list every file by hand; at the archive's current scale that stopped being maintainable, so
 it has been replaced with a per-folder summary table (below) plus a generated full listing.
 
@@ -558,6 +558,19 @@ Pollution Control Board case dockets, Sanborn fire-insurance map plates, and ora
 interviews — alongside GAO oversight reports, USACE district-history and hydraulic-model studies,
 ISWS/IDNR water-supply and allocation series, period engineering-society journals, and
 primary-source Sanitary District and Dept. of Public Works annual reports.
+
+A **July 2026 waterworkshistory.us sweep** added the `chicago-water-supply-history` folder: 32
+early-water-supply primary documents harvested from Morris A. Pierce's waterworkshistory.us Chicago
+page (<http://www.waterworkshistory.us/IL/Chicago/>) after confirming they were not already held.
+The batch fills a real gap on the drinking-water side of the archive — the Board of Water
+Commissioners semi-annual reports for the 3rd (1852), 7th (1854), 9th (1855), 11th (1856), 15th
+(1858) and 17th (1859) sessions (complementing the 13th and 19th already held), the Illinois
+legislative charters of the Chicago Hydraulic, Lake Michigan Hydraulic and Chicago City Hydraulic
+companies (1835–1861), descriptive water-works pamphlets (1855, 1866 ×2, 1884, 1885, 1886, 1889),
+the 1900 Chicago water-system map, an 1865 Davis Union Water Filter notice, an 1872 low-service-system
+report, an 1871 post-fire water-works investigation, and 1936 pumping/meter/statistics supplements.
+These rows carry **archive** in the "Cited in" column — acquired for reference and RAG retrieval,
+not yet cited by a numbered synthesis document.
 
 | Folder | Files | Description |
 |---|---|---|
