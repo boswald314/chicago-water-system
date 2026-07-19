@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Archive Search — semantic search over the full corpus</title>
+<meta name="description" content="Semantic + keyword search over the research archive's full 154,000-chunk source corpus. Available on the private mirror, where the RAG index and embedder run locally.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔎</text></svg>">
+<link rel="stylesheet" href="assets/timeline.css">
+<style>
+  main.search { max-width:880px; margin:0 auto; padding:40px 24px 80px; }
+  main.search h1 { font-size:clamp(26px,4.5vw,38px); margin:0 0 8px; }
+  main.search .sub { color:var(--ink2); margin:0 0 22px; max-width:64ch; }
+  #q { width:100%; padding:13px 15px; font-size:16.5px; border:1px solid var(--line); border-radius:9px;
+    background:var(--panel); color:var(--ink); }
+  #q:focus { outline:none; border-color:var(--accent); }
+  #status { color:var(--ink2); font-size:13.5px; margin:10px 2px; min-height:18px; }
+  .hit { display:block; background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:13px 16px; margin-bottom:12px; text-decoration:none; color:inherit; }
+  a.hit:hover { border-color:var(--accent); }
+  .hit .src { font-size:12px; color:var(--ink2); display:flex; gap:8px; flex-wrap:wrap; align-items:baseline; }
+  .hit .src .badge { font-size:10px; font-weight:700; letter-spacing:.6px; text-transform:uppercase;
+    color:var(--accent); border:1px solid var(--line); border-radius:999px; padding:1px 8px; }
+  .hit .path { font-weight:650; color:var(--ink); font-size:14px; margin:3px 0 5px; word-break:break-all; }
+  .hit .snip { color:var(--ink2); font-size:13.5px; line-height:1.55; }
+  .offline { background:var(--quote-bg); border:1px solid var(--line); border-radius:10px; padding:16px 18px;
+    color:var(--ink2); }
+  .offline b { color:var(--ink); }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<nav class="sitenav">
+  <a class="brand" href="./">💧 Chicago's Water System</a>
+  <div class="links" id="navlinks"></div>
+</nav>
+<main class="search">
+  <h1>Archive search</h1>
+  <p class="sub">Semantic + keyword search over the <b>entire source corpus</b> — 154,000 passages from
+  2,000+ documents, including vision-model descriptions of maps and figures. Queries are embedded locally
+  (Qwen3-Embedding-4B) and fused with BM25 — the same retrieval the archive's verification pipeline uses.</p>
+  <input type="search" id="q" placeholder="Ask the archive… (e.g. why was the Vulcan quarry deal abandoned, drop shaft air entrainment, Lawrence Avenue mole)" autofocus>
+  <p id="status"></p>
+  <div id="results"></div>
+</main>
+<script>
+document.getElementById('navlinks').innerHTML = [
+  ['Flow map', './'], ['Geographic map', 'geo.html'], ['Deep Tunnel timeline', 'deep-tunnel-timeline.html'],
+  ['Overview', '00-SYSTEM-OVERVIEW.html'], ['Documents', 'docs/'],
+  ['Site search', 'search.html'], ['Sources', 'SOURCES.html'],
+].map(([t, h]) => `<a href="${h}">${t}</a>`).join('');
+
+const q = document.getElementById('q'), status = document.getElementById('status'), out = document.getElementById('results');
+const esc = s => (s || '').replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+let timer = null, seq = 0;
+
+async function health() {
+  try {
+    const h = await (await fetch('/api/health')).json();
+    if (h.ok) { status.textContent = `${h.chunks.toLocaleString()} passages indexed · embedder ready`; return true; }
+  } catch (e) {}
+  out.innerHTML = `<div class="offline"><b>The semantic search API isn't running here.</b><br>
+    This page works on the private mirror (bigmantower), where the RAG index and the local embedder live.
+    On the public site, use the <a href="search.html">keyword site search</a> instead — it covers the 17
+    research documents. The full-corpus semantic index stays on personal hardware.</div>`;
+  status.textContent = '';
+  return false;
+}
+
+async function run() {
+  const query = q.value.trim();
+  if (!query) { out.innerHTML = ''; status.textContent = ''; return; }
+  const my = ++seq;
+  status.textContent = 'searching…';
+  try {
+    const r = await (await fetch('/api/search?q=' + encodeURIComponent(query) + '&k=15')).json();
+    if (my !== seq) return;
+    if (r.error) { status.textContent = r.error; return; }
+    status.textContent = `${r.results.length} passages`;
+    out.innerHTML = r.results.map(h => {
+      const badge = h.is_figure ? '<span class="badge">figure</span>' :
+        (h.file.startsWith('docs/') ? '<span class="badge">research doc</span>' : '<span class="badge">source</span>');
+      const pages = h.page_start === h.page_end ? `p.${h.page_start}` : `p.${h.page_start}–${h.page_end}`;
+      const inner = `<div class="src">${badge}<span>${pages}</span><span>score ${h.score}</span></div>
+        <div class="path">${esc(h.file)}</div><div class="snip">${esc(h.snippet)}</div>`;
+      return h.link ? `<a class="hit" href="${h.link}" target="_blank" rel="noopener">${inner}</a>`
+                    : `<div class="hit">${inner}</div>`;
+    }).join('');
+  } catch (e) { if (my === seq) status.textContent = 'search failed: ' + e; }
+}
+q.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(run, 350); });
+q.addEventListener('keydown', e => { if (e.key === 'Enter') { clearTimeout(timer); run(); } });
+health().then(ok => {
+  const pre = new URLSearchParams(location.search).get('q');
+  if (pre && ok) { q.value = pre; run(); }
+});
+</script>
+</body>
+</html>

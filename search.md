@@ -10,7 +10,7 @@ title: Search
 <div id="results"></div>
 
 <p style="color:var(--ink2);font-size:13px;margin-top:24px;border-top:1px solid var(--line);padding-top:12px;">
-This is a keyword search over the 16 detail documents and the overview, running entirely in your browser — no server, nothing sent anywhere. It matches words in the text and links you to the exact section. (Semantic/AI search against the full 1,900-source corpus runs locally against the research index; it isn't part of the public site.)
+This is a keyword search over the 16 detail documents and the overview, running entirely in your browser — no server, nothing sent anywhere. It matches words in the text and links you to the exact section. (Semantic/AI search against the full 2,000-source corpus runs on the archive's private mirror — see <a href="rag-search.html">archive search</a> — where the RAG index and local embedder live; it isn't part of the public site.)
 </p>
 
 <style>
