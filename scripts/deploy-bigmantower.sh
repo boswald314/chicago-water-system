@@ -10,7 +10,7 @@ set -euo pipefail
 HOST="${1:-bigmantower}"
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 DEST="~/chicago-water-mirror"
-PORT="${PORT:-8080}"
+PORT="${PORT:-8077}"
 
 echo "== 1/5 building static site (jekyll) =="
 cd "$REPO"
@@ -35,7 +35,7 @@ set -e
 cd $DEST
 [ -d .venv ] || python3 -m venv .venv
 ./.venv/bin/pip install -q sqlite-vec requests
-pkill -f 'rag/serve.py' 2>/dev/null || true
+pkill -f 'rag/serve[.]py' 2>/dev/null || true
 sleep 1
 nohup ./.venv/bin/python rag/serve.py > serve.log 2>&1 &
 sleep 2
