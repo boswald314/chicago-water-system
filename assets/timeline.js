@@ -7,19 +7,39 @@
 (function () {
 const LOCAL = location.protocol === 'file:';
 
-const FAMILY = [
-  { id: 'overview', href: 'deep-tunnel-timeline.html', label: 'The Deep Tunnel', sub: 'overview timeline' },
-  { id: 'tunnels', href: 'tarp-tunnels-timeline.html', label: 'The Tunnels', sub: 'all four systems, exhaustive' },
-  { id: 'majewski', href: 'majewski-timeline.html', label: 'Majewski Reservoir', sub: "the O'Hare basin" },
-  { id: 'thornton', href: 'thornton-timeline.html', label: 'Thornton Reservoirs', sub: 'the quarry conversion' },
-  { id: 'mccook', href: 'mccook-timeline.html', label: 'McCook Reservoir', sub: 'the hole MWRD dug itself' },
-];
+const FAMILIES = {
+  tarp: {
+    title: 'Construction timelines',
+    other: { label: 'River & habitat restoration →', href: 'restoration-timeline.html' },
+    items: [
+      { id: 'overview', href: 'deep-tunnel-timeline.html', label: 'The Deep Tunnel', sub: 'overview timeline' },
+      { id: 'tunnels', href: 'tarp-tunnels-timeline.html', label: 'The Tunnels', sub: 'all four systems, exhaustive' },
+      { id: 'majewski', href: 'majewski-timeline.html', label: 'Majewski Reservoir', sub: "the O'Hare basin" },
+      { id: 'thornton', href: 'thornton-timeline.html', label: 'Thornton Reservoirs', sub: 'the quarry conversion' },
+      { id: 'mccook', href: 'mccook-timeline.html', label: 'McCook Reservoir', sub: 'the hole MWRD dug itself' },
+    ],
+  },
+  habitat: {
+    title: 'Restoration timelines',
+    other: { label: 'Deep Tunnel construction →', href: 'deep-tunnel-timeline.html' },
+    items: [
+      { id: 'overview', href: 'restoration-timeline.html', label: 'Restoring the Rivers', sub: 'overview timeline' },
+      { id: 'north-branch', href: 'north-branch-restoration-timeline.html', label: 'North Branch corridor', sub: 'parks, dam removal, Wild Mile' },
+      { id: 'bubbly-creek', href: 'bubbly-creek-restoration-timeline.html', label: 'Bubbly Creek', sub: 'the restoration that keeps almost happening' },
+      { id: 'calumet', href: 'calumet-restoration-timeline.html', label: 'Calumet wetlands', sub: 'Superfund to sanctuary' },
+      { id: 'programs', href: 'caws-programs-timeline.html', label: 'Programs & plans', sub: 'the enabling machinery' },
+    ],
+  },
+};
+const GROUP = FAMILIES[window.TIMELINE_GROUP || 'tarp'];
+const FAMILY = GROUP.items;
 const CUR = window.TIMELINE_CURRENT || 'overview';
 
 document.getElementById('navlinks').innerHTML = [
   ['Flow map', LOCAL ? 'index.html' : './'],
   ['Geographic map', 'geo.html'],
   ['Deep Tunnel timeline', 'deep-tunnel-timeline.html'],
+  ['Restoration timeline', 'restoration-timeline.html'],
   ['Overview', LOCAL ? '00-SYSTEM-OVERVIEW.md' : '00-SYSTEM-OVERVIEW.html'],
   ['Documents', 'docs/'], ['Galleries', LOCAL ? 'images/' : 'gallery/'],
   ['Search', LOCAL ? 'search.md' : 'search.html'],
@@ -30,11 +50,12 @@ document.getElementById('navlinks').innerHTML = [
 const famLinks = FAMILY.map(f =>
   `<a class="${f.id === CUR ? 'cur' : ''}" href="${f.href}">${f.label}` +
   (f.sub ? `<span class="sub">${f.sub}</span>` : '') + `</a>`).join('');
+const other = `<a class="other" href="${GROUP.other.href}">${GROUP.other.label}</a>`;
 const side = document.getElementById('famside');
-if (side) side.innerHTML = `<div class="hd">Construction timelines</div>${famLinks}`;
+if (side) side.innerHTML = `<div class="hd">${GROUP.title}</div>${famLinks}<div class="otherwrap">${other}</div>`;
 const chips = document.getElementById('famchips');
 if (chips) chips.innerHTML = FAMILY.map(f =>
-  `<a class="${f.id === CUR ? 'cur' : ''}" href="${f.href}">${f.label}</a>`).join('');
+  `<a class="${f.id === CUR ? 'cur' : ''}" href="${f.href}">${f.label}</a>`).join('') + other;
 
 const D = window.TARPTIMELINE;
 const KINDLABEL = { problem: 'Problem', decision: 'Decision', construction: 'Construction',
@@ -46,7 +67,7 @@ const esc = s => (s || '').replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', 
 
 const kick = document.getElementById('hero-kicker');
 if (kick) kick.innerHTML = D.kicker ||
-  (CUR !== 'overview' ? `<a href="deep-tunnel-timeline.html">← The Deep Tunnel</a> · component timeline` : 'Construction timeline');
+  (CUR !== 'overview' ? `<a href="${GROUP.items[0].href}">← ${GROUP.items[0].label}</a> · component timeline` : GROUP.title.replace(/s$/, ''));
 document.getElementById('hero-title').textContent = D.title;
 document.getElementById('hero-lede').innerHTML = D.lede;
 document.getElementById('stats').innerHTML = D.stats.map(s =>

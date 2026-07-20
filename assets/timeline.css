@@ -31,6 +31,8 @@ body { margin:0; font:16px/1.65 -apple-system,"Segoe UI",Helvetica,Arial,sans-se
 #famside a:hover { color:var(--accent); border-color:var(--line); }
 #famside a.cur { color:var(--ink); font-weight:650; background:var(--panel); border-color:var(--line); }
 #famside a .sub { display:block; font-size:11px; color:var(--ink2); font-weight:400; }
+#famside .otherwrap { margin-top:10px; padding-top:9px; border-top:1px solid var(--line); }
+#famside a.other { font-size:12px; color:var(--accent); }
 #famchips { display:none; }
 @media (max-width:1279px) {
   #famside { display:none; }
