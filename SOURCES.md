@@ -559,6 +559,8 @@ interviews — alongside GAO oversight reports, USACE district-history and hydra
 ISWS/IDNR water-supply and allocation series, period engineering-society journals, and
 primary-source Sanitary District and Dept. of Public Works annual reports.
 
+A **July 2026 river-morphology sweep** (traditional + citation-chain search) added the `river-engineering-history` and `river-restoration` folders: the 1915 Chicago Railway Terminal Commission report and 1988 HAER St. Charles Air Line Bridge study (the 1928-30 straightening's engineering trail), the 33 U.S.C. §27 harbor-line statutes, a 2011 Chicago-shoreline coastal-engineering paper, the Historic Railroad Bridges landmark report, plus restoration-morphology planning documents — the 2019 Wild Mile Framework Vision, the 2005 Chicago River Corridor Design Guidelines, Our Great Rivers (2016 vision + 2021 update), and MWRD's North Branch detailed watershed plan. ~22 HathiTrust full-view targets (incl. the 1930 *Straightening the Chicago River* report) are identified but need the browser page-image relay — logged in `sources/river-engineering-history/HATHITRUST-TODO.md`.
+
 A **July 2026 waterworkshistory.us sweep** added the `chicago-water-supply-history` folder: 32
 early-water-supply primary documents harvested from Morris A. Pierce's waterworkshistory.us Chicago
 page (<http://www.waterworkshistory.us/IL/Chicago/>) after confirming they were not already held.
