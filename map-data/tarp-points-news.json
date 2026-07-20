@@ -1,100 +1,164 @@
 {
-  "type": "tarp-points-news",
-  "generated": "2026-07",
-  "vents": [
-    {
-      "name": "TARP drop shaft near North Branch Pumping Station (DS-M90 & DS-M91)",
-      "lat": 41.96917,
-      "lng": -87.70111,
-      "approx": false,
-      "source": "WTTW News, 'Pee-EWW! Foul Odor in North Side Neighborhoods Linked to Deep Tunnel Shafts' (news.wttw.com/2026/03/11/..., published Mar 11 2026, updated Mar 13 2026) — photo caption: 'A Deep Tunnel drop shaft, located near the North Branch Pumping Station.' Coordinates from map-data/gis/cso-outfall-points.geojson (MWRD public CSO-outfall GIS layer; TARP_CONNECTION field 'DS-M90 & DS-M91 (NBPS)', LOCATION 'North Branch P.S. (E)'), cross-checked against MWRD's own field naming in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf and MWRD_Collection_System_OM_Manual_2026.pdf.",
-      "note": "MWRD spokesperson Allison Fore told WTTW the March 2026 North Side stench (reported from Lincoln Square, Albany Park, North Center, Irving Park, Horner Park and Roscoe Village) was 'likely odor escaping from TARP drop shafts' whose gravity louvers occasionally stick open after heavy-flow rain events. The article did not name which specific shaft(s) stuck open — this point is the one MWRD's own photo shows, immediately adjacent to the North Branch (Lawrence Ave) Pumping Station (facilities.json id mwrd-north-branch, 41.9705/-87.7013), not a confirmed culprit for the stench."
-    }
-  ],
-  "dropshafts": [
-    {
-      "name": "TARP drop shaft in Ronan Park (DS-LAT)",
-      "lat": 41.96879,
-      "lng": -87.70164,
-      "approx": false,
-      "source": "Block Club Chicago, 'Albany Park Riverside Development Would Be Bigger If Deep Tunnel Sewer Wasn't Nearby' (blockclubchicago.org/2023/11/27/..., Alex V. Hernandez, Nov 27 2023) — developer's attorney Rolando Acosta, on the 2919 W. Lawrence Ave. site: 'There's a Deep Tunnel shaft in Ronan Park [across the street] here and there's deep tunnel lines, basically sewer lines, that go through the property and actually end up at LaPointe Park.' Coordinates from map-data/gis/cso-outfall-points.geojson (TARP_CONNECTION 'DS-LAT', LOCATION 'Lawrence Ave (W)', waterway 'NBCR Lower').",
-      "note": "MWRD owns an easement across the surface parking lot at 2919 W. Lawrence Ave (Ronan Park is directly across Lawrence Ave to the north) because a Deep Tunnel line runs under the property; Acosta said the line continues to LaPointe Park (N Manor Ave & W Giddings St, ~41.9676/-87.7024, geocoded via OSM/Overpass) further south. 'DS-LAT' ('lateral' drop shaft) at Lawrence Ave is the closest MWRD GIS-catalogued drop shaft to Ronan Park and matches the quote precisely. City Council approved the Lawrence Gateway building on this site Jan 24 2024 (blockclubchicago.org/2024/01/25/...) with the surface lot retained specifically because MWRD infrastructure prohibits permanent structures on the easement."
-    },
-    {
-      "name": "TARP drop shaft DS-M92, Berwyn Ave (near River Park / North Shore Channel confluence)",
-      "lat": 41.97754,
-      "lng": -87.70502,
-      "approx": false,
-      "source": "map-data/gis/cso-outfall-points.geojson (MWRD public CSO-outfall GIS layer; TARP_CONNECTION 'DS-M92', LOCATION 'Berwyn Ave (E)', waterway 'NSC Lower (NSWRP)'), field-name-matched to sources/mwrd-interceptors-pumping-stations/CollectionSystemOMManual_2026.pdf p.222.",
-      "note": "Nearest catalogued TARP drop shaft to the North Shore Channel / North Branch of the Chicago River confluence at River Park (the 'confluence area' flagged for review) — about 0.3 mi north of the Albany Park tunnel's outlet shaft and the removed North Branch Dam site (facilities.json id north-branch-dam, 41.974/-87.7027). Lincoln Square neighborhood, one of the six named in the March 2026 WTTW odor report."
-    },
-    {
-      "name": "TARP drop shaft DS-M93, Bryn Mawr Ave",
-      "lat": 41.98302,
-      "lng": -87.7067,
-      "approx": false,
-      "source": "map-data/gis/cso-outfall-points.geojson (TARP_CONNECTION 'DS-M93', LOCATION 'Bryn Mawr Ave (E)', waterway 'NSC Lower').",
-      "note": "North Shore Channel corridor, Lincoln Square/Peterson Park area — one of the neighborhoods named in the March 2026 WTTW odor report."
-    },
-    {
-      "name": "TARP drop shaft DS-M89, Montrose Ave",
-      "lat": 41.96132,
-      "lng": -87.69458,
-      "approx": false,
-      "source": "map-data/gis/cso-outfall-points.geojson (TARP_CONNECTION 'DS-M89', LOCATION 'Montrose Ave (E)', waterway 'NBCR Lower').",
-      "note": "North Branch of the Chicago River, North Center — one of the neighborhoods named in the March 2026 WTTW odor report."
-    },
-    {
-      "name": "TARP drop shaft DS-M88, Berteau Ave",
-      "lat": 41.95748,
-      "lng": -87.69456,
-      "approx": false,
-      "source": "map-data/gis/cso-outfall-points.geojson (TARP_CONNECTION 'DS-M88', LOCATION 'Berteau Ave (W)', waterway 'NBCR Lower').",
-      "note": "North Branch of the Chicago River, North Center/Horner Park area."
-    },
-    {
-      "name": "TARP drop shaft DS-M87, Irving Park Rd",
-      "lat": 41.954,
-      "lng": -87.69423,
-      "approx": false,
-      "source": "map-data/gis/cso-outfall-points.geojson (TARP_CONNECTION 'DS-M87', LOCATION 'Irving Park Rd (E)', waterway 'NBCR Lower').",
-      "note": "North Branch of the Chicago River at Irving Park Rd, adjacent to Horner Park — both named in the March 2026 WTTW odor report."
-    },
-    {
-      "name": "TARP drop shaft DS-M85, Addison St",
-      "lat": 41.94649,
-      "lng": -87.69577,
-      "approx": false,
-      "source": "map-data/gis/cso-outfall-points.geojson (TARP_CONNECTION 'DS-M85', LOCATION 'Addison St (Inside ComEd's property) (E)', waterway 'NBCR Lower').",
-      "note": "North Branch of the Chicago River, Roscoe Village/North Center border — Roscoe Village was named in the March 2026 WTTW odor report."
-    },
-    {
-      "name": "TARP drop shaft DS-M84, Roscoe St",
-      "lat": 41.94279,
-      "lng": -87.6956,
-      "approx": false,
-      "source": "map-data/gis/cso-outfall-points.geojson (TARP_CONNECTION 'DS-M84', LOCATION 'Roscoe St (W)', waterway 'NBCR Lower').",
-      "note": "North Branch of the Chicago River, Roscoe Village — named in the March 2026 WTTW odor report."
-    }
-  ],
-  "albanyParkTunnel": {
-    "intake": [41.976, -87.7259],
-    "outlet": [41.9743, -87.7038],
-    "waypoints": [
-      [41.976, -87.7259],
-      [41.9752, -87.7148],
-      [41.9743, -87.7038]
-    ],
-    "from": 2018,
-    "source": "City of Chicago CDOT/MWRD press release, 'Albany Park Stormwater Diversion Tunnel' groundbreaking release (chicago.gov/city/en/depts/cdot/supp_info/albany-park-stormwater-diverson-tunnel.html); Block Club Chicago, 'Heavy Rains Flowing Into New $70 Million Albany Park Tunnel — Not People's Basements, City Officials Say' (blockclubchicago.org/2019/05/02/..., Alex V. Hernandez, May 2 2019); Chan, A. et al., 'Construction of the Albany Park stormwater diversion tunnel,' Trenchless Technology / T&UC Magazine (tucmagazine.org, Dec 1 2020) — engineering-management paper with shaft dimensions and station data; ACEC-Illinois 2019 Engineering Excellence Award (chicago.gov CDOT news release, Oct 2018) and 2019 CMAA National Achievement Award.",
-    "not_TARP": true,
-    "operator": "Chicago Department of Transportation (CDOT), designed with Metropolitan Water Reclamation District of Greater Chicago (MWRD); design engineer MWH Americas Inc.; contractor Kenny Construction Co.; construction manager WSP USA Inc.",
-    "length_ft": 5835,
-    "diameter_ft": 18,
-    "depth_ft": 140,
-    "cost_usd": 70000000,
-    "opened": "First activated during construction May 3 2018; substantial completion August 2018.",
-    "note": "NOT a TARP/MWRD Deep Tunnel structure — this is a City of Chicago CDOT stormwater-diversion tunnel, built 2016-2018 after the catastrophic April 2013 Albany Park flood, that runs 140 ft below Foster Avenue and functions as an inverted siphon between two rivers. INTAKE (inlet shaft): 'a bend in the [North Branch Chicago River] in Eugene Field Park just east of Pulaski Road' (city press release) / 'an inlet along the South Bank of the Chicago River near the intersection of Springfield and Foster avenues' (Block Club 2019). Point picked at the river's bend apex nearest that description via OpenStreetMap waterway geometry for the North Branch Chicago River inside Eugene Field Park (OSM node cluster ~41.9755-41.9761/-87.7273 to -87.7250); marked approx because no as-built shaft-collar coordinate was published. OUTLET shaft: 'River Park just south of Foster Avenue into the North Shore Channel,' 'on the east side of the North Shore Channel' (city press release); 'located along the east bank of the NSC south of the Foster Avenue bridge at River Park' (T&UC Magazine). Point picked on the North Shore Channel centerline (OSM waterway geometry) just south of the Foster Ave crossing, nudged east for 'east bank'; marked approx for the same reason. Straight-line distance between these two picked points is ~6,020 ft, within 3% of the sourced 5,835-ft tunnel length — a rough consistency check, not proof of exact shaft position. Waypoints are a straight-line interpolation (the tunnel is a single TBM bore, not a curved alignment) with one midpoint added only for map legibility. TBM ('Keri', a rebuilt 1979 Robbins mainbeam machine) launched from the OUTLET shaft in April 2017 and holed through at the INLET shaft Aug 30 2017. Diverts up to ~2,300 cfs (city release) / ~2,000 cfs (T&UC, 100-yr event) of North Branch overflow away from Albany Park streets and basements. Blasting at the outlet shaft was coordinated around Swedish Covenant Hospital's proton-accelerator treatment schedule nearby."
+ "type": "tarp-points-news",
+ "generated": "2026-07",
+ "vents": [
+  {
+   "name": "TARP drop shaft near North Branch Pumping Station (DS-M90 & DS-M91)",
+   "lat": 41.96917,
+   "lng": -87.70111,
+   "approx": false,
+   "source": "WTTW News, 'Pee-EWW! Foul Odor in North Side Neighborhoods Linked to Deep Tunnel Shafts' (news.wttw.com/2026/03/11/..., published Mar 11 2026, updated Mar 13 2026) \u2014 photo caption: 'A Deep Tunnel drop shaft, located near the North Branch Pumping Station.' Coordinates from map-data/gis/cso-outfall-points.geojson (MWRD public CSO-outfall GIS layer; TARP_CONNECTION field 'DS-M90 & DS-M91 (NBPS)', LOCATION 'North Branch P.S. (E)'), cross-checked against MWRD's own field naming in sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf and MWRD_Collection_System_OM_Manual_2026.pdf.",
+   "note": "MWRD spokesperson Allison Fore told WTTW the March 2026 North Side stench (reported from Lincoln Square, Albany Park, North Center, Irving Park, Horner Park and Roscoe Village) was 'likely odor escaping from TARP drop shafts' whose gravity louvers occasionally stick open after heavy-flow rain events. The article did not name which specific shaft(s) stuck open \u2014 this point is the one MWRD's own photo shows, immediately adjacent to the North Branch (Lawrence Ave) Pumping Station (facilities.json id mwrd-north-branch, 41.9705/-87.7013), not a confirmed culprit for the stench."
+  }
+ ],
+ "dropshafts": [
+  {
+   "name": "TARP drop shaft in Ronan Park (DS-LAT)",
+   "lat": 41.96879,
+   "lng": -87.70164,
+   "approx": false,
+   "source": "Block Club Chicago, 'Albany Park Riverside Development Would Be Bigger If Deep Tunnel Sewer Wasn't Nearby' (blockclubchicago.org/2023/11/27/..., Alex V. Hernandez, Nov 27 2023) \u2014 developer's attorney Rolando Acosta, on the 2919 W. Lawrence Ave. site: 'There's a Deep Tunnel shaft in Ronan Park [across the street] here and there's deep tunnel lines, basically sewer lines, that go through the property and actually end up at LaPointe Park.' Coordinates from map-data/gis/cso-outfall-points.geojson (TARP_CONNECTION 'DS-LAT', LOCATION 'Lawrence Ave (W)', waterway 'NBCR Lower').",
+   "note": "MWRD owns an easement across the surface parking lot at 2919 W. Lawrence Ave (Ronan Park is directly across Lawrence Ave to the north) because a Deep Tunnel line runs under the property; Acosta said the line continues to LaPointe Park (N Manor Ave & W Giddings St, ~41.9676/-87.7024, geocoded via OSM/Overpass) further south. 'DS-LAT' ('lateral' drop shaft) at Lawrence Ave is the closest MWRD GIS-catalogued drop shaft to Ronan Park and matches the quote precisely. City Council approved the Lawrence Gateway building on this site Jan 24 2024 (blockclubchicago.org/2024/01/25/...) with the surface lot retained specifically because MWRD infrastructure prohibits permanent structures on the easement."
   },
-  "notes": "Scope: air vents, neighborhood drop shafts, and the Albany Park Stormwater Diversion Tunnel, sourced from journalism plus the MWRD GIS/O&M-manual data already in this archive. The site's rag/ index (190 primary docs, mostly 1970s-2020s EPA/EIS/MWRD engineering reports) does NOT contain Block Club Chicago, WTTW, DNAinfo, or Nadig Newspapers coverage — that material lives only on the open web and was retrieved via WebSearch/WebFetch/browser for this task, not via rag/query.py. Two RAG hits worth flagging for the archive maintainers: (1) sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf and sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf + sources/mwrd-interceptors-pumping-stations/CollectionSystemOMManual_2026.pdf contain a full table of MWRD TARP_CONNECTION IDs (DS-N01..DS-N20 on the North Branch, DS-M##/I-##/TG-## on the North Shore Channel, Chicago River, South Branch, Sanitary & Ship Canal) by CSO-outfall number, but with NO coordinates or street addresses in the table text itself; (2) map-data/gis/cso-outfall-points.geojson (already in this repo, provenance/date not documented anywhere in ATTRIBUTION.md or SOURCES.md — appears to be MWRD's public CSO-outfall GIS layer given its field names match the O&M manual exactly) supplies the missing coordinates AND a 'LOCATION' street-cross-reference for every one of those IDs, which is how every dropshafts[] point above was pinned. Recommend the archive add proper attribution/URL for that geojson file. UNRESOLVED: (a) the March 2026 WTTW odor story names six affected neighborhoods (Lincoln Square, Albany Park, North Center, Irving Park, Horner Park, Roscoe Village) but never names which specific shaft's louver stuck open — the dropshafts[] entries above are the nearest catalogued MWRD shaft in each named neighborhood, not a confirmed source of the smell; treat them as 'candidate vent locations,' not 'the vent that stank in March 2026.' (b) No journalism or document in the archive gives a street address for a TARP air vent north of Ardmore/Peterson (i.e., nothing tying a named vent specifically to Ravenswood proper, as opposed to Lincoln Square/North Center/Andersonville-adjacent stretches of the same North Branch/NSC corridor) — Ravenswood itself sits east of the river corridor and wasn't named in the WTTW piece. (c) Nadig Newspapers search turned up no Jefferson Park/Norwood Park-specific TARP vent/odor stories; that lead did not pan out. (d) DNAinfo's 2013 Albany Park flood coverage (dnainfo.com/chicago/20130419/albany-park/even-deep-tunnel-couldnt-control-flooding-city-finds) is useful flood-context background (confirms the 109-mile TARP system and all three lakefront reversal points were opened April 18 2013, precipitating the Albany Park tunnel project) but names no shaft/vent locations of its own."
+  {
+   "name": "TARP drop shaft DS-M92, Berwyn Ave (near River Park / North Shore Channel confluence)",
+   "lat": 41.97754,
+   "lng": -87.70502,
+   "approx": false,
+   "source": "map-data/gis/cso-outfall-points.geojson (MWRD public CSO-outfall GIS layer; TARP_CONNECTION 'DS-M92', LOCATION 'Berwyn Ave (E)', waterway 'NSC Lower (NSWRP)'), field-name-matched to sources/mwrd-interceptors-pumping-stations/CollectionSystemOMManual_2026.pdf p.222.",
+   "note": "Nearest catalogued TARP drop shaft to the North Shore Channel / North Branch of the Chicago River confluence at River Park (the 'confluence area' flagged for review) \u2014 about 0.3 mi north of the Albany Park tunnel's outlet shaft and the removed North Branch Dam site (facilities.json id north-branch-dam, 41.974/-87.7027). Lincoln Square neighborhood, one of the six named in the March 2026 WTTW odor report."
+  },
+  {
+   "name": "TARP drop shaft DS-M93, Bryn Mawr Ave",
+   "lat": 41.98302,
+   "lng": -87.7067,
+   "approx": false,
+   "source": "map-data/gis/cso-outfall-points.geojson (TARP_CONNECTION 'DS-M93', LOCATION 'Bryn Mawr Ave (E)', waterway 'NSC Lower').",
+   "note": "North Shore Channel corridor, Lincoln Square/Peterson Park area \u2014 one of the neighborhoods named in the March 2026 WTTW odor report."
+  },
+  {
+   "name": "TARP drop shaft DS-M89, Montrose Ave",
+   "lat": 41.96132,
+   "lng": -87.69458,
+   "approx": false,
+   "source": "map-data/gis/cso-outfall-points.geojson (TARP_CONNECTION 'DS-M89', LOCATION 'Montrose Ave (E)', waterway 'NBCR Lower').",
+   "note": "North Branch of the Chicago River, North Center \u2014 one of the neighborhoods named in the March 2026 WTTW odor report."
+  },
+  {
+   "name": "TARP drop shaft DS-M88, Berteau Ave",
+   "lat": 41.95748,
+   "lng": -87.69456,
+   "approx": false,
+   "source": "map-data/gis/cso-outfall-points.geojson (TARP_CONNECTION 'DS-M88', LOCATION 'Berteau Ave (W)', waterway 'NBCR Lower').",
+   "note": "North Branch of the Chicago River, North Center/Horner Park area."
+  },
+  {
+   "name": "TARP drop shaft DS-M87, Irving Park Rd",
+   "lat": 41.954,
+   "lng": -87.69423,
+   "approx": false,
+   "source": "map-data/gis/cso-outfall-points.geojson (TARP_CONNECTION 'DS-M87', LOCATION 'Irving Park Rd (E)', waterway 'NBCR Lower').",
+   "note": "North Branch of the Chicago River at Irving Park Rd, adjacent to Horner Park \u2014 both named in the March 2026 WTTW odor report."
+  },
+  {
+   "name": "TARP drop shaft DS-M85, Addison St",
+   "lat": 41.94649,
+   "lng": -87.69577,
+   "approx": false,
+   "source": "map-data/gis/cso-outfall-points.geojson (TARP_CONNECTION 'DS-M85', LOCATION 'Addison St (Inside ComEd's property) (E)', waterway 'NBCR Lower').",
+   "note": "North Branch of the Chicago River, Roscoe Village/North Center border \u2014 Roscoe Village was named in the March 2026 WTTW odor report."
+  },
+  {
+   "name": "TARP drop shaft DS-M84, Roscoe St",
+   "lat": 41.94279,
+   "lng": -87.6956,
+   "approx": false,
+   "source": "map-data/gis/cso-outfall-points.geojson (TARP_CONNECTION 'DS-M84', LOCATION 'Roscoe St (W)', waterway 'NBCR Lower').",
+   "note": "North Branch of the Chicago River, Roscoe Village \u2014 named in the March 2026 WTTW odor report."
+  },
+  {
+   "name": "TARP drop shaft, Bubbly Creek \u2014 near CSO 190, head of Bubbly Creek at the South Branch junction",
+   "lat": 41.8392,
+   "lng": -87.665,
+   "approx": true,
+   "source": "USACE Bubbly Creek Integrated Feasibility Report (2020), Fig. 5 'Study Area Map' p.23: drop shafts marked along the South Fork; positions georeferenced off the schematic figure."
+  },
+  {
+   "name": "TARP drop shaft, Bubbly Creek \u2014 west bank at the CSO 191/192 bend (~31st St)",
+   "lat": 41.8368,
+   "lng": -87.6635,
+   "approx": true,
+   "source": "USACE Bubbly Creek Integrated Feasibility Report (2020), Fig. 5 'Study Area Map' p.23: drop shafts marked along the South Fork; positions georeferenced off the schematic figure."
+  },
+  {
+   "name": "TARP drop shaft, Bubbly Creek \u2014 east bank near CSO 193 (~31st\u201332nd St)",
+   "lat": 41.8358,
+   "lng": -87.6618,
+   "approx": true,
+   "source": "USACE Bubbly Creek Integrated Feasibility Report (2020), Fig. 5 'Study Area Map' p.23: drop shafts marked along the South Fork; positions georeferenced off the schematic figure."
+  },
+  {
+   "name": "TARP drop shaft, Bubbly Creek \u2014 west bank at CSO 194 (~35th St)",
+   "lat": 41.8313,
+   "lng": -87.658,
+   "approx": true,
+   "source": "USACE Bubbly Creek Integrated Feasibility Report (2020), Fig. 5 'Study Area Map' p.23: drop shafts marked along the South Fork; positions georeferenced off the schematic figure."
+  },
+  {
+   "name": "TARP drop shaft, Bubbly Creek \u2014 Racine Ave Pumping Station forebay, north",
+   "lat": 41.8258,
+   "lng": -87.659,
+   "approx": true,
+   "source": "USACE Bubbly Creek Integrated Feasibility Report (2020), Fig. 5 'Study Area Map' p.23: drop shafts marked along the South Fork; positions georeferenced off the schematic figure."
+  },
+  {
+   "name": "TARP drop shaft, Bubbly Creek \u2014 Racine Ave Pumping Station forebay, west",
+   "lat": 41.825,
+   "lng": -87.6586,
+   "approx": true,
+   "source": "USACE Bubbly Creek Integrated Feasibility Report (2020), Fig. 5 'Study Area Map' p.23: drop shafts marked along the South Fork; positions georeferenced off the schematic figure."
+  },
+  {
+   "name": "TARP drop shaft, Bubbly Creek \u2014 turning basin south end near CSO 198",
+   "lat": 41.8246,
+   "lng": -87.6578,
+   "approx": true,
+   "source": "USACE Bubbly Creek Integrated Feasibility Report (2020), Fig. 5 'Study Area Map' p.23: drop shafts marked along the South Fork; positions georeferenced off the schematic figure."
+  }
+ ],
+ "albanyParkTunnel": {
+  "intake": [
+   41.976,
+   -87.7259
+  ],
+  "outlet": [
+   41.9743,
+   -87.7038
+  ],
+  "waypoints": [
+   [
+    41.976,
+    -87.7259
+   ],
+   [
+    41.9752,
+    -87.7148
+   ],
+   [
+    41.9743,
+    -87.7038
+   ]
+  ],
+  "from": 2018,
+  "source": "City of Chicago CDOT/MWRD press release, 'Albany Park Stormwater Diversion Tunnel' groundbreaking release (chicago.gov/city/en/depts/cdot/supp_info/albany-park-stormwater-diverson-tunnel.html); Block Club Chicago, 'Heavy Rains Flowing Into New $70 Million Albany Park Tunnel \u2014 Not People's Basements, City Officials Say' (blockclubchicago.org/2019/05/02/..., Alex V. Hernandez, May 2 2019); Chan, A. et al., 'Construction of the Albany Park stormwater diversion tunnel,' Trenchless Technology / T&UC Magazine (tucmagazine.org, Dec 1 2020) \u2014 engineering-management paper with shaft dimensions and station data; ACEC-Illinois 2019 Engineering Excellence Award (chicago.gov CDOT news release, Oct 2018) and 2019 CMAA National Achievement Award.",
+  "not_TARP": true,
+  "operator": "Chicago Department of Transportation (CDOT), designed with Metropolitan Water Reclamation District of Greater Chicago (MWRD); design engineer MWH Americas Inc.; contractor Kenny Construction Co.; construction manager WSP USA Inc.",
+  "length_ft": 5835,
+  "diameter_ft": 18,
+  "depth_ft": 140,
+  "cost_usd": 70000000,
+  "opened": "First activated during construction May 3 2018; substantial completion August 2018.",
+  "note": "NOT a TARP/MWRD Deep Tunnel structure \u2014 this is a City of Chicago CDOT stormwater-diversion tunnel, built 2016-2018 after the catastrophic April 2013 Albany Park flood, that runs 140 ft below Foster Avenue and functions as an inverted siphon between two rivers. INTAKE (inlet shaft): 'a bend in the [North Branch Chicago River] in Eugene Field Park just east of Pulaski Road' (city press release) / 'an inlet along the South Bank of the Chicago River near the intersection of Springfield and Foster avenues' (Block Club 2019). Point picked at the river's bend apex nearest that description via OpenStreetMap waterway geometry for the North Branch Chicago River inside Eugene Field Park (OSM node cluster ~41.9755-41.9761/-87.7273 to -87.7250); marked approx because no as-built shaft-collar coordinate was published. OUTLET shaft: 'River Park just south of Foster Avenue into the North Shore Channel,' 'on the east side of the North Shore Channel' (city press release); 'located along the east bank of the NSC south of the Foster Avenue bridge at River Park' (T&UC Magazine). Point picked on the North Shore Channel centerline (OSM waterway geometry) just south of the Foster Ave crossing, nudged east for 'east bank'; marked approx for the same reason. Straight-line distance between these two picked points is ~6,020 ft, within 3% of the sourced 5,835-ft tunnel length \u2014 a rough consistency check, not proof of exact shaft position. Waypoints are a straight-line interpolation (the tunnel is a single TBM bore, not a curved alignment) with one midpoint added only for map legibility. TBM ('Keri', a rebuilt 1979 Robbins mainbeam machine) launched from the OUTLET shaft in April 2017 and holed through at the INLET shaft Aug 30 2017. Diverts up to ~2,300 cfs (city release) / ~2,000 cfs (T&UC, 100-yr event) of North Branch overflow away from Albany Park streets and basements. Blasting at the outlet shaft was coordinated around Swedish Covenant Hospital's proton-accelerator treatment schedule nearby."
+ },
+ "notes": "Scope: air vents, neighborhood drop shafts, and the Albany Park Stormwater Diversion Tunnel, sourced from journalism plus the MWRD GIS/O&M-manual data already in this archive. The site's rag/ index (190 primary docs, mostly 1970s-2020s EPA/EIS/MWRD engineering reports) does NOT contain Block Club Chicago, WTTW, DNAinfo, or Nadig Newspapers coverage \u2014 that material lives only on the open web and was retrieved via WebSearch/WebFetch/browser for this task, not via rag/query.py. Two RAG hits worth flagging for the archive maintainers: (1) sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf and sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf + sources/mwrd-interceptors-pumping-stations/CollectionSystemOMManual_2026.pdf contain a full table of MWRD TARP_CONNECTION IDs (DS-N01..DS-N20 on the North Branch, DS-M##/I-##/TG-## on the North Shore Channel, Chicago River, South Branch, Sanitary & Ship Canal) by CSO-outfall number, but with NO coordinates or street addresses in the table text itself; (2) map-data/gis/cso-outfall-points.geojson (already in this repo, provenance/date not documented anywhere in ATTRIBUTION.md or SOURCES.md \u2014 appears to be MWRD's public CSO-outfall GIS layer given its field names match the O&M manual exactly) supplies the missing coordinates AND a 'LOCATION' street-cross-reference for every one of those IDs, which is how every dropshafts[] point above was pinned. Recommend the archive add proper attribution/URL for that geojson file. UNRESOLVED: (a) the March 2026 WTTW odor story names six affected neighborhoods (Lincoln Square, Albany Park, North Center, Irving Park, Horner Park, Roscoe Village) but never names which specific shaft's louver stuck open \u2014 the dropshafts[] entries above are the nearest catalogued MWRD shaft in each named neighborhood, not a confirmed source of the smell; treat them as 'candidate vent locations,' not 'the vent that stank in March 2026.' (b) No journalism or document in the archive gives a street address for a TARP air vent north of Ardmore/Peterson (i.e., nothing tying a named vent specifically to Ravenswood proper, as opposed to Lincoln Square/North Center/Andersonville-adjacent stretches of the same North Branch/NSC corridor) \u2014 Ravenswood itself sits east of the river corridor and wasn't named in the WTTW piece. (c) Nadig Newspapers search turned up no Jefferson Park/Norwood Park-specific TARP vent/odor stories; that lead did not pan out. (d) DNAinfo's 2013 Albany Park flood coverage (dnainfo.com/chicago/20130419/albany-park/even-deep-tunnel-couldnt-control-flooding-city-finds) is useful flood-context background (confirms the 109-mile TARP system and all three lakefront reversal points were opened April 18 2013, precipitating the Albany Park tunnel project) but names no shaft/vent locations of its own."
 }
