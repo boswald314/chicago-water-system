@@ -3,18 +3,49 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Archive Search — semantic search over the full corpus</title>
-<meta name="description" content="Semantic + keyword search over the research archive's full 154,000-chunk source corpus. Available on the private mirror, where the RAG index and embedder run locally.">
+<title>Ask the Archive — semantic search & AI Q&A over the full corpus</title>
+<meta name="description" content="Ask questions or search the research archive's full 154,000-chunk source corpus. On the private mirror, a local model synthesizes the sources into cited answers; the public site offers keyword search.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔎</text></svg>">
 <link rel="stylesheet" href="assets/timeline.css">
 <style>
-  main.search { max-width:880px; margin:0 auto; padding:40px 24px 80px; }
-  main.search h1 { font-size:clamp(26px,4.5vw,38px); margin:0 0 8px; }
-  main.search .sub { color:var(--ink2); margin:0 0 22px; max-width:64ch; }
-  #q { width:100%; padding:13px 15px; font-size:16.5px; border:1px solid var(--line); border-radius:9px;
+  main.search { max-width:880px; margin:0 auto; padding:34px 24px 90px; }
+  main.search h1 { font-size:clamp(24px,4.2vw,34px); margin:0 0 8px; }
+  main.search .sub { color:var(--ink2); margin:0 0 20px; max-width:66ch; }
+  .modes { display:inline-flex; border:1px solid var(--line); border-radius:9px; overflow:hidden; margin-bottom:14px; }
+  .modes button { border:0; background:var(--panel); color:var(--ink2); font-size:14px; font-weight:600;
+    padding:8px 18px; cursor:pointer; }
+  .modes button.on { background:var(--accent); color:#fff; }
+  .askrow { display:flex; gap:8px; }
+  #q { flex:1; padding:13px 15px; font-size:16.5px; border:1px solid var(--line); border-radius:9px;
     background:var(--panel); color:var(--ink); }
   #q:focus { outline:none; border-color:var(--accent); }
+  #send { border:1px solid var(--accent); background:var(--accent); color:#fff; font-weight:650; font-size:15px;
+    padding:0 18px; border-radius:9px; cursor:pointer; }
+  #send:disabled { opacity:.5; cursor:default; }
   #status { color:var(--ink2); font-size:13.5px; margin:10px 2px; min-height:18px; }
+
+  /* Ask thread */
+  .turn { margin:18px 0 4px; }
+  .turn .qline { font-weight:700; font-size:16px; margin-bottom:8px; }
+  .turn .qline::before { content:"Q  "; color:var(--accent); font-weight:800; }
+  .answer { color:var(--ink); line-height:1.68; white-space:pre-wrap; }
+  .answer.streaming::after { content:"▋"; color:var(--accent); animation:blink 1s steps(2) infinite; }
+  @keyframes blink { 50% { opacity:0; } }
+  .answer cite, .answer a.cit { font-style:normal; }
+  a.cit { display:inline-block; text-decoration:none; color:var(--accent); font-weight:700; font-size:12.5px;
+    vertical-align:super; line-height:1; padding:0 1px; }
+  a.cit:hover { text-decoration:underline; }
+  .srcbox { margin-top:14px; border-top:1px solid var(--line); padding-top:10px; }
+  .srcbox .hd { font-size:11.5px; letter-spacing:.6px; text-transform:uppercase; color:var(--ink2); margin-bottom:8px; }
+  .srcitem { display:flex; gap:9px; margin-bottom:7px; font-size:13px; }
+  .srcitem .n { color:var(--accent); font-weight:700; flex:none; }
+  .srcitem a { color:var(--ink); text-decoration:none; word-break:break-all; }
+  .srcitem a:hover { color:var(--accent); }
+  .srcitem .pg { color:var(--ink2); }
+  .srcitem .fig { font-size:9.5px; font-weight:700; letter-spacing:.5px; color:var(--milestone); border:1px solid var(--line);
+    border-radius:4px; padding:0 5px; }
+
+  /* Search results */
   .hit { display:block; background:var(--panel); border:1px solid var(--line); border-radius:10px;
     padding:13px 16px; margin-bottom:12px; text-decoration:none; color:inherit; }
   a.hit:hover { border-color:var(--accent); }
@@ -35,49 +66,153 @@
   <div class="links" id="navlinks"></div>
 </nav>
 <main class="search">
-  <h1>Archive search</h1>
-  <p class="sub">Semantic + keyword search over the <b>entire source corpus</b> — 154,000 passages from
-  2,000+ documents, including vision-model descriptions of maps and figures. Queries are embedded locally
-  (Qwen3-Embedding-4B) and fused with BM25 — the same retrieval the archive's verification pipeline uses.</p>
-  <input type="search" id="q" placeholder="Ask the archive… (e.g. why was the Vulcan quarry deal abandoned, drop shaft air entrainment, Lawrence Avenue mole)" autofocus>
+  <h1>Ask the archive</h1>
+  <p class="sub">Two ways into the <b>entire source corpus</b> — 154,000 passages from 2,000+ documents,
+  including vision-model descriptions of maps and figures. <b>Ask</b> a question and a local model
+  synthesizes the sources into a cited answer; or <b>search</b> for raw passages. Retrieval is hybrid
+  semantic + BM25 — the same the archive's verification pipeline uses.</p>
+
+  <div class="modes" id="modes">
+    <button data-mode="ask" class="on">Ask a question</button>
+    <button data-mode="search">Search passages</button>
+  </div>
+  <div class="askrow">
+    <input type="search" id="q" autofocus>
+    <button id="send">Ask</button>
+  </div>
   <p id="status"></p>
+  <div id="thread"></div>
   <div id="results"></div>
 </main>
 <script>
 document.getElementById('navlinks').innerHTML = [
-  ['Flow map', './'], ['Geographic map', 'geo.html'], ['Deep Tunnel timeline', 'deep-tunnel-timeline.html'], ['Restoration timeline', 'restoration-timeline.html'],
-  ['Overview', '00-SYSTEM-OVERVIEW.html'], ['Documents', 'docs/'],
+  ['Flow map', './'], ['Geographic map', 'geo.html'], ['Deep Tunnel timeline', 'deep-tunnel-timeline.html'],
+  ['Restoration timeline', 'restoration-timeline.html'], ['Documents', 'docs/'],
   ['Site search', 'search.html'], ['Sources', 'SOURCES.html'],
 ].map(([t, h]) => `<a href="${h}">${t}</a>`).join('');
 
-const q = document.getElementById('q'), status = document.getElementById('status'), out = document.getElementById('results');
+const q = document.getElementById('q'), send = document.getElementById('send'),
+      status = document.getElementById('status'), thread = document.getElementById('thread'),
+      results = document.getElementById('results');
 const esc = s => (s || '').replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-let timer = null, seq = 0;
+let mode = 'ask', online = false, busy = false;
+const history = [];   // [{role,content}] for follow-ups
+
+const PLACE = {
+  ask: 'Ask the archive… (e.g. why was the river straightened in 1928? how does McCook fill and drain?)',
+  search: 'Search passages… (e.g. drop shaft air entrainment, dock wall design, fish species recovery)'
+};
+function setMode(m) {
+  mode = m; results.innerHTML = ''; thread.innerHTML = ''; history.length = 0;
+  document.querySelectorAll('#modes button').forEach(b => b.classList.toggle('on', b.dataset.mode === m));
+  q.placeholder = PLACE[m]; send.textContent = m === 'ask' ? 'Ask' : 'Search';
+  send.style.display = online ? '' : 'none';
+  status.textContent = online ? (m === 'ask' ? 'Ask a grounded question about the archive.' : '') : status.textContent;
+  q.focus();
+}
+document.querySelectorAll('#modes button').forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)));
 
 async function health() {
   try {
     const h = await (await fetch('/api/health')).json();
-    if (h.ok) { status.textContent = `${h.chunks.toLocaleString()} passages indexed · embedder ready`; return true; }
+    if (h.ok) {
+      online = true;
+      status.textContent = `${h.chunks.toLocaleString()} passages · ${h.chat_model} for answers`;
+      setMode('ask');
+      return true;
+    }
   } catch (e) {}
-  out.innerHTML = `<div class="offline"><b>The semantic search API isn't running here.</b><br>
-    This page works on the private mirror (bigmantower), where the RAG index and the local embedder live.
-    On the public site, use the <a href="search.html">keyword site search</a> instead — it covers the 17
-    research documents. The full-corpus semantic index stays on personal hardware.</div>`;
+  online = false;
+  document.querySelector('.askrow').style.display = 'none';
+  document.getElementById('modes').style.display = 'none';
+  results.innerHTML = `<div class="offline"><b>Semantic search and AI Q&A aren't available on this site.</b><br>
+    They run on the archive's private mirror, where the full source index and a local language model live —
+    the corpus stays on personal hardware. On the public site, use the
+    <a href="search.html">keyword site search</a>, which covers the research documents.</div>`;
   status.textContent = '';
   return false;
 }
 
-async function run() {
-  const query = q.value.trim();
-  if (!query) { out.innerHTML = ''; status.textContent = ''; return; }
-  const my = ++seq;
+// ---- citation linkify: [N] -> link to source N ----
+function linkifyCitations(text, sources) {
+  return esc(text).replace(/\[(\d{1,2})\]/g, (m, n) => {
+    const s = sources[+n - 1];
+    if (!s) return m;
+    const href = s.link || (s.file.endsWith('.pdf') ? '/' + s.file : '#');
+    return `<a class="cit" href="${href}" target="_blank" rel="noopener" title="${esc(s.file)}${s.page_start ? ' p.' + s.page_start : ''}">[${n}]</a>`;
+  });
+}
+function sourceListHtml(sources) {
+  return `<div class="srcbox"><div class="hd">Sources the answer draws on</div>` +
+    sources.map((s, i) => {
+      const href = s.link || (s.file.endsWith('.pdf') ? '/' + s.file : '');
+      const pg = s.page_start ? `<span class="pg">p.${s.page_start}</span>` : '';
+      const fig = s.is_figure ? '<span class="fig">figure</span>' : '';
+      const label = `${esc(s.file)}`;
+      return `<div class="srcitem"><span class="n">[${i + 1}]</span><div>` +
+        (href ? `<a href="${href}" target="_blank" rel="noopener">${label}</a>` : label) +
+        ` ${pg} ${fig}</div></div>`;
+    }).join('') + `</div>`;
+}
+
+// ---- Ask (streaming) ----
+async function ask(question) {
+  busy = true; send.disabled = true; status.textContent = 'searching the archive…';
+  const turn = document.createElement('div');
+  turn.className = 'turn';
+  turn.innerHTML = `<div class="qline">${esc(question)}</div><div class="answer streaming"></div><div class="srchold"></div>`;
+  thread.appendChild(turn);
+  const ansEl = turn.querySelector('.answer'), srcHold = turn.querySelector('.srchold');
+  ansEl.scrollIntoView({ block: 'nearest' });
+  let sources = [], raw = '';
+  try {
+    const resp = await fetch('/api/ask', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ q: question, history })
+    });
+    const reader = resp.body.getReader(), dec = new TextDecoder();
+    let buf = '';
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      let idx;
+      while ((idx = buf.indexOf('\n\n')) >= 0) {
+        const rawEvt = buf.slice(0, idx); buf = buf.slice(idx + 2);
+        let ev = null, data = null;
+        for (const l of rawEvt.split('\n')) {
+          if (l.startsWith('event: ')) ev = l.slice(7);
+          else if (l.startsWith('data: ')) data = l.slice(6);
+        }
+        if (data == null) continue;
+        const d = JSON.parse(data);
+        if (ev === 'sources') { sources = d; status.textContent = 'answering…'; }
+        else if (ev === 'error') { ansEl.innerHTML = `<span style="color:var(--problem)">${esc(d.error)}</span>`; }
+        else if (ev === 'done') { /* finalize below */ }
+        else if (d.t) { raw += d.t; ansEl.textContent = raw; }
+      }
+    }
+    ansEl.classList.remove('streaming');
+    ansEl.innerHTML = linkifyCitations(raw, sources);
+    if (sources.length) srcHold.innerHTML = sourceListHtml(sources);
+    history.push({ role: 'user', content: question }, { role: 'assistant', content: raw });
+    status.textContent = 'Ask a follow-up, or start a new question.';
+  } catch (e) {
+    ansEl.classList.remove('streaming');
+    ansEl.innerHTML = `<span style="color:var(--problem)">Request failed: ${esc(String(e))}</span>`;
+    status.textContent = '';
+  }
+  busy = false; send.disabled = false; q.focus();
+}
+
+// ---- Search (raw passages) ----
+async function runSearch(query) {
   status.textContent = 'searching…';
   try {
     const r = await (await fetch('/api/search?q=' + encodeURIComponent(query) + '&k=15')).json();
-    if (my !== seq) return;
     if (r.error) { status.textContent = r.error; return; }
     status.textContent = `${r.results.length} passages`;
-    out.innerHTML = r.results.map(h => {
+    results.innerHTML = r.results.map(h => {
       const badge = h.is_figure ? '<span class="badge">figure</span>' :
         (h.file.startsWith('docs/') ? '<span class="badge">research doc</span>' : '<span class="badge">source</span>');
       const pages = h.page_start === h.page_end ? `p.${h.page_start}` : `p.${h.page_start}–${h.page_end}`;
@@ -86,13 +221,23 @@ async function run() {
       return h.link ? `<a class="hit" href="${h.link}" target="_blank" rel="noopener">${inner}</a>`
                     : `<div class="hit">${inner}</div>`;
     }).join('');
-  } catch (e) { if (my === seq) status.textContent = 'search failed: ' + e; }
+  } catch (e) { status.textContent = 'search failed: ' + e; }
 }
-q.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(run, 350); });
-q.addEventListener('keydown', e => { if (e.key === 'Enter') { clearTimeout(timer); run(); } });
+
+function submit() {
+  const query = q.value.trim();
+  if (!query || busy) return;
+  if (mode === 'ask') { q.value = ''; ask(query); }
+  else { runSearch(query); }
+}
+send.addEventListener('click', submit);
+q.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
+
 health().then(ok => {
   const pre = new URLSearchParams(location.search).get('q');
-  if (pre && ok) { q.value = pre; run(); }
+  const m = new URLSearchParams(location.search).get('mode');
+  if (ok && m === 'search') setMode('search');
+  if (ok && pre) { q.value = pre; submit(); }
 });
 </script>
 </body>
