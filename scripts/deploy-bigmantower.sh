@@ -32,12 +32,13 @@ rsync -az rag/data/index.db "$HOST:$DEST/rag/data/index.db"
 echo "== 5/5 remote venv + (re)start service =="
 ssh "$HOST" bash -s <<REMOTE
 set -e
+export PORT=$PORT
 cd $DEST
 [ -d .venv ] || python3 -m venv .venv
 ./.venv/bin/pip install -q sqlite-vec requests
 pkill -f 'rag/serve[.]py' 2>/dev/null || true
 sleep 1
-PORT= nohup ./.venv/bin/python rag/serve.py > serve.log 2>&1 &
+nohup ./.venv/bin/python rag/serve.py > serve.log 2>&1 &
 sleep 2
 curl -sf "http://127.0.0.1:$PORT/api/health" && echo && echo "mirror live on http://\$(hostname):$PORT"
 REMOTE
