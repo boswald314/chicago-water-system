@@ -22,8 +22,9 @@ $PY rag/figures.py chunks
 echo "[finish] 3/5 embed.py (embed everything new)"
 $PY rag/embed.py 2>&1 | tail -5
 
-echo "[finish] 4/5 rsync index -> mirror"
+echo "[finish] 4/5 rsync index + new source files -> mirror"
 rsync -az rag/data/index.db bigmantower:~/chicago-water-mirror/rag/data/index.db
+rsync -az --exclude _hunt --exclude _new sources/ bigmantower:~/chicago-water-mirror/sources/
 
 echo "[finish] 5/5 restart mirror server"
 ssh bigmantower bash -s <<'REMOTE'
