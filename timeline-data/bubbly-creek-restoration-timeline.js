@@ -45,6 +45,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/mwrd-interceptors-pumping-stations/Description_of_CWS_Report_for_UAA_2008.pdf",
       "sources/usace-caws-restoration-dredging/2020-usace-bubbly-creek-chiefs-report.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "Description CWS Report for",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Description_of_CWS_Report_for_UAA_2008/p0001.jpg"
+      },
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0001.jpg"
+      }
      ]
     },
     {
@@ -55,6 +65,12 @@ window.TARPTIMELINE = {
      "weight": "standard",
      "sources": [
       "sources/usace-caws-restoration-dredging/2020-usace-bubbly-creek-chiefs-report.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0001.jpg"
+      }
      ]
     },
     {
@@ -71,6 +87,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-caws-restoration-dredging/2023-usace-chicago-waterways-restoration-framework-plan.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0001.jpg"
+      }
      ]
     },
     {
@@ -81,6 +103,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/usace-caws-restoration-dredging/2020-usace-bubbly-creek-chiefs-report.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0001.jpg"
+      }
      ]
     },
     {
@@ -91,6 +119,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/usace-caws-restoration-dredging/2020-usace-bubbly-creek-chiefs-report.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0001.jpg"
+      }
      ]
     },
     {
@@ -101,6 +135,12 @@ window.TARPTIMELINE = {
      "weight": "standard",
      "sources": [
       "sources/usace-caws-restoration-dredging/2020-usace-bubbly-creek-chiefs-report.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0001.jpg"
+      }
      ]
     },
     {
@@ -117,6 +157,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-caws-restoration-dredging/2020-usace-bubbly-creek-chiefs-report.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0001.jpg"
+      }
      ]
     }
    ]
@@ -134,6 +180,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/usace-caws-restoration-dredging/2020-usace-bubbly-creek-chiefs-report.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0001.jpg"
+      }
      ]
     },
     {
@@ -144,6 +196,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
+      }
      ]
     },
     {
@@ -154,6 +212,12 @@ window.TARPTIMELINE = {
      "weight": "standard",
      "sources": [
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
+      }
      ]
     },
     {
@@ -164,6 +228,12 @@ window.TARPTIMELINE = {
      "weight": "standard",
      "sources": [
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
+      }
      ]
     },
     {
@@ -174,6 +244,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/usace-caws-restoration-dredging/2020-usace-bubbly-creek-chiefs-report.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0001.jpg"
+      }
      ]
     },
     {
@@ -184,6 +260,12 @@ window.TARPTIMELINE = {
      "weight": "major",
      "sources": [
       "docs/14-cso-outfalls-discharges.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 14",
+       "href": "docs/14-cso-outfalls-discharges.html"
+      }
      ]
     },
     {
@@ -194,6 +276,12 @@ window.TARPTIMELINE = {
      "weight": "standard",
      "sources": [
       "sources/usace-caws-restoration-dredging/2020-usace-bubbly-creek-south-fork-south-branch-ecosystem-restoration-subject-letter.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-south-fork-south-branch-ecosystem-restoration-subject-le/p0001.jpg"
+      }
      ]
     },
     {
@@ -210,6 +298,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-caws-restoration-dredging/2020-usace-bubbly-creek-chiefs-report.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0001.jpg"
+      }
      ]
     },
     {
@@ -226,7 +320,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2010-bubbly-creek-sediment-oxygen-demand-sod-study-with-the-u-of-i-hydrodynamic-/p0062.jpg",
       "caption": "Sediment-characterization map of lower Bubbly Creek classifying the streambed from organic muck to coarse gravel \u2014 baseline data for deciding where restoration substrate needed to ",
       "credit": "2010-bubbly-creek-sediment-oxygen-demand-sod-study-with-the-u-of-i-hydrodynamic-sod-s.pdf p.62 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2009,
@@ -242,7 +342,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2010-bubbly-creek-sediment-oxygen-demand-sod-study-with-the-u-of-i-hydrodynamic-/p0054.jpg",
       "caption": "Map of University of Illinois sediment-oxygen-demand sampling stations on lower Bubbly Creek, used to measure how much oxygen the creek's polluted bottom sediments consume.",
       "credit": "2010-bubbly-creek-sediment-oxygen-demand-sod-study-with-the-u-of-i-hydrodynamic-sod-s.pdf p.54 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0001.jpg"
+      }
+     ]
     }
    ]
   },
@@ -272,7 +378,13 @@ window.TARPTIMELINE = {
       "credit": "USGS Illinois Water Science Center (public domain)",
       "href": "https://commons.wikimedia.org/wiki/File:Bubbly_Creek_headwaters-Racine_Avenue_Pump_Station_JPG.jpg",
       "source_url": "https://commons.wikimedia.org/wiki/File:Bubbly_Creek_headwaters-Racine_Avenue_Pump_Station_JPG.jpg"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2011 grilli iit evolution",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2011-grilli-iit-evolution-south-fork-turning-basin-preliminary-research/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2011,
@@ -295,7 +407,13 @@ window.TARPTIMELINE = {
       "credit": "USGS Illinois Water Science Center (public domain)",
       "href": "https://commons.wikimedia.org/wiki/File:Bubbly_Creek-Right_bank_development-Bridgeport_Village_JPG.jpg",
       "source_url": "https://commons.wikimedia.org/wiki/File:Bubbly_Creek-Right_bank_development-Bridgeport_Village_JPG.jpg"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2013,
@@ -311,7 +429,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-feasibility-appendix-d-geotechnical/p0044.jpg",
       "caption": "Geotechnical survey mapping differential settlement (0-0.05%) across the engineered gas cap along Bubbly Creek, stationed in 500-foot increments \u2014 the ground-stability data underly",
       "credit": "2020-usace-bubbly-creek-feasibility-appendix-d-geotechnical.pdf p.44 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2014,
@@ -327,6 +451,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-caws-restoration-dredging/2020-usace-bubbly-creek-chiefs-report.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0001.jpg"
+      }
      ]
     },
     {
@@ -343,6 +473,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-caws-restoration-dredging/appendices-bubbly-creek/2020-usace-bubbly-creek-feasibility-appendix-b-compliance-coordination.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-feasibility-appendix-b-compliance-coordination/p0001.jpg"
+      }
      ]
     },
     {
@@ -353,6 +489,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/usace-caws-restoration-dredging/2020-usace-bubbly-creek-chiefs-report.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0001.jpg"
+      }
      ]
     },
     {
@@ -376,7 +518,17 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-feasibility-study-ecosystem-restoration/p0027.jpg",
       "caption": "Detailed street-level study-area map of Bubbly Creek with CSO outfalls, drop shafts, and dissolved-oxygen monitoring points overlaid on the surrounding rail and canal network.",
       "credit": "2020-usace-bubbly-creek-feasibility-study-ecosystem-restoration.pdf p.27 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-south-fork-south-branch-ecosystem-restoration-subject-le/p0001.jpg"
+      },
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2015,
@@ -388,6 +540,20 @@ window.TARPTIMELINE = {
       "sources/usace-caws-restoration-dredging/appendices-bubbly-creek/2020-usace-bubbly-creek-feasibility-appendix-b-compliance-coordination.pdf",
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf",
       "sources/usace-caws-restoration-dredging/2023-usace-chicago-waterways-restoration-framework-plan.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-feasibility-appendix-b-compliance-coordination/p0001.jpg"
+      },
+      {
+       "label": "2025 usace caws restoration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
+      },
+      {
+       "label": "2023 usace chicago waterways",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0001.jpg"
+      }
      ]
     },
     {
@@ -404,7 +570,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0108.jpg",
       "caption": "Overview map of the recommended ecosystem-restoration (NER) plan for Bubbly Creek, keyed to a legend of substrate restoration (quarried stone, rounded river rock), riparian and eme",
       "credit": "2020-usace-bubbly-creek-chiefs-report.pdf p.108 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2017,
@@ -426,7 +598,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0067.jpg",
       "caption": "Map of combined sewer overflow outfalls (CSO 190 and up) discharging into Bubbly Creek and its historic side canals \u2014 Arvold's, Stuyvesant's, Loomis Street, Sampson's, Troop's, and",
       "credit": "2020-usace-bubbly-creek-chiefs-report.pdf p.67 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2018,
@@ -448,7 +626,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0032.jpg",
       "caption": "Environmental investigation map delineating the Peoples Gas 'Bubbly Creek Operable Unit' boundary and adjacent ambient-monitoring area at the creek's Turning Basin, with river flow",
       "credit": "2020-usace-bubbly-creek-chiefs-report.pdf p.32 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-south-fork-south-branch-ecosystem-restoration-subject-le/p0001.jpg"
+      }
+     ]
     }
    ]
   },
@@ -478,7 +662,17 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0016.jpg",
       "caption": "System-wide map of the Chicago Area Waterway System locating the Bubbly Creek study area (red box) among the district's water reclamation plants, pumping stations, and aeration sta",
       "credit": "2020-usace-bubbly-creek-chiefs-report.pdf p.16 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0001.jpg"
+      },
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-feasibility-study-ecosystem-restoration/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2020,
@@ -500,7 +694,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0017.jpg",
       "caption": "Close-up vicinity map of Bubbly Creek \u2014 the South Fork of the South Branch \u2014 showing its confluence with the Chicago Sanitary and Ship Canal and the Racine Avenue Pumping Station a",
       "credit": "2020-usace-bubbly-creek-chiefs-report.pdf p.17 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-south-fork-south-branch-ecosystem-restoration-subject-le/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2022,
@@ -524,7 +724,21 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0059.jpg",
       "caption": "Map of ecological reference sites used to benchmark Bubbly Creek's restoration \u2014 Eugene Field Park on the North Shore Channel, Powderhorn Ridge and Swale, and Red Mill Pond near Ga",
       "credit": "2020-usace-bubbly-creek-chiefs-report.pdf p.59 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 14",
+       "href": "docs/14-cso-outfalls-discharges.html"
+      },
+      {
+       "label": "2025 usace caws restoration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
+      },
+      {
+       "label": "2023 usace chicago waterways",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2023,
@@ -546,7 +760,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0109.jpg",
       "caption": "Restoration design for Bubbly Creek's Upstream Reach 1, overlaying substrate and planting zones on 2014 aerial imagery of the industrial corridor along the channel.",
       "credit": "2020-usace-bubbly-creek-chiefs-report.pdf p.109 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2024,
@@ -568,7 +788,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0110.jpg",
       "caption": "Restoration design for Bubbly Creek's Middle Reach 2, threading riparian plantings and quarried-stone substrate between warehouses and residential rowhouses.",
       "credit": "2020-usace-bubbly-creek-chiefs-report.pdf p.110 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "EPA UAA disinfection 2024",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/IL_EPA_UAA_disinfection_2024/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2024,
@@ -590,7 +816,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0111.jpg",
       "caption": "Restoration design for Bubbly Creek's Downstream Reach 3, extending substrate and planting zones under a highway bridge toward the creek's mouth.",
       "credit": "2020-usace-bubbly-creek-chiefs-report.pdf p.111 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "EPA UAA disinfection 2024",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/IL_EPA_UAA_disinfection_2024/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2025,
@@ -600,6 +832,12 @@ window.TARPTIMELINE = {
      "weight": "major",
      "sources": [
       "docs/14-cso-outfalls-discharges.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 14",
+       "href": "docs/14-cso-outfalls-discharges.html"
+      }
      ]
     },
     {
@@ -610,6 +848,12 @@ window.TARPTIMELINE = {
      "weight": "standard",
      "sources": [
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
+      }
      ]
     },
     {
@@ -620,6 +864,12 @@ window.TARPTIMELINE = {
      "weight": "major",
      "sources": [
       "docs/14-cso-outfalls-discharges.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 14",
+       "href": "docs/14-cso-outfalls-discharges.html"
+      }
      ]
     },
     {
@@ -630,6 +880,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "docs/14-cso-outfalls-discharges.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 14",
+       "href": "docs/14-cso-outfalls-discharges.html"
+      }
      ]
     },
     {
@@ -640,6 +896,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/usace-caws-restoration-dredging/2020-usace-bubbly-creek-chiefs-report.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace bubbly creek",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-bubbly-creek-chiefs-report/p0001.jpg"
+      }
      ]
     }
    ]

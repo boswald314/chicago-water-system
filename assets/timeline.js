@@ -125,6 +125,13 @@ for (const era of D.eras) {
     if (ev.doc) {
       h += `<a class="doclink" href="${LOCAL ? 'docs/' + ev.doc + '.md' : 'docs/' + ev.doc + '.html'}">Read the full research →</a>`;
     }
+    if (ev.srclinks && ev.srclinks.length) {
+      h += `<div class="evsrc"><span class="lbl">Sources</span>` + ev.srclinks.map(s =>
+        s.href
+          ? `<a href="${s.href}"${/^https?:|\.jpg$/.test(s.href) ? ' target="_blank" rel="noopener"' : ''}>${esc(s.label)}</a>`
+          : `<span class="noh">${esc(s.label)}</span>`
+      ).join('') + `</div>`;
+    }
     a.innerHTML = h;
     wrap.appendChild(a);
   }

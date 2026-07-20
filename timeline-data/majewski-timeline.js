@@ -45,6 +45,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-chicagoland-underflow-plan/1975-usace-cup-urban-water-damage-study-draft-eis.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1975 usace cup urban",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1975-usace-cup-urban-water-damage-study-draft-eis/p0001.jpg"
+      }
      ]
     },
     {
@@ -55,6 +61,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/usace-chicagoland-underflow-plan/1975-usace-cup-urban-water-damage-study-draft-eis.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1975 usace cup urban",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1975-usace-cup-urban-water-damage-study-draft-eis/p0001.jpg"
+      }
      ]
     },
     {
@@ -65,6 +77,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -88,7 +106,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1975-usace-cup-urban-water-damage-study-draft-eis/p0013.jpg",
       "caption": "TARP as conceived in 1975 \u2014 tunnels, on-line and terminal reservoirs \u2014 the plan the O'Hare Reservoir would eventually be carved out of.",
       "credit": "1975-usace-cup-urban-water-damage-study-draft-eis.pdf p.13 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1975 usace cup urban",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1975-usace-cup-urban-water-damage-study-draft-eis/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1980,
@@ -105,6 +129,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/suburban-wrps/kirie_factsheet.pdf",
       "sources/current-projects/mwrd-2026-final-budget-book.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "kirie factsheet",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/kirie_factsheet/p0001.jpg"
+      },
+      {
+       "label": "mwrd 2026 final budget",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/mwrd-2026-final-budget-book/p0001.jpg"
+      }
      ]
     },
     {
@@ -116,6 +150,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/09-tarp-deep-tunnel.md",
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      },
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -126,6 +170,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/usace-chicagoland-underflow-plan/1990-cup-ohare-reservoir-phase2-gdm-eis-vol2.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol2/p0001.jpg"
+      }
      ]
     },
     {
@@ -137,6 +187,12 @@ window.TARPTIMELINE = {
      "date": "1984-04",
      "sources": [
       "sources/usace-chicagoland-underflow-plan/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0001.jpg"
+      }
      ]
     },
     {
@@ -159,7 +215,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0162.jpg",
       "caption": "Where the O'Hare system sits within TARP's four combined-sewer service areas.",
       "credit": "1990-cup-ohare-reservoir-phase2-gdm-eis-vol1.pdf p.162 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1986,
@@ -177,6 +239,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/tarp-reservoirs/TARP_Status_Report_6-30-25.pdf",
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_6-30-25/p0001.jpg"
+      },
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -200,7 +272,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol2/p0203.jpg",
       "caption": "A textbook cross-section of the combined-sewer problem the reservoir solves: untreated overflow bypassing the interceptor straight to the watercourse in wet weather.",
       "credit": "1990-cup-ohare-reservoir-phase2-gdm-eis-vol2.pdf p.203 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0001.jpg"
+      }
+     ]
     }
    ]
   },
@@ -224,7 +302,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol2/p0482.jpg",
       "caption": "A geologic cross-section west of the reservoir showing boreholes through clay and sand layers down to dolomitic bedrock \u2014 the subsurface conditions the excavation and liner design had to account for.",
       "credit": "1990-cup-ohare-reservoir-phase2-gdm-eis-vol2.pdf p.482 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1989,
@@ -242,7 +326,17 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol2/p0094.jpg",
       "caption": "Plate 8 details how Willow-Higgins Creek was redesigned around the reservoir: a meandering low-flow channel threading a proposed wetland, with the full relocated-channel elevation profile.",
       "credit": "1990-cup-ohare-reservoir-phase2-gdm-eis-vol2.pdf p.94 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0001.jpg"
+      },
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol2/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1990,
@@ -264,7 +358,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol2/p0087.jpg",
       "caption": "Volume II's plan view of the two connected O'Hare Reservoir basins, with slope ratios and spillway pipe callouts.",
       "credit": "1990-cup-ohare-reservoir-phase2-gdm-eis-vol2.pdf p.87 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol2/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1990,
@@ -287,7 +387,17 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0082.jpg",
       "caption": "The 1,050 acre-foot O'Hare Reservoir as originally authorized: Plate 1 of the Corps of Engineers' Chicagoland Underflow Plan, before the design grew to its final 1,650 acre-foot footprint.",
       "credit": "1990-cup-ohare-reservoir-phase2-gdm-eis-vol1.pdf p.82 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "mwrd 2026 final budget",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/mwrd-2026-final-budget-book/p0001.jpg"
+      },
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1990,
@@ -309,7 +419,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0083.jpg",
       "caption": "Plate 2: the 'locally preferred' 1,650 acre-foot design that superseded the original authorization, with spoil piles, the utility corridor, and the shop base access road.",
       "credit": "1990-cup-ohare-reservoir-phase2-gdm-eis-vol1.pdf p.83 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1990,
@@ -332,7 +448,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol2/p0088.jpg",
       "caption": "Volume II's version of the locally-preferred 1,650 acre-foot site plan, keyed to Bellefield Hollow Creek and two engineered spill-fill embankments.",
       "credit": "1990-cup-ohare-reservoir-phase2-gdm-eis-vol2.pdf p.88 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol2/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1990,
@@ -355,7 +477,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0085.jpg",
       "caption": "Plate 4 maps the Des Plaines River tributary network the O'Hare Reservoir was built to intercept \u2014 Higgins and Willow Creeks among them \u2014 each confluence marked by river mile.",
       "credit": "1990-cup-ohare-reservoir-phase2-gdm-eis-vol1.pdf p.85 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol2/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1990,
@@ -378,7 +506,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0087.jpg",
       "caption": "Plate 6 catalogs land use around the O'Hare system study area \u2014 the built environment the reservoir had to fit into near O'Hare Airport.",
       "credit": "1990-cup-ohare-reservoir-phase2-gdm-eis-vol1.pdf p.87 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol2/p0001.jpg"
+      }
+     ]
     }
    ]
   },
@@ -401,7 +535,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0352.jpg",
       "caption": "The reservoir's stage-storage curve: how water-surface elevation rises with stored volume, up to the 1,050 acre-foot design high-water level.",
       "credit": "1990-cup-ohare-reservoir-phase2-gdm-eis-vol1.pdf p.352 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1992,
@@ -423,7 +563,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0229.jpg",
       "caption": "A junction-numbering schematic for the Devon Avenue sewer system that fed combined-sewer overflow data into the reservoir's design models.",
       "credit": "1990-cup-ohare-reservoir-phase2-gdm-eis-vol1.pdf p.229 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1998,
@@ -440,6 +586,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/current-projects/mwrd-2026-final-budget-book.pdf",
       "sources/cso-outfalls-discharges/tarp-status-report-dec2024-mwrd.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "mwrd 2026 final budget",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/mwrd-2026-final-budget-book/p0001.jpg"
+      },
+      {
+       "label": "tarp status report dec2024",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/tarp-status-report-dec2024-mwrd/p0001.jpg"
+      }
      ]
     },
     {
@@ -450,6 +606,12 @@ window.TARPTIMELINE = {
      "weight": "standard",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     }
    ]
@@ -467,6 +629,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/mwrd-mr-reports/2011-tunnel-and-reservoir-plan-gloria-alitto-majewski-chicagoland-underflow-plan-rese.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2011 tunnel and reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2011-tunnel-and-reservoir-plan-gloria-alitto-majewski-chicagoland-underflow-plan/p0001.jpg"
+      }
      ]
     },
     {
@@ -477,6 +645,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/mwrd-mr-reports/2012-tarp-majewski-reservoir-water-2011-groundwater-monitoring-report.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2012 tarp majewski reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2012-tarp-majewski-reservoir-water-2011-groundwater-monitoring-report/p0001.jpg"
+      }
      ]
     },
     {
@@ -488,6 +662,12 @@ window.TARPTIMELINE = {
      "date": "2019-01-31",
      "sources": [
       "docs/16-current-capital-projects.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 16",
+       "href": "docs/16-current-capital-projects.html"
+      }
      ]
     },
     {
@@ -499,6 +679,12 @@ window.TARPTIMELINE = {
      "date": "2020-06",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -509,6 +695,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -525,7 +717,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2024-report-no-24-21-tunnel-and-reservoir-plan-gloria-alitto-majewski-cup-underf/p0009.jpg",
       "caption": "MWRD's current groundwater-monitoring map: four water-quality wells and nine private wells ringing the finished Majewski Reservoir, watched annually since it went into service.",
       "credit": "2024-report-no-24-21-tunnel-and-reservoir-plan-gloria-alitto-majewski-cup-underflow-p.pdf p.9 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
+     ]
     },
     {
      "year": 2026,
@@ -536,6 +734,12 @@ window.TARPTIMELINE = {
      "date": "2026-01",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -553,6 +757,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/current-projects/mwrd-2026-final-budget-book.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "mwrd 2026 final budget",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/mwrd-2026-final-budget-book/p0001.jpg"
+      }
      ]
     },
     {
@@ -564,6 +774,12 @@ window.TARPTIMELINE = {
      "date": "2026-07",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -574,6 +790,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/current-projects/mwrd-2026-final-budget-book.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "mwrd 2026 final budget",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/mwrd-2026-final-budget-book/p0001.jpg"
+      }
      ]
     }
    ]

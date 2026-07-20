@@ -101,6 +101,13 @@ article.ev.in { opacity:1; transform:none; }
   border-radius:5px; padding:1px 7px; }
 .ev .doclink { display:inline-block; margin-top:8px; font-size:13px; color:var(--accent); text-decoration:none; }
 .ev .doclink:hover { text-decoration:underline; }
+.ev .evsrc { margin-top:9px; display:flex; flex-wrap:wrap; gap:6px 8px; align-items:baseline; font-size:12px; }
+.ev .evsrc .lbl { color:var(--ink2); text-transform:uppercase; letter-spacing:.6px; font-size:10.5px; font-weight:700; }
+.ev .evsrc a, .ev .evsrc .noh { text-decoration:none; border:1px solid var(--line); border-radius:5px;
+  padding:1px 7px; background:var(--panel); }
+.ev .evsrc a { color:var(--accent); }
+.ev .evsrc a:hover { border-color:var(--accent); }
+.ev .evsrc .noh { color:var(--ink2); }
 
 .ev.minor .body { color:var(--ink2); font-size:14.5px; }
 .ev.minor h3 { font-size:15.5px; margin-bottom:3px; }

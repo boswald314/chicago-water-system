@@ -38,6 +38,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/usace-caws-restoration-dredging/2023-usace-chicago-waterways-restoration-framework-plan.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0001.jpg"
+      }
      ]
     },
     {
@@ -49,6 +55,12 @@ window.TARPTIMELINE = {
      "doc": "08-north-branch-pumping-station",
      "sources": [
       "docs/08-north-branch-pumping-station.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 08",
+       "href": "docs/08-north-branch-pumping-station.html"
+      }
      ]
     },
     {
@@ -65,6 +77,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-north-branch-gdm/1972-usace-final-environmental-statement-debris-removal-north-branch-chicago-river.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1972 usace final environmental",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1972-usace-final-environmental-statement-debris-removal-north-branch-chicago-riv/p0001.jpg"
+      }
      ]
     },
     {
@@ -75,6 +93,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/usace-north-branch-gdm/1983-usace-north-branch-chicago-river-phase1-gdm.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1983 usace north branch",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1983-usace-north-branch-chicago-river-phase1-gdm/p0001.jpg"
+      }
      ]
     },
     {
@@ -91,7 +115,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1981-usace-north-branch-chicago-river-phase1-gdm-eis-draft/p0221.jpg",
       "caption": "1979 aerial photograph of proposed Reservoir Site No. 7 on the North Branch, annotated with the dashed alignment of the planned excavation.",
       "credit": "1981-usace-north-branch-chicago-river-phase1-gdm-eis-draft.pdf p.221 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1983 usace north branch",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1983-usace-north-branch-chicago-river-phase1-gdm/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1981,
@@ -107,7 +137,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1981-usace-north-branch-chicago-river-phase1-gdm-eis-draft/p0383.jpg",
       "caption": "General location map of the North Branch watershed from the 1981 draft EIS, spanning northern Cook and southern Lake Counties with numbered hydraulic control structures.",
       "credit": "1981-usace-north-branch-chicago-river-phase1-gdm-eis-draft.pdf p.383 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1981 usace north branch",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1981-usace-north-branch-chicago-river-phase1-gdm-eis-draft/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1983,
@@ -129,7 +165,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1983-usace-north-branch-chicago-river-phase1-gdm/p0080.jpg",
       "caption": "Plate 1 of the 1983 Phase I General Design Memorandum: the North Branch Chicago River study area from O'Hare to the Lake Michigan shoreline near Waukegan, mapping the full basin la",
       "credit": "1983-usace-north-branch-chicago-river-phase1-gdm.pdf p.80 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1983 usace north branch",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1983-usace-north-branch-chicago-river-phase1-gdm/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1983,
@@ -151,7 +193,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1983-usace-north-branch-chicago-river-phase1-gdm/p0193.jpg",
       "caption": "Generic engineering diagram of meander geometry, cross-sections, and pool/riffle placement for a natural stream \u2014 the design vocabulary the Corps used to plan channel restoration o",
       "credit": "1983-usace-north-branch-chicago-river-phase1-gdm.pdf p.193 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1983 usace north branch",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1983-usace-north-branch-chicago-river-phase1-gdm/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1983,
@@ -173,7 +221,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1983-usace-north-branch-chicago-river-phase1-gdm/p0081.jpg",
       "caption": "Plate 2 lays out more than twenty numbered alternative flood-control reservoir sites considered along the North Branch and its Middle and West Forks.",
       "credit": "1983-usace-north-branch-chicago-river-phase1-gdm.pdf p.81 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1983 usace north branch",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1983-usace-north-branch-chicago-river-phase1-gdm/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1983,
@@ -195,7 +249,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1983-usace-north-branch-chicago-river-phase1-gdm/p0164.jpg",
       "caption": "Basin map pinpointing six proposed reservoir sites (15, 4, 7, 18, 27, 29) along the North Branch corridor from Winnetka to Skokie.",
       "credit": "1983-usace-north-branch-chicago-river-phase1-gdm.pdf p.164 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1983 usace north branch",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1983-usace-north-branch-chicago-river-phase1-gdm/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1983,
@@ -217,7 +277,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1983-usace-north-branch-chicago-river-phase1-gdm/p0194.jpg",
       "caption": "Longitudinal profile showing how a natural stream's bed alternates between shallow riffles and deep pools \u2014 the template for restoring channelized reaches to a more natural form.",
       "credit": "1983-usace-north-branch-chicago-river-phase1-gdm.pdf p.194 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1983 usace north branch",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1983-usace-north-branch-chicago-river-phase1-gdm/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1983,
@@ -239,7 +305,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1983-usace-north-branch-chicago-river-phase1-gdm/p0195.jpg",
       "caption": "Conceptual engineering design for a constructed pool-riffle sequence, with plan view, cross-sections through the riffle and pool, and a dimensioned longitudinal profile \u2014 the speci",
       "credit": "1983-usace-north-branch-chicago-river-phase1-gdm.pdf p.195 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1983 usace north branch",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1983-usace-north-branch-chicago-river-phase1-gdm/p0001.jpg"
+      }
+     ]
     }
    ]
   },
@@ -263,13 +335,23 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/docs-societies-mwrd-misc/1999-chicago-rivers-demonstration-project-whats-working-on-working-rivers.pdf",
       "sources/usace-caws-restoration-dredging/2023-usace-chicago-waterways-restoration-framework-plan.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1999 chicago rivers demonstration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1999-chicago-rivers-demonstration-project-whats-working-on-working-rivers/p0001.jpg"
+      },
+      {
+       "label": "2023 usace chicago waterways",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0001.jpg"
+      }
      ]
     },
     {
      "year": 1993,
-     "title": "SEPA Station at Webster Avenue Keeps the North Branch Oxygenated",
+     "title": "Instream aeration keeps the North Branch oxygenated",
      "kind": "construction",
-     "body": "MWRD built its Sidestream Elevated Pool Aeration and instream-diffuser aeration systems in the late 1970s and early 1990s to fix a structural problem restoration alone couldn't solve: the CAWS's engineered, slow, sometimes-reversed flow leaves stretches with too little natural reaeration to sustain fish. The District's Webster Avenue station on the North Branch (paired with a Devon Avenue station on the North Shore Channel) is the corridor-specific instance of that program, lifting and cascading water to add dissolved oxygen year-round rather than only where habitat-restoration construction happens to occur.",
+     "body": "MWRD addressed a structural problem restoration alone couldn't solve \u2014 the CAWS's engineered, slow, sometimes-reversed flow leaves stretches with too little natural reaeration to sustain fish \u2014 by installing instream diffused-aeration stations that bubble compressed air up through the channel. The Webster Avenue station on the North Branch (paired with a Devon Avenue station on the North Shore Channel) is the corridor's instance, adding dissolved oxygen year-round. These are distinct from MWRD's five Sidestream Elevated Pool Aeration (SEPA) stations, which lift and cascade water on the Calumet system and Cal-Sag Channel \u2014 a different technology for the same low-oxygen problem.",
      "weight": "standard",
      "quote": {
       "text": "MWRDGC also operates aeration stations on the North Branch Chicago River (at W. Webster Avenue) and the NSC (at W. Devon Avenue).",
@@ -280,6 +362,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/mwrd-mr-reports/2002-report-02-11-continuous-dissolved-oxygen-monitoring-from-wilmette-to-lockport-in.pdf",
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2002 report continuous dissolved",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2002-report-02-11-continuous-dissolved-oxygen-monitoring-from-wilmette-to-lockpo/p0001.jpg"
+      },
+      {
+       "label": "2025 usace caws restoration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
+      }
      ]
     },
     {
@@ -291,6 +383,12 @@ window.TARPTIMELINE = {
      "doc": "08-north-branch-pumping-station",
      "sources": [
       "docs/08-north-branch-pumping-station.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 08",
+       "href": "docs/08-north-branch-pumping-station.html"
+      }
      ]
     },
     {
@@ -307,6 +405,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-caws-restoration-dredging/2023-usace-chicago-waterways-restoration-framework-plan.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0001.jpg"
+      }
      ]
     },
     {
@@ -323,6 +427,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
+      }
      ]
     },
     {
@@ -333,6 +443,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
+      }
      ]
     },
     {
@@ -343,6 +459,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/docs-societies-mwrd-misc/2007-focr-action-plan-chicago-river.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2007 focr action plan",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2007-focr-action-plan-chicago-river/p0001.jpg"
+      }
      ]
     },
     {
@@ -353,6 +475,12 @@ window.TARPTIMELINE = {
      "weight": "standard",
      "sources": [
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
+      }
      ]
     }
    ]
@@ -376,6 +504,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
+      }
      ]
     },
     {
@@ -386,6 +520,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
+      }
      ]
     },
     {
@@ -409,7 +549,13 @@ window.TARPTIMELINE = {
       "credit": "Wikimedia Commons contributor, CC BY-SA 4.0",
       "href": "https://commons.wikimedia.org/wiki/File:North-Branch-of-the-Chicago-River-01.JPG",
       "source_url": "https://commons.wikimedia.org/wiki/File:North-Branch-of-the-Chicago-River-01.JPG"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2015,
@@ -419,6 +565,12 @@ window.TARPTIMELINE = {
      "weight": "standard",
      "sources": [
       "sources/usace-caws-restoration-dredging/2023-usace-chicago-waterways-restoration-framework-plan.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0001.jpg"
+      }
      ]
     },
     {
@@ -430,6 +582,12 @@ window.TARPTIMELINE = {
      "doc": "08-north-branch-pumping-station",
      "sources": [
       "docs/08-north-branch-pumping-station.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 08",
+       "href": "docs/08-north-branch-pumping-station.html"
+      }
      ]
     },
     {
@@ -441,6 +599,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/usace-caws-restoration-dredging/2020-usace-caws-dredged-material-management-plan-final-eis.pdf",
       "sources/usace-caws-restoration-dredging/2023-usace-chicago-waterways-restoration-framework-plan.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace caws dredged",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-caws-dredged-material-management-plan-final-eis/p0001.jpg"
+      },
+      {
+       "label": "2023 usace chicago waterways",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0001.jpg"
+      }
      ]
     },
     {
@@ -457,6 +625,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
+      }
      ]
     },
     {
@@ -474,7 +648,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-chicago-rivers-restoration-framework-plan-study/p0017.jpg",
       "caption": "Before-and-after photos of the low-head dam at the confluence of the upper North Branch and North Shore Channel: turbulent water spilling over the concrete weir in 2017, and the ex",
       "credit": "2023-chicago-rivers-restoration-framework-plan-study.pdf p.17 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 08",
+       "href": "docs/08-north-branch-pumping-station.html"
+      }
+     ]
     },
     {
      "year": 2018,
@@ -499,7 +679,17 @@ window.TARPTIMELINE = {
       "credit": "USACE Chicago District, CC BY-NC 2.0",
       "href": "https://www.flickr.com/photos/usacechicago/43088313674/",
       "source_url": "https://www.flickr.com/photos/usacechicago/43088313674/"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 08",
+       "href": "docs/08-north-branch-pumping-station.html"
+      },
+      {
+       "label": "2023 usace chicago waterways",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0001.jpg"
+      }
+     ]
     }
    ]
   },
@@ -530,7 +720,17 @@ window.TARPTIMELINE = {
       "credit": "USACE Chicago District, CC BY-NC 2.0",
       "href": "https://www.flickr.com/photos/usacechicago/43088305504/",
       "source_url": "https://www.flickr.com/photos/usacechicago/43088305504/"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
+      },
+      {
+       "label": "doc 08",
+       "href": "docs/08-north-branch-pumping-station.html"
+      }
+     ]
     },
     {
      "year": 2019,
@@ -546,6 +746,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
+      }
      ]
     },
     {
@@ -564,6 +770,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/08-north-branch-pumping-station.md",
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 08",
+       "href": "docs/08-north-branch-pumping-station.html"
+      },
+      {
+       "label": "2025 usace caws restoration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
+      }
      ]
     },
     {
@@ -575,6 +791,12 @@ window.TARPTIMELINE = {
      "doc": "08-north-branch-pumping-station",
      "sources": [
       "docs/08-north-branch-pumping-station.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 08",
+       "href": "docs/08-north-branch-pumping-station.html"
+      }
      ]
     },
     {
@@ -591,6 +813,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-caws-restoration-dredging/2023-usace-chicago-waterways-restoration-framework-plan.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0001.jpg"
+      }
      ]
     },
     {
@@ -607,6 +835,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-caws-restoration-dredging/2023-usace-chicago-waterways-restoration-framework-plan.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0001.jpg"
+      }
      ]
     },
     {
@@ -617,6 +851,12 @@ window.TARPTIMELINE = {
      "weight": "standard",
      "sources": [
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
+      }
      ]
     },
     {
@@ -633,6 +873,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-caws-restoration-dredging/2023-usace-chicago-waterways-restoration-framework-plan.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0001.jpg"
+      }
      ]
     },
     {
@@ -649,6 +895,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
+      }
      ]
     },
     {
@@ -666,7 +918,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0039.jpg",
       "caption": "Map of 14 numbered restoration 'opportunity sites' along the North Branch above its fork with the North Shore Channel, keyed to recreational paths, railroad property, and industria",
       "credit": "2023-usace-chicago-waterways-restoration-framework-plan.pdf p.39 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 08",
+       "href": "docs/08-north-branch-pumping-station.html"
+      }
+     ]
     },
     {
      "year": 2023,
@@ -688,7 +946,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0043.jpg",
       "caption": "Map of the North Branch 'Below Fork' reach, a 5.1-mile run from the North Shore Channel confluence south to Kinzie Street through Ravenswood, Logan Square, and Lincoln Park.",
       "credit": "2023-usace-chicago-waterways-restoration-framework-plan.pdf p.43 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2023,
@@ -710,7 +974,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0048.jpg",
       "caption": "Zoning map of the North Branch corridor between its northern confluence and Kinzie Street, showing Planned Manufacturing districts still dominating the river's edge even as parklan",
       "credit": "2023-usace-chicago-waterways-restoration-framework-plan.pdf p.48 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2023,
@@ -726,6 +996,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-caws-restoration-dredging/2023-usace-chicago-waterways-restoration-framework-plan.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0001.jpg"
+      }
      ]
     },
     {
@@ -742,6 +1018,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-caws-restoration-dredging/2023-usace-chicago-waterways-restoration-framework-plan.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0001.jpg"
+      }
      ]
     },
     {
@@ -758,6 +1040,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-caws-restoration-dredging/2023-usace-chicago-waterways-restoration-framework-plan.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0001.jpg"
+      }
      ]
     },
     {
@@ -768,6 +1056,12 @@ window.TARPTIMELINE = {
      "weight": "standard",
      "sources": [
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
+      }
      ]
     },
     {
@@ -784,6 +1078,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
+      }
      ]
     },
     {
@@ -794,6 +1094,12 @@ window.TARPTIMELINE = {
      "weight": "standard",
      "sources": [
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
+      }
      ]
     }
    ]

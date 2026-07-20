@@ -40,6 +40,12 @@ window.TARPTIMELINE = {
      "doc": "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf",
      "sources": [
       "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "Chicago Underflow Plan 1972",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0001.jpg"
+      }
      ]
     },
     {
@@ -58,6 +64,12 @@ window.TARPTIMELINE = {
      "doc": "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf",
      "sources": [
       "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "Chicago Underflow Plan 1972",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0001.jpg"
+      }
      ]
     },
     {
@@ -69,6 +81,12 @@ window.TARPTIMELINE = {
      "doc": "sources/usace-mccook-hydraulic-model/1991-usace-wes-mccook-reservoir-hydraulic-model-investigation.pdf",
      "sources": [
       "sources/usace-mccook-hydraulic-model/1991-usace-wes-mccook-reservoir-hydraulic-model-investigation.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1991 usace wes mccook",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1991-usace-wes-mccook-reservoir-hydraulic-model-investigation/p0001.jpg"
+      }
      ]
     },
     {
@@ -80,6 +98,12 @@ window.TARPTIMELINE = {
      "doc": "sources/usace-chicagoland-underflow-plan/1975-usace-cup-urban-water-damage-study-draft-eis.pdf",
      "sources": [
       "sources/usace-chicagoland-underflow-plan/1975-usace-cup-urban-water-damage-study-draft-eis.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1975 usace cup urban",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1975-usace-cup-urban-water-damage-study-draft-eis/p0001.jpg"
+      }
      ]
     },
     {
@@ -92,6 +116,12 @@ window.TARPTIMELINE = {
      "doc": "docs/10-tarp-reservoirs.md",
      "sources": [
       "sources/usace-chicagoland-underflow-plan/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0001.jpg"
+      }
      ]
     },
     {
@@ -103,6 +133,12 @@ window.TARPTIMELINE = {
      "doc": "docs/10-tarp-reservoirs.md",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -126,7 +162,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1991-usace-wes-mccook-reservoir-hydraulic-model-investigation/p0061.jpg",
       "caption": "Turbulent flow through the covered conduit at 2,000 cfs in the physical model \u2014 one of dozens of discharge scenarios tested.",
       "credit": "1991-usace-wes-mccook-reservoir-hydraulic-model-investigation.pdf p.61 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "FactSheet McCook Reservoir 250515",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/FactSheet_McCook_Reservoir_250515/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1986,
@@ -149,7 +191,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1991-usace-wes-mccook-reservoir-hydraulic-model-investigation/p0058.jpg",
       "caption": "Dye-traced flow patterns converging on the model intake at two test discharges \u2014 500 and 1,000 cubic feet per second \u2014 during the 1991 hydraulic model study.",
       "credit": "1991-usace-wes-mccook-reservoir-hydraulic-model-investigation.pdf p.58 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1988,
@@ -166,7 +214,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1991-usace-wes-mccook-reservoir-hydraulic-model-investigation/p0080.jpg",
       "caption": "Plan and elevation of the reservoir's Morning Glory intake \u2014 the funnel-shaped drop structure that pulls stored water back down into the tunnel system.",
       "credit": "1991-usace-wes-mccook-reservoir-hydraulic-model-investigation.pdf p.80 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1988 epa tarp special",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1991,
@@ -184,7 +238,17 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1991-usace-wes-mccook-reservoir-hydraulic-model-investigation/p0077.jpg",
       "caption": "The Corps of Engineers' 1991 hydraulic-model study baseline location map: McCook Quarry as it existed before reservoir conversion, wedged between the Des Plaines River and the Sanitary and Ship Canal.",
       "credit": "1991-usace-wes-mccook-reservoir-hydraulic-model-investigation.pdf p.77 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1991 usace wes mccook",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1991-usace-wes-mccook-reservoir-hydraulic-model-investigation/p0001.jpg"
+      },
+      {
+       "label": "1991 dtic mccook reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1991-dtic-mccook-reservoir-water-quality-model-numerical-investigation/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1991,
@@ -208,7 +272,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1991-usace-wes-mccook-reservoir-hydraulic-model-investigation/p0078.jpg",
       "caption": "Plan and profile of the McCook Manifold \u2014 the outlet structure the model was built to test \u2014 with its wheel gate and surge shafts.",
       "credit": "1991-usace-wes-mccook-reservoir-hydraulic-model-investigation.pdf p.78 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1991 dtic mccook reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1991-dtic-mccook-reservoir-water-quality-model-numerical-investigation/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1993,
@@ -225,7 +295,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1991-usace-wes-mccook-reservoir-hydraulic-model-investigation/p0016.jpg",
       "caption": "Inside the Waterways Experiment Station lab: the physical scale model of the Morning Glory intake and manifold outlet used to test McCook's hydraulics before construction.",
       "credit": "1991-usace-wes-mccook-reservoir-hydraulic-model-investigation.pdf p.16 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "FactSheet McCook Reservoir 250515",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/FactSheet_McCook_Reservoir_250515/p0001.jpg"
+      }
+     ]
     }
    ]
   },
@@ -255,7 +331,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1995-dtic-3d-numerical-model-reservoir-hydrodynamics-mccook/p0044.jpg",
       "caption": "A 3-D computational grid of the reservoir basin, built for the Corps' 1995 numerical model of how stored water stratifies and mixes.",
       "credit": "1995-dtic-3d-numerical-model-reservoir-hydrodynamics-mccook.pdf p.44 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2011 epa doj mwrd",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2011-epa-doj-mwrd-consent-decree/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1996,
@@ -276,7 +358,21 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1995-dtic-3d-numerical-model-reservoir-hydrodynamics-mccook/p0055.jpg",
       "caption": "Modeled surface-water circulation patterns overlaid on an aerial photo of the reservoir basin \u2014 part of the Corps' study of how incoming combined sewage mixes with stored water.",
       "credit": "1995-dtic-3d-numerical-model-reservoir-hydrodynamics-mccook.pdf p.55 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1996 federal register eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1996-federal-register-eis-notice-mccook-reservoir-draft-filed/p0001.jpg"
+      },
+      {
+       "label": "1997 federal register eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1997-federal-register-eis-notice-mccook-reservoir-comment-reopened/p0001.jpg"
+      },
+      {
+       "label": "1998 federal register eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1998-federal-register-eis-notice-mccook-reservoir-final-filed/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1999,
@@ -300,7 +396,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2005-dtic-tri-service-conf-chicago-underflow-mccook-reservoir-presentations/p0008.jpg",
       "caption": "The full McCook 'Lagoons Reservoir' layout as engineered in 1999: six numbered tunnels, twin pump houses, and the Stage 1/Stage 2 floor split that would later become the reservoir's two construction phases.",
       "credit": "2005-dtic-tri-service-conf-chicago-underflow-mccook-reservoir-presentations.pdf p.8 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "TARP Status Report",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_6-30-25/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2001,
@@ -311,6 +413,12 @@ window.TARPTIMELINE = {
      "doc": "docs/10-tarp-reservoirs.md",
      "sources": [
       "sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2011 epa doj mwrd",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2011-epa-doj-mwrd-consent-decree/p0001.jpg"
+      }
      ]
     },
     {
@@ -323,6 +431,12 @@ window.TARPTIMELINE = {
      "doc": "docs/10-tarp-reservoirs.md",
      "sources": [
       "sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2011 epa doj mwrd",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2011-epa-doj-mwrd-consent-decree/p0001.jpg"
+      }
      ]
     },
     {
@@ -334,6 +448,12 @@ window.TARPTIMELINE = {
      "doc": "docs/10-tarp-reservoirs.md",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -351,6 +471,12 @@ window.TARPTIMELINE = {
      "doc": "docs/10-tarp-reservoirs.md",
      "sources": [
       "sources/tarp-reservoirs/TARP_Status_Report_6-30-25.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_6-30-25/p0001.jpg"
+      }
      ]
     },
     {
@@ -363,6 +489,12 @@ window.TARPTIMELINE = {
      "doc": "docs/10-tarp-reservoirs.md",
      "sources": [
       "sources/tarp-reservoirs/TARP_Status_Report_6-30-25.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_6-30-25/p0001.jpg"
+      }
      ]
     },
     {
@@ -375,6 +507,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/tarp-reservoirs/2009-mwrd-board-mccook-reservoir-mining-costs-mar2009.pdf",
       "sources/tarp-reservoirs/2011-mwrd-board-mccook-reservoir-mining-costs-jun2011.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2009 mwrd board mccook",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2009-mwrd-board-mccook-reservoir-mining-costs-mar2009/p0001.jpg"
+      },
+      {
+       "label": "2011 mwrd board mccook",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2011-mwrd-board-mccook-reservoir-mining-costs-jun2011/p0001.jpg"
+      }
      ]
     },
     {
@@ -386,6 +528,12 @@ window.TARPTIMELINE = {
      "doc": "docs/10-tarp-reservoirs.md",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     }
    ]
@@ -405,6 +553,12 @@ window.TARPTIMELINE = {
      "doc": "docs/10-tarp-reservoirs.md",
      "sources": [
       "sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2011 epa doj mwrd",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2011-epa-doj-mwrd-consent-decree/p0001.jpg"
+      }
      ]
     },
     {
@@ -416,6 +570,12 @@ window.TARPTIMELINE = {
      "doc": "sources/tarp-reservoirs/FactSheet_McCook_Reservoir_250515.pdf",
      "sources": [
       "sources/tarp-reservoirs/TARP_Status_Report_6-30-25.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_6-30-25/p0001.jpg"
+      }
      ]
     },
     {
@@ -434,6 +594,12 @@ window.TARPTIMELINE = {
      "doc": "sources/mwrd-mr-reports/2024-report-no-24-36-tunnel-and-reservoir-plan-mccook-reservoir-annual-groundwater-mo.pdf",
      "sources": [
       "sources/mwrd-mr-reports/2024-report-no-24-36-tunnel-and-reservoir-plan-mccook-reservoir-annual-groundwater-mo.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2024 report tunnel and",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2024-report-no-24-36-tunnel-and-reservoir-plan-mccook-reservoir-annual-groundwat/p0001.jpg"
+      }
      ]
     },
     {
@@ -451,7 +617,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-mwrd-seminar-50-year-history-tarp/p0117.jpg",
       "caption": "McCook Reservoir mid-construction, from MWRD's 50th-anniversary retrospective \u2014 steep concrete-and-rock walls and a partially filled basin.",
       "credit": "2023-mwrd-seminar-50-year-history-tarp.pdf p.117 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
+     ]
     },
     {
      "year": 2016,
@@ -463,6 +635,12 @@ window.TARPTIMELINE = {
      "doc": "docs/10-tarp-reservoirs.md",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -474,6 +652,12 @@ window.TARPTIMELINE = {
      "doc": "docs/10-tarp-reservoirs.md",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -492,7 +676,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-mwrd-seminar-50-year-history-tarp/p0100.jpg",
       "caption": "MWRD's own cutaway rendering of the finished McCook Reservoir: Stage 1, Stage 2, and Lagoon 23, sandwiched between the Des Plaines River and the Sanitary and Ship Canal.",
       "credit": "2023-mwrd-seminar-50-year-history-tarp.pdf p.100 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "TARP Status Report",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_6-30-25/p0001.jpg"
+      }
+     ]
     }
    ]
   },
@@ -510,6 +700,12 @@ window.TARPTIMELINE = {
      "doc": "docs/10-tarp-reservoirs.md",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -528,6 +724,12 @@ window.TARPTIMELINE = {
      "doc": "sources/mwrd-mr-reports/2021-report-no-19-27-tunnel-and-reservoir-plan-mccook-reservoir-annual-groundwater-mo.pdf",
      "sources": [
       "sources/mwrd-mr-reports/2021-report-no-19-27-tunnel-and-reservoir-plan-mccook-reservoir-annual-groundwater-mo.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2021 report tunnel and",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2021-report-no-19-27-tunnel-and-reservoir-plan-mccook-reservoir-annual-groundwat/p0001.jpg"
+      }
      ]
     },
     {
@@ -539,6 +741,12 @@ window.TARPTIMELINE = {
      "doc": "docs/10-tarp-reservoirs.md",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -557,6 +765,12 @@ window.TARPTIMELINE = {
      "doc": "docs/16-current-capital-projects.md",
      "sources": [
       "sources/tarp-deep-tunnel/TARP_50th_Anniversary.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP 50th Anniversary",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_50th_Anniversary/p0001.jpg"
+      }
      ]
     },
     {
@@ -569,6 +783,12 @@ window.TARPTIMELINE = {
      "doc": "docs/10-tarp-reservoirs.md",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -586,7 +806,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-report-no-23-14-tunnel-and-reservoir-plan-mccook-reservoir-annual-groundwat/p0010.jpg",
       "caption": "MWRD's current site plan for the finished McCook Reservoir: seven monitoring wells ringing the grout curtain between the Des Plaines River and the Sanitary and Ship Canal.",
       "credit": "2023-report-no-23-14-tunnel-and-reservoir-plan-mccook-reservoir-annual-groundwater-mo.pdf p.10 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
+     ]
     },
     {
      "year": 2022,
@@ -609,7 +835,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-mwrd-seminar-50-year-history-tarp/p0123.jpg",
       "caption": "Combined-sewer-overflow volume McCook Reservoir has captured year by year since coming online in 2017-18.",
       "credit": "2023-mwrd-seminar-50-year-history-tarp.pdf p.123 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "TARP 50th Anniversary",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_50th_Anniversary/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2022,
@@ -627,6 +859,12 @@ window.TARPTIMELINE = {
      "doc": "sources/tarp-deep-tunnel/TARP_50th_Anniversary.pdf",
      "sources": [
       "sources/tarp-deep-tunnel/TARP_50th_Anniversary.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP 50th Anniversary",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_50th_Anniversary/p0001.jpg"
+      }
      ]
     },
     {
@@ -638,6 +876,12 @@ window.TARPTIMELINE = {
      "doc": "sources/mwrd-mr-reports/2024-report-no-24-36-tunnel-and-reservoir-plan-mccook-reservoir-annual-groundwater-mo.pdf",
      "sources": [
       "sources/mwrd-mr-reports/2024-report-no-24-36-tunnel-and-reservoir-plan-mccook-reservoir-annual-groundwater-mo.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2024 report tunnel and",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2024-report-no-24-36-tunnel-and-reservoir-plan-mccook-reservoir-annual-groundwat/p0001.jpg"
+      }
      ]
     },
     {
@@ -649,6 +893,12 @@ window.TARPTIMELINE = {
      "doc": "docs/16-current-capital-projects.md",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -666,6 +916,12 @@ window.TARPTIMELINE = {
      "doc": "docs/10-tarp-reservoirs.md",
      "sources": [
       "sources/tarp-reservoirs/TARP_Status_Report_6-30-25.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_6-30-25/p0001.jpg"
+      }
      ]
     },
     {
@@ -684,6 +940,12 @@ window.TARPTIMELINE = {
      "doc": "sources/tarp-reservoirs/FactSheet_McCook_Reservoir_250515.pdf",
      "sources": [
       "sources/tarp-reservoirs/FactSheet_McCook_Reservoir_250515.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "FactSheet McCook Reservoir 250515",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/FactSheet_McCook_Reservoir_250515/p0001.jpg"
+      }
      ]
     },
     {
@@ -696,6 +958,12 @@ window.TARPTIMELINE = {
      "doc": "docs/10-tarp-reservoirs.md",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -707,6 +975,12 @@ window.TARPTIMELINE = {
      "doc": "docs/16-current-capital-projects.md",
      "sources": [
       "docs/16-current-capital-projects.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 16",
+       "href": "docs/16-current-capital-projects.html"
+      }
      ]
     },
     {
@@ -719,6 +993,12 @@ window.TARPTIMELINE = {
      "doc": "docs/10-tarp-reservoirs.md",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     }
    ]

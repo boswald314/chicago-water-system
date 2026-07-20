@@ -39,6 +39,12 @@ window.TARPTIMELINE = {
      "date": "1836",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -50,6 +56,12 @@ window.TARPTIMELINE = {
      "date": "1938",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -67,6 +79,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/tarp-reservoirs/TARP_Status_Report_6-30-25.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_6-30-25/p0001.jpg"
+      }
      ]
     },
     {
@@ -90,7 +108,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-final-eis-tarp-calumet-tunnel-system/p0280.jpg",
       "caption": "Muck-haul routes from 1970s tunnel-construction shafts to the Thornton Quarry spoil-disposal site \u2014 the same quarry later excavated into the reservoir.",
       "credit": "1976-epa-final-eis-tarp-calumet-tunnel-system.pdf p.280 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1975 usace cup urban",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1975-usace-cup-urban-water-damage-study-draft-eis/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1975,
@@ -114,7 +138,17 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-final-eis-tarp-calumet-tunnel-system/p0279.jpg",
       "caption": "The Phase I Calumet Tunnel System construction schedule, segment by segment, from the 1976 EIS.",
       "credit": "1976-epa-final-eis-tarp-calumet-tunnel-system.pdf p.279 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1975 usace cup urban",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1975-usace-cup-urban-water-damage-study-draft-eis/p0001.jpg"
+      },
+      {
+       "label": "1976 epa draft eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-draft-eis-tarp-calumet-tunnel-system/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1976,
@@ -137,7 +171,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-final-eis-tarp-calumet-tunnel-system/p0237.jpg",
       "caption": "Thornton Quarry was already the Calumet system's endpoint in 1976 \u2014 two decades before it became a reservoir: this EPA EIS figure traces the conveyance tunnel from the Calumet plant south to the quarry.",
       "credit": "1976-epa-final-eis-tarp-calumet-tunnel-system.pdf p.237 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1976 epa final eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-final-eis-tarp-calumet-tunnel-system/p0001.jpg"
+      }
+     ]
     }
    ]
   },
@@ -162,6 +202,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/tarp-reservoirs/TARP_Status_Report_6-30-25.pdf",
       "sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_6-30-25/p0001.jpg"
+      },
+      {
+       "label": "2011 epa doj mwrd",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2011-epa-doj-mwrd-consent-decree/p0001.jpg"
+      }
      ]
     },
     {
@@ -173,6 +223,12 @@ window.TARPTIMELINE = {
      "date": "1988",
      "sources": [
       "sources/tarp-reservoirs/2000-usace-wrda-sec501b-thornton-reservoir-cook-county-guidance.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2000 usace wrda sec501b",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2000-usace-wrda-sec501b-thornton-reservoir-cook-county-guidance/p0001.jpg"
+      }
      ]
     },
     {
@@ -184,6 +240,12 @@ window.TARPTIMELINE = {
      "date": "1998-06",
      "sources": [
       "sources/tarp-reservoirs/2010-mwrd-board-thornton-north-quarry-mining-progress-update.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2010 mwrd board thornton",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2010-mwrd-board-thornton-north-quarry-mining-progress-update/p0001.jpg"
+      }
      ]
     },
     {
@@ -195,6 +257,12 @@ window.TARPTIMELINE = {
      "date": "1998-11",
      "sources": [
       "sources/mwrd-mr-reports/2024-report-no-24-23-tunnel-and-reservoir-plan-thornton-transitional-flood-control-re.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2024 report tunnel and",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2024-report-no-24-23-tunnel-and-reservoir-plan-thornton-transitional-flood-contr/p0001.jpg"
+      }
      ]
     },
     {
@@ -212,6 +280,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/tarp-reservoirs/2000-usace-wrda-sec501b-thornton-reservoir-cook-county-guidance.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2000 usace wrda sec501b",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2000-usace-wrda-sec501b-thornton-reservoir-cook-county-guidance/p0001.jpg"
+      }
      ]
     },
     {
@@ -224,6 +298,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/tarp-reservoirs/TARP_Status_Report_6-30-25.pdf",
       "sources/mwrd-mr-reports/2024-report-no-24-23-tunnel-and-reservoir-plan-thornton-transitional-flood-control-re.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_6-30-25/p0001.jpg"
+      },
+      {
+       "label": "2024 report tunnel and",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2024-report-no-24-23-tunnel-and-reservoir-plan-thornton-transitional-flood-contr/p0001.jpg"
+      }
      ]
     },
     {
@@ -235,6 +319,12 @@ window.TARPTIMELINE = {
      "date": "2002",
      "sources": [
       "sources/tarp-reservoirs/TARP_Status_Report_6-30-25.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_6-30-25/p0001.jpg"
+      }
      ]
     }
    ]
@@ -260,6 +350,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/mwrd-mr-reports/2024-report-no-24-23-tunnel-and-reservoir-plan-thornton-transitional-flood-control-re.pdf",
       "sources/tarp-reservoirs/TARP_Status_Report_6-30-25.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2024 report tunnel and",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2024-report-no-24-23-tunnel-and-reservoir-plan-thornton-transitional-flood-contr/p0001.jpg"
+      },
+      {
+       "label": "TARP Status Report",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_6-30-25/p0001.jpg"
+      }
      ]
     },
     {
@@ -271,6 +371,12 @@ window.TARPTIMELINE = {
      "date": "2003-09-18",
      "sources": [
       "sources/tarp-reservoirs/TARP_Status_Report_6-30-25.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_6-30-25/p0001.jpg"
+      }
      ]
     },
     {
@@ -288,6 +394,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/tarp-reservoirs/TARP_Status_Report_6-30-25.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_6-30-25/p0001.jpg"
+      }
      ]
     },
     {
@@ -305,7 +417,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2006-2005-thornton-reservoir-tarp-groundwater-monitoring-report/p0010.jpg",
       "caption": "The earliest groundwater-monitoring location map for the Thornton Transitional Reservoir on file, from 2006 \u2014 before the composite reservoir's north lobe was excavated.",
       "credit": "2006-2005-thornton-reservoir-tarp-groundwater-monitoring-report.pdf p.10 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2024 report tunnel and",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2024-report-no-24-23-tunnel-and-reservoir-plan-thornton-transitional-flood-contr/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2008,
@@ -316,6 +434,12 @@ window.TARPTIMELINE = {
      "date": "2008-06",
      "sources": [
       "sources/tarp-reservoirs/2008-mwrd-board-thornton-reservoir-mining-costs-june2008.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2008 mwrd board thornton",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2008-mwrd-board-thornton-reservoir-mining-costs-june2008/p0001.jpg"
+      }
      ]
     },
     {
@@ -327,6 +451,12 @@ window.TARPTIMELINE = {
      "date": "2009",
      "sources": [
       "sources/tarp-reservoirs/2010-mwrd-board-thornton-north-quarry-mining-progress-update.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2010 mwrd board thornton",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2010-mwrd-board-thornton-north-quarry-mining-progress-update/p0001.jpg"
+      }
      ]
     },
     {
@@ -338,6 +468,12 @@ window.TARPTIMELINE = {
      "date": "2010-04",
      "sources": [
       "sources/tarp-reservoirs/2010-mwrd-board-thornton-reservoir-mining-costs-apr2010.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2010 mwrd board thornton",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2010-mwrd-board-thornton-reservoir-mining-costs-apr2010/p0001.jpg"
+      }
      ]
     },
     {
@@ -355,6 +491,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2011 epa doj mwrd",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2011-epa-doj-mwrd-consent-decree/p0001.jpg"
+      }
      ]
     },
     {
@@ -372,7 +514,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-mwrd-seminar-50-year-history-tarp/p0111.jpg",
       "caption": "Blasting during Thornton Composite Reservoir excavation, from MWRD's 50th-anniversary TARP retrospective.",
       "credit": "2023-mwrd-seminar-50-year-history-tarp.pdf p.111 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
+     ]
     },
     {
      "year": 2015,
@@ -391,7 +539,21 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-mwrd-seminar-50-year-history-tarp/p0116.jpg",
       "caption": "MWRD's own completion photo of the finished Thornton Composite Reservoir, captioned with its final 7.9-billion-gallon capacity.",
       "credit": "2023-mwrd-seminar-50-year-history-tarp.pdf p.116 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "TARP Status Report",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_6-30-25/p0001.jpg"
+      },
+      {
+       "label": "FactSheet Thornton 250515",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/FactSheet_Thornton_250515/p0001.jpg"
+      },
+      {
+       "label": "2023 mwrd board thornton",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-mwrd-board-thornton-reservoir-mining-costs-heidelberg/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2015,
@@ -415,7 +577,17 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-mwrd-seminar-50-year-history-tarp/p0112.jpg",
       "caption": "An aerial view of Thornton Quarry's North Lobe with the gap-dam location marked \u2014 the roller-compacted-concrete dam that seals the reservoir from the still-active south quarry.",
       "credit": "2023-mwrd-seminar-50-year-history-tarp.pdf p.112 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "FactSheet Thornton 250515",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/FactSheet_Thornton_250515/p0001.jpg"
+      },
+      {
+       "label": "TARP Status Report",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_6-30-25/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2015,
@@ -426,6 +598,12 @@ window.TARPTIMELINE = {
      "date": "2015",
      "sources": [
       "sources/tarp-reservoirs/TARP_Status_Report_6-30-25.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_6-30-25/p0001.jpg"
+      }
      ]
     },
     {
@@ -443,6 +621,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/tarp-reservoirs/FactSheet_Thornton_250515.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "FactSheet Thornton 250515",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/FactSheet_Thornton_250515/p0001.jpg"
+      }
      ]
     },
     {
@@ -459,6 +643,11 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/journalism/2015-wbez-after-40-years-deep-tunnel-complete.html"
+     ],
+     "srclinks": [
+      {
+       "label": "2015 wbez after years"
+      }
      ]
     }
    ]
@@ -489,7 +678,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-mwrd-seminar-50-year-history-tarp/p0109.jpg",
       "caption": "A USGS-credited satellite view of the Thornton Composite Reservoir in its surrounding south-suburban context.",
       "credit": "2023-mwrd-seminar-50-year-history-tarp.pdf p.109 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2017 thornton composite reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2017-17-13-thornton-composite-reservoir-groundwater-monitoring-report-third-quar/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2016,
@@ -500,6 +695,12 @@ window.TARPTIMELINE = {
      "date": "2016",
      "sources": [
       "sources/mwrd-mr-reports/2017-17-13-thornton-composite-reservoir-groundwater-monitoring-report-third-quarter-2.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2017 thornton composite reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2017-17-13-thornton-composite-reservoir-groundwater-monitoring-report-third-quar/p0001.jpg"
+      }
      ]
     },
     {
@@ -511,6 +712,12 @@ window.TARPTIMELINE = {
      "date": "2017",
      "sources": [
       "sources/tarp-reservoirs/TARP_Status_Report_6-30-25.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_6-30-25/p0001.jpg"
+      }
      ]
     },
     {
@@ -528,7 +735,12 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2017-17-13-thornton-composite-reservoir-groundwater-monitoring-report-third-quar/p0010.jpg",
       "caption": "An aerial site plan of the finished Thornton Composite Reservoir North Lobe: grout curtain, dewatering tunnel, and the Thorn Creek Connection Tunnel threading through the old quarry footprint.",
       "credit": "2017-17-13-thornton-composite-reservoir-groundwater-monitoring-report-third-quarter-2.pdf p.10 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "legistar board records"
+      }
+     ]
     },
     {
      "year": 2019,
@@ -545,7 +757,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2019-report-19-13-post-construction-report-calumet-tarp/p0021.jpg",
       "caption": "Every CSO outfall and rain gage feeding the Calumet system that Thornton Reservoir now captures, mapped for post-construction water-quality monitoring.",
       "credit": "2019-report-19-13-post-construction-report-calumet-tarp.pdf p.21 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2024 report tunnel and",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2024-report-no-24-23-tunnel-and-reservoir-plan-thornton-transitional-flood-contr/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2020,
@@ -556,6 +774,12 @@ window.TARPTIMELINE = {
      "date": "2020",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -574,6 +798,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/current-projects/mwrd-2021-final-budget-book.pdf",
       "sources/current-projects/mwrd-2023-final-budget-book.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "mwrd 2021 final budget",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/mwrd-2021-final-budget-book/p0001.jpg"
+      },
+      {
+       "label": "mwrd 2023 final budget",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/mwrd-2023-final-budget-book/p0001.jpg"
+      }
      ]
     },
     {
@@ -592,7 +826,17 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-mwrd-seminar-50-year-history-tarp/p0119.jpg",
       "caption": "Combined-sewer-overflow volume captured by Thornton Reservoir, year by year, from MWRD's 2023 retrospective.",
       "credit": "2023-mwrd-seminar-50-year-history-tarp.pdf p.119 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "TARP Status Report",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_6-30-25/p0001.jpg"
+      },
+      {
+       "label": "FactSheet Thornton 250515",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/FactSheet_Thornton_250515/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2023,
@@ -603,6 +847,12 @@ window.TARPTIMELINE = {
      "date": "2023",
      "sources": [
       "sources/tarp-reservoirs/TARP_Status_Report_6-30-25.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_6-30-25/p0001.jpg"
+      }
      ]
     },
     {
@@ -614,6 +864,12 @@ window.TARPTIMELINE = {
      "date": "2023",
      "sources": [
       "sources/tarp-reservoirs/2023-mwrd-board-thornton-reservoir-mining-costs-heidelberg.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 mwrd board thornton",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-mwrd-board-thornton-reservoir-mining-costs-heidelberg/p0001.jpg"
+      }
      ]
     },
     {
@@ -625,6 +881,12 @@ window.TARPTIMELINE = {
      "date": "2023-02",
      "sources": [
       "sources/docs-societies-mwrd-misc/2023-mwrd-seminar-50-year-history-tarp.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 mwrd seminar year",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-mwrd-seminar-50-year-history-tarp/p0001.jpg"
+      }
      ]
     },
     {
@@ -636,6 +898,12 @@ window.TARPTIMELINE = {
      "date": "2023-07",
      "sources": [
       "sources/tarp-reservoirs/TARP_Status_Report_6-30-25.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_6-30-25/p0001.jpg"
+      }
      ]
     },
     {
@@ -647,6 +915,12 @@ window.TARPTIMELINE = {
      "date": "2023-09-28",
      "sources": [
       "sources/tarp-reservoirs/2023-mwrd-board-thornton-reservoir-mining-costs-heidelberg.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 mwrd board thornton",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-mwrd-board-thornton-reservoir-mining-costs-heidelberg/p0001.jpg"
+      }
      ]
     },
     {
@@ -664,7 +938,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2024-report-no-24-23-tunnel-and-reservoir-plan-thornton-transitional-flood-contr/p0009.jpg",
       "caption": "MWRD's most recent monitoring-well location map for the Thornton Transitional Reservoir, filed in 2024.",
       "credit": "2024-report-no-24-23-tunnel-and-reservoir-plan-thornton-transitional-flood-control-re.pdf p.9 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 16",
+       "href": "docs/16-current-capital-projects.html"
+      }
+     ]
     },
     {
      "year": 2026,
@@ -682,7 +962,17 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_6-30-25/p0007.jpg",
       "caption": "The Calumet system's current status map, showing Thornton Reservoir's place in the 90.8-square-mile service area it protects.",
       "credit": "TARP_Status_Report_6-30-25.pdf p.7 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      },
+      {
+       "label": "doc 16",
+       "href": "docs/16-current-capital-projects.html"
+      }
+     ]
     },
     {
      "year": 2026,
@@ -693,6 +983,12 @@ window.TARPTIMELINE = {
      "date": "2026-07-04",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -704,6 +1000,12 @@ window.TARPTIMELINE = {
      "date": "2026-07-11",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     }
    ]

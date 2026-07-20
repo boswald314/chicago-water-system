@@ -52,7 +52,17 @@ window.TARPTIMELINE = {
       "credit": "USGS (public domain)",
       "href": "https://ngmdb.usgs.gov/topoview/viewer/#15/41.6800/-87.5500",
       "source_url": "https://ngmdb.usgs.gov/topoview/viewer/#15/41.6800/-87.5500"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 15",
+       "href": "docs/15-calumet-lakes-transformation.html"
+      },
+      {
+       "label": "2022 epa community involvement p.29",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2022-epa-community-involvement-plan-lake-calumet-cluster/p0029.jpg"
+      }
+     ]
     },
     {
      "year": 1940,
@@ -63,6 +73,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/calumet-lakes/2022-epa-community-involvement-plan-lake-calumet-cluster.pdf p.29",
       "docs/15-calumet-lakes-transformation.md"
+     ],
+     "srclinks": [
+      {
+       "label": "2022 epa community involvement p.29",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2022-epa-community-involvement-plan-lake-calumet-cluster/p0029.jpg"
+      },
+      {
+       "label": "doc 15",
+       "href": "docs/15-calumet-lakes-transformation.html"
+      }
      ]
     }
    ]
@@ -86,7 +106,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1999-mwrd-biological-water-quality-calumet-waterway-system-1988/p0062.jpg",
       "caption": "MWRD's 1988 fish-survey results for the Calumet River, Little Calumet River, and Cal-Sag Channel, showing species counts rising sharply downstream of the Calumet Water Reclamation ",
       "credit": "1999-mwrd-biological-water-quality-calumet-waterway-system-1988.pdf p.62 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 15",
+       "href": "docs/15-calumet-lakes-transformation.html"
+      }
+     ]
     },
     {
      "year": 1993,
@@ -103,7 +129,17 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-usace-draft-eis-sanitary-landfill-wetland-lake-calumet-permit4208203/p0090.jpg",
       "caption": "Habitat restoration plan for the 130th Street site by Lake Calumet, tallying proposed cover types \u2014 53 acres of emergent wetland, 19 of wet meadow, 21 of cottonwood grove.",
       "credit": "1990-usace-draft-eis-sanitary-landfill-wetland-lake-calumet-permit4208203.pdf p.90 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1999 chicago rivers demonstration",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1999-chicago-rivers-demonstration-project-whats-working-on-working-rivers/p0001.jpg"
+      },
+      {
+       "label": "2023 usace chicago waterways p.13",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0013.jpg"
+      }
+     ]
     },
     {
      "year": 1996,
@@ -119,7 +155,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-usace-draft-eis-sanitary-landfill-wetland-lake-calumet-permit4208203/p0291.jpg",
       "caption": "Illinois Natural Areas Inventory map of Burnham Prairie on the Lake Calumet quadrangle, locating the surviving native prairie remnant among the Calumet region's landfills and indus",
       "credit": "1990-usace-draft-eis-sanitary-landfill-wetland-lake-calumet-permit4208203.pdf p.291 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2020 usace caws dredged p.51",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-caws-dredged-material-management-plan-final-eis/p0051.jpg"
+      }
+     ]
     },
     {
      "year": 1998,
@@ -142,7 +184,13 @@ window.TARPTIMELINE = {
       "credit": "USGS (public domain)",
       "href": "https://ngmdb.usgs.gov/topoview/viewer/#14/41.6700/-87.5500",
       "source_url": "https://ngmdb.usgs.gov/topoview/viewer/#14/41.6700/-87.5500"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2020 usace caws dredged p.51",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-caws-dredged-material-management-plan-final-eis/p0051.jpg"
+      }
+     ]
     },
     {
      "year": 2000,
@@ -171,7 +219,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2000-idnr-calumet-area-assessment-part1/p0059.jpg",
       "caption": "Wetland cover by subbasin across the Calumet Assessment Area, showing every one of the region's eight watersheds \u2014 Calumet River, Cal-Sag Channel, Chicago Sanitary and Ship Canal a",
       "credit": "2000-idnr-calumet-area-assessment-part1.pdf p.59 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2020 usace caws dredged p.50",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-caws-dredged-material-management-plan-final-eis/p0050.jpg"
+      }
+     ]
     },
     {
      "year": 2004,
@@ -181,6 +235,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/usace-caws-restoration-dredging/2020-usace-caws-dredged-material-management-plan-final-eis.pdf p.51"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace caws dredged p.51",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-caws-dredged-material-management-plan-final-eis/p0051.jpg"
+      }
      ]
     },
     {
@@ -191,6 +251,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/usace-caws-restoration-dredging/2020-usace-caws-dredged-material-management-plan-final-eis.pdf p.51"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace caws dredged p.51",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-caws-dredged-material-management-plan-final-eis/p0051.jpg"
+      }
      ]
     }
    ]
@@ -208,6 +274,12 @@ window.TARPTIMELINE = {
      "weight": "standard",
      "sources": [
       "docs/15-calumet-lakes-transformation.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 15",
+       "href": "docs/15-calumet-lakes-transformation.html"
+      }
      ]
     },
     {
@@ -218,6 +290,12 @@ window.TARPTIMELINE = {
      "weight": "standard",
      "sources": [
       "sources/calumet-lakes/2022-epa-community-involvement-plan-lake-calumet-cluster.pdf p.29"
+     ],
+     "srclinks": [
+      {
+       "label": "2022 epa community involvement p.29",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2022-epa-community-involvement-plan-lake-calumet-cluster/p0029.jpg"
+      }
      ]
     },
     {
@@ -235,6 +313,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/usace-caws-restoration-dredging/2023-usace-chicago-waterways-restoration-framework-plan.pdf p.92-93",
       "docs/15-calumet-lakes-transformation.md"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways p.92",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0092.jpg"
+      },
+      {
+       "label": "doc 15",
+       "href": "docs/15-calumet-lakes-transformation.html"
+      }
      ]
     },
     {
@@ -252,6 +340,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/15-calumet-lakes-transformation.md",
       "sources/usace-caws-restoration-dredging/2020-usace-caws-dredged-material-management-plan-final-eis.pdf p.53-54"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 15",
+       "href": "docs/15-calumet-lakes-transformation.html"
+      },
+      {
+       "label": "2020 usace caws dredged p.53",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-caws-dredged-material-management-plan-final-eis/p0053.jpg"
+      }
      ]
     },
     {
@@ -263,6 +361,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/15-calumet-lakes-transformation.md",
       "sources/calumet-lakes/2022-epa-community-involvement-plan-lake-calumet-cluster.pdf p.29"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 15",
+       "href": "docs/15-calumet-lakes-transformation.html"
+      },
+      {
+       "label": "2022 epa community involvement p.29",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2022-epa-community-involvement-plan-lake-calumet-cluster/p0029.jpg"
+      }
      ]
     },
     {
@@ -273,6 +381,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/calumet-lakes/2010-meder-iit-biophilic-calumet-final-book.pdf pp.6-9,89-90"
+     ],
+     "srclinks": [
+      {
+       "label": "2010 meder iit biophilic",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2010-meder-iit-biophilic-calumet-final-book/p0001.jpg"
+      }
      ]
     },
     {
@@ -290,6 +404,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/usace-caws-restoration-dredging/2020-usace-caws-dredged-material-management-plan-final-eis.pdf p.49-50",
       "sources/mwrd-mr-reports/2017-2016-biosolids-program-and-ems-performance-report.pdf p.21"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace caws dredged p.49",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-caws-dredged-material-management-plan-final-eis/p0049.jpg"
+      },
+      {
+       "label": "2017 2016 biosolids program p.21",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2017-2016-biosolids-program-and-ems-performance-report/p0021.jpg"
+      }
      ]
     },
     {
@@ -307,6 +431,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/usace-caws-restoration-dredging/2020-usace-caws-dredged-material-management-plan-final-eis.pdf p.52",
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf p.37"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace caws dredged p.52",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-caws-dredged-material-management-plan-final-eis/p0052.jpg"
+      },
+      {
+       "label": "2025 usace caws restoration p.37",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0037.jpg"
+      }
      ]
     },
     {
@@ -317,6 +451,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/usace-caws-restoration-dredging/2020-usace-caws-dredged-material-management-plan-final-eis.pdf p.50-51"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace caws dredged p.50",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-caws-dredged-material-management-plan-final-eis/p0050.jpg"
+      }
      ]
     },
     {
@@ -327,6 +467,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/usace-caws-restoration-dredging/2020-usace-caws-dredged-material-management-plan-final-eis.pdf p.52"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace caws dredged p.52",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-caws-dredged-material-management-plan-final-eis/p0052.jpg"
+      }
      ]
     },
     {
@@ -343,6 +489,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-caws-restoration-dredging/2020-usace-caws-dredged-material-management-plan-final-eis.pdf p.51"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace caws dredged p.51",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-caws-dredged-material-management-plan-final-eis/p0051.jpg"
+      }
      ]
     },
     {
@@ -354,6 +506,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf p.37",
       "sources/usace-caws-restoration-dredging/2020-usace-caws-dredged-material-management-plan-final-eis.pdf p.52"
+     ],
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration p.37",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0037.jpg"
+      },
+      {
+       "label": "2020 usace caws dredged p.52",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-caws-dredged-material-management-plan-final-eis/p0052.jpg"
+      }
      ]
     }
    ]
@@ -372,6 +534,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/usace-caws-restoration-dredging/2020-usace-caws-dredged-material-management-plan-final-eis.pdf p.51-52",
       "sources/usace-caws-restoration-dredging/2023-usace-chicago-waterways-restoration-framework-plan.pdf p.15"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace caws dredged p.51",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-caws-dredged-material-management-plan-final-eis/p0051.jpg"
+      },
+      {
+       "label": "2023 usace chicago waterways p.15",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0015.jpg"
+      }
      ]
     },
     {
@@ -388,6 +560,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-caws-restoration-dredging/2023-usace-chicago-waterways-restoration-framework-plan.pdf p.92"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways p.92",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0092.jpg"
+      }
      ]
     },
     {
@@ -404,6 +582,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-caws-restoration-dredging/appendices-caws-dmmp/2020-usace-caws-dmmp-eis-appendix-a3-coordination-attachments-8-11.pdf p.114-115"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace caws dmmp p.114",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-caws-dmmp-eis-appendix-a3-coordination-attachments-8-11/p0114.jpg"
+      }
      ]
     },
     {
@@ -414,6 +598,12 @@ window.TARPTIMELINE = {
      "weight": "standard",
      "sources": [
       "sources/usace-caws-restoration-dredging/appendices-caws-dmmp/2020-usace-caws-dmmp-eis-appendix-l-calumet-harbor-sediment-beneficial-use.pdf p.4-6"
+     ],
+     "srclinks": [
+      {
+       "label": "2020 usace caws dmmp p.4",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-caws-dmmp-eis-appendix-l-calumet-harbor-sediment-beneficial-use/p0004.jpg"
+      }
      ]
     },
     {
@@ -424,6 +614,12 @@ window.TARPTIMELINE = {
      "weight": "standard",
      "sources": [
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf p.37"
+     ],
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration p.37",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0037.jpg"
+      }
      ]
     },
     {
@@ -435,6 +631,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/15-calumet-lakes-transformation.md",
       "sources/usace-caws-restoration-dredging/appendices-caws-dmmp/2020-usace-caws-dmmp-eis-appendix-a3-coordination-attachments-8-11.pdf p.115"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 15",
+       "href": "docs/15-calumet-lakes-transformation.html"
+      },
+      {
+       "label": "2020 usace caws dmmp p.115",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2020-usace-caws-dmmp-eis-appendix-a3-coordination-attachments-8-11/p0115.jpg"
+      }
      ]
     },
     {
@@ -445,6 +651,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/usace-caws-restoration-dredging/2023-usace-chicago-waterways-restoration-framework-plan.pdf p.81,92"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways p.81",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0081.jpg"
+      }
      ]
     },
     {
@@ -455,6 +667,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/usace-caws-restoration-dredging/2023-usace-chicago-waterways-restoration-framework-plan.pdf p.81"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways p.81",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0081.jpg"
+      }
      ]
     },
     {
@@ -471,6 +689,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/calumet-lakes/2022-epa-community-involvement-plan-lake-calumet-cluster.pdf p.8-9,18"
+     ],
+     "srclinks": [
+      {
+       "label": "2022 epa community involvement p.8",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2022-epa-community-involvement-plan-lake-calumet-cluster/p0008.jpg"
+      }
      ]
     },
     {
@@ -481,6 +705,12 @@ window.TARPTIMELINE = {
      "weight": "standard",
      "sources": [
       "sources/usace-caws-restoration-dredging/2023-usace-chicago-waterways-restoration-framework-plan.pdf p.92"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways p.92",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0092.jpg"
+      }
      ]
     },
     {
@@ -491,6 +721,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/usace-caws-restoration-dredging/2023-usace-chicago-waterways-restoration-framework-plan.pdf p.86"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways p.86",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0086.jpg"
+      }
      ]
     },
     {
@@ -513,7 +749,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0087.jpg",
       "caption": "Zoning map of the Calumet region's waterways \u2014 the Calumet, Little Calumet, and Grand Calumet rivers, Wolf Lake, and Lake Calumet \u2014 showing how little parkland (green) breaks up th",
       "credit": "2023-usace-chicago-waterways-restoration-framework-plan.pdf p.87 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways p.89",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0089.jpg"
+      }
+     ]
     },
     {
      "year": 2023,
@@ -537,7 +779,21 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-chicago-rivers-restoration-framework-plan-study/p0016.jpg",
       "caption": "Restoration-framework opportunity-site map for the Calumet region, marking bike routes, open space, and the proposed Lake Calumet Trail Bridge across the industrial waterfront.",
       "credit": "2023-chicago-rivers-restoration-framework-plan-study.pdf p.16 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways p.84",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0084.jpg"
+      },
+      {
+       "label": "2022 epa community involvement p.19",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2022-epa-community-involvement-plan-lake-calumet-cluster/p0019.jpg"
+      },
+      {
+       "label": "doc 15",
+       "href": "docs/15-calumet-lakes-transformation.html"
+      }
+     ]
     },
     {
      "year": 2023,
@@ -554,6 +810,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/usace-caws-restoration-dredging/2023-usace-chicago-waterways-restoration-framework-plan.pdf p.92",
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf p.36-37"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways p.92",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0092.jpg"
+      },
+      {
+       "label": "2025 usace caws restoration p.36",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0036.jpg"
+      }
      ]
     },
     {
@@ -564,6 +830,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/usace-caws-restoration-dredging/2023-usace-chicago-waterways-restoration-framework-plan.pdf p.92"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 usace chicago waterways p.92",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-usace-chicago-waterways-restoration-framework-plan/p0092.jpg"
+      }
      ]
     },
     {
@@ -580,7 +852,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2024-epa-five-year-review-lake-calumet-cluster/p0018.jpg",
       "caption": "EPA site-location map for the Lake Calumet Cluster Superfund site, marking Big Marsh, the Indian Ridge Marshes, Heron Pond, and the surrounding Paxton and Land & Lakes landfills.",
       "credit": "2024-epa-five-year-review-lake-calumet-cluster.pdf p.18 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2024 usace calumet harbor p.1",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2024-usace-calumet-harbor-river-beneficial-use-dredged-material-review-plan/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2025,
@@ -602,7 +880,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2024-epa-five-year-review-lake-calumet-cluster/p0019.jpg",
       "caption": "Site-vicinity map of the Lake Calumet Cluster, showing the Superfund cluster boundary against Gull Island, Deadstick Pond, and the Indian Ridge Marshes it borders.",
       "credit": "2024-epa-five-year-review-lake-calumet-cluster.pdf p.19 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration p.82",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0082.jpg"
+      }
+     ]
     },
     {
      "year": 2025,
@@ -624,7 +908,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2024-epa-five-year-review-lake-calumet-cluster/p0020.jpg",
       "caption": "Aerial photograph of the Lake Calumet Cluster's landfills, lagoons, and incinerator footprint \u2014 Land and Lakes #3, Paxton Lagoons, the Alburn Incinerator \u2014 the industrial legacy un",
       "credit": "2024-epa-five-year-review-lake-calumet-cluster.pdf p.20 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration p.46",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0046.jpg"
+      }
+     ]
     },
     {
      "year": 2025,
@@ -634,6 +924,12 @@ window.TARPTIMELINE = {
      "weight": "standard",
      "sources": [
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf p.75-78"
+     ],
+     "srclinks": [
+      {
+       "label": "2025 usace caws restoration p.75",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0075.jpg"
+      }
      ]
     },
     {
@@ -644,6 +940,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "docs/15-calumet-lakes-transformation.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 15",
+       "href": "docs/15-calumet-lakes-transformation.html"
+      }
      ]
     }
    ]

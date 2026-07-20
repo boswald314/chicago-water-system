@@ -38,6 +38,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/tarp-deep-tunnel/1988-epa-tarp-special-evaluation-project-interim-report.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1988 epa tarp special",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0001.jpg"
+      }
      ]
     },
     {
@@ -50,6 +56,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-22",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -63,6 +75,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/06-city-sewer-network.md#src-39",
       "sources/city-sewer-network/LawrenceAvenueUnderflow_1980_EPA.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 06",
+       "href": "docs/06-city-sewer-network.html"
+      },
+      {
+       "label": "LawrenceAvenueUnderflow 1980 EPA",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/LawrenceAvenueUnderflow_1980_EPA/p0001.jpg"
+      }
      ]
     },
     {
@@ -75,6 +97,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/09-tarp-deep-tunnel.md",
       "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      },
+      {
+       "label": "Chicago Underflow Plan 1972",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0001.jpg"
+      }
      ]
     },
     {
@@ -87,6 +119,12 @@ window.TARPTIMELINE = {
      "doc": "06-city-sewer-network.md#src-39",
      "sources": [
       "sources/city-sewer-network/LawrenceAvenueUnderflow_1980_EPA.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "LawrenceAvenueUnderflow 1980 EPA",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/LawrenceAvenueUnderflow_1980_EPA/p0001.jpg"
+      }
      ]
     },
     {
@@ -105,6 +143,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-7",
      "sources": [
       "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "Chicago Underflow Plan 1972",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0001.jpg"
+      }
      ]
     },
     {
@@ -117,6 +161,12 @@ window.TARPTIMELINE = {
      "doc": "06-city-sewer-network.md#src-39",
      "sources": [
       "sources/city-sewer-network/LawrenceAvenueUnderflow_1980_EPA.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "LawrenceAvenueUnderflow 1980 EPA",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/LawrenceAvenueUnderflow_1980_EPA/p0001.jpg"
+      }
      ]
     },
     {
@@ -135,6 +185,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/city-sewer-network/LawrenceAvenueUnderflow_1980_EPA.pdf p.35,47,48",
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "LawrenceAvenueUnderflow 1980 EPA p.35",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/LawrenceAvenueUnderflow_1980_EPA/p0035.jpg"
+      },
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -148,6 +208,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/tarp-deep-tunnel/1976-epa-draft-eis-tarp-calumet-tunnel-system.pdf",
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "1976 epa draft eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-draft-eis-tarp-calumet-tunnel-system/p0001.jpg"
+      },
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -166,6 +236,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-7",
      "sources": [
       "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "Chicago Underflow Plan 1972",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0001.jpg"
+      }
      ]
     },
     {
@@ -176,6 +252,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/tarp-deep-tunnel/1988-epa-tarp-special-evaluation-project-interim-report.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1988 epa tarp special",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0001.jpg"
+      }
      ]
     },
     {
@@ -188,6 +270,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/09-tarp-deep-tunnel.md",
       "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      },
+      {
+       "label": "Chicago Underflow Plan 1972",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0001.jpg"
+      }
      ]
     },
     {
@@ -199,6 +291,12 @@ window.TARPTIMELINE = {
      "doc": "07-mwrd-interceptors-pumping-stations.md#src-38",
      "sources": [
       "docs/07-mwrd-interceptors-pumping-stations.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 07",
+       "href": "docs/07-mwrd-interceptors-pumping-stations.html"
+      }
      ]
     },
     {
@@ -211,6 +309,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/09-tarp-deep-tunnel.md",
       "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      },
+      {
+       "label": "Chicago Underflow Plan 1972",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0001.jpg"
+      }
      ]
     },
     {
@@ -223,6 +331,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-7",
      "sources": [
       "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "Chicago Underflow Plan 1972",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0001.jpg"
+      }
      ]
     },
     {
@@ -233,6 +347,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "docs/13-suburban-wrps.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 13",
+       "href": "docs/13-suburban-wrps.html"
+      }
      ]
     },
     {
@@ -246,6 +366,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/tarp-case-studies/1972-heim-preliminary-geologic-investigations-rock-tunnel-sites-flood-pollution-control-chicago.pdf",
       "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1972 heim preliminary geologic",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1972-heim-preliminary-geologic-investigations-rock-tunnel-sites-flood-pollution-/p0001.jpg"
+      },
+      {
+       "label": "Chicago Underflow Plan 1972",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0001.jpg"
+      }
      ]
     },
     {
@@ -264,6 +394,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf p.15",
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "Chicago Underflow Plan 1972 p.15",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0015.jpg"
+      },
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -276,6 +416,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/tarp-deep-tunnel/TARP_Status_Report_2025-06-30.pdf p.9",
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report 2025 p.9",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0009.jpg"
+      },
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -292,6 +442,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/tarp-deep-tunnel/1977-epa-final-eis-tarp-lower-des-plaines-tunnel-system.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1977 epa final eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1977-epa-final-eis-tarp-lower-des-plaines-tunnel-system/p0001.jpg"
+      }
      ]
     },
     {
@@ -304,6 +460,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/09-tarp-deep-tunnel.md",
       "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      },
+      {
+       "label": "Chicago Underflow Plan 1972",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0001.jpg"
+      }
      ]
     },
     {
@@ -316,6 +482,15 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/09-tarp-deep-tunnel.md",
       "sources/tarp-case-studies/1979-easterbrook-deep-tunnel-washington-monthly.html"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      },
+      {
+       "label": "1979 easterbrook deep tunnel"
+      }
      ]
     },
     {
@@ -333,6 +508,12 @@ window.TARPTIMELINE = {
      "doc": "1972-1223-billion-estimate",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -345,6 +526,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/09-tarp-deep-tunnel.md",
       "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      },
+      {
+       "label": "Chicago Underflow Plan 1972",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0001.jpg"
+      }
      ]
     },
     {
@@ -357,6 +548,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-7",
      "sources": [
       "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "Chicago Underflow Plan 1972",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0001.jpg"
+      }
      ]
     },
     {
@@ -370,6 +567,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/09-tarp-deep-tunnel.md",
       "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      },
+      {
+       "label": "Chicago Underflow Plan 1972",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0001.jpg"
+      }
      ]
     },
     {
@@ -388,6 +595,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-7",
      "sources": [
       "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "Chicago Underflow Plan 1972",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0001.jpg"
+      }
      ]
     },
     {
@@ -406,6 +619,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-7",
      "sources": [
       "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "Chicago Underflow Plan 1972",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0001.jpg"
+      }
      ]
     },
     {
@@ -424,6 +643,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-7",
      "sources": [
       "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "Chicago Underflow Plan 1972",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0001.jpg"
+      }
      ]
     },
     {
@@ -442,6 +667,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-7",
      "sources": [
       "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "Chicago Underflow Plan 1972",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0001.jpg"
+      }
      ]
     },
     {
@@ -460,6 +691,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-7",
      "sources": [
       "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "Chicago Underflow Plan 1972",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0001.jpg"
+      }
      ]
     },
     {
@@ -478,6 +715,12 @@ window.TARPTIMELINE = {
      "doc": "1972-heim-egn52",
      "sources": [
       "sources/tarp-case-studies/1972-heim-preliminary-geologic-investigations-rock-tunnel-sites-flood-pollution-control-chicago.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1972 heim preliminary geologic",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1972-heim-preliminary-geologic-investigations-rock-tunnel-sites-flood-pollution-/p0001.jpg"
+      }
      ]
     },
     {
@@ -497,6 +740,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/tarp-deep-tunnel/Chicago_Underflow_Plan_1972.pdf",
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "Chicago Underflow Plan 1972",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/Chicago_Underflow_Plan_1972/p0001.jpg"
+      },
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     }
    ]
@@ -516,6 +769,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/07-mwrd-interceptors-pumping-stations.md",
       "sources/tarp-deep-tunnel/TARP_Status_Report_2025-06-30.pdf p.9"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 07",
+       "href": "docs/07-mwrd-interceptors-pumping-stations.html"
+      },
+      {
+       "label": "TARP Status Report 2025 p.9",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0009.jpg"
+      }
      ]
     },
     {
@@ -528,6 +791,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/08-north-branch-pumping-station.md",
       "sources/tarp-deep-tunnel/TARP_Status_Report_2025-06-30.pdf p.9"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 08",
+       "href": "docs/08-north-branch-pumping-station.html"
+      },
+      {
+       "label": "TARP Status Report 2025 p.9",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0009.jpg"
+      }
      ]
     },
     {
@@ -539,6 +812,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-deep-tunnel/TARP_Status_Report_2025-06-30.pdf p.9"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report 2025 p.9",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0009.jpg"
+      }
      ]
     },
     {
@@ -550,6 +829,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-deep-tunnel/TARP_Status_Report_2025-06-30.pdf p.9"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report 2025 p.9",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0009.jpg"
+      }
      ]
     },
     {
@@ -561,6 +846,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-deep-tunnel/TARP_Status_Report_2025-06-30.pdf p.8"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report 2025 p.8",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0008.jpg"
+      }
      ]
     },
     {
@@ -573,6 +864,12 @@ window.TARPTIMELINE = {
      "doc": "06-city-sewer-network.md#src-39",
      "sources": [
       "sources/city-sewer-network/LawrenceAvenueUnderflow_1980_EPA.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "LawrenceAvenueUnderflow 1980 EPA",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/LawrenceAvenueUnderflow_1980_EPA/p0001.jpg"
+      }
      ]
     },
     {
@@ -586,6 +883,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/tarp-deep-tunnel/TARP_Status_Report_2025-06-30.pdf",
       "docs/07-mwrd-interceptors-pumping-stations.md"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report 2025",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0001.jpg"
+      },
+      {
+       "label": "doc 07",
+       "href": "docs/07-mwrd-interceptors-pumping-stations.html"
+      }
      ]
     },
     {
@@ -598,6 +905,12 @@ window.TARPTIMELINE = {
      "doc": "06-city-sewer-network.md#src-39",
      "sources": [
       "sources/city-sewer-network/LawrenceAvenueUnderflow_1980_EPA.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "LawrenceAvenueUnderflow 1980 EPA",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/LawrenceAvenueUnderflow_1980_EPA/p0001.jpg"
+      }
      ]
     },
     {
@@ -615,7 +928,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1975-usace-cup-urban-water-damage-study-draft-eis/p0047.jpg",
       "caption": "What actually feeds the tunnels: 377 square miles of combined-sewered Chicago mapped by which tunnel system catches its overflow.",
       "credit": "1975-usace-cup-urban-water-damage-study-draft-eis.pdf p.47 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "TARP Status Report 2025 p.9",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0009.jpg"
+      }
+     ]
     },
     {
      "year": 1975,
@@ -626,6 +945,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-deep-tunnel/TARP_Status_Report_2025-06-30.pdf p.8"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report 2025 p.8",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0008.jpg"
+      }
      ]
     },
     {
@@ -638,6 +963,20 @@ window.TARPTIMELINE = {
       "sources/tarp-deep-tunnel/1988-epa-tarp-special-evaluation-project-interim-report.pdf",
       "sources/tarp-deep-tunnel/TARP_Status_Report_2025-06-30.pdf",
       "sources/docs-societies-mwrd-misc/2023-mwrd-seminar-50-year-history-tarp.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1988 epa tarp special",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0001.jpg"
+      },
+      {
+       "label": "TARP Status Report 2025",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0001.jpg"
+      },
+      {
+       "label": "2023 mwrd seminar year",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-mwrd-seminar-50-year-history-tarp/p0001.jpg"
+      }
      ]
     },
     {
@@ -656,7 +995,16 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1975-usace-cup-urban-water-damage-study-draft-eis/p0023.jpg",
       "caption": "The 1975 engineering alignment of the Calumet Tunnel System \u2014 Little Calumet, Calumet River, and Cal-Sag Channel branches converging on the Calumet Treatment Plant.",
       "credit": "1975-usace-cup-urban-water-damage-study-draft-eis.pdf p.23 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      },
+      {
+       "label": "1979 easterbrook deep tunnel"
+      }
+     ]
     },
     {
      "year": 1975,
@@ -668,6 +1016,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-deep-tunnel/1976-epa-final-eis-tarp-calumet-tunnel-system.pdf p.63"
+     ],
+     "srclinks": [
+      {
+       "label": "1976 epa final eis p.63",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-final-eis-tarp-calumet-tunnel-system/p0063.jpg"
+      }
      ]
     },
     {
@@ -680,6 +1034,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-37",
      "sources": [
       "sources/tarp-safl-hydraulic-model/1975-safl-pr154-anderson-dahlin-model-studies-dropshafts-tarp.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1975 safl pr154 anderson",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1975-safl-pr154-anderson-dahlin-model-studies-dropshafts-tarp/p0001.jpg"
+      }
      ]
     },
     {
@@ -692,6 +1052,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-2",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -716,7 +1082,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1975-usace-cup-urban-water-damage-study-draft-eis/p0025.jpg",
       "caption": "The Upper Des Plaines (O'Hare) tunnel system as aligned in 1975 \u2014 the network that today feeds the Majewski Reservoir.",
       "credit": "1975-usace-cup-urban-water-damage-study-draft-eis.pdf p.25 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1975 safl pr154 anderson",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1975-safl-pr154-anderson-dahlin-model-studies-dropshafts-tarp/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1975,
@@ -728,6 +1100,12 @@ window.TARPTIMELINE = {
      "doc": "06-city-sewer-network.md#src-39",
      "sources": [
       "sources/city-sewer-network/LawrenceAvenueUnderflow_1980_EPA.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "LawrenceAvenueUnderflow 1980 EPA",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/LawrenceAvenueUnderflow_1980_EPA/p0001.jpg"
+      }
      ]
     },
     {
@@ -751,7 +1129,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-draft-eis-tarp-calumet-tunnel-system/p0132.jpg",
       "caption": "Geologic cross-section for the Calumet Tunnel, Crawford Street to the Grand Calumet River \u2014 the faults engineers had to route the bore around or through.",
       "credit": "1976-epa-draft-eis-tarp-calumet-tunnel-system.pdf p.132 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1976 epa draft eis p.44",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-draft-eis-tarp-mainstream-tunnel-system/p0044.jpg"
+      }
+     ]
     },
     {
      "year": 1976,
@@ -768,7 +1152,17 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-draft-eis-tarp-mainstream-tunnel-system/p0248.jpg",
       "caption": "The Mainstream Tunnel's largest bore \u2014 33 feet in diameter \u2014 traced street by street from Summit to Damen Avenue, with the size of every drop shaft along the way.",
       "credit": "1976-epa-draft-eis-tarp-mainstream-tunnel-system.pdf p.248 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1988 epa tarp special",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0001.jpg"
+      },
+      {
+       "label": "TARP Status Report 2025",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1976,
@@ -784,7 +1178,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-final-eis-tarp-calumet-tunnel-system/p0277.jpg",
       "caption": "How much rock TARP's tunnel boring machines were pulling out of the ground at peak construction \u2014 over three million tons a year, citywide.",
       "credit": "1976-epa-final-eis-tarp-calumet-tunnel-system.pdf p.277 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1976,
@@ -801,7 +1201,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-final-eis-tarp-calumet-tunnel-system/p0280.jpg",
       "caption": "Where did a million tons of bored-out dolomite go? Truck routes carried it from construction shafts across the South Side to the Thornton Quarry.",
       "credit": "1976-epa-final-eis-tarp-calumet-tunnel-system.pdf p.280 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
+     ]
     },
     {
      "year": 1976,
@@ -819,7 +1225,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-draft-eis-tarp-mainstream-tunnel-system/p0295.jpg",
       "caption": "Five construction segments, a decade of overlapping schedules: the contract-by-contract build-out plan for the Mainstream Tunnel.",
       "credit": "1976-epa-draft-eis-tarp-mainstream-tunnel-system.pdf p.295 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1976 epa draft eis p.254",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-draft-eis-tarp-calumet-tunnel-system/p0254.jpg"
+      }
+     ]
     },
     {
      "year": 1976,
@@ -843,7 +1255,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-final-eis-tarp-calumet-tunnel-system/p0119.jpg",
       "caption": "The bedrock geology map that told TARP's engineers where the Silurian dolomite lay thick enough to bore through \u2014 and where faults like the Sandwich Fault Zone didn't.",
       "credit": "1976-epa-final-eis-tarp-calumet-tunnel-system.pdf p.119 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1976 epa draft eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-draft-eis-tarp-calumet-tunnel-system/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1976,
@@ -867,7 +1285,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-draft-eis-tarp-calumet-tunnel-system/p0139.jpg",
       "caption": "The Des Plaines Disturbance: a knot of intersecting faults along the Des Plaines River that TARP's tunnel designers had to map and route around.",
       "credit": "1976-epa-draft-eis-tarp-calumet-tunnel-system.pdf p.139 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1976 epa draft eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-draft-eis-tarp-calumet-tunnel-system/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1976,
@@ -891,7 +1315,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-final-eis-tarp-calumet-tunnel-system/p0233.jpg",
       "caption": "The Calumet Tunnel unrolled into a profile: elevation, diameter, and the dolomite bedrock it was bored through, from the Sanitary & Ship Canal to the Grand Calumet River.",
       "credit": "1976-epa-final-eis-tarp-calumet-tunnel-system.pdf p.233 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1976 epa draft eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-draft-eis-tarp-calumet-tunnel-system/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1976,
@@ -909,6 +1339,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-deep-tunnel/1976-epa-draft-eis-tarp-calumet-tunnel-system.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1976 epa draft eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-draft-eis-tarp-calumet-tunnel-system/p0001.jpg"
+      }
      ]
     },
     {
@@ -927,6 +1363,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-deep-tunnel/1976-epa-draft-eis-tarp-calumet-tunnel-system.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1976 epa draft eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-draft-eis-tarp-calumet-tunnel-system/p0001.jpg"
+      }
      ]
     },
     {
@@ -951,7 +1393,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-final-eis-tarp-calumet-tunnel-system/p0235.jpg",
       "caption": "Contract-level detail on the Calumet Tunnel between Crawford Avenue and the treatment plant \u2014 every drop, construction, and access shaft marked along the route.",
       "credit": "1976-epa-final-eis-tarp-calumet-tunnel-system.pdf p.235 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1976 epa final eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-final-eis-tarp-calumet-tunnel-system/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1976,
@@ -969,6 +1417,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-deep-tunnel/1976-epa-final-eis-tarp-calumet-tunnel-system.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1976 epa final eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-final-eis-tarp-calumet-tunnel-system/p0001.jpg"
+      }
      ]
     },
     {
@@ -981,6 +1435,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-deep-tunnel/1976-epa-final-eis-tarp-calumet-tunnel-system.pdf p.509-512"
+     ],
+     "srclinks": [
+      {
+       "label": "1976 epa final eis p.509",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-final-eis-tarp-calumet-tunnel-system/p0509.jpg"
+      }
      ]
     },
     {
@@ -999,7 +1459,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-final-eis-tarp-calumet-tunnel-system/p0130.jpg",
       "caption": "A vertical slice through the earth along the Mainstream Tunnel's route from 59th Street to Damen Avenue, showing exactly which rock layer the bore would sit in.",
       "credit": "1976-epa-final-eis-tarp-calumet-tunnel-system.pdf p.130 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1976 epa draft eis p.190",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-draft-eis-tarp-calumet-tunnel-system/p0190.jpg"
+      }
+     ]
     },
     {
      "year": 1976,
@@ -1023,7 +1489,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-final-eis-tarp-calumet-tunnel-system/p0132.jpg",
       "caption": "The same cross-section technique applied to the Lower Des Plaines Tunnel System, 47th Street to Fullerton Avenue.",
       "credit": "1976-epa-final-eis-tarp-calumet-tunnel-system.pdf p.132 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1976 epa final eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-final-eis-tarp-calumet-tunnel-system/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1976,
@@ -1041,7 +1513,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-final-eis-tarp-calumet-tunnel-system/p0237.jpg",
       "caption": "The southern leg of the Calumet Tunnel, running from the treatment plant down to the Thornton Quarry \u2014 the route the connecting tunnel to Thornton Reservoir would later follow.",
       "credit": "1976-epa-final-eis-tarp-calumet-tunnel-system.pdf p.237 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1976 epa final eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1976-epa-final-eis-tarp-calumet-tunnel-system/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1977,
@@ -1057,7 +1535,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1977-epa-final-eis-tarp-lower-des-plaines-tunnel-system/p0233.jpg",
       "caption": "The Des Plaines Tunnel System in profile \u2014 diameters stepping down from 30 feet near the storage reservoir to 10 feet out toward the O'Hare and Palatine branches.",
       "credit": "1977-epa-final-eis-tarp-lower-des-plaines-tunnel-system.pdf p.233 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1977 epa final eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1977-epa-final-eis-tarp-lower-des-plaines-tunnel-system/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1977,
@@ -1073,7 +1557,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1977-epa-final-eis-tarp-lower-des-plaines-tunnel-system/p0237.jpg",
       "caption": "The Des Plaines Tunnel traced from 59th Street to Cermak Road, hugging the Des Plaines River and Sanitary & Ship Canal.",
       "credit": "1977-epa-final-eis-tarp-lower-des-plaines-tunnel-system.pdf p.237 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1977 epa final eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1977-epa-final-eis-tarp-lower-des-plaines-tunnel-system/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1977,
@@ -1089,6 +1579,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/tarp-deep-tunnel/1977-epa-final-eis-tarp-lower-des-plaines-tunnel-system.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1977 epa final eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1977-epa-final-eis-tarp-lower-des-plaines-tunnel-system/p0001.jpg"
+      }
      ]
     },
     {
@@ -1105,6 +1601,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/tarp-deep-tunnel/1977-epa-final-eis-tarp-lower-des-plaines-tunnel-system.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1977 epa final eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1977-epa-final-eis-tarp-lower-des-plaines-tunnel-system/p0001.jpg"
+      }
      ]
     },
     {
@@ -1115,6 +1617,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/tarp-deep-tunnel/1977-epa-final-eis-tarp-lower-des-plaines-tunnel-system.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1977 epa final eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1977-epa-final-eis-tarp-lower-des-plaines-tunnel-system/p0001.jpg"
+      }
      ]
     },
     {
@@ -1127,6 +1635,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/09-tarp-deep-tunnel.md",
       "sources/gao-oversight-reports/1978-gao-psad-78-94-chicago-combined-water-cleanup-flood-control.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      },
+      {
+       "label": "1978 gao psad chicago",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1978-gao-psad-78-94-chicago-combined-water-cleanup-flood-control/p0001.jpg"
+      }
      ]
     },
     {
@@ -1140,6 +1658,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/tarp-deep-tunnel/TARP_Status_Report_2025-06-30.pdf",
       "sources/tarp-deep-tunnel/1988-epa-tarp-special-evaluation-project-interim-report.pdf p.42"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report 2025",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0001.jpg"
+      },
+      {
+       "label": "1988 epa tarp special p.42",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0042.jpg"
+      }
      ]
     },
     {
@@ -1176,6 +1704,12 @@ window.TARPTIMELINE = {
      "doc": "1978-army-concurs",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1193,6 +1727,12 @@ window.TARPTIMELINE = {
      "doc": "1978-gao-first-report",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1210,6 +1750,12 @@ window.TARPTIMELINE = {
      "doc": "1979-gao-six-volume-survey",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1227,6 +1773,12 @@ window.TARPTIMELINE = {
      "doc": "1979-park-ridge-survey",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1244,6 +1796,12 @@ window.TARPTIMELINE = {
      "doc": "1979-river-grove-skepticism",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1260,6 +1818,12 @@ window.TARPTIMELINE = {
      "doc": "1979-corps-study-funding",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1276,6 +1840,12 @@ window.TARPTIMELINE = {
      "doc": "1979-washington-monthly",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1292,6 +1862,12 @@ window.TARPTIMELINE = {
      "doc": "1979-dan-white-critique",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1308,6 +1884,12 @@ window.TARPTIMELINE = {
      "doc": "1979-sierra-club-edf-opposition",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1324,6 +1906,12 @@ window.TARPTIMELINE = {
      "doc": "1979-abstract-standard-quote",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1340,6 +1928,12 @@ window.TARPTIMELINE = {
      "doc": "1979-bus-station-locker-quote",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1351,6 +1945,12 @@ window.TARPTIMELINE = {
      "doc": "1979-jobs-per-dollar",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1363,6 +1963,12 @@ window.TARPTIMELINE = {
      "doc": "06-city-sewer-network.md#src-39",
      "sources": [
       "sources/city-sewer-network/LawrenceAvenueUnderflow_1980_EPA.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "LawrenceAvenueUnderflow 1980 EPA",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/LawrenceAvenueUnderflow_1980_EPA/p0001.jpg"
+      }
      ]
     },
     {
@@ -1387,7 +1993,17 @@ window.TARPTIMELINE = {
       "credit": "The Robbins Company (manufacturer); research/editorial use, verify redistribution terms",
       "source_url": "https://www.robbinstbm.com/projects/chicagos-tunnel-reservoir-plan-tarp/",
       "href": "https://www.robbinstbm.com/projects/chicagos-tunnel-reservoir-plan-tarp/"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1988 epa tarp special",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0001.jpg"
+      },
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1980,
@@ -1403,6 +2019,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2011 epa doj mwrd",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2011-epa-doj-mwrd-consent-decree/p0001.jpg"
+      }
      ]
     },
     {
@@ -1419,6 +2041,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/tarp-deep-tunnel/1988-epa-tarp-special-evaluation-project-interim-report.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1988 epa tarp special",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0001.jpg"
+      }
      ]
     },
     {
@@ -1442,7 +2070,13 @@ window.TARPTIMELINE = {
       "credit": "The Robbins Company (manufacturer); research/editorial use, verify redistribution terms",
       "source_url": "https://www.robbinstbm.com/projects/chicagos-tunnel-reservoir-plan-tarp/",
       "href": "https://www.robbinstbm.com/projects/chicagos-tunnel-reservoir-plan-tarp/"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1988 epa tarp special",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1980,
@@ -1454,6 +2088,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/09-tarp-deep-tunnel.md",
       "sources/gao-oversight-reports/1981-gao-ced-81-51-tarp-costs-continue-to-rise.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      },
+      {
+       "label": "1981 gao ced tarp",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1981-gao-ced-81-51-tarp-costs-continue-to-rise/p0001.jpg"
+      }
      ]
     },
     {
@@ -1465,6 +2109,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/tarp-deep-tunnel/1988-epa-tarp-special-evaluation-project-interim-report.pdf",
       "docs/13-suburban-wrps.md"
+     ],
+     "srclinks": [
+      {
+       "label": "1988 epa tarp special",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0001.jpg"
+      },
+      {
+       "label": "doc 13",
+       "href": "docs/13-suburban-wrps.html"
+      }
      ]
     },
     {
@@ -1477,6 +2131,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/09-tarp-deep-tunnel.md",
       "sources/tarp-safl-hydraulic-model/1997-safl-pr417-he-song-hydraulic-transient-analysis-tarp-phase2-ohare-tunnel.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      },
+      {
+       "label": "1997 safl pr417 song",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1997-safl-pr417-he-song-hydraulic-transient-analysis-tarp-phase2-ohare-tunnel/p0001.jpg"
+      }
      ]
     },
     {
@@ -1494,6 +2158,12 @@ window.TARPTIMELINE = {
      "doc": "1981-gao-fourth-report",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1511,6 +2181,12 @@ window.TARPTIMELINE = {
      "doc": "1981-12-5-billion-projection",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1523,6 +2199,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/09-tarp-deep-tunnel.md",
       "sources/gao-oversight-reports/1981-gao-ced-81-51-tarp-costs-continue-to-rise.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      },
+      {
+       "label": "1981 gao ced tarp",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1981-gao-ced-81-51-tarp-costs-continue-to-rise/p0001.jpg"
+      }
      ]
     },
     {
@@ -1540,6 +2226,12 @@ window.TARPTIMELINE = {
      "doc": "1981-per-household-cost",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1552,6 +2244,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-2",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1563,6 +2261,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-deep-tunnel/TARP_Status_Report_2025-06-30.pdf p.8"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report 2025 p.8",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0008.jpg"
+      }
      ]
     },
     {
@@ -1581,7 +2285,13 @@ window.TARPTIMELINE = {
       "credit": "Flickr (michaelinitaly); verify license/redistribution terms",
       "source_url": "https://www.flickr.com/photos/michaelinitaly/5329513371",
       "href": "https://www.flickr.com/photos/michaelinitaly/5329513371"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
+     ]
     },
     {
      "year": 1982,
@@ -1599,7 +2309,13 @@ window.TARPTIMELINE = {
       "credit": "Flickr (michaelinitaly); verify license/redistribution terms",
       "source_url": "https://www.flickr.com/photos/michaelinitaly/5315142613",
       "href": "https://www.flickr.com/photos/michaelinitaly/5315142613"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
+     ]
     },
     {
      "year": 1982,
@@ -1611,6 +2327,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/docs-societies-mwrd-misc/2023-mwrd-seminar-50-year-history-tarp.pdf p.76"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 mwrd seminar year p.76",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-mwrd-seminar-50-year-history-tarp/p0076.jpg"
+      }
      ]
     },
     {
@@ -1623,6 +2345,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-deep-tunnel/TARP_Status_Report_2025-06-30.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report 2025",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0001.jpg"
+      }
      ]
     },
     {
@@ -1635,6 +2363,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "docs/09-tarp-deep-tunnel.md [23]"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1647,6 +2381,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/tarp-deep-tunnel/TARP_Status_Report_2025-06-30.pdf p.8",
       "sources/tarp-deep-tunnel/1988-epa-tarp-special-evaluation-project-interim-report.pdf p.39"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report 2025 p.8",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0008.jpg"
+      },
+      {
+       "label": "1988 epa tarp special p.39",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0039.jpg"
+      }
      ]
     },
     {
@@ -1658,6 +2402,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-deep-tunnel/TARP_Status_Report_2025-06-30.pdf p.8"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report 2025 p.8",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0008.jpg"
+      }
      ]
     },
     {
@@ -1668,6 +2418,12 @@ window.TARPTIMELINE = {
      "weight": "standard",
      "sources": [
       "sources/docs-societies-mwrd-misc/2023-mwrd-seminar-50-year-history-tarp.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 mwrd seminar year",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-mwrd-seminar-50-year-history-tarp/p0001.jpg"
+      }
      ]
     },
     {
@@ -1679,6 +2435,12 @@ window.TARPTIMELINE = {
      "doc": "1985-dedication-funding-dried-up",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1690,6 +2452,12 @@ window.TARPTIMELINE = {
      "doc": "1985-labor-lawsuit-fatality",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1701,6 +2469,12 @@ window.TARPTIMELINE = {
      "doc": "1985-bga-dead-dispute",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1719,6 +2493,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-deep-tunnel/1988-epa-tarp-special-evaluation-project-interim-report.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1988 epa tarp special",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0001.jpg"
+      }
      ]
     },
     {
@@ -1731,6 +2511,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-2",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1750,6 +2536,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/tarp-deep-tunnel/1988-epa-tarp-special-evaluation-project-interim-report.pdf p.25",
       "docs/07-mwrd-interceptors-pumping-stations.md"
+     ],
+     "srclinks": [
+      {
+       "label": "1988 epa tarp special p.25",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0025.jpg"
+      },
+      {
+       "label": "doc 07",
+       "href": "docs/07-mwrd-interceptors-pumping-stations.html"
+      }
      ]
     },
     {
@@ -1762,6 +2558,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-safl-hydraulic-model/1988-safl-pr270-song-guo-zheng-hydraulic-transient-modeling-tarp.pdf p.9"
+     ],
+     "srclinks": [
+      {
+       "label": "1988 safl pr270 song p.9",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-safl-pr270-song-guo-zheng-hydraulic-transient-modeling-tarp/p0009.jpg"
+      }
      ]
     }
    ]
@@ -1781,6 +2583,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/tarp-deep-tunnel/TARP_Status_Report_2025-06-30.pdf p.8",
       "sources/tarp-deep-tunnel/1988-epa-tarp-special-evaluation-project-interim-report.pdf p.36"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report 2025 p.8",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0008.jpg"
+      },
+      {
+       "label": "1988 epa tarp special p.36",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0036.jpg"
+      }
      ]
     },
     {
@@ -1799,7 +2611,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1986-usace-cup-phase1-general-design-memorandum-eis/p0165.jpg",
       "caption": "A typical diaphragm structure \u2014 the grouted rock-fill barrier the Corps of Engineers used to seal tunnel-adjacent channel crossings.",
       "credit": "1986-usace-cup-phase1-general-design-memorandum-eis.pdf p.165 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1988 epa tarp special p.45",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0045.jpg"
+      }
+     ]
     },
     {
      "year": 1986,
@@ -1811,6 +2629,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-deep-tunnel/1988-epa-tarp-special-evaluation-project-interim-report.pdf p.42"
+     ],
+     "srclinks": [
+      {
+       "label": "1988 epa tarp special p.42",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0042.jpg"
+      }
      ]
     },
     {
@@ -1829,6 +2653,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-safl-hydraulic-model/1988-safl-pr270-song-guo-zheng-hydraulic-transient-modeling-tarp.pdf p.9"
+     ],
+     "srclinks": [
+      {
+       "label": "1988 safl pr270 song p.9",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-safl-pr270-song-guo-zheng-hydraulic-transient-modeling-tarp/p0009.jpg"
+      }
      ]
     },
     {
@@ -1841,6 +2671,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-8",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1860,6 +2696,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/tarp-deep-tunnel/1988-epa-tarp-special-evaluation-project-interim-report.pdf p.36",
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "1988 epa tarp special p.36",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0036.jpg"
+      },
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -1872,6 +2718,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-safl-hydraulic-model/1988-safl-pr270-song-guo-zheng-hydraulic-transient-modeling-tarp.pdf p.9"
+     ],
+     "srclinks": [
+      {
+       "label": "1988 safl pr270 song p.9",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-safl-pr270-song-guo-zheng-hydraulic-transient-modeling-tarp/p0009.jpg"
+      }
      ]
     },
     {
@@ -1889,6 +2741,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-deep-tunnel/1988-epa-tarp-special-evaluation-project-interim-report.pdf p.36"
+     ],
+     "srclinks": [
+      {
+       "label": "1988 epa tarp special p.36",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0036.jpg"
+      }
      ]
     },
     {
@@ -1907,6 +2765,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-35",
      "sources": [
       "sources/tarp-deep-tunnel/1988-epa-tarp-special-evaluation-project-interim-report.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1988 epa tarp special",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0001.jpg"
+      }
      ]
     },
     {
@@ -1929,7 +2793,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0037.jpg",
       "caption": "How an existing interceptor sewer plugs into the Mainstream Tunnel: a regulating structure with sluice gates feeding a drop shaft down to the bore.",
       "credit": "1988-epa-tarp-special-evaluation-project-interim-report.pdf p.37 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1988 epa tarp special",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1988,
@@ -1951,7 +2821,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0018.jpg",
       "caption": "By 1988, the Upper Des Plaines tunnels were broken into five numbered contracts \u2014 rock tunnels and drop shafts converging on the O'Hare treatment plant and storage reservoir.",
       "credit": "1988-epa-tarp-special-evaluation-project-interim-report.pdf p.18 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1988 safl pr276 guo",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-safl-pr276-guo-song-hydraulic-transient-analysis-tarp-phase2/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1988,
@@ -1963,6 +2839,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-deep-tunnel/1988-epa-tarp-special-evaluation-project-interim-report.pdf p.42"
+     ],
+     "srclinks": [
+      {
+       "label": "1988 epa tarp special p.42",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0042.jpg"
+      }
      ]
     },
     {
@@ -1976,6 +2858,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/tarp-safl-hydraulic-model/1988-safl-pr270-song-guo-zheng-hydraulic-transient-modeling-tarp.pdf",
       "sources/tarp-deep-tunnel/1988-epa-tarp-special-evaluation-project-interim-report.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1988 safl pr270 song",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-safl-pr270-song-guo-zheng-hydraulic-transient-modeling-tarp/p0001.jpg"
+      },
+      {
+       "label": "1988 epa tarp special",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0001.jpg"
+      }
      ]
     },
     {
@@ -2000,7 +2892,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0043.jpg",
       "caption": "The Calumet System's tunnel status as the Corps of Engineers tracked it \u2014 completed segments distinguished from what was still Phase 2.",
       "credit": "1988-epa-tarp-special-evaluation-project-interim-report.pdf p.43 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1988,
@@ -2018,6 +2916,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-deep-tunnel/1988-epa-tarp-special-evaluation-project-interim-report.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1988 epa tarp special",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0001.jpg"
+      }
      ]
     },
     {
@@ -2036,6 +2940,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-safl-hydraulic-model/1988-safl-pr270-song-guo-zheng-hydraulic-transient-modeling-tarp.pdf p.16-17,26,34"
+     ],
+     "srclinks": [
+      {
+       "label": "1988 safl pr270 song p.16",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-safl-pr270-song-guo-zheng-hydraulic-transient-modeling-tarp/p0016.jpg"
+      }
      ]
     },
     {
@@ -2054,6 +2964,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-deep-tunnel/1988-epa-tarp-special-evaluation-project-interim-report.pdf p.36,38,39"
+     ],
+     "srclinks": [
+      {
+       "label": "1988 epa tarp special p.36",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0036.jpg"
+      }
      ]
     },
     {
@@ -2072,6 +2988,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-35",
      "sources": [
       "sources/tarp-deep-tunnel/1988-epa-tarp-special-evaluation-project-interim-report.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1988 epa tarp special",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0001.jpg"
+      }
      ]
     },
     {
@@ -2090,6 +3012,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-35",
      "sources": [
       "sources/tarp-deep-tunnel/1988-epa-tarp-special-evaluation-project-interim-report.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1988 epa tarp special",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0001.jpg"
+      }
      ]
     },
     {
@@ -2100,6 +3028,12 @@ window.TARPTIMELINE = {
      "weight": "major",
      "sources": [
       "sources/usace-chicagoland-underflow-plan/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0001.jpg"
+      }
      ]
     },
     {
@@ -2118,6 +3052,12 @@ window.TARPTIMELINE = {
      "doc": "10-tarp-reservoirs.md#src-28",
      "sources": [
       "sources/usace-chicagoland-underflow-plan/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0001.jpg"
+      }
      ]
     },
     {
@@ -2130,6 +3070,12 @@ window.TARPTIMELINE = {
      "doc": "10-tarp-reservoirs.md#src-28",
      "sources": [
       "sources/usace-chicagoland-underflow-plan/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0001.jpg"
+      }
      ]
     },
     {
@@ -2146,6 +3092,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/usace-chicagoland-underflow-plan/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0001.jpg"
+      }
      ]
     },
     {
@@ -2156,6 +3108,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/usace-chicagoland-underflow-plan/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0001.jpg"
+      }
      ]
     },
     {
@@ -2168,6 +3126,12 @@ window.TARPTIMELINE = {
      "doc": "1991-usace-wes-mccook-model",
      "sources": [
       "sources/usace-mccook-hydraulic-model/1991-usace-wes-mccook-reservoir-hydraulic-model-investigation.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1991 usace wes mccook",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1991-usace-wes-mccook-reservoir-hydraulic-model-investigation/p0001.jpg"
+      }
      ]
     },
     {
@@ -2185,7 +3149,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1992-shackleford-reduction-peak-flows-water-quality-illinois-waterway-tarp-phase/p0048.jpg",
       "caption": "The number that justified the whole project: modeled combined-sewer spill days per year collapse from roughly 60 to near zero once both tunnel phases are in service.",
       "credit": "1992-shackleford-reduction-peak-flows-water-quality-illinois-waterway-tarp-phases1-2.pdf p.48 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1992 safl pr332 song p.22",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1992-safl-pr332-song-lin-gong-hydraulic-transient-modeling-tarp/p0022.jpg"
+      }
+     ]
     },
     {
      "year": 1992,
@@ -2197,6 +3167,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-38",
      "sources": [
       "sources/tarp-safl-hydraulic-model/1992-safl-pr332-song-lin-gong-hydraulic-transient-modeling-tarp.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1992 safl pr332 song",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1992-safl-pr332-song-lin-gong-hydraulic-transient-modeling-tarp/p0001.jpg"
+      }
      ]
     },
     {
@@ -2215,7 +3191,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1992-safl-pr332-song-lin-gong-hydraulic-transient-modeling-tarp/p0037.jpg",
       "caption": "How hydraulic engineers simplified the finished Mainstream Tunnel into a four-branch network model to simulate storm surges racing through it.",
       "credit": "1992-safl-pr332-song-lin-gong-hydraulic-transient-modeling-tarp.pdf p.37 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1992 shackleford reduction peak",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1992-shackleford-reduction-peak-flows-water-quality-illinois-waterway-tarp-phase/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1993,
@@ -2232,6 +3214,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/docs-societies-mwrd-misc/2023-mwrd-seminar-50-year-history-tarp.pdf",
       "sources/tarp-deep-tunnel/1977-epa-final-eis-tarp-lower-des-plaines-tunnel-system.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 mwrd seminar year",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-mwrd-seminar-50-year-history-tarp/p0001.jpg"
+      },
+      {
+       "label": "1977 epa final eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1977-epa-final-eis-tarp-lower-des-plaines-tunnel-system/p0001.jpg"
+      }
      ]
     },
     {
@@ -2243,6 +3235,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-safl-hydraulic-model/1994-safl-pr353-song-he-liu-gong-hydraulic-transient-mainstream-desplaines-phase2.pdf p.25"
+     ],
+     "srclinks": [
+      {
+       "label": "1994 safl pr353 song p.25",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1994-safl-pr353-song-he-liu-gong-hydraulic-transient-mainstream-desplaines-phase/p0025.jpg"
+      }
      ]
     },
     {
@@ -2254,6 +3252,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/docs-societies-mwrd-misc/2023-mwrd-seminar-50-year-history-tarp.pdf",
       "sources/tarp-deep-tunnel/1977-epa-final-eis-tarp-lower-des-plaines-tunnel-system.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2023 mwrd seminar year",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-mwrd-seminar-50-year-history-tarp/p0001.jpg"
+      },
+      {
+       "label": "1977 epa final eis",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1977-epa-final-eis-tarp-lower-des-plaines-tunnel-system/p0001.jpg"
+      }
      ]
     },
     {
@@ -2264,6 +3272,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "docs/13-suburban-wrps.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 13",
+       "href": "docs/13-suburban-wrps.html"
+      }
      ]
     },
     {
@@ -2277,6 +3291,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/tarp-safl-hydraulic-model/1994-safl-pr353-song-he-liu-gong-hydraulic-transient-mainstream-desplaines-phase2.pdf",
       "sources/tarp-safl-hydraulic-model/1994-safl-pr361-he-song-liu-gong-hydraulic-transient-mainstream-tunnel-control-system.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1994 safl pr353 song",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1994-safl-pr353-song-he-liu-gong-hydraulic-transient-mainstream-desplaines-phase/p0001.jpg"
+      },
+      {
+       "label": "1994 safl pr361 song",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1994-safl-pr361-he-song-liu-gong-hydraulic-transient-mainstream-tunnel-control-s/p0001.jpg"
+      }
      ]
     },
     {
@@ -2289,6 +3313,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-safl-hydraulic-model/1994-safl-pr361-he-song-liu-gong-hydraulic-transient-mainstream-tunnel-control-system.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1994 safl pr361 song",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1994-safl-pr361-he-song-liu-gong-hydraulic-transient-mainstream-tunnel-control-s/p0001.jpg"
+      }
      ]
     },
     {
@@ -2307,6 +3337,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-40",
      "sources": [
       "sources/tarp-deep-tunnel/2016-usgs-sir2015-5186-hydrogeology-groundwater-tarp-monitoring-wells-cook-county-1995-2013.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2016 usgs sir2015 5186",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2016-usgs-sir2015-5186-hydrogeology-groundwater-tarp-monitoring-wells-cook-count/p0001.jpg"
+      }
      ]
     },
     {
@@ -2320,6 +3356,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/tarp-deep-tunnel/TARP_Status_Report_2025-06-30.pdf",
       "sources/docs-societies-mwrd-misc/2023-mwrd-seminar-50-year-history-tarp.pdf p.76,79"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report 2025",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0001.jpg"
+      },
+      {
+       "label": "2023 mwrd seminar year p.76",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-mwrd-seminar-50-year-history-tarp/p0076.jpg"
+      }
      ]
     },
     {
@@ -2338,7 +3384,17 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1997-safl-pr417-he-song-hydraulic-transient-analysis-tarp-phase2-ohare-tunnel/p0048.jpg",
       "caption": "Modeling how fast the O'Hare Tunnel fills during storms of different size and duration \u2014 the hydraulic transient work that shaped the gate-control system.",
       "credit": "1997-safl-pr417-he-song-hydraulic-transient-analysis-tarp-phase2-ohare-tunnel.pdf p.48 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1997 safl pr417 song",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1997-safl-pr417-he-song-hydraulic-transient-analysis-tarp-phase2-ohare-tunnel/p0001.jpg"
+      },
+      {
+       "label": "1990 cup ohare reservoir p.303",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol2/p0303.jpg"
+      }
+     ]
     },
     {
      "year": 1997,
@@ -2361,7 +3417,17 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1997-safl-pr417-he-song-hydraulic-transient-analysis-tarp-phase2-ohare-tunnel/p0036.jpg",
       "caption": "A typical TARP drop shaft in profile \u2014 a 9-foot vertical bore dropping street-level overflow roughly 90 feet down to the 20-foot rock tunnel below.",
       "credit": "1997-safl-pr417-he-song-hydraulic-transient-analysis-tarp-phase2-ohare-tunnel.pdf p.36 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "1997 safl pr417 song",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1997-safl-pr417-he-song-hydraulic-transient-analysis-tarp-phase2-ohare-tunnel/p0001.jpg"
+      },
+      {
+       "label": "1988 epa tarp special",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1988-epa-tarp-special-evaluation-project-interim-report/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 1997,
@@ -2373,6 +3439,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-38",
      "sources": [
       "sources/tarp-safl-hydraulic-model/1997-safl-pr417-he-song-hydraulic-transient-analysis-tarp-phase2-ohare-tunnel.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "1997 safl pr417 song",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1997-safl-pr417-he-song-hydraulic-transient-analysis-tarp-phase2-ohare-tunnel/p0001.jpg"
+      }
      ]
     },
     {
@@ -2385,6 +3457,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/10-tarp-reservoirs.md",
       "sources/usace-chicagoland-underflow-plan/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      },
+      {
+       "label": "1990 cup ohare reservoir",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/1990-cup-ohare-reservoir-phase2-gdm-eis-vol1/p0001.jpg"
+      }
      ]
     },
     {
@@ -2396,6 +3478,12 @@ window.TARPTIMELINE = {
      "doc": "1998-majewski-completed",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -2409,6 +3497,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/tarp-deep-tunnel/TARP_Status_Report_2025-06-30.pdf",
       "sources/docs-societies-mwrd-misc/2023-mwrd-seminar-50-year-history-tarp.pdf p.76"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report 2025",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0001.jpg"
+      },
+      {
+       "label": "2023 mwrd seminar year p.76",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-mwrd-seminar-50-year-history-tarp/p0076.jpg"
+      }
      ]
     },
     {
@@ -2421,6 +3519,12 @@ window.TARPTIMELINE = {
      "doc": "10-tarp-reservoirs",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -2432,6 +3536,12 @@ window.TARPTIMELINE = {
      "doc": "1999-encyclopedia-4-billion",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     }
    ]
@@ -2450,6 +3560,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-safl-hydraulic-model/2000-safl-pr446-he-stefan-whamo-model-chicagoland-underflow-plan-evaluations.pdf p.6-7"
+     ],
+     "srclinks": [
+      {
+       "label": "2000 safl pr446 stefan p.6",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2000-safl-pr446-he-stefan-whamo-model-chicagoland-underflow-plan-evaluations/p0006.jpg"
+      }
      ]
     },
     {
@@ -2462,6 +3578,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-38",
      "sources": [
       "sources/tarp-safl-hydraulic-model/2000-safl-pr446-he-stefan-whamo-model-chicagoland-underflow-plan-evaluations.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2000 safl pr446 stefan",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2000-safl-pr446-he-stefan-whamo-model-chicagoland-underflow-plan-evaluations/p0001.jpg"
+      }
      ]
     },
     {
@@ -2478,6 +3600,12 @@ window.TARPTIMELINE = {
      },
      "sources": [
       "sources/court-consent-decrees/2011-epa-doj-mwrd-consent-decree.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2011 epa doj mwrd",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2011-epa-doj-mwrd-consent-decree/p0001.jpg"
+      }
      ]
     },
     {
@@ -2491,6 +3619,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/09-tarp-deep-tunnel.md [29]",
       "sources/tarp-deep-tunnel/TARP_Status_Report_2025-06-30.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      },
+      {
+       "label": "TARP Status Report 2025",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0001.jpg"
+      }
      ]
     },
     {
@@ -2502,6 +3640,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "sources/tarp-safl-hydraulic-model/2002-safl-pr445-he-song-mainstream-desplaines-tarp-tunnel-hydraulic-model-study.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2002 safl pr445 song",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2002-safl-pr445-he-song-mainstream-desplaines-tarp-tunnel-hydraulic-model-study/p0001.jpg"
+      }
      ]
     },
     {
@@ -2514,6 +3658,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-18",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -2526,6 +3676,12 @@ window.TARPTIMELINE = {
      "doc": "10-tarp-reservoirs",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -2537,6 +3693,12 @@ window.TARPTIMELINE = {
      "doc": "2004-thornton-funding-takeover",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -2549,6 +3711,12 @@ window.TARPTIMELINE = {
      "doc": "10-tarp-reservoirs",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -2561,6 +3729,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/09-tarp-deep-tunnel.md",
       "sources/tarp-deep-tunnel/TARP_Status_Report_2025-06-30.pdf p.8"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      },
+      {
+       "label": "TARP Status Report 2025 p.8",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0008.jpg"
+      }
      ]
     },
     {
@@ -2572,6 +3750,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-2",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -2583,6 +3767,12 @@ window.TARPTIMELINE = {
      "doc": "2006-phase-i-complete-cost",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -2596,6 +3786,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/09-tarp-deep-tunnel.md",
       "sources/docs-societies-mwrd-misc/2023-mwrd-seminar-50-year-history-tarp.pdf p.85"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      },
+      {
+       "label": "2023 mwrd seminar year p.85",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2023-mwrd-seminar-50-year-history-tarp/p0085.jpg"
+      }
      ]
     },
     {
@@ -2608,6 +3808,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-2",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     }
    ]
@@ -2632,7 +3838,13 @@ window.TARPTIMELINE = {
       "credit": "\u00a9 David Schalliol; MAS Context photo essay; editorial/research use, verify redistribution terms",
       "source_url": "https://mascontext.com/issues/hidden/exploring-the-physicality-of-the-tunnel-and-reservoir-plan/",
       "href": "https://mascontext.com/issues/hidden/exploring-the-physicality-of-the-tunnel-and-reservoir-plan/"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2011 epa doj mwrd",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2011-epa-doj-mwrd-consent-decree/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2011,
@@ -2651,7 +3863,17 @@ window.TARPTIMELINE = {
       "credit": "MWRD (public agency); official photo",
       "source_url": "https://mwrd.org/what-we-do/history-protecting-our-water-environment",
       "href": "https://mwrd.org/what-we-do/history-protecting-our-water-environment"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      },
+      {
+       "label": "doc 14",
+       "href": "docs/14-cso-outfalls-discharges.html"
+      }
+     ]
     },
     {
      "year": 2011,
@@ -2677,7 +3899,17 @@ window.TARPTIMELINE = {
       "credit": "\u00a9 David Schalliol; MAS Context photo essay; editorial/research use, verify redistribution terms",
       "source_url": "https://mascontext.com/issues/hidden/exploring-the-physicality-of-the-tunnel-and-reservoir-plan/",
       "href": "https://mascontext.com/issues/hidden/exploring-the-physicality-of-the-tunnel-and-reservoir-plan/"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2011 epa doj mwrd p.80",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2011-epa-doj-mwrd-consent-decree/p0080.jpg"
+      },
+      {
+       "label": "2010 seminar may 2010 p.55",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2010-m-r-seminar-may-2010/p0055.jpg"
+      }
+     ]
     },
     {
      "year": 2012,
@@ -2694,7 +3926,13 @@ window.TARPTIMELINE = {
       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2012-morales-hydrologic-hydraulic-modeling-lawrence-avenue-underflow-sewer/p0091.jpg",
       "caption": "What a real storm looks like inside the tunnel: a 2012 hydraulic model shows water surging up the drop shafts during the July 2010 storm, decades after the bore was finished.",
       "credit": "2012-morales-hydrologic-hydraulic-modeling-lawrence-avenue-underflow-sewer.pdf p.91 (US government document, public domain)"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 14",
+       "href": "docs/14-cso-outfalls-discharges.html"
+      }
+     ]
     },
     {
      "year": 2013,
@@ -2713,7 +3951,13 @@ window.TARPTIMELINE = {
       "credit": "Flickr (reallyboring); verify license/redistribution terms",
       "source_url": "https://www.flickr.com/photos/reallyboring/13887903255",
       "href": "https://www.flickr.com/photos/reallyboring/13887903255"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
+     ]
     },
     {
      "year": 2013,
@@ -2738,7 +3982,13 @@ window.TARPTIMELINE = {
       "credit": "Wikimedia Commons, CC BY 2.0",
       "source_url": "https://commons.wikimedia.org/wiki/File:Deep_Tunnel_(9189642028).jpg",
       "href": "https://commons.wikimedia.org/wiki/File:Deep_Tunnel_(9189642028).jpg"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "CollectionSystemOMManual 2022",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/CollectionSystemOMManual_2022/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2014,
@@ -2763,7 +4013,17 @@ window.TARPTIMELINE = {
       "credit": "Credit: MWRD / DNAinfo Chicago",
       "source_url": "http://industrialscenery.blogspot.com/2017/01/mwrd-calumet-tarp-pumping-station.html",
       "href": "http://industrialscenery.blogspot.com/2017/01/mwrd-calumet-tarp-pumping-station.html"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 14",
+       "href": "docs/14-cso-outfalls-discharges.html"
+      },
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
+     ]
     },
     {
      "year": 2015,
@@ -2782,7 +4042,13 @@ window.TARPTIMELINE = {
       "credit": "\u00a9 David Schalliol; MAS Context photo essay; editorial/research use, verify redistribution terms",
       "source_url": "https://mascontext.com/issues/hidden/exploring-the-physicality-of-the-tunnel-and-reservoir-plan/",
       "href": "https://mascontext.com/issues/hidden/exploring-the-physicality-of-the-tunnel-and-reservoir-plan/"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
+     ]
     },
     {
      "year": 2015,
@@ -2801,7 +4067,13 @@ window.TARPTIMELINE = {
       "credit": "\u00a9 David Schalliol; MAS Context photo essay; editorial/research use, verify redistribution terms",
       "source_url": "https://mascontext.com/issues/hidden/exploring-the-physicality-of-the-tunnel-and-reservoir-plan/",
       "href": "https://mascontext.com/issues/hidden/exploring-the-physicality-of-the-tunnel-and-reservoir-plan/"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 06",
+       "href": "docs/06-city-sewer-network.html"
+      }
+     ]
     },
     {
      "year": 2015,
@@ -2820,7 +4092,13 @@ window.TARPTIMELINE = {
       "credit": "\u00a9 David Schalliol; MAS Context photo essay; editorial/research use, verify redistribution terms",
       "source_url": "https://mascontext.com/issues/hidden/exploring-the-physicality-of-the-tunnel-and-reservoir-plan/",
       "href": "https://mascontext.com/issues/hidden/exploring-the-physicality-of-the-tunnel-and-reservoir-plan/"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
+     ]
     },
     {
      "year": 2015,
@@ -2839,7 +4117,13 @@ window.TARPTIMELINE = {
       "credit": "\u00a9 David Schalliol; MAS Context photo essay; editorial/research use, verify redistribution terms",
       "source_url": "https://mascontext.com/issues/hidden/exploring-the-physicality-of-the-tunnel-and-reservoir-plan/",
       "href": "https://mascontext.com/issues/hidden/exploring-the-physicality-of-the-tunnel-and-reservoir-plan/"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
+     ]
     },
     {
      "year": 2016,
@@ -2857,7 +4141,13 @@ window.TARPTIMELINE = {
       "credit": "\u00a9 David Schalliol; MAS Context photo essay; editorial/research use, verify redistribution terms",
       "source_url": "https://mascontext.com/issues/hidden/exploring-the-physicality-of-the-tunnel-and-reservoir-plan/",
       "href": "https://mascontext.com/issues/hidden/exploring-the-physicality-of-the-tunnel-and-reservoir-plan/"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
+     ]
     },
     {
      "year": 2016,
@@ -2876,7 +4166,17 @@ window.TARPTIMELINE = {
       "credit": "MWRD (public agency); official photo",
       "source_url": "https://mwrd.org/what-we-do/tunnel-and-reservoir-plan-tarp",
       "href": "https://mwrd.org/what-we-do/tunnel-and-reservoir-plan-tarp"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      },
+      {
+       "label": "TARP Status Report 2025",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2016,
@@ -2896,7 +4196,17 @@ window.TARPTIMELINE = {
       "credit": "\u00a9 David Schalliol; MAS Context photo essay; editorial/research use, verify redistribution terms",
       "source_url": "https://mascontext.com/issues/hidden/exploring-the-physicality-of-the-tunnel-and-reservoir-plan/",
       "href": "https://mascontext.com/issues/hidden/exploring-the-physicality-of-the-tunnel-and-reservoir-plan/"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 07",
+       "href": "docs/07-mwrd-interceptors-pumping-stations.html"
+      },
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
+     ]
     },
     {
      "year": 2017,
@@ -2914,7 +4224,13 @@ window.TARPTIMELINE = {
       "credit": "\u00a9 David Schalliol; MAS Context photo essay; editorial/research use, verify redistribution terms",
       "source_url": "https://mascontext.com/issues/hidden/exploring-the-physicality-of-the-tunnel-and-reservoir-plan/",
       "href": "https://mascontext.com/issues/hidden/exploring-the-physicality-of-the-tunnel-and-reservoir-plan/"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
+     ]
     },
     {
      "year": 2017,
@@ -2934,7 +4250,17 @@ window.TARPTIMELINE = {
       "credit": "CC BY 2.0; photographer David Wilson (Flickr)",
       "source_url": "https://www.flickr.com/photos/davidwilson1949/49240529521",
       "href": "https://www.flickr.com/photos/davidwilson1949/49240529521"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      },
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
+     ]
     },
     {
      "year": 2018,
@@ -2952,7 +4278,13 @@ window.TARPTIMELINE = {
       "credit": "WBEZ Chicago photo essay; photo by Andrew Gill; verify redistribution terms",
       "source_url": "https://interactive.wbez.org/photos/deeptunnel/",
       "href": "https://interactive.wbez.org/photos/deeptunnel/"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 07",
+       "href": "docs/07-mwrd-interceptors-pumping-stations.html"
+      }
+     ]
     },
     {
      "year": 2018,
@@ -2988,6 +4320,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/16-current-capital-projects.md",
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 16",
+       "href": "docs/16-current-capital-projects.html"
+      },
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -3001,6 +4343,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/09-tarp-deep-tunnel.md",
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      },
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -3011,6 +4363,12 @@ window.TARPTIMELINE = {
      "weight": "standard",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -3023,6 +4381,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-30",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -3043,7 +4407,17 @@ window.TARPTIMELINE = {
       "credit": "\u00a9 David Schalliol; MAS Context photo essay; editorial/research use, verify redistribution terms",
       "source_url": "https://mascontext.com/issues/hidden/exploring-the-physicality-of-the-tunnel-and-reservoir-plan/",
       "href": "https://mascontext.com/issues/hidden/exploring-the-physicality-of-the-tunnel-and-reservoir-plan/"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 07",
+       "href": "docs/07-mwrd-interceptors-pumping-stations.html"
+      },
+      {
+       "label": "mwrd 2026 final budget p.339",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/mwrd-2026-final-budget-book/p0339.jpg"
+      }
+     ]
     },
     {
      "year": 2022,
@@ -3053,6 +4427,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/tarp-deep-tunnel/TARP_Status_Report_2025-06-30.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "TARP Status Report 2025",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0001.jpg"
+      }
      ]
     },
     {
@@ -3065,6 +4445,20 @@ window.TARPTIMELINE = {
       "docs/09-tarp-deep-tunnel.md",
       "sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf",
       "sources/tarp-deep-tunnel/TARP_Status_Report_2025-06-30.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      },
+      {
+       "label": "CollectionSystemOMManual 2022",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/CollectionSystemOMManual_2022/p0001.jpg"
+      },
+      {
+       "label": "TARP Status Report 2025",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/TARP_Status_Report_2025-06-30/p0001.jpg"
+      }
      ]
     },
     {
@@ -3083,6 +4477,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-26",
      "sources": [
       "sources/north-branch-pumping-station/CollectionSystemOMManual_2022.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "CollectionSystemOMManual 2022",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/CollectionSystemOMManual_2022/p0001.jpg"
+      }
      ]
     },
     {
@@ -3096,6 +4496,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/09-tarp-deep-tunnel.md",
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      },
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -3108,6 +4518,12 @@ window.TARPTIMELINE = {
      "doc": "10-tarp-reservoirs",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -3120,6 +4536,12 @@ window.TARPTIMELINE = {
      "doc": "07-mwrd-interceptors-pumping-stations",
      "sources": [
       "docs/07-mwrd-interceptors-pumping-stations.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 07",
+       "href": "docs/07-mwrd-interceptors-pumping-stations.html"
+      }
      ]
     },
     {
@@ -3138,7 +4560,13 @@ window.TARPTIMELINE = {
       "credit": "MWRD (public agency); official map, rendered from PDF status report",
       "source_url": "https://mwrd.org/sites/default/files/2024-10/Tarp_Status_Report_2024.pdf",
       "href": "https://mwrd.org/sites/default/files/2024-10/Tarp_Status_Report_2024.pdf"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
+     ]
     },
     {
      "year": 2023,
@@ -3157,7 +4585,13 @@ window.TARPTIMELINE = {
       "credit": "MWRD (public agency); official map, rendered from PDF status report",
       "source_url": "https://mwrd.org/sites/default/files/2024-10/Tarp_Status_Report_2024.pdf",
       "href": "https://mwrd.org/sites/default/files/2024-10/Tarp_Status_Report_2024.pdf"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
+     ]
     },
     {
      "year": 2023,
@@ -3169,6 +4603,12 @@ window.TARPTIMELINE = {
      "doc": "16-current-capital-projects",
      "sources": [
       "sources/current-projects/mwrd-2023-final-budget-book.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "mwrd 2023 final budget",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/mwrd-2023-final-budget-book/p0001.jpg"
+      }
      ]
     },
     {
@@ -3181,6 +4621,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -3193,6 +4639,12 @@ window.TARPTIMELINE = {
      "doc": "09-tarp-deep-tunnel.md#src-15",
      "sources": [
       "docs/09-tarp-deep-tunnel.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      }
      ]
     },
     {
@@ -3216,7 +4668,13 @@ window.TARPTIMELINE = {
       "credit": "Credit: MWRD (official/Facebook post)",
       "source_url": "https://mwrd.org/news/special-unit-rescue-team-rappels-down-mwrd-infrastructure",
       "href": "https://mwrd.org/news/special-unit-rescue-team-rappels-down-mwrd-infrastructure"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "2024 mwrd board upper",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2024-mwrd-board-upper-des-plaines-dropshafts-calumet-dropshaft34-fact-sheet-23-3/p0001.jpg"
+      }
+     ]
     },
     {
      "year": 2024,
@@ -3236,7 +4694,21 @@ window.TARPTIMELINE = {
       "credit": "MWRD (public agency); official map, rendered from PDF status report",
       "source_url": "https://mwrd.org/sites/default/files/2024-10/Tarp_Status_Report_2024.pdf",
       "href": "https://mwrd.org/sites/default/files/2024-10/Tarp_Status_Report_2024.pdf"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      },
+      {
+       "label": "doc 14",
+       "href": "docs/14-cso-outfalls-discharges.html"
+      },
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
+     ]
     },
     {
      "year": 2025,
@@ -3255,7 +4727,17 @@ window.TARPTIMELINE = {
       "credit": "MWRD (public agency)",
       "source_url": "https://mwrd.org/sites/default/files/2026-01/TARP_Status_%20Report_12-31-2025.pdf",
       "href": "https://mwrd.org/sites/default/files/2026-01/TARP_Status_%20Report_12-31-2025.pdf"
-     }
+     },
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      },
+      {
+       "label": "doc 16",
+       "href": "docs/16-current-capital-projects.html"
+      }
+     ]
     },
     {
      "year": 2026,
@@ -3281,6 +4763,12 @@ window.TARPTIMELINE = {
      "weight": "minor",
      "sources": [
       "sources/mwrd-interceptors-pumping-stations/2024-mwrd-board-upper-des-plaines-dropshafts-calumet-dropshaft34-fact-sheet-23-378-2s.pdf"
+     ],
+     "srclinks": [
+      {
+       "label": "2024 mwrd board upper",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2024-mwrd-board-upper-des-plaines-dropshafts-calumet-dropshaft34-fact-sheet-23-3/p0001.jpg"
+      }
      ]
     },
     {
@@ -3292,6 +4780,12 @@ window.TARPTIMELINE = {
      "doc": "2026-kirie-cost-growth",
      "sources": [
       "docs/16-current-capital-projects.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 16",
+       "href": "docs/16-current-capital-projects.html"
+      }
      ]
     },
     {
@@ -3303,6 +4797,12 @@ window.TARPTIMELINE = {
      "doc": "2026-north-branch-cost-growth",
      "sources": [
       "docs/16-current-capital-projects.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 16",
+       "href": "docs/16-current-capital-projects.html"
+      }
      ]
     },
     {
@@ -3315,6 +4815,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/16-current-capital-projects.md",
       "docs/12-calumet-obrien-wrp.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 16",
+       "href": "docs/16-current-capital-projects.html"
+      },
+      {
+       "label": "doc 12",
+       "href": "docs/12-calumet-obrien-wrp.html"
+      }
      ]
     },
     {
@@ -3327,6 +4837,16 @@ window.TARPTIMELINE = {
      "sources": [
       "docs/16-current-capital-projects.md",
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 16",
+       "href": "docs/16-current-capital-projects.html"
+      },
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -3338,6 +4858,12 @@ window.TARPTIMELINE = {
      "doc": "2026-harbor-lock-funding-fight",
      "sources": [
       "docs/16-current-capital-projects.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 16",
+       "href": "docs/16-current-capital-projects.html"
+      }
      ]
     },
     {
@@ -3352,6 +4878,20 @@ window.TARPTIMELINE = {
       "docs/09-tarp-deep-tunnel.md",
       "docs/10-tarp-reservoirs.md",
       "docs/07-mwrd-interceptors-pumping-stations.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 09",
+       "href": "docs/09-tarp-deep-tunnel.html"
+      },
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      },
+      {
+       "label": "doc 07",
+       "href": "docs/07-mwrd-interceptors-pumping-stations.html"
+      }
      ]
     },
     {
@@ -3371,6 +4911,16 @@ window.TARPTIMELINE = {
      "sources": [
       "sources/current-projects/mwrd-2026-final-budget-book.pdf",
       "docs/16-current-capital-projects.md"
+     ],
+     "srclinks": [
+      {
+       "label": "mwrd 2026 final budget",
+       "href": "https://boswald314.github.io/chicago-water-images/sources-pages/mwrd-2026-final-budget-book/p0001.jpg"
+      },
+      {
+       "label": "doc 16",
+       "href": "docs/16-current-capital-projects.html"
+      }
      ]
     },
     {
@@ -3383,6 +4933,12 @@ window.TARPTIMELINE = {
      "doc": "10-tarp-reservoirs",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -3395,6 +4951,12 @@ window.TARPTIMELINE = {
      "doc": "10-tarp-reservoirs",
      "sources": [
       "docs/10-tarp-reservoirs.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 10",
+       "href": "docs/10-tarp-reservoirs.html"
+      }
      ]
     },
     {
@@ -3407,6 +4969,11 @@ window.TARPTIMELINE = {
      "doc": "16-current-capital-projects",
      "sources": [
       "sources/current-projects/mwrd-2026-final-budget-book.pdf p.23548,24768"
+     ],
+     "srclinks": [
+      {
+       "label": "mwrd 2026 final budget p.23548"
+      }
      ]
     },
     {
@@ -3419,6 +4986,11 @@ window.TARPTIMELINE = {
      "doc": "16-current-capital-projects",
      "sources": [
       "sources/current-projects/mwrd-2026-final-budget-book.pdf p.22697"
+     ],
+     "srclinks": [
+      {
+       "label": "mwrd 2026 final budget p.22697"
+      }
      ]
     },
     {
@@ -3431,6 +5003,12 @@ window.TARPTIMELINE = {
      "doc": "08-north-branch-pumping-station",
      "sources": [
       "docs/08-north-branch-pumping-station.md"
+     ],
+     "srclinks": [
+      {
+       "label": "doc 08",
+       "href": "docs/08-north-branch-pumping-station.html"
+      }
      ]
     },
     {
@@ -3443,6 +5021,11 @@ window.TARPTIMELINE = {
      "doc": "16-current-capital-projects",
      "sources": [
       "sources/current-projects/mwrd-2026-final-budget-book.pdf p.24504,23562"
+     ],
+     "srclinks": [
+      {
+       "label": "mwrd 2026 final budget p.24504"
+      }
      ]
     }
    ]
