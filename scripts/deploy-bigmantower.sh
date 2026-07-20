@@ -37,7 +37,7 @@ cd $DEST
 ./.venv/bin/pip install -q sqlite-vec requests
 pkill -f 'rag/serve[.]py' 2>/dev/null || true
 sleep 1
-nohup ./.venv/bin/python rag/serve.py > serve.log 2>&1 &
+PORT= nohup ./.venv/bin/python rag/serve.py > serve.log 2>&1 &
 sleep 2
 curl -sf "http://127.0.0.1:$PORT/api/health" && echo && echo "mirror live on http://\$(hostname):$PORT"
 REMOTE
