@@ -885,7 +885,7 @@ window.TARPTIMELINE = {
      "year": 2021,
      "title": "Wild Mile Phase 1 Opens: 400 Feet of Floating Wetlands",
      "kind": "construction",
-     "body": "The Wild Mile's first phase was completed in 2021, delivering 400 linear feet of floating wetlands and boardwalks on the east bank of the North Branch Canal \u2014 adaptive reuse of an unnavigable, shallow industrial channel that would have needed dredging for boat traffic, converted instead into floating habitat and public walking access.",
+     "body": "The Wild Mile's first phase opened in 2021: roughly 12,000 sq ft of floating gardens plus 400 linear feet of boardwalk, built for about $1.6 million on an unnavigable, shallow industrial channel that would otherwise have needed dredging. The floating modules are Biomatrix Water (Scotland) units \u2014 thermo-fused HDPE floats joined at 316-stainless quick-connect flanges (destructive-tested past 4 tonnes of pull), planted not in soil but in landscape fabric topped with LECA and wood chips (a hydroponic 'riverponic' bed) with 10,000+ native plants across ~50 species. Phase 1 was anchored with roughly thirty-five 3,000-lb concrete blocks \u2014 a choice that would prove inadequate.",
      "weight": "major",
      "quote": {
       "text": "The first phase of the Wild Mile was constructed in 2021 and consisted of 400 linear feet of floating wetlands and boardwalks. In 2024, an additional 300 feet of floating wetlands and walkway was added to the north end of the first phase.",
@@ -897,6 +897,18 @@ window.TARPTIMELINE = {
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf"
      ],
      "srclinks": [
+      {
+       "label": "Wild Mile construction",
+       "href": "https://wildmile.org/construction"
+      },
+      {
+       "label": "Biomatrix (Wild Mile)",
+       "href": "https://www.biomatrixwater.com/the-wild-mile-chicago/"
+      },
+      {
+       "label": "Urban Rivers FAQ (cost)",
+       "href": "https://urbanrivers.org/faqs"
+      },
       {
        "label": "2025 usace caws restoration",
        "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
@@ -1050,14 +1062,26 @@ window.TARPTIMELINE = {
     },
     {
      "year": 2024,
-     "title": "Wild Mile Phase 2 Adds 300 More Feet of Floating Wetlands",
+     "title": "Wild Mile Phase 2: 300 More Feet \u2014 and a New Way to Anchor It",
      "kind": "construction",
-     "body": "In 2024, an additional 300 feet of floating wetlands and walkway extended the Wild Mile northward from the end of Phase 1, bringing the built total to roughly 700 linear feet against the 2019 Framework Vision's mile-long ambition \u2014 measurable but partial progress toward a still-unrealized full build-out.",
-     "weight": "standard",
+     "body": "Phase 2 added about 300 feet of floating wetlands and walkway in 2024 for roughly $1.7 million, bringing the built total near 700 linear feet (about 11,716 sq ft of habitat) against the 2019 vision's full mile. Its most consequential change was invisible: after the Phase 1 concrete-block anchors shifted and lost tension within a few years, Phase 2 switched to Chance SS5 helical anchors \u2014 1.5-inch square shafts with 8/10/12-inch helix plates driven ~19 ft from a barge and pull-tested past 20,000 lb \u2014 tethered to the rafts by Hazelett Marine elastic polyurethane rodes that stretch over 200% to absorb boat-wake and wind loads and ride the Chicago River's measured ~9.9-ft (100-year) level swing. The 2025 peer-reviewed cost study pegged the finished Wild Mile at about $2,537 per m\u00b2 to build and $181 per m\u00b2/yr to maintain \u2014 high for a floating wetland precisely because it is a walkable 'eco-park,' not a bulk water-treatment system (it covers under 1% of the river surface).",
+     "weight": "major",
      "sources": [
       "sources/usace-caws-restoration-dredging/2025-usace-caws-restoration-recreation-study-federal-interest-determination.pdf"
      ],
      "srclinks": [
+      {
+       "label": "Hubbell/Chance (anchors)",
+       "href": "https://blog.hubbell.com/en/chancefoundationsolutions/the-wild-mile-anchored-in-sustainability"
+      },
+      {
+       "label": "ASCE (Wild Mile engineering)",
+       "href": "https://www.asce.org/publications-and-news/civil-engineering-source/civil-engineering-magazine/article/2022/08/reinventing-a-chicago-canal-into-the-wild-mile"
+      },
+      {
+       "label": "Awad 2025 (cost)",
+       "href": "https://www.newswise.com/pdf_docs/175929835875847_awad-et-al-2025-assessing-the-costs-of-constructed-floating-wetlands-for-the-treatment-of-surface-waters-and-wastewater.pdf"
+      },
       {
        "label": "2025 usace caws restoration",
        "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"

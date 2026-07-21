@@ -706,7 +706,7 @@ window.TARPTIMELINE = {
      "year": 2022,
      "title": "Urban Rivers Installs Floating Wetlands on Bubbly Creek",
      "kind": "outcome",
-     "body": "With the federal project still frozen on CERCLA liability, the nonprofit Urban Rivers installed floating wetland islands directly in Bubbly Creek in 2022 \u2014 an interim, small-scale habitat and water-quality measure requiring no sediment disturbance and therefore none of the liability exposure blocking USACE's plan. The 2025 federal study later cited it, alongside the North Branch dam removal, as one of the CAWS's only realized large-scale habitat gains, a striking reversal in which a community nonprofit outpaced a fully designed, congressionally reviewed federal project.",
+     "body": "With the federal project frozen on CERCLA liability, the nonprofit Urban Rivers installed floating wetland islands directly in Bubbly Creek in 2022 \u2014 an interim habitat measure needing no sediment disturbance and so none of the liability blocking USACE's plan. Like the Wild Mile, the rafts are Biomatrix HDPE modules planted in a soil-less LECA/fabric bed; the initial installation covered roughly 3,000 sq ft with 3,000+ native plants (dominated by soft rush, Juncus effusus \u2014 independently the cold-hardiest species in overwintering trials), later expanded by ~40 structures to about 4,460 sq ft. The 2025 peer-reviewed cost study put Bubbly Creek at about $1,324 per m\u00b2 capital and $175 per m\u00b2/yr to operate \u2014 cheaper per area than the Wild Mile but, at under 1% river coverage, likewise a habitat-and-amenity project rather than a bulk nutrient-treatment system. The 2025 federal study cited it, alongside the dam removal, as one of the CAWS's only realized large-scale habitat gains \u2014 a community nonprofit outpacing a congressionally reviewed federal project.",
      "weight": "major",
      "quote": {
       "text": "Urban Rivers floating wetland gardens in the North Branch Chicago River and Bubbly Creek",
@@ -726,6 +726,14 @@ window.TARPTIMELINE = {
       "credit": "2020-usace-bubbly-creek-chiefs-report.pdf p.59 (US government document, public domain)"
      },
      "srclinks": [
+      {
+       "label": "Awad 2025 (cost)",
+       "href": "https://www.newswise.com/pdf_docs/175929835875847_awad-et-al-2025-assessing-the-costs-of-constructed-floating-wetlands-for-the-treatment-of-surface-waters-and-wastewater.pdf"
+      },
+      {
+       "label": "Biomatrix (Wild Mile)",
+       "href": "https://www.biomatrixwater.com/the-wild-mile-chicago/"
+      },
       {
        "label": "doc 14",
        "href": "docs/14-cso-outfalls-discharges.html"
