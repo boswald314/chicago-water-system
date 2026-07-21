@@ -1125,6 +1125,26 @@ window.TARPTIMELINE = {
        "href": "https://boswald314.github.io/chicago-water-images/sources-pages/2025-usace-caws-restoration-recreation-study-federal-interest-determination/p0001.jpg"
       }
      ]
+    },
+    {
+     "year": 2025,
+     "kind": "outcome",
+     "weight": "major",
+     "title": "Five Years of Data: The Wild Mile Actually Cleans the Water",
+     "body": "A 2025 peer-reviewed study by Illinois State University and Urban Rivers (Chukwudi, Peterson & Nicodemus) gave the Wild Mile the vendor-neutral, long-term test most floating wetlands never get: weekly sampling above and below a 90 m\u00b2 section of the North Branch Canal garden from 2018 to 2023 \u2014 a 69-month record. Nitrate-nitrogen fell a statistically significant ~1.31 mg/L (about 23%) and phosphate ~0.64 mg/L (~16%) as water passed under the rafts (p<0.001), with no significant seasonal drop-off \u2014 it works year-round, driven by root uptake and root-zone microbes (phosphate removal was weaker at depth, an honest caveat). Just as telling for durability: over five years the installation needed replacement of under 10% of its planting area and 'relatively little maintenance,' and the HDPE-and-coir rafts are simply left in place through the Chicago winter \u2014 dead stems left standing for overwintering insects, with only occasional light surface ice on the canal. It is rare, quantitative confirmation that a real urban floating wetland both lasts and measurably improves water quality.",
+     "sources": [
+      "sources/floating-wetlands/2025-chukwudi-peterson-nicodemus-5year-wild-mile-north-branch-canal-nutrient-reduction-urbansci.txt"
+     ],
+     "srclinks": [
+      {
+       "label": "Chukwudi 2025 (5-yr study)",
+       "href": "https://doi.org/10.3390/urbansci9110482"
+      },
+      {
+       "label": "Urban Rivers FAQ",
+       "href": "https://urbanrivers.org/faqs"
+      }
+     ]
     }
    ]
   }
