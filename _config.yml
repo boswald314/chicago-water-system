@@ -33,3 +33,7 @@ exclude:
   - README.md
   - Gemfile
   - "*.py"
+  # design/: publish the .md proposal + research notes as pages; keep the raw
+  # Artifact-source HTML out of the build (it's a fragment, and its basename
+  # would collide with the .md's generated .html)
+  - design/sheet-pile-riverponic-bioswale-spec.html

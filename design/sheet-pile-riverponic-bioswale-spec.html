@@ -1,0 +1,325 @@
+<title>Passive Solar Riverponic Bioswale — Design Spec</title>
+<style>
+  :root{
+    --paper:#EDF0EA; --surface:#FBFCFA; --surface-2:#F4F6F1;
+    --ink:#15302E; --ink-2:#4B5D58; --ink-3:#7C8B85;
+    --line:#D6DBD2; --line-2:#C0C9BE;
+    --teal:#2C6E6A; --teal-ink:#1B4A47;
+    --sage:#5F7E54; --steel:#5E6E73;
+    --flag:#A5402C; --flag-bg:#F6E7E2; --flag-ink:#7A2E1C;
+    --note-bg:#E3EEEB; --note-ink:#1B4A47;
+    --sheet:#FBFCFA;
+    --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --paper:#0E1E1C; --surface:#152B28; --surface-2:#12241F;
+      --ink:#E7ECE5; --ink-2:#AAB8B2; --ink-3:#7F8F89;
+      --line:#294039; --line-2:#375049;
+      --teal:#4FA79B; --teal-ink:#8FD3C7;
+      --sage:#93B382; --steel:#9AAAAF;
+      --flag:#E08A72; --flag-bg:#37201A; --flag-ink:#F0C6B7;
+      --note-bg:#163430; --note-ink:#B7E0D6;
+    }
+  }
+  :root[data-theme="light"]{
+    --paper:#EDF0EA; --surface:#FBFCFA; --surface-2:#F4F6F1;
+    --ink:#15302E; --ink-2:#4B5D58; --ink-3:#7C8B85;
+    --line:#D6DBD2; --line-2:#C0C9BE;
+    --teal:#2C6E6A; --teal-ink:#1B4A47; --sage:#5F7E54; --steel:#5E6E73;
+    --flag:#A5402C; --flag-bg:#F6E7E2; --flag-ink:#7A2E1C;
+    --note-bg:#E3EEEB; --note-ink:#1B4A47;
+  }
+  :root[data-theme="dark"]{
+    --paper:#0E1E1C; --surface:#152B28; --surface-2:#12241F;
+    --ink:#E7ECE5; --ink-2:#AAB8B2; --ink-3:#7F8F89;
+    --line:#294039; --line-2:#375049;
+    --teal:#4FA79B; --teal-ink:#8FD3C7; --sage:#93B382; --steel:#9AAAAF;
+    --flag:#E08A72; --flag-bg:#37201A; --flag-ink:#F0C6B7;
+    --note-bg:#163430; --note-ink:#B7E0D6;
+  }
+  *{box-sizing:border-box}
+  body{margin:0}
+  .wrap{font-family:var(--sans); color:var(--ink); background:var(--paper); line-height:1.62; font-size:15.5px; -webkit-font-smoothing:antialiased; padding:clamp(16px,4vw,44px) clamp(14px,4vw,40px) 64px;}
+  .doc{max-width:1060px; margin:0 auto; display:flex; flex-direction:column; gap:40px}
+  .eyebrow{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--teal); font-weight:600}
+  h1{font-size:clamp(24px,3.4vw,33px); line-height:1.12; margin:.15em 0 .1em; font-weight:650; letter-spacing:-.01em; text-wrap:balance}
+  h2{font-size:19px; margin:0; font-weight:620; letter-spacing:-.005em}
+  h3{font-size:14.5px; margin:0 0 2px; font-weight:620}
+  p{margin:0 0 .7em}
+  a{color:var(--teal); text-underline-offset:2px; text-decoration-thickness:.5px}
+  strong{font-weight:620}
+  .lede{font-size:17px; color:var(--ink-2); max-width:70ch}
+  .titleblock{border:1px solid var(--line-2); background:var(--surface); border-radius:12px; overflow:hidden}
+  .tb-main{padding:22px clamp(18px,3vw,30px) 20px; border-bottom:1px solid var(--line)}
+  .tb-meta{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+  .tb-meta div{padding:11px 16px; border-right:1px solid var(--line)}
+  .tb-meta div:last-child{border-right:0}
+  .tb-k{font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); display:block; margin-bottom:3px}
+  .tb-v{font-size:13.5px; font-weight:560; color:var(--ink)}
+  .status{display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--flag-ink); background:var(--flag-bg); border:1px solid color-mix(in srgb,var(--flag) 35%,transparent); padding:3px 9px; border-radius:20px; font-weight:600}
+  .status::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--flag)}
+  section{display:flex; flex-direction:column; gap:14px}
+  .sec-head{display:flex; align-items:baseline; gap:14px; border-top:1.5px solid var(--ink); padding-top:12px}
+  .sec-ref{font-family:var(--mono); font-size:12px; font-weight:600; color:var(--teal); letter-spacing:.04em; white-space:nowrap}
+  .sec-body{max-width:74ch}
+  .sec-body.wide{max-width:100%}
+  figure{margin:6px 0 0}
+  .sheet{background:var(--sheet); border:1px solid var(--line-2); border-radius:10px; padding:8px; overflow-x:auto}
+  .sheet svg{display:block; width:100%; height:auto; min-width:520px}
+  figcaption{font-family:var(--mono); font-size:11.5px; color:var(--ink-3); margin-top:8px; letter-spacing:.02em}
+  figcaption b{color:var(--ink-2); font-weight:600}
+  .figrow{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px}
+  .tbl{overflow-x:auto; border:1px solid var(--line); border-radius:10px}
+  table{border-collapse:collapse; width:100%; font-size:13.5px; min-width:520px}
+  th,td{text-align:left; padding:9px 13px; border-bottom:1px solid var(--line); vertical-align:top}
+  thead th{background:var(--surface-2); font-family:var(--mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.07em; color:var(--ink-2); font-weight:600}
+  tbody tr:last-child td{border-bottom:0}
+  td.num,th.num{text-align:right; font-variant-numeric:tabular-nums; font-family:var(--mono)}
+  tbody tr:nth-child(even){background:color-mix(in srgb,var(--surface-2) 55%,transparent)}
+  .tag{display:inline-block; font-family:var(--mono); font-size:10px; letter-spacing:.04em; padding:1px 7px; border-radius:20px; font-weight:600; white-space:nowrap}
+  .tag.wet{background:color-mix(in srgb,var(--teal) 16%,transparent); color:var(--teal-ink)}
+  .tag.dry{background:color-mix(in srgb,var(--sage) 20%,transparent); color:var(--sage)}
+  .tag.no{background:var(--flag-bg); color:var(--flag-ink)}
+  .call{border:1px solid var(--line-2); border-radius:10px; padding:14px 16px; background:var(--surface); display:flex; flex-direction:column; gap:6px}
+  .call .lab{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; font-weight:600}
+  .call.flag{background:var(--flag-bg); border-color:color-mix(in srgb,var(--flag) 30%,transparent)}
+  .call.flag .lab{color:var(--flag-ink)}
+  .call.note{background:var(--note-bg); border-color:color-mix(in srgb,var(--teal) 30%,transparent)}
+  .call.note .lab{color:var(--note-ink)}
+  .call p{margin:0; font-size:14px}
+  .call ul{margin:2px 0 0; padding-left:18px; font-size:14px}
+  .call li{margin:3px 0}
+  .flow{display:flex; flex-wrap:wrap; gap:8px; align-items:stretch}
+  .flow .step{flex:1 1 120px; min-width:112px; background:var(--surface); border:1px solid var(--line); border-radius:9px; padding:10px 12px}
+  .flow .step .n{font-family:var(--mono); font-size:10px; color:var(--teal); letter-spacing:.1em}
+  .flow .step .t{font-size:13px; font-weight:560; margin-top:2px}
+  .flow .step .d{font-size:12px; color:var(--ink-2); margin-top:2px}
+  .grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px}
+  .keyval{display:grid; grid-template-columns:auto 1fr; gap:4px 14px; font-size:14px}
+  .keyval dt{font-family:var(--mono); font-size:11px; color:var(--ink-3); letter-spacing:.03em; text-transform:uppercase; padding-top:2px}
+  .keyval dd{margin:0}
+  ul.clean{margin:.2em 0; padding-left:18px}
+  ul.clean li{margin:4px 0}
+  .foot{border-top:1px solid var(--line); padding-top:16px; font-size:12.5px; color:var(--ink-3); font-family:var(--mono); letter-spacing:.02em; line-height:1.7}
+  .src{font-size:13px; color:var(--ink-2)}
+  .src b{color:var(--ink); font-weight:600}
+</style>
+
+<div class="wrap"><div class="doc">
+
+  <header class="titleblock">
+    <div class="tb-main">
+      <span class="eyebrow">Chicago River · nature-based edge · concept design</span>
+      <h1>Passive solar riverponic bioswale</h1>
+      <p class="lede">A modular, wall-hung treatment channel that lifts river water with a small solar pump and doses it in tidal pulses through a stacked, meandering planted terrace on an existing sheet-pile wall, returning it aerated to the river. Sized to hang from the cap, overwinter in place, and tile into a continuous run. Honest mission: dissolved-oxygen polishing, habitat, and demonstration — not a measurable river-wide cleanup.</p>
+    </div>
+    <div class="tb-meta">
+      <div><span class="tb-k">Status</span><span class="status">Concept — for PE review</span></div>
+      <div><span class="tb-k">Revision</span><span class="tb-v">B · 2026-07</span></div>
+      <div><span class="tb-k">Design basis</span><span class="tb-v">Generic PZ-class Z/U wall · 6–8 ft freeboard</span></div>
+      <div><span class="tb-k">Module</span><span class="tb-v">4 ft channel segment · tileable</span></div>
+      <div><span class="tb-k">Operation</span><span class="tb-v">Tidal fill-and-drain · Apr–Oct</span></div>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head"><span class="sec-ref">SEC 01</span><h2>Concept &amp; operating principle</h2></div>
+    <div class="sec-body">
+      <p>River water is drawn through a screened intake, lifted 6–10 ft by a small PV-powered pump, and <strong>dosed in pulses</strong> to the top row; it fills and drains through a switchbacking series of shallow planted channels via notched weirs, then cascades back to the river. The planters live entirely in the <strong>dry freeboard above the ice and normal-water line</strong> — the move that lets a rigid, wall-mounted assembly avoid the ice-thrust load case that forces Wild Mile's wetlands to float.</p>
+      <p>Treatment is honest habitat-grade polishing, not municipal-scale removal. The genuinely defensible benefits are <strong>dissolved-oxygen addition at the cascade, ecological edge/habitat, and public demonstration</strong>; nitrogen removal is possible only through the tidal cycle (SEC 03), and no single unit measurably changes the river column (SEC 09).</p>
+    </div>
+    <div class="flow" role="list">
+      <div class="step" role="listitem"><div class="n">01</div><div class="t">Screened intake</div><div class="d">CuNi/316 wedge-wire, below low water</div></div>
+      <div class="step" role="listitem"><div class="n">02</div><div class="t">Pulsed solar lift</div><div class="d">100 W PV → DC pump, ~6–8 L/min</div></div>
+      <div class="step" role="listitem"><div class="n">03</div><div class="t">Fill &amp; drain</div><div class="d">3 rows, weir-gated tidal cycle</div></div>
+      <div class="step" role="listitem"><div class="n">04</div><div class="t">Root-zone contact</div><div class="d">crowns in media + summer root curtain</div></div>
+      <div class="step" role="listitem"><div class="n">05</div><div class="t">Aeration cascade</div><div class="d">splash return, oxygenated re-entry</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-ref">SEC 02</span><h2>Module geometry</h2></div>
+    <div class="sec-body">
+      <p>Flow runs <strong>back and forth along the length of the wall</strong> (elevation), dropping row to row; each shelf projects only ≤12 in off the face (section, and SEC 04). Shelves meander in/out through the corrugation (plan) to add ~40–60% flow length and habitat edge. The isometric shows one assembled module.</p>
+    </div>
+    <figure>
+      <div class="sheet"><svg viewBox="0 0 680 384" role="img" xmlns="http://www.w3.org/2000/svg"><title>Elevation of the wall face</title><desc>Wall-face elevation: solar panel and pump at top-left, screened intake below water, three planted channels the water serpentines along, and an aeration cascade returning to the river.</desc><defs><marker id="fl3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker><linearGradient id="wE3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#82B0AD"/><stop offset="1" stop-color="#417071"/></linearGradient><pattern id="grE3" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#C4A97A"/><circle cx="1.6" cy="1.8" r="0.9" fill="#8A6E38"/><circle cx="4.4" cy="4.2" r="0.8" fill="#A5885C"/><circle cx="4" cy="1" r="0.6" fill="#7E6338"/></pattern><g id="sedE3"><line x1="0" y1="0" x2="-6" y2="-14" stroke="#93BE72" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="0" x2="-2.5" y2="-18" stroke="#6E9E56" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="0" x2="0" y2="-20" stroke="#4E7C44" stroke-width="1.7" stroke-linecap="round"/><line x1="0" y1="0" x2="2.5" y2="-18" stroke="#6E9E56" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="0" x2="6" y2="-14" stroke="#93BE72" stroke-width="1.5" stroke-linecap="round"/></g></defs><g font-family="ui-sans-serif,system-ui,sans-serif" font-size="10.5" fill="#22332F"><rect x="44" y="20" width="12" height="12" rx="2" fill="#57898B"/><text x="60" y="30">water</text><rect x="118" y="20" width="12" height="12" rx="2" fill="#34464E"/><text x="134" y="30">steel pile</text><rect x="204" y="20" width="12" height="12" rx="2" fill="#CBCEC4" stroke="#A9AEA2"/><text x="220" y="30">cap</text><rect x="258" y="20" width="12" height="12" rx="2" fill="url(#grE3)"/><text x="274" y="30">media</text><rect x="330" y="20" width="12" height="12" rx="2" fill="#6C8890"/><text x="346" y="30">channel</text><rect x="416" y="20" width="12" height="12" rx="2" fill="#6E9E56"/><text x="432" y="30">plants</text><rect x="486" y="20" width="12" height="12" rx="2" fill="#159AB6"/><text x="502" y="30">flow</text><rect x="548" y="20" width="12" height="12" rx="2" fill="#1E2C3E"/><text x="564" y="30">PV panel</text></g><rect x="40" y="44" width="600" height="276" fill="#E9EFEA"/><rect x="40" y="44" width="600" height="70" fill="#EFF4EF"/><rect x="40" y="320" width="600" height="44" fill="url(#wE3)"/><rect x="40" y="320" width="600" height="4" fill="#8FBAB6"/><path d="M40 331 q30 5 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0" fill="none" stroke="#B4D6D2" stroke-width="1.4" opacity="0.7"/><rect x="120" y="60" width="470" height="9" fill="#CBCEC4"/><line x1="120" y1="60.5" x2="590" y2="60.5" stroke="#E2E4DC" stroke-width="1"/><line x1="120" y1="68.5" x2="590" y2="68.5" stroke="#A9AEA2" stroke-width="1"/><g><polygon points="66,58 112,44 124,52 78,66" fill="#1E2C3E"/><polygon points="66,58 112,44 124,52 78,66" fill="none" stroke="#101A26" stroke-width="1"/><g stroke="#4A6C94" stroke-width="0.9"><line x1="80" y1="55.5" x2="115" y2="48.5"/><line x1="90" y1="61" x2="102" y2="47"/></g><line x1="70" y1="56" x2="118" y2="45.5" stroke="#7CA9CE" stroke-width="1.2"/><line x1="108" y1="60" x2="128" y2="70" stroke="#516066" stroke-width="3" stroke-linecap="round"/></g><rect x="120" y="70" width="26" height="17" rx="2" fill="#9CA7A9" stroke="#6C7779"/><rect x="120" y="70" width="26" height="4" fill="#B7C0C1"/><circle cx="133" cy="79" r="4" fill="#6C7779"/><path d="M132 87 L132 342" fill="none" stroke="#B7C0C1" stroke-width="3" stroke-linecap="round"/><rect x="123" y="338" width="18" height="16" fill="#26454C"/><g stroke="#7FA0A6" stroke-width="1"><line x1="127" y1="340" x2="127" y2="352"/><line x1="132" y1="340" x2="132" y2="352"/><line x1="137" y1="340" x2="137" y2="352"/></g><path d="M146 80 L162 98" fill="none" stroke="#B7C0C1" stroke-width="3" stroke-linecap="round"/><g><rect x="162" y="120" width="418" height="4" rx="2" fill="#223138" opacity="0.16"/><rect x="162" y="184" width="418" height="4" rx="2" fill="#223138" opacity="0.16"/><rect x="162" y="248" width="418" height="4" rx="2" fill="#223138" opacity="0.16"/><rect x="160" y="96" width="420" height="24" rx="3" fill="#6C8890" stroke="#4A646B"/><rect x="166" y="105" width="408" height="12" fill="url(#grE3)"/><rect x="166" y="114" width="408" height="3" fill="#3E565D" opacity="0.5"/><line x1="161" y1="97" x2="579" y2="97" stroke="#93B0B8" stroke-width="1"/><rect x="160" y="160" width="420" height="24" rx="3" fill="#6C8890" stroke="#4A646B"/><rect x="166" y="169" width="408" height="12" fill="url(#grE3)"/><rect x="166" y="178" width="408" height="3" fill="#3E565D" opacity="0.5"/><line x1="161" y1="161" x2="579" y2="161" stroke="#93B0B8" stroke-width="1"/><rect x="160" y="224" width="420" height="24" rx="3" fill="#6C8890" stroke="#4A646B"/><rect x="166" y="233" width="408" height="12" fill="url(#grE3)"/><rect x="166" y="242" width="408" height="3" fill="#3E565D" opacity="0.5"/><line x1="161" y1="225" x2="579" y2="225" stroke="#93B0B8" stroke-width="1"/></g><g fill="#2C3C2A" opacity="0.15"><ellipse cx="200" cy="106" rx="7" ry="2"/><ellipse cx="270" cy="106" rx="7" ry="2"/><ellipse cx="345" cy="106" rx="7" ry="2"/><ellipse cx="420" cy="106" rx="7" ry="2"/><ellipse cx="500" cy="106" rx="7" ry="2"/><ellipse cx="210" cy="170" rx="7" ry="2"/><ellipse cx="300" cy="170" rx="7" ry="2"/><ellipse cx="390" cy="170" rx="7" ry="2"/><ellipse cx="480" cy="170" rx="7" ry="2"/><ellipse cx="200" cy="234" rx="7" ry="2"/><ellipse cx="280" cy="234" rx="7" ry="2"/><ellipse cx="360" cy="234" rx="7" ry="2"/><ellipse cx="440" cy="234" rx="7" ry="2"/><ellipse cx="520" cy="234" rx="7" ry="2"/></g><g><use href="#sedE3" transform="translate(200,105)"/><use href="#sedE3" transform="translate(270,105)"/><use href="#sedE3" transform="translate(345,105)"/><use href="#sedE3" transform="translate(420,105)"/><use href="#sedE3" transform="translate(500,105)"/><use href="#sedE3" transform="translate(210,169)"/><use href="#sedE3" transform="translate(300,169)"/><use href="#sedE3" transform="translate(390,169)"/><use href="#sedE3" transform="translate(480,169)"/><use href="#sedE3" transform="translate(200,233)"/><use href="#sedE3" transform="translate(280,233)"/><use href="#sedE3" transform="translate(360,233)"/><use href="#sedE3" transform="translate(440,233)"/><use href="#sedE3" transform="translate(520,233)"/></g><g fill="#C97E93"><circle cx="345" cy="90" r="3"/><circle cx="480" cy="154" r="3"/></g><g stroke="#159AB6" stroke-width="2.6" fill="none" marker-end="url(#fl3)"><line x1="176" y1="112" x2="560" y2="112"/><line x1="574" y1="120" x2="574" y2="158"/><line x1="564" y1="176" x2="176" y2="176"/><line x1="170" y1="184" x2="170" y2="222"/><line x1="176" y1="240" x2="560" y2="240"/><line x1="574" y1="248" x2="574" y2="314"/></g><g fill="#CBCEC4" stroke="#A9AEA2" stroke-width="0.7"><rect x="566" y="252" width="20" height="7"/><rect x="562" y="268" width="24" height="7"/><rect x="566" y="284" width="20" height="7"/></g><g fill="#CFE6E6"><circle cx="576" cy="322" r="2.4"/><circle cx="570" cy="326" r="1.8"/><circle cx="582" cy="325" r="1.8"/></g><line x1="160" y1="300" x2="560" y2="300" stroke="#4B6B63" stroke-width="1.1" marker-start="url(#fl3)" marker-end="url(#fl3)"/><g font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#22332F"><g><rect x="46" y="52" width="204" height="16" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="52" y="64">elevation · wall face — flow runs along the wall</text></g><g><rect x="150" y="76" width="80" height="15" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="190" y="87" text-anchor="middle">PV + pump</text></g><g><rect x="150" y="328" width="120" height="15" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="210" y="339" text-anchor="middle">screened intake</text></g><g><rect x="518" y="274" width="112" height="15" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="574" y="285" text-anchor="middle">return cascade</text></g><g><rect x="256" y="292" width="208" height="16" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="360" y="304" text-anchor="middle">module ≈ 8–12 ft along the wall</text></g></g></svg></div>
+      <figcaption><b>Fig 1</b> — Elevation: serpentine flow along the wall face; PV pump, screened intake, aeration cascade.</figcaption>
+    </figure>
+    <div class="figrow">
+      <figure>
+        <div class="sheet"><svg viewBox="0 0 680 398" role="img" xmlns="http://www.w3.org/2000/svg"><title>Section</title><desc>Cut through the wall showing three planted shelves projecting up to three feet with root curtains.</desc><defs><marker id="fs3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker><linearGradient id="wS3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#82B0AD"/><stop offset="1" stop-color="#3F6E70"/></linearGradient><pattern id="grS3" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#C4A97A"/><circle cx="1.6" cy="1.8" r="0.9" fill="#8A6E38"/><circle cx="4.4" cy="4.2" r="0.8" fill="#A5885C"/><circle cx="4" cy="1" r="0.6" fill="#7E6338"/></pattern><g id="sedS3"><line x1="0" y1="0" x2="-5.5" y2="-13" stroke="#93BE72" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="0" x2="-2" y2="-17" stroke="#6E9E56" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="0" x2="0" y2="-19" stroke="#4E7C44" stroke-width="1.7" stroke-linecap="round"/><line x1="0" y1="0" x2="2" y2="-17" stroke="#6E9E56" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="0" x2="5.5" y2="-13" stroke="#93BE72" stroke-width="1.5" stroke-linecap="round"/></g></defs><rect x="40" y="44" width="600" height="288" fill="#E9EFEA"/><rect x="40" y="44" width="600" height="66" fill="#EFF4EF"/><rect x="40" y="332" width="600" height="48" fill="url(#wS3)"/><rect x="40" y="332" width="600" height="4" fill="#8FBAB6"/><rect x="444" y="64" width="196" height="286" fill="#6E6153"/><rect x="444" y="64" width="196" height="7" fill="#84765F"/><rect x="430" y="66" width="110" height="46" fill="#CBCEC4" stroke="#A9AEA2"/><rect x="430" y="66" width="110" height="6" fill="#DBDDD4"/><rect x="430" y="106" width="110" height="6" fill="#B4B8AD"/><rect x="430" y="112" width="14" height="238" fill="#34464E"/><rect x="430" y="112" width="3" height="238" fill="#48606B"/><g stroke="#4E6A75" stroke-width="1"><line x1="436" y1="116" x2="436" y2="348"/><line x1="440" y1="116" x2="440" y2="348"/></g><line x1="382" y1="223" x2="430" y2="200" stroke="#4E6B79" stroke-width="4" stroke-linecap="round"/><line x1="352" y1="283" x2="430" y2="252" stroke="#4E6B79" stroke-width="4" stroke-linecap="round"/><g stroke="#8A6B44" stroke-width="1.3" fill="none"><path d="M392 163 q-2 9 1 15"/><path d="M410 163 q2 9 -1 15"/><path d="M346 224 q-2 11 1 18"/><path d="M372 224 q2 11 -1 18"/><path d="M400 224 q-2 10 1 17"/><path d="M320 284 q-3 20 1 48"/><path d="M348 284 q3 22 -1 50"/><path d="M376 284 q-2 22 2 49"/><path d="M404 284 q3 20 -2 47"/></g><g><rect x="384" y="163" width="46" height="4" rx="2" fill="#223138" opacity="0.16"/><rect x="338" y="223" width="92" height="4" rx="2" fill="#223138" opacity="0.16"/><rect x="308" y="283" width="122" height="4" rx="2" fill="#223138" opacity="0.16"/><rect x="382" y="148" width="48" height="15" rx="2" fill="#6C8890" stroke="#4A646B"/><line x1="382" y1="149" x2="430" y2="149" stroke="#93B0B8" stroke-width="1"/><rect x="336" y="208" width="94" height="15" rx="2" fill="#6C8890" stroke="#4A646B"/><line x1="336" y1="209" x2="430" y2="209" stroke="#93B0B8" stroke-width="1"/><rect x="306" y="268" width="124" height="15" rx="2" fill="#6C8890" stroke="#4A646B"/><line x1="306" y1="269" x2="430" y2="269" stroke="#93B0B8" stroke-width="1"/><rect x="386" y="143" width="40" height="8" fill="url(#grS3)"/><rect x="340" y="203" width="86" height="8" fill="url(#grS3)"/><rect x="310" y="263" width="116" height="8" fill="url(#grS3)"/></g><g><use href="#sedS3" transform="translate(398,143)"/><use href="#sedS3" transform="translate(416,143)"/><use href="#sedS3" transform="translate(352,203)"/><use href="#sedS3" transform="translate(380,203)"/><use href="#sedS3" transform="translate(408,203)"/><use href="#sedS3" transform="translate(322,263)"/><use href="#sedS3" transform="translate(352,263)"/><use href="#sedS3" transform="translate(384,263)"/><use href="#sedS3" transform="translate(414,263)"/></g><g stroke="#4B6B63" stroke-width="1.1" fill="none" marker-start="url(#fs3)" marker-end="url(#fs3)"><line x1="382" y1="134" x2="430" y2="134"/><line x1="336" y1="192" x2="430" y2="192"/><line x1="306" y1="300" x2="430" y2="300"/></g><circle cx="392" cy="200" r="6" fill="#EFF4EF" stroke="#22332F" stroke-width="1.3"/><circle cx="392" cy="200" r="1.6" fill="#22332F"/><g font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#22332F"><g><rect x="46" y="52" width="230" height="16" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="52" y="64">section · shelves project ≤3 ft off the wall</text></g><g><rect x="384" y="120" width="46" height="15" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="407" y="131" text-anchor="middle">≈1 ft</text></g><g><rect x="386" y="178" width="46" height="15" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="409" y="189" text-anchor="middle">≈2 ft</text></g><g><rect x="330" y="304" width="82" height="16" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="371" y="316" text-anchor="middle">≤3 ft (max)</text></g><g><rect x="60" y="352" width="176" height="16" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="68" y="364">normal water · winter ice below</text></g><g><rect x="470" y="300" width="90" height="15" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="515" y="311" text-anchor="middle">roots → river</text></g></g></svg></div>
+        <figcaption><b>Fig 2</b> — Section: shelf projections (≤3 ft) and root curtains.</figcaption>
+      </figure>
+      <figure>
+        <div class="sheet"><svg viewBox="0 0 680 296" role="img" xmlns="http://www.w3.org/2000/svg"><title>Plan</title><desc>Top-down: channel weaving through the corrugation pockets, lengthening flow and edge.</desc><defs><marker id="fp3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker><linearGradient id="wP3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8FBAB6"/><stop offset="1" stop-color="#6B9A9B"/></linearGradient><g id="sedP3"><line x1="0" y1="0" x2="-5" y2="-11" stroke="#93BE72" stroke-width="1.4" stroke-linecap="round"/><line x1="0" y1="0" x2="-1.8" y2="-14" stroke="#6E9E56" stroke-width="1.4" stroke-linecap="round"/><line x1="0" y1="0" x2="0" y2="-16" stroke="#4E7C44" stroke-width="1.6" stroke-linecap="round"/><line x1="0" y1="0" x2="1.8" y2="-14" stroke="#6E9E56" stroke-width="1.4" stroke-linecap="round"/><line x1="0" y1="0" x2="5" y2="-11" stroke="#93BE72" stroke-width="1.4" stroke-linecap="round"/></g></defs><rect x="40" y="42" width="600" height="66" fill="url(#wP3)"/><rect x="40" y="42" width="600" height="4" fill="#A6CECB"/><rect x="40" y="184" width="600" height="84" fill="#E4EBE2"/><path d="M60,140 L90,140 L110,170 L150,170 L170,140 L210,140 L230,170 L270,170 L290,140 L330,140 L350,170 L390,170 L410,140 L450,140 L470,170 L510,170 L530,140 L570,140 L590,170 L620,170" fill="none" stroke="#223138" stroke-width="9" stroke-linejoin="round" opacity="0.14"/><path d="M60,122 L90,122 L110,152 L150,152 L170,122 L210,122 L230,152 L270,152 L290,122 L330,122 L350,152 L390,152 L410,122 L450,122 L470,152 L510,152 L530,122 L570,122 L590,152 L620,152" fill="none" stroke="#34464E" stroke-width="8" stroke-linejoin="round"/><path d="M60,122 L90,122 L110,152 L150,152 L170,122 L210,122 L230,152 L270,152 L290,122 L330,122 L350,152 L390,152 L410,122 L450,122 L470,152 L510,152 L530,122 L570,122 L590,152 L620,152" fill="none" stroke="#4E6A75" stroke-width="1.4" stroke-linejoin="round"/><path d="M60,138 L90,138 L110,168 L150,168 L170,138 L210,138 L230,168 L270,168 L290,138 L330,138 L350,168 L390,168 L410,138 L450,138 L470,168 L510,168 L530,138 L570,138 L590,168 L620,168" fill="none" stroke="#6C8890" stroke-width="9" stroke-linejoin="round"/><path d="M64,138 L90,138 L110,168 L150,168 L170,138 L210,138 L230,168 L270,168 L290,138 L330,138 L350,168 L390,168 L410,138 L450,138 L470,168 L510,168 L530,138 L570,138 L590,168 L614,168" fill="none" stroke="#159AB6" stroke-width="2.4" stroke-linejoin="round" marker-end="url(#fp3)"/><g fill="#2C3C2A" opacity="0.14"><ellipse cx="122" cy="183" rx="6" ry="2"/><ellipse cx="242" cy="183" rx="6" ry="2"/><ellipse cx="362" cy="183" rx="6" ry="2"/><ellipse cx="482" cy="183" rx="6" ry="2"/></g><g><use href="#sedP3" transform="translate(122,182)"/><use href="#sedP3" transform="translate(242,182)"/><use href="#sedP3" transform="translate(362,182)"/><use href="#sedP3" transform="translate(482,182)"/></g><g font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#22332F"><g><rect x="176" y="50" width="288" height="16" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="320" y="62" text-anchor="middle">sinuous route ≈ +40–60% flow length &amp; edge</text></g><g><rect x="52" y="86" width="112" height="16" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="108" y="98" text-anchor="middle">sheet-pile wall (plan)</text></g><g><rect x="250" y="234" width="180" height="16" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="340" y="246" text-anchor="middle">straight-line run (the chord)</text></g></g></svg></div>
+        <figcaption><b>Fig 3</b> — Plan: channels meander the corrugation.</figcaption>
+      </figure>
+    </div>
+    <figure>
+      <div class="sheet"><svg viewBox="0 0 680 430" role="img" xmlns="http://www.w3.org/2000/svg"><title>Isometric of one module</title><desc>3D isometric: solar panel and pump atop the wall, three planted channels stacking down with lower shelves projecting farther, water serpentining, and a cascade to the river.</desc><defs><marker id="fi" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker><linearGradient id="wI" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8CB6B3"/><stop offset="1" stop-color="#3F6E70"/></linearGradient><pattern id="grainI" width="7" height="7" patternUnits="userSpaceOnUse"><rect width="7" height="7" fill="#C6AC7D"/><circle cx="1.8" cy="2" r="1" fill="#8A6E38"/><circle cx="5" cy="5" r="0.9" fill="#A5885C"/><circle cx="4.4" cy="1.2" r="0.7" fill="#7E6338"/></pattern><g id="sedI"><line x1="0" y1="0" x2="-5" y2="-12" stroke="#93BE72" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="0" x2="-1.8" y2="-16" stroke="#6E9E56" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="0" x2="0" y2="-18" stroke="#4E7C44" stroke-width="1.7" stroke-linecap="round"/><line x1="0" y1="0" x2="1.8" y2="-16" stroke="#6E9E56" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="0" x2="5" y2="-12" stroke="#93BE72" stroke-width="1.5" stroke-linecap="round"/></g></defs><g transform="translate(52,6)"><polygon points="300,250 498,349 432,382 234,283" fill="url(#wI)"/><path d="M250 288 q40 -6 80 2 t80 2" fill="none" stroke="#AFD2CE" stroke-width="1.3" opacity="0.7"/><polygon points="300,250 498,349 498,193 300,94" fill="#3A4C54"/><polygon points="300,250 498,349 498,338 300,239" fill="#2C3C43" opacity="0.6"/><g stroke="#4E6A75" stroke-width="1.1" opacity="0.55"><line x1="344" y1="272" x2="344" y2="116"/><line x1="388" y1="294" x2="388" y2="138"/><line x1="432" y1="316" x2="432" y2="160"/><line x1="476" y1="338" x2="476" y2="182"/></g><line x1="300" y1="94" x2="498" y2="193" stroke="#5E7681" stroke-width="1.2"/><polygon points="300,94 498,193 511,186 313,87" fill="#CBCEC4"/><polygon points="308,60 340,48 340,74 308,86" fill="#1E2C3E" stroke="#101A26" stroke-width="1"/><g stroke="#4A6C94" stroke-width="0.9"><line x1="308" y1="73" x2="340" y2="61"/><line x1="324" y1="54" x2="324" y2="80"/></g><line x1="310" y1="62" x2="338" y2="51" stroke="#6E9DC4" stroke-width="1.1"/><line x1="324" y1="82" x2="318" y2="92" stroke="#4E5A60" stroke-width="2.5"/><polygon points="300,92 320,85 326,90 306,98" fill="#9CA7A9" stroke="#6C7779" stroke-width="0.8"/><polygon points="311,214 263,238 263,249 311,224" fill="#46626A"/><polygon points="263,238 439,326 439,337 263,249" fill="#5E7A82"/><polygon points="311,214 487,302 439,326 263,238" fill="url(#grainI)"/><polygon points="311,214 487,302 439,326 263,238" fill="none" stroke="#8A6E45" stroke-width="0.7"/><use href="#sedI" transform="translate(348,246)"/><use href="#sedI" transform="translate(400,272)"/><use href="#sedI" transform="translate(452,298)"/><polygon points="311,170 278,186 278,197 311,180" fill="#46626A"/><polygon points="278,186 454,274 454,285 278,197" fill="#5E7A82"/><polygon points="311,170 487,258 454,274 278,186" fill="url(#grainI)"/><polygon points="311,170 487,258 454,274 278,186" fill="none" stroke="#8A6E45" stroke-width="0.7"/><use href="#sedI" transform="translate(346,202)"/><use href="#sedI" transform="translate(398,228)"/><use href="#sedI" transform="translate(448,253)"/><polygon points="311,126 289,137 289,147 311,136" fill="#46626A"/><polygon points="289,137 465,225 465,235 289,147" fill="#5E7A82"/><polygon points="311,126 487,214 465,225 289,137" fill="url(#grainI)"/><polygon points="311,126 487,214 465,225 289,137" fill="none" stroke="#8A6E45" stroke-width="0.7"/><use href="#sedI" transform="translate(350,152)"/><use href="#sedI" transform="translate(402,178)"/><use href="#sedI" transform="translate(450,202)"/><g fill="#C97E93"><circle cx="376" cy="160" r="2.6"/><circle cx="372" cy="238" r="2.6"/></g><g stroke="#159AB6" stroke-width="2.6" fill="none" marker-end="url(#fi)"><line x1="330" y1="132" x2="466" y2="200"/><line x1="480" y1="212" x2="482" y2="248"/><line x1="470" y1="255" x2="300" y2="180"/><line x1="292" y1="186" x2="294" y2="224"/><line x1="330" y1="222" x2="466" y2="290"/><line x1="482" y1="304" x2="470" y2="338"/></g><ellipse cx="470" cy="344" rx="14" ry="5" fill="#2C3C43" opacity="0.28"/><g font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#22332F"><g><rect x="-8" y="18" width="176" height="16" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="-2" y="30">isometric view · one module</text></g><g><rect x="150" y="52" width="96" height="15" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="198" y="63" text-anchor="middle">PV + pump</text></g><g><rect x="470" y="140" width="120" height="15" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="530" y="151" text-anchor="middle">serpentine flow</text></g><g><rect x="80" y="330" width="196" height="16" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="88" y="342">lower shelves project farther</text></g><g><rect x="486" y="352" width="90" height="15" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="531" y="363" text-anchor="middle">cascade → river</text></g></g></g></svg></div>
+      <figcaption><b>Fig 4</b> — Isometric of one assembled module.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-ref">SEC 03</span><h2>Operating mode — tidal fill-and-drain</h2></div>
+    <div class="sec-body">
+      <p>The pump doses in <strong>pulses, not a continuous trickle</strong>: a timer/float gates flow so each channel <strong>floods, holds, then drains</strong> through its notched weirs. This tidal cycle is the treatment engine, and it earns its place on the merits:</p>
+      <ul class="clean">
+        <li><strong>Nitrogen removal without a saturated sump.</strong> The flooded/held phase goes anoxic (denitrification); the drain phase pulls air into the media (nitrification + O₂ transfer). Alternating redox does both in sequence — the standard tidal-flow-wetland mechanism — so <strong>anoxia comes from the cycle, not from recirculation.</strong> An optional thin woodchip/biochar carbon cell in the lowest channel supplies the electron donor denitrification needs.</li>
+        <li><strong>~70% less pump duty</strong> than continuous flow — directly eases the 100 W PV budget.</li>
+      </ul>
+    </div>
+    <div class="call note"><span class="lab">Recirculation is a separate, optional lever</span><p>Routing outflow back to a small head tank multiplies passes for <em>more removal per unit of water</em>, but treats <em>less total water</em> — a per-unit-quality vs total-volume tradeoff. The <strong>replication route</strong> (many single-pass units along the wall) favors single-pass tidal operation; the <strong>quality route</strong> favors recirculation. A river-scale units-needed analysis is in progress (SEC 11).</p></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-ref">SEC 04</span><h2>Attachment — top-hung cap-saddle hanger</h2></div>
+    <div class="sec-body"><p>The assembly <strong>hooks over the wall cap</strong>: weight drops into vertical bearing on the cap, and the small overturning moment is a hook-tension/toe-bearing couple over a long front leg. <strong>No friction clamp, no penetrating waler.</strong> Narrowing the shelf to 12 in keeps the couple light. Precedent: Tractel parapet clamp (non-penetrating top+face grip), rated 1,500 lb.</p></div>
+    <figure>
+      <div class="sheet"><svg viewBox="0 0 680 462" role="img" xmlns="http://www.w3.org/2000/svg"><title>Top-hung cap-saddle hanger</title><desc>Inverted-J hanger hooks over a concrete coping cap, bears vertically, runs a front leg to a toe pad, with a light keeper.</desc><defs><marker id="aH" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker><linearGradient id="wH" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#82B0AD"/><stop offset="1" stop-color="#3F6E70"/></linearGradient><pattern id="grHg" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#C4A97A"/><circle cx="1.6" cy="1.8" r="0.9" fill="#8A6E38"/><circle cx="4.4" cy="4.2" r="0.8" fill="#A5885C"/></pattern><g id="sedH"><line x1="0" y1="0" x2="-5" y2="-12" stroke="#93BE72" stroke-width="1.4" stroke-linecap="round"/><line x1="0" y1="0" x2="-1.8" y2="-16" stroke="#6E9E56" stroke-width="1.4" stroke-linecap="round"/><line x1="0" y1="0" x2="0" y2="-18" stroke="#4E7C44" stroke-width="1.6" stroke-linecap="round"/><line x1="0" y1="0" x2="1.8" y2="-16" stroke="#6E9E56" stroke-width="1.4" stroke-linecap="round"/><line x1="0" y1="0" x2="5" y2="-12" stroke="#93BE72" stroke-width="1.4" stroke-linecap="round"/></g></defs><rect x="40" y="54" width="600" height="386" rx="4" fill="#F3F4EF" stroke="#D6D9CF"/><rect x="40" y="54" width="600" height="60" fill="#F6F7F2"/><polygon points="566,120 628,120 628,418 566,418" fill="#6E6153"/><rect x="566" y="120" width="62" height="6" fill="#84765F"/><rect x="56" y="400" width="406" height="40" fill="url(#wH)"/><rect x="56" y="400" width="406" height="4" fill="#8FBAB6"/><rect x="462" y="120" width="104" height="48" fill="#CBCEC4" stroke="#A9AEA2"/><rect x="462" y="120" width="104" height="6" fill="#DBDDD4"/><rect x="462" y="162" width="104" height="6" fill="#B4B8AD"/><rect x="462" y="168" width="14" height="250" fill="#34464E"/><rect x="462" y="168" width="3" height="250" fill="#48606B"/><g stroke="#4E6A75" stroke-width="1"><line x1="468" y1="172" x2="468" y2="416"/><line x1="472" y1="172" x2="472" y2="416"/></g><ellipse cx="420" cy="330" rx="34" ry="4" fill="#223138" opacity="0.10"/><rect x="384" y="242" width="72" height="5" rx="2" fill="#223138" opacity="0.13"/><g><rect x="453" y="111" width="119" height="9" fill="#4E6B79"/><rect x="453" y="111" width="119" height="2.5" fill="#6E8794"/><rect x="453" y="120" width="9" height="204" fill="#4E6B79"/><rect x="453" y="120" width="2.5" height="204" fill="#6E8794"/><rect x="459.5" y="120" width="2.5" height="204" fill="#3D5865"/><rect x="563" y="120" width="9" height="34" fill="#4E6B79"/><rect x="563" y="120" width="2.5" height="34" fill="#6E8794"/></g><rect x="444" y="320" width="18" height="9" fill="#8A9A9E"/><rect x="444" y="320" width="18" height="2.5" fill="#AEBABD"/><line x1="567" y1="150" x2="560" y2="122" stroke="#3A4E52" stroke-width="2.5" stroke-linecap="round"/><rect x="446" y="222" width="9" height="16" rx="1" fill="#B9C4BE" stroke="#8A96A0" stroke-width="0.7"/><g><rect x="392" y="219" width="6" height="24" fill="#6C8890"/><rect x="392" y="236" width="64" height="7" fill="#6C8890"/><rect x="450" y="219" width="6" height="24" fill="#6C8890"/><rect x="398" y="228" width="52" height="8" fill="url(#grHg)"/><line x1="392" y1="220" x2="456" y2="220" stroke="#93B0B8" stroke-width="1"/></g><ellipse cx="422" cy="228" rx="20" ry="2" fill="#2C3C2A" opacity="0.13"/><use href="#sedH" transform="translate(414,228)"/><use href="#sedH" transform="translate(430,228)"/><g stroke="#8A6B44" stroke-width="1.2" fill="none"><path d="M404 243 q-2 10 2 20"/><path d="M424 243 q2 11 -2 21"/><path d="M444 243 q-2 10 2 19"/></g><line x1="510" y1="84" x2="510" y2="109" stroke="#A5402C" stroke-width="2.5" marker-end="url(#aH)"/><line x1="430" y1="325" x2="446" y2="325" stroke="#A5402C" stroke-width="2.5" marker-end="url(#aH)"/><line x1="596" y1="138" x2="576" y2="138" stroke="#A5402C" stroke-width="2.5" marker-end="url(#aH)"/><line x1="392" y1="260" x2="456" y2="260" stroke="#4B6B63" stroke-width="1.1" marker-start="url(#aH)" marker-end="url(#aH)"/><line x1="424" y1="120" x2="424" y2="324" stroke="#4B6B63" stroke-width="1.1" marker-start="url(#aH)" marker-end="url(#aH)"/><g font-family="ui-sans-serif,system-ui,sans-serif" font-size="11"><g><rect x="452" y="62" width="150" height="16" rx="3" fill="#F6E7E2" stroke="#C9A99E"/><text x="527" y="74" text-anchor="middle" fill="#7A2E1C">W ≈ 209 lbf → into cap</text></g><g><rect x="474" y="118" width="96" height="15" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="522" y="129" text-anchor="middle" fill="#22332F">concrete coping cap</text></g><g><rect x="452" y="186" width="176" height="16" rx="3" fill="#F6E7E2" stroke="#C9A99E"/><text x="540" y="198" text-anchor="middle" fill="#7A2E1C">keeper (light) — stops wind uplift</text></g><g><rect x="60" y="156" width="170" height="16" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="145" y="168" text-anchor="middle" fill="#22332F">cap-saddle hanger, FRP/316</text></g><g><rect x="88" y="176" width="114" height="16" rx="3" fill="#EAF0EC" stroke="#B7C6BC"/><text x="145" y="188" text-anchor="middle" fill="#1D4A3A">no clamp · no waler</text></g><g><rect x="56" y="336" width="188" height="16" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="150" y="348" text-anchor="middle" fill="#22332F">toe pad: bearing only, no fastener</text></g><g><rect x="250" y="292" width="146" height="16" rx="3" fill="#F6E7E2" stroke="#C9A99E"/><text x="323" y="304" text-anchor="middle" fill="#7A2E1C">couple H ≈ 85 lbf (hook ⇄ toe)</text></g><g><rect x="366" y="266" width="112" height="16" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="422" y="278" text-anchor="middle" fill="#22332F">12 in projection</text></g><g><rect x="204" y="228" width="132" height="16" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="270" y="240" text-anchor="middle" fill="#22332F">leg ≈ 22 in (0.55 m)</text></g></g></svg></div>
+      <figcaption><b>Fig 5</b> — Cap-saddle hanger. Longer leg lowers hook force (∝ 1/h); a light keeper resists wind uplift only.</figcaption>
+    </figure>
+    <div class="tbl"><table>
+      <thead><tr><th>Load per 4-ft module · 12 in projection · leg h = 0.55 m</th><th class="num">Service (q≈2.5 kPa)</th><th class="num">Design (q≈3.5 kPa)</th></tr></thead>
+      <tbody>
+        <tr><td>Vertical hang load into cap, W</td><td class="num">209 lbf</td><td class="num">293 lbf</td></tr>
+        <tr><td>Hook ⇄ toe couple, H (±15%)</td><td class="num">85 lbf</td><td class="num">118 lbf</td></tr>
+        <tr><td>Toe face-bearing pressure</td><td class="num">3.6 psi</td><td class="num">5.1 psi</td></tr>
+      </tbody>
+    </table></div>
+    <p style="font-size:13.5px;color:var(--ink-2)">Max projection <strong>12 in</strong> (9–12 band); 18 in only with h = 0.75 m on a concrete cap; past 18 in revert to clamp/waler. Apply ~2–3× hardware factor. <strong>Bare pile tops must be capped first.</strong> Wind uplift, not gravity, governs (SEC 11).</p>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-ref">SEC 05</span><h2>Mounting kit &amp; bill of materials</h2></div>
+    <div class="sec-body"><p>Structure separated from vessel; a small kit of repeated, mostly-catalog parts. <strong>All-FRP/HDPE eliminates the galvanic couple</strong> against the carbon-steel pile. Only the saddle bracket is bespoke — a flat-cut, single-bend plate (waterjet, no tooling), one SKU per pile profile.</p></div>
+    <figure>
+      <div class="sheet"><svg viewBox="0 0 680 420" role="img" xmlns="http://www.w3.org/2000/svg"><title>Click-in mounting kit</title><desc>Four kit parts — saddle bracket, rail, snap clip, channel — that bolt and clip into a wall-mounted channel.</desc><defs><marker id="ak" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker><pattern id="grK" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#C4A97A"/><circle cx="1.6" cy="1.8" r="0.9" fill="#8A6E38"/><circle cx="4.4" cy="4.2" r="0.8" fill="#A5885C"/><circle cx="4" cy="1" r="0.6" fill="#7E6338"/></pattern><g id="sedK"><line x1="0" y1="0" x2="-5" y2="-12" stroke="#93BE72" stroke-width="1.4" stroke-linecap="round"/><line x1="0" y1="0" x2="-1.8" y2="-16" stroke="#6E9E56" stroke-width="1.4" stroke-linecap="round"/><line x1="0" y1="0" x2="0" y2="-18" stroke="#4E7C44" stroke-width="1.6" stroke-linecap="round"/><line x1="0" y1="0" x2="1.8" y2="-16" stroke="#6E9E56" stroke-width="1.4" stroke-linecap="round"/><line x1="0" y1="0" x2="5" y2="-12" stroke="#93BE72" stroke-width="1.4" stroke-linecap="round"/></g></defs><g font-family="ui-sans-serif,system-ui,sans-serif"><rect x="44" y="30" width="210" height="18" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="52" y="43" font-size="11" fill="#22332F">modular click-in kit of parts</text></g><g><rect x="50" y="54" width="128" height="104" rx="9" fill="#F7F7F1" stroke="#D6D9CF"/><rect x="196" y="54" width="128" height="104" rx="9" fill="#F7F7F1" stroke="#D6D9CF"/><rect x="342" y="54" width="128" height="104" rx="9" fill="#F7F7F1" stroke="#D6D9CF"/><rect x="488" y="54" width="128" height="104" rx="9" fill="#F7F7F1" stroke="#D6D9CF"/></g><g font-family="ui-sans-serif,system-ui,sans-serif" font-size="16" fill="#5F5E5A"><text x="184" y="113">+</text><text x="330" y="113">+</text><text x="476" y="113">+</text></g><g><rect x="90" y="70" width="30" height="7" fill="#4E6B79"/><rect x="90" y="70" width="30" height="2" fill="#7E96A2"/><rect x="104" y="70" width="7" height="56" fill="#4E6B79"/><rect x="104" y="70" width="2" height="56" fill="#6E8794"/><rect x="104" y="122" width="24" height="6" fill="#4E6B79"/></g><g><rect x="208" y="98" width="104" height="13" rx="2" fill="#4E6B79"/><rect x="208" y="98" width="104" height="3" fill="#6E8794"/><g fill="#2E4450"><rect x="224" y="103" width="8" height="5" rx="1"/><rect x="256" y="103" width="8" height="5" rx="1"/><rect x="288" y="103" width="8" height="5" rx="1"/></g></g><g fill="#B9C4BE" stroke="#8A96A0" stroke-width="0.8"><rect x="388" y="86" width="7" height="38"/><rect x="388" y="86" width="28" height="7"/><rect x="388" y="117" width="28" height="7"/></g><rect x="388" y="86" width="28" height="2" fill="#D6DCDA"/><g><rect x="524" y="90" width="7" height="36" fill="#6C8890"/><rect x="524" y="119" width="62" height="7" fill="#6C8890"/><rect x="579" y="90" width="7" height="36" fill="#6C8890"/><rect x="531" y="110" width="48" height="9" fill="url(#grK)"/><rect x="531" y="117" width="48" height="2" fill="#3E565D" opacity="0.55"/><line x1="524" y1="91" x2="586" y2="91" stroke="#93B0B8" stroke-width="1"/><use href="#sedK" transform="translate(548,110)"/></g><g font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#FFFFFF"><circle cx="64" cy="68" r="8" fill="#22332F"/><text x="64" y="72" text-anchor="middle">1</text><circle cx="210" cy="68" r="8" fill="#22332F"/><text x="210" y="72" text-anchor="middle">2</text><circle cx="356" cy="68" r="8" fill="#22332F"/><text x="356" y="72" text-anchor="middle">3</text><circle cx="502" cy="68" r="8" fill="#22332F"/><text x="502" y="72" text-anchor="middle">4</text></g><g font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#22332F"><text x="114" y="150" text-anchor="middle">saddle bracket</text><text x="260" y="150" text-anchor="middle">rail</text><text x="406" y="150" text-anchor="middle">snap clip</text><text x="552" y="150" text-anchor="middle">channel</text></g><line x1="340" y1="166" x2="340" y2="192" stroke="#4B6B63" stroke-width="2.2" fill="none" marker-end="url(#ak)"/><g font-family="ui-sans-serif,system-ui,sans-serif"><rect x="356" y="170" width="150" height="16" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="431" y="182" text-anchor="middle" font-size="11" fill="#22332F">bolts + clips, no welding</text></g><rect x="40" y="198" width="600" height="212" rx="4" fill="#EDF1EC"/><g font-family="ui-sans-serif,system-ui,sans-serif"><rect x="44" y="202" width="196" height="16" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="52" y="214" font-size="11" fill="#22332F">assembled module (section)</text></g><polygon points="594,224 640,224 640,408 594,408" fill="#6E6153"/><rect x="594" y="224" width="46" height="6" fill="#84765F"/><rect x="580" y="218" width="14" height="190" fill="#34464E"/><rect x="580" y="218" width="3" height="190" fill="#48606B"/><rect x="572" y="210" width="30" height="8" fill="#CBCEC4"/><line x1="572" y1="210.5" x2="602" y2="210.5" stroke="#E2E4DC" stroke-width="1"/><rect x="470" y="262" width="94" height="5" rx="2" fill="#223138" opacity="0.14"/><line x1="478" y1="260" x2="558" y2="320" stroke="#3D5865" stroke-width="6" stroke-linecap="round"/><line x1="480" y1="258" x2="558" y2="317" stroke="#6E8794" stroke-width="1.4" stroke-linecap="round"/><g><rect x="556" y="208" width="24" height="6" fill="#4E6B79"/><rect x="556" y="208" width="24" height="2" fill="#7E96A2"/><rect x="556" y="208" width="6" height="66" fill="#4E6B79"/><rect x="556" y="208" width="2" height="66" fill="#6E8794"/><rect x="556" y="318" width="6" height="20" fill="#4E6B79"/></g><g><rect x="474" y="252" width="88" height="10" rx="2" fill="#4E6B79"/><rect x="474" y="252" width="88" height="2.5" fill="#6E8794"/></g><rect x="500" y="242" width="8" height="14" rx="1" fill="#B9C4BE" stroke="#8A96A0" stroke-width="0.7"/><g><rect x="476" y="230" width="6" height="22" fill="#6C8890"/><rect x="476" y="246" width="86" height="6" fill="#6C8890"/><rect x="556" y="230" width="6" height="22" fill="#6C8890"/><rect x="483" y="238" width="72" height="8" fill="url(#grK)"/><rect x="483" y="244" width="72" height="2" fill="#3E565D" opacity="0.5"/><line x1="476" y1="231" x2="562" y2="231" stroke="#93B0B8" stroke-width="1"/></g><ellipse cx="514" cy="238" rx="26" ry="2" fill="#2C3C2A" opacity="0.14"/><g><use href="#sedK" transform="translate(498,238)"/><use href="#sedK" transform="translate(526,238)"/></g><g font-family="ui-sans-serif,system-ui,sans-serif" font-size="11" fill="#FFFFFF"><circle cx="566" cy="230" r="8" fill="#22332F"/><text x="566" y="234" text-anchor="middle">1</text><circle cx="520" cy="276" r="8" fill="#22332F"/><text x="520" y="280" text-anchor="middle">2</text><circle cx="500" cy="228" r="8" fill="#22332F"/><text x="500" y="232" text-anchor="middle">3</text><circle cx="524" cy="300" r="8" fill="#22332F"/><text x="524" y="304" text-anchor="middle">5</text></g><g font-family="ui-sans-serif,system-ui,sans-serif"><rect x="60" y="360" width="222" height="16" rx="3" fill="#F5F6F0" stroke="#C9CFC4"/><text x="68" y="372" font-size="11" fill="#22332F">all-FRP / HDPE = no galvanic isolation needed</text></g></svg></div>
+      <figcaption><b>Fig 6</b> — Kit (①saddle bracket ②rail ③clip ④channel ⑤brace) and assembled section.</figcaption>
+    </figure>
+    <div class="tbl"><table>
+      <thead><tr><th>Config</th><th class="num">Per module (4 ft)</th><th class="num">Per linear ft</th><th class="num">24 ft pilot</th></tr></thead>
+      <tbody>
+        <tr><td>All-FRP · 6″ Dura Slope <span class="tag dry">production</span></td><td class="num">~$413</td><td class="num">~$103</td><td class="num">~$2,480</td></tr>
+        <tr><td>All-FRP · 4″ Spee-D <span class="tag wet">pilot</span></td><td class="num">~$225</td><td class="num">~$56</td><td class="num">~$1,350</td></tr>
+        <tr><td>Hybrid 316 load path</td><td class="num">~$460</td><td class="num">~$115</td><td class="num">~$2,760</td></tr>
+      </tbody>
+    </table></div>
+    <p style="font-size:13.5px;color:var(--ink-2)">Parts: NDS Dura Slope/Spee-D HDPE channel, fiberglass SST strut rail ($8.98/ft), FG channel-nut clip, Fibergrate/Strongwell FRP brace, flat-cut G-10/316 saddle bracket (SendCutSend). Use the <strong>6″ channel even for the pilot</strong> — deeper media aids winter survival <em>and</em> adds wind-uplift ballast.</p>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-ref">SEC 06</span><h2>Media — reactive blend</h2></div>
+    <div class="sec-body"><p>Revised after the deep media sweep: a light, biologically-active blend with a reactive phosphorus sorbent. Plain biochar removes P poorly (can even release it), so the iron sand is the decisive P addition.</p></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Component (~150 mm bed, by volume)</th><th>Role</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td>~50% biochar (350–500 °C)</td><td>biofilm, ammonium CEC, metals</td><td>light; <em>not</em> phosphorus</td></tr>
+        <tr><td>~15–20% clinoptilolite zeolite</td><td>fast ammonium ion-exchange</td><td>discrete layer; NaCl regen at drain-down</td></tr>
+        <tr><td>~20–25% pumice / LECA</td><td>light structure &amp; drainage</td><td>keeps the thin bed conductive</td></tr>
+        <tr><td>coir top mat</td><td>TSS, root support, metals</td><td>not bulk fill</td></tr>
+        <tr><td><strong>iron-enhanced sand</strong> <span class="tag wet">P sorbent</span></td><td>phosphorus (~0.9–2.9 mg P/g)</td><td>river-safe pH, multi-year life</td></tr>
+        <tr><td>optional woodchip carbon cell (lowest row)</td><td>denitrification electron donor</td><td>pairs with the tidal cycle (SEC 03)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="call flag"><span class="lab">Reject — river safety &amp; weight</span><p><strong>Steel/blast-furnace slag</strong> (pH 10–12 caustic shock), <strong>Al-based WTR/alum</strong> (fish-toxic dissolved Al below pH 6.5), and <strong>sand/gravel/expanded shale as primary</strong> (too heavy at 1,600–2,100 kg/m³). Wet blend ≈ <strong>75–105 kg/m²</strong> + water + biomass — verify against the SEC 04 bracket capacity.</p></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-ref">SEC 07</span><h2>Planting schedule — winter-hardy, zoned</h2></div>
+    <div class="sec-body"><p>Selected on the 2-zone container rule (Illinois Extension): crown-hardy to <strong>USDA zone 3–4</strong>, not 5b/6a. Wet-treatment sedges/rush lower; tough shallow-media accents upper.</p></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Species</th><th class="num">Zone</th><th>Role</th><th>Basis</th></tr></thead>
+      <tbody>
+        <tr><td>Bristly sedge · <em>Carex comosa</em></td><td class="num">3–10</td><td><span class="tag wet">lower</span></td><td>Best winter survivor (Lake Champlain FTW)</td></tr>
+        <tr><td>Softstem bulrush · <em>Schoenoplectus tabernaemontani</em></td><td class="num">3–9</td><td><span class="tag wet">lower</span></td><td>Co-best (&gt;95% plug survival)</td></tr>
+        <tr><td>Tussock sedge · <em>Carex stricta</em></td><td class="num">3–8</td><td><span class="tag wet">lower</span></td><td>Wild tussock = elevated-crown analog</td></tr>
+        <tr><td>Soft rush · <em>Juncus effusus</em></td><td class="num">3–9</td><td><span class="tag wet">lower</span></td><td>Local (Wild Mile / Bubbly Creek)</td></tr>
+        <tr><td>Sedum, Allium cernuum, Carex lurida</td><td class="num">3–4</td><td><span class="tag dry">upper</span></td><td>MSU shallow green-roof survivors</td></tr>
+        <tr><td>Pickerelweed / Sagittaria / tall forbs</td><td class="num">—</td><td><span class="tag no">avoid</span></td><td>Cold-sensitive / tuber strategy / wind-sail</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-ref">SEC 08</span><h2>Solar pump schedule</h2></div>
+    <div class="sec-body wide"><div class="grid2">
+      <dl class="keyval">
+        <dt>Design flow</dt><dd>6–8 L/min (~1.6–2 gpm), pulsed</dd>
+        <dt>Total head</dt><dd>~11–12 ft</dd>
+        <dt>Pump</dt><dd>Brushless DC, ≥2 gpm @ 12 ft, ~20–40 W, 12 V; keep a spare</dd>
+        <dt>PV panel</dt><dd>100 W (tidal dosing cuts duty ~70%)</dd>
+      </dl>
+      <dl class="keyval">
+        <dt>Controller</dt><dd>Timer/float for fill-and-drain + dry-run cutoff; PV-direct</dd>
+        <dt>Intake</dt><dd>CuNi/316 wedge-wire, ≥1–2 ft below low water</dd>
+        <dt>Delivery</dt><dd>½–¾″ tubing → slotted top-row header</dd>
+        <dt>Why PV</dt><dd>vs Fresnel thermal pump: 15–50× more water/m², all-weather, freeze-drainable</dd>
+      </dl>
+    </div></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-ref">SEC 09</span><h2>Treatment &amp; water quality — honest</h2></div>
+    <div class="sec-body"><p>Per-pass expectations (adversarially verified; most literature removal %s come from hours-to-days residence and do <em>not</em> transfer to a 7–15 min pass). Reference point: Wild Mile's own 90 m² mat achieved only ~6–7% <em>local</em> nutrient reduction, no detectable DO change, over 5 years.</p></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Per pass</th><th>Honest expectation</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Dissolved oxygen</td><td>&lt;1–2 mg/L added</td><td>the defensible benefit; ~0 when near saturation</td></tr>
+        <tr><td>TSS / turbidity</td><td>~40–65% / ~15–40%</td><td>physical filtration</td></tr>
+        <tr><td>Metals (fresh media)</td><td>Zn 30–60%, Pb 15–45%, Cu 10–35%</td><td>finite sorption; declines as sites fill</td></tr>
+        <tr><td>Phosphorus</td><td>low, sorption-limited</td><td>needs the iron sand (SEC 06)</td></tr>
+        <tr><td>Nitrogen (plain trickle)</td><td>~0%</td><td>no anoxic zone</td></tr>
+        <tr><td><strong>Nitrogen (tidal + carbon cell)</strong></td><td>real removal via nitrify/denitrify cycle</td><td>the reason for SEC 03; rate pending research</td></tr>
+      </tbody>
+    </table></div>
+    <div class="call note"><span class="lab">The honest reframe</span><p>Genuinely good for <strong>DO polishing in the discharge eddy, habitat, and demonstration</strong> — not a measurable river-column intervention at one unit (~1:10,000 throughput vs river flow). The value is proving a replicable module type. A units-needed-to-move-the-river analysis is in progress (SEC 11).</p></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-ref">SEC 10</span><h2>Overwintering &amp; operations — stays up</h2></div>
+    <div class="sec-body">
+      <p>Never removed. Plants die back to the crown, which overwinters insulated <strong>in the media</strong> (green-roof model) and resprouts in spring. Bare hanging roots do not survive winter — crown-in-media is the survival unit.</p>
+      <ul class="clean">
+        <li>Media ~150 mm; ends autumn <strong>moist-but-drained</strong>; channel <strong>self-drains empty</strong> before hard freeze. Fall coir/wood-chip mulch cap over crowns.</li>
+        <li>Consider a <strong>removable winter insulating cover</strong> for the exposed-crown risk (the one untested regime). Pump: drain / blow out lines.</li>
+        <li>Established survival ~85–95%; first winter ~15–30% replacement (heaving on new crowns).</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-ref">SEC 11</span><h2>Open items — review, pilot &amp; scaling</h2></div>
+    <div class="sec-body wide">
+      <div class="grid2">
+        <div class="call flag"><span class="lab">Flag · structural (PE stamp)</span><ul><li>Site wind (ASCE 7 Hazard Tool) + true moment about the hook — <strong>wind uplift, not gravity, governs</strong>.</li><li>Verify real saturated media density; field-verify cap geometry per reach; bare pile tops must be capped first.</li></ul></div>
+        <div class="call flag"><span class="lab">Flag · pilot winter</span><ul><li>Exact assembly untested and harsher than a floating raft. Run 1–2 real panels one Chicago winter; log crown-depth vs air temp; score spring resprout before certifying no-removal.</li></ul></div>
+      </div>
+      <div class="call" style="margin-top:12px"><span class="lab" style="color:var(--ink-3)">In progress · research</span><p style="font-size:13.5px"><strong>Replication scaling</strong> — how many units to measurably move the river (per pollutant / spatial scale, benchmarked vs SEPA aeration). <strong>Tidal / denitrification methods</strong> — cycle timing and N-removal rates. Both fold into rev C. <strong>Permitting</strong>: USACE §10/§404 (likely NWP 27), IEPA §401, IDNR OWR, MWRD WMO, CDOT, City DPD, and adjacent wall-owner consent (schedule driver).</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-ref">SEC 12</span><h2>Precedents &amp; sources</h2></div>
+    <div class="sec-body">
+      <ul class="clean src">
+        <li><b>Wild Mile / Urban Rivers</b> — BioMatrix riverponic modules; 5-yr ~6–7% local nutrient reduction; cost $1,324–2,537/m² (Awad 2025).</li>
+        <li><b>Wild Mile Framework Vision</b> (SOM 2019) — proposes sheet-pile wall planters, conceptual only (no structural analysis).</li>
+        <li><b>Tidal-flow constructed wetlands / RAS trickling filters</b> — the fill-and-drain + areal-rate framing (SEC 03/09).</li>
+        <li><b>Tractel parapet clamp</b> — 1,500 lb non-penetrating precedent for the cap-saddle couple.</li>
+        <li><b>MSU green-roof &amp; Lake Champlain FTW winter trials</b>; <b>Illinois Extension</b> 2-zone container rule.</li>
+        <li><b>Vendors</b> — NDS, Unistrut/Atkore fiberglass, Fibergrate/Strongwell, SendCutSend.</li>
+      </ul>
+    </div>
+    <div class="foot">Concept design · research synthesis · rev B 2026-07 · not a stamped engineering calculation.<br>Loads and costs are order-of-magnitude for scoping; every load path, media density, cap geometry, treatment rate, and winter survival requires site verification before construction.</div>
+  </section>
+
+</div></div>
+
+<script>
+  (function(){ try{ var r=document.documentElement; if(!r.hasAttribute('data-theme')){ var m=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches; r.setAttribute('data-theme', m?'dark':'light'); } }catch(e){} })();
+</script>
