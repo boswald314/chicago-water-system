@@ -651,3 +651,105 @@ export class FrustumWater {
     return f > 0.0005;
   }
 }
+
+/* ------------------------------------------------------- polygon pits */
+/**
+ * A mined pit built from its real plan outline: benched, near-vertical rock
+ * walls stepping in toward a flat floor. Volume is integrated from the actual
+ * stepped cross-section, so the fill level for a given volume is exact and the
+ * same solid can be asked "what depth holds V?" or "what plan scale holds V?".
+ *
+ * Inward offsets use scaling about the centroid, which is exact for the
+ * near-vertical walls a quarry has (a few percent of the plan at most).
+ */
+export class PolyPit {
+  constructor(outline, opts = {}) {
+    this.base = outline.map(p => [p[0], p[1]]);        // local metres, centred
+    this.benches = opts.benches == null ? 6 : opts.benches;
+    this.benchIn = opts.benchIn == null ? 0.035 : opts.benchIn;   // plan shrink per bench
+    this.k = 1; this.D = 1;
+    this.geom = new THREE.BufferGeometry();
+    this.water = new THREE.BufferGeometry();
+  }
+  area(scale) {
+    let a = 0; const n = this.base.length;
+    for (let i = 0; i < n; i++) { const [x1, z1] = this.base[i], [x2, z2] = this.base[(i + 1) % n]; a += x1 * z2 - x2 * z1; }
+    return Math.abs(a) / 2 * scale * scale;
+  }
+  /** plan scale factor at a height fraction t (0 floor .. 1 rim) */
+  scaleAt(t) {
+    const step = Math.floor((1 - t) * this.benches + 1e-9);          // benches counted from the rim
+    return this.k * (1 - this.benchIn * Math.min(step, this.benches));
+  }
+  /** total volume, m^3 */
+  volume() {
+    let v = 0; const N = 60;
+    for (let i = 0; i < N; i++) v += this.area(this.scaleAt((i + 0.5) / N)) * (this.D / N);
+    return v;
+  }
+  /** build the walls+floor for a plan scale k and depth D (metres, already exaggerated) */
+  setShape(k, D) {
+    this.k = k; this.D = D;
+    const n = this.base.length, v = [], idx = [];
+    const rings = [];
+    // a ring at the rim, then two rings per bench (the flat step and the drop)
+    rings.push({ t: 1, s: this.k });
+    for (let b = 1; b <= this.benches; b++) {
+      const t = 1 - b / this.benches;
+      rings.push({ t: t + 1e-6, s: this.k * (1 - this.benchIn * (b - 1)) });   // bottom of the drop
+      rings.push({ t, s: this.k * (1 - this.benchIn * b) });                  // stepped in
+    }
+    for (const r of rings) for (const p of this.base) v.push(p[0] * r.s, -D * (1 - r.t), p[1] * r.s);
+    for (let r = 0; r < rings.length - 1; r++)
+      for (let j = 0; j < n; j++) {
+        const j2 = (j + 1) % n, a = r * n + j, b = r * n + j2, c = (r + 1) * n + j, d = (r + 1) * n + j2;
+        idx.push(a, c, b, b, c, d);
+      }
+    const floor = (rings.length - 1) * n;
+    for (let j = 1; j < n - 1; j++) idx.push(floor, floor + j + 1, floor + j);
+    this.geom.dispose();
+    this.geom = new THREE.BufferGeometry();
+    this.geom.setAttribute('position', new THREE.Float32BufferAttribute(v, 3));
+    this.geom.setIndex(idx); this.geom.computeVertexNormals();
+    // rim + water buffers
+    this.rimPts = this.base.map(p => new THREE.Vector3(p[0] * k, 0, p[1] * k));
+    this.wpos = new Float32Array(n * 2 * 3);
+    const uv = new Float32Array(n * 4);
+    for (let j = 0; j < n; j++) { uv[j * 2] = j / n; uv[j * 2 + 1] = 0; uv[(n + j) * 2] = j / n; uv[(n + j) * 2 + 1] = 1; }
+    const widx = [];
+    for (let j = 1; j < n - 1; j++) { widx.push(0, j, j + 1); widx.push(n, n + j + 1, n + j); }
+    for (let j = 0; j < n; j++) { const j2 = (j + 1) % n; widx.push(j, n + j, j2, j2, n + j, n + j2); }
+    this.water.dispose();
+    this.water = new THREE.BufferGeometry();
+    this.water.setAttribute('position', new THREE.BufferAttribute(this.wpos, 3));
+    this.water.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
+    this.water.setIndex(widx);
+    // volume table by height fraction
+    const N = 200; this._acc = new Float64Array(N + 1); let s = 0;
+    for (let i = 0; i < N; i++) { s += this.area(this.scaleAt((i + 0.5) / N)) * (D / N); this._acc[i + 1] = s; }
+    this._total = s;
+    return this;
+  }
+  /** height fraction (0 floor .. 1 rim) at which the pit holds volume fraction f */
+  levelFor(f) {
+    const target = Math.max(0, Math.min(1, f)) * this._total, acc = this._acc, N = acc.length - 1;
+    let k = 0; while (k < N && acc[k + 1] < target) k++;
+    return Math.min(1, (k + (k < N ? (target - acc[k]) / Math.max(acc[k + 1] - acc[k], 1e-9) : 0)) / N);
+  }
+  /** rewrite the water prism for a volume fraction; returns whether any water shows */
+  fill(f) {
+    const t = this.levelFor(f), n = this.base.length;
+    const sTop = this.scaleAt(Math.min(t, 0.9999)), sBot = this.scaleAt(0);
+    const yTop = -this.D * (1 - t), yBot = -this.D;
+    for (let j = 0; j < n; j++) {
+      const [x, z] = this.base[j];
+      this.wpos[j * 3] = x * sBot; this.wpos[j * 3 + 1] = yBot; this.wpos[j * 3 + 2] = z * sBot;
+      this.wpos[(n + j) * 3] = x * sTop; this.wpos[(n + j) * 3 + 1] = yTop; this.wpos[(n + j) * 3 + 2] = z * sTop;
+    }
+    this.water.attributes.position.needsUpdate = true;
+    this.water.computeVertexNormals(); this.water.computeBoundingSphere();
+    this.surfaceY = yTop; this.surfaceScale = sTop; this.t = t;
+    return f > 0.0005;
+  }
+  ringAt(t) { const s = this.scaleAt(Math.min(t, 0.9999)), y = -this.D * (1 - t); return this.base.map(p => new THREE.Vector3(p[0] * s, y, p[1] * s)).concat([new THREE.Vector3(this.base[0][0] * s, y, this.base[0][1] * s)]); }
+}

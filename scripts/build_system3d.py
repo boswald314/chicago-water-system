@@ -1058,6 +1058,33 @@ def build_facilities(fac_raw, tunnels3d, outfall_pts):
                 rec['cso'].append(entry)
         if spec['kind'] == 'reservoir':
             rec['geom'] = reservoir_geometry(spec)
+            # real plan outlines where the archive has them (OSM-traced quarry
+            # rims), relative to the facility point; the viewer extrudes these
+            # with benched quarry walls instead of drawing a generic frustum
+            outline_id = {'res-mccook': 'mccook-reservoir-quarry',
+                          'res-thornton': 'thornton-quarry-reservoir'}.get(spec_id)
+            if outline_id:
+                for w in load('waterways-modern.json', []):
+                    if w['id'] == outline_id:
+                        ring = [proj(a, b) for a, b in w['geometry']]
+                        if ring[0] == ring[-1]:
+                            ring = ring[:-1]
+                        a2 = 0.0
+                        for i in range(len(ring)):
+                            x1, z1 = ring[i]; x2, z2 = ring[(i + 1) % len(ring)]
+                            a2 += x1 * z2 - x2 * z1
+                        area_m2 = abs(a2) / 2
+                        cx = sum(q[0] for q in ring) / len(ring)
+                        cz = sum(q[1] for q in ring) / len(ring)
+                        # re-centre the facility on the outline's centroid so the
+                        # pit sits where the pit is
+                        rec['x'], rec['z'] = round(cx, 1), round(cz, 1)
+                        rec['geom']['outline'] = [[round(q[0] - cx, 1), round(q[1] - cz, 1)] for q in ring]
+                        rec['geom']['outlineAcres'] = round(area_m2 / 4046.856, 1)
+                        rec['geom']['outlineSrc'] = 'OpenStreetMap quarry rim, via map-data/waterways-modern.json'
+                        # vertical-walled mined pit: what depth holds the published total?
+                        rec['geom']['plainDepthFt'] = round(spec['capFullMG']['v'] * 133680.556 / (area_m2 * 10.7639), 1)
+                        break
         elif spec['kind'] == 'wrp':
             spec['_id'] = spec_id
             rec['geom'] = wrp_geometry(spec)

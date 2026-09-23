@@ -16,8 +16,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
-import { SewerModel, CONFIGS } from './sim.js?v=8';
-import * as SC from './scene.js?v=8';
+import { SewerModel, CONFIGS } from './sim.js?v=9';
+import * as SC from './scene.js?v=9';
 
 const D = window.SYS3D;
 const FT = SC.FT;
@@ -567,27 +567,41 @@ function buildReservoirs() {
   for (const f of D.facilities) {
     if (f.kind !== 'reservoir') continue;
     const g = f.geom, grp = new THREE.Group(); grp.position.set(f.x, 0, f.z);
-    const bench = f.shape === 'quarry' ? 6 : (f.shape === 'pit' ? 4 : 0);
-    const pit = new THREE.Mesh(SC.frustumGeometry(g.L, g.W, g.D * ST.vExag, g.insetM, bench), M.rock); grp.add(pit);
-    const rim = new THREE.Line(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: f.retired ? 0x7a8694 : 0x6fc3e8 })); grp.add(rim);
-    const fw = new SC.FrustumWater();
-    const water = new THREE.Mesh(fw.geom, M.resWater); water.renderOrder = 1; water.visible = false; grp.add(water);
-    const waterline = new THREE.Line(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 0x8ad8ff })); waterline.renderOrder = 2; grp.add(waterline);
+    const isPit = !!g.outline;
+    let pit, fw, water, waterline, rim, poly = null;
+    if (isPit) {
+      // the real quarry rim, extruded down with benched walls
+      poly = new SC.PolyPit(g.outline, { benches: f.id === 'res-thornton' ? 8 : 5, benchIn: f.id === 'res-thornton' ? 0.03 : 0.025 });
+      poly.setShape(1, g.depthFt * FT * ST.vExag);
+      pit = new THREE.Mesh(poly.geom, M.rock);
+      water = new THREE.Mesh(poly.water, M.resWater);
+    } else {
+      const bench = f.shape === 'quarry' ? 6 : (f.shape === 'pit' ? 4 : 0);
+      pit = new THREE.Mesh(SC.frustumGeometry(g.L, g.W, g.D * ST.vExag, g.insetM, bench), M.rock);
+      fw = new SC.FrustumWater();
+      water = new THREE.Mesh(fw.geom, M.resWater);
+    }
+    water.renderOrder = 1; water.visible = false;
+    rim = new THREE.Line(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: f.retired ? 0x7a8694 : 0x6fc3e8 }));
+    waterline = new THREE.Line(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 0x8ad8ff })); waterline.renderOrder = 2;
+    grp.add(pit, water, rim, waterline);
+    // the level marker: a small label riding the waterline on the near wall
+    const lvl = el('div', 'lbl level'); const lvlObj = new CSS2DObject(lvl); lvlObj.position.set(0, 0, 0); lvlObj.visible = false;
+    grp.add(lvlObj);
     layerG.reservoirs.add(grp);
     const sys = f.system ? D.systems[f.system] : null;
     reg(pit, { kind: 'reservoir', title: f.name, sub: f.retired ? 'decommissioned' : (sys ? sys.name : ''),
       rows: [['Capacity (TARP share)', `${f.spec.capMG.v.toLocaleString()} MG`, f.spec.capMG.s],
         ['Capacity (total)', `${f.spec.capFullMG.v.toLocaleString()} MG`, f.spec.capFullMG.s],
-        ['Depth', `${g.depthFt} ft (${num(g.D)} m)`, f.spec.depthFt.s],
-        ['Surface', `${g.topAcres} acres`, f.spec.surfaceAcres ? f.spec.surfaceAcres.s : 'derived'],
-        ['Drawn as', `${num(g.L)} × ${num(g.W)} × ${num(g.D)} m frustum`, 'derived'],
-        ['Volume check', `drawn solid holds ${g.geomMG.toLocaleString()} MG vs published ${g.sourcedMG.toLocaleString()} MG (${g.deltaPct >= 0 ? '+' : ''}${g.deltaPct}%)`, 'derived'],
-        ['Dimension solved for', g.solvedFor, 'derived'],
-        ['Drawn for the selected era', () => { const r = resObjects[f.id]; return r ? `${num(r.builtMG)} MG excavated — plan dimensions scaled by ×${r.k.toFixed(2)}` : '—'; }, 'derived'],
+        ['Depth', () => { const r = resObjects[f.id]; return r && r.poly ? `${(r.poly.D / ST.vExag / FT).toFixed(0)} ft (mean over the benched pit)` : `${g.depthFt} ft (${num(g.D)} m)`; }, isPit && f.id === 'res-thornton' ? 'derived' : f.spec.depthFt.s],
+        isPit ? ['Plan outline', `${g.outlineAcres} acres as traced${f.spec.surfaceAcres ? ` — MWRD gives ${f.spec.surfaceAcres.v}` : ''}`, 'gis'] : ['Surface', `${g.topAcres} acres`, f.spec.surfaceAcres ? f.spec.surfaceAcres.s : 'derived'],
+        isPit ? ['Walls', 'benched, near-vertical rock — a mined quarry', 'doc10'] : ['Drawn as', `${num(g.L)} × ${num(g.W)} × ${num(g.D)} m frustum`, 'derived'],
+        ['Volume check', () => { const r = resObjects[f.id]; const drawn = r && r.poly ? r.poly.volume() / ST.vExag / 3785.41 : g.geomMG * (r ? r.k * r.k : 1); return `drawn solid holds ${num(drawn)} MG for this era vs ${num(r ? r.builtMG : g.sourcedMG)} MG published`; }, 'derived'],
+        ['Dimension solved for', isPit ? (f.id === 'res-thornton' ? 'mean depth (outline and volume are sourced)' : 'plan scale for the era (depth and volume are sourced)') : g.solvedFor, 'derived'],
         ['Holding now', () => { const s = V.reservoirs[f.id]; return s && s.cap > 0 ? `${num(s.vol)} of ${num(s.cap)} MG (${(100 * s.vol / s.cap).toFixed(0)}%)` : 'not built in this era'; }, 'derived'],
         ['Flow now', () => { const r = resObjects[f.id]; return !r || Math.abs(r.net) < 1 ? 'still' : (r.net > 0 ? `filling from the tunnel at ${num(r.net)} MGD` : `draining to the pumps at ${num(-r.net)} MGD`); }, 'derived']],
       note: f.note, doc: f.doc, facId: f.id });
-    resObjects[f.id] = { f, grp, pit, rim, fw, water, waterline, bench, k: 1, builtMG: f.spec.capFullMG.v, shown: -1, net: 0 };
+    resObjects[f.id] = { f, grp, pit, rim, fw, poly, water, waterline, lvl, lvlObj, k: 1, builtMG: f.spec.capFullMG.v, shown: -1, net: 0, marks: [] };
     addLabel(f.short, f.x, f.z, 30, 'res', 60000);
   }
 }
@@ -597,14 +611,46 @@ function applyBuildOut() {
   for (const [rid, r] of Object.entries(resObjects)) {
     const cap = f0.reservoirs[rid] ? f0.reservoirs[rid].capMG : 0, full = r.f.spec.capFullMG.v;
     const built = rid === 'res-thornton' ? full : (cap > 0 ? cap : r.f.spec.capMG.v);
-    const k = Math.sqrt(Math.max(0.08, built / full));
-    r.k = k; r.builtMG = built;
-    const L = r.f.geom.L * k, W = r.f.geom.W * k, Dp = r.f.geom.D * ST.vExag, inset = r.f.geom.insetM * k;
-    r.pit.geometry.dispose(); r.pit.geometry = SC.frustumGeometry(L, W, Dp, inset, r.bench);
-    r.rim.geometry.dispose();
-    r.rim.geometry = new THREE.BufferGeometry().setFromPoints([V3(-L / 2, 0, -W / 2), V3(L / 2, 0, -W / 2), V3(L / 2, 0, W / 2), V3(-L / 2, 0, W / 2), V3(-L / 2, 0, -W / 2)]);
-    r.fw.setShape(L, W, Dp, inset);
-    r.holdsMG = r.f.geom.geomMG * k * k;
+    const g = r.f.geom, targetM3 = built * 3785.41;
+    for (const m of r.marks) { r.grp.remove(m.line); if (m.obj) r.grp.remove(m.obj); }
+    r.marks = [];
+    if (r.poly) {
+      if (rid === 'res-thornton') {
+        // sourced outline and volume: solve the mean depth
+        let lo = 20, hi = 450;
+        for (let i = 0; i < 40; i++) { const mid = (lo + hi) / 2; r.poly.setShape(1, mid * ST.vExag); (r.poly.volume() / ST.vExag < targetM3 ? (lo = mid) : (hi = mid)); }
+        r.poly.setShape(1, (lo + hi) / 2 * ST.vExag); r.k = 1;
+        // where the 4.8 BG TARP allocation sits inside the 7.9 BG hole
+        const tarpT = r.poly.levelFor(r.f.spec.capMG.v / full);
+        const mk = (t, text, cls) => {
+          const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(r.poly.ringAt(t)), new THREE.LineDashedMaterial({ color: 0xffd166, dashSize: 60, gapSize: 40 }));
+          line.computeLineDistances(); r.grp.add(line);
+          const d = el('div', 'lbl mark ' + cls); d.textContent = text;
+          const o = new CSS2DObject(d); const p = r.poly.ringAt(t)[0]; o.position.set(p.x, p.y, p.z); r.grp.add(o);
+          labelObjs.push({ o, y: p.y, d: 9000, div: d, abs: true });
+          r.marks.push({ line, obj: o });
+        };
+        mk(tarpT, `↑ 3.1 BG Thorn Creek flood storage · ↓ 4.8 BG TARP allocation`, '');
+      } else {
+        // sourced depth and volume: solve the plan scale for the era
+        const D0 = g.depthFt * FT * ST.vExag;
+        let lo = 0.2, hi = 3;
+        for (let i = 0; i < 40; i++) { const mid = (lo + hi) / 2; r.poly.setShape(mid, D0); (r.poly.volume() / ST.vExag < targetM3 ? (lo = mid) : (hi = mid)); }
+        r.k = (lo + hi) / 2; r.poly.setShape(r.k, D0);
+      }
+      r.pit.geometry = r.poly.geom; r.water.geometry = r.poly.water;
+      r.rim.geometry.dispose(); r.rim.geometry = new THREE.BufferGeometry().setFromPoints(r.poly.rimPts.concat([r.poly.rimPts[0]]));
+      r.holdsMG = r.poly.volume() / ST.vExag / 3785.41;
+    } else {
+      const k = Math.sqrt(Math.max(0.08, built / full)); r.k = k;
+      const L = g.L * k, W = g.W * k, Dp = g.D * ST.vExag, inset = g.insetM * k;
+      r.pit.geometry.dispose(); r.pit.geometry = SC.frustumGeometry(L, W, Dp, inset, 0);
+      r.rim.geometry.dispose();
+      r.rim.geometry = new THREE.BufferGeometry().setFromPoints([V3(-L / 2, 0, -W / 2), V3(L / 2, 0, -W / 2), V3(L / 2, 0, W / 2), V3(-L / 2, 0, W / 2), V3(-L / 2, 0, -W / 2)]);
+      r.fw.setShape(L, W, Dp, inset);
+      r.holdsMG = g.geomMG * k * k;
+    }
+    r.builtMG = built;
     r.grp.visible = cap > 0 || (r.f.retired && ST.storm.config === 'r2015');
     r.built = cap > 0; r.shown = -1;
   }
@@ -928,12 +974,24 @@ function syncView(snap, dt = 1 / 60) {
     const frac = s && r.holdsMG > 0 ? clamp01(s.vol / r.holdsMG) : 0;
     if (Math.abs(frac - r.shown) < 1e-4) continue;
     r.shown = frac;
-    r.water.visible = r.fw.update(frac);
-    const [hx, hz] = r.fw.surfaceHalf, y = r.fw.surfaceY;
-    r.waterline.geometry.dispose();
-    r.waterline.geometry = new THREE.BufferGeometry().setFromPoints([V3(-hx, y, -hz), V3(hx, y, -hz), V3(hx, y, hz), V3(-hx, y, hz), V3(-hx, y, -hz)]);
+    const full = s && s.cap > 0 && s.vol / s.cap > 0.995;
+    let pts, y;
+    if (r.poly) { r.water.visible = r.poly.fill(frac); pts = r.poly.ringAt(r.poly.t); y = r.poly.surfaceY; }
+    else {
+      r.water.visible = r.fw.update(frac);
+      const [hx, hz] = r.fw.surfaceHalf; y = r.fw.surfaceY;
+      pts = [V3(-hx, y, -hz), V3(hx, y, -hz), V3(hx, y, hz), V3(-hx, y, hz), V3(-hx, y, -hz)];
+    }
+    r.waterline.geometry.dispose(); r.waterline.geometry = new THREE.BufferGeometry().setFromPoints(pts);
     r.waterline.visible = r.water.visible;
-    r.waterline.material.color.set(s && s.cap > 0 && s.vol / s.cap > 0.995 ? 0xff9a6b : 0x8ad8ff);
+    r.waterline.material.color.set(full ? 0xff9a6b : 0x8ad8ff);
+    // the level, written on the waterline itself
+    r.lvlObj.visible = r.water.visible && s && s.cap > 0;
+    if (r.lvlObj.visible) {
+      const p = pts[0]; r.lvlObj.position.set(p.x, y, p.z);
+      r.lvl.classList.toggle('full', full);
+      r.lvl.innerHTML = `<b>${(100 * s.vol / s.cap).toFixed(0)}%</b> ${num(s.vol)} MG`;
+    }
   }
   for (const set of shaftSets) {
     if (!set.sid) continue;
