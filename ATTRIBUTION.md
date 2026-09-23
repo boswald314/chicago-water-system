@@ -32,3 +32,14 @@ This is a non-commercial research and education project. If you are a rights hol
 like an image removed or the attribution corrected, please
 [open an issue](https://github.com/boswald314/chicago-water-images/issues) and it will be
 handled promptly.
+
+## Third-party code
+
+- **three.js** (r165) — MIT licence, © 2010–2024 three.js authors. Vendored under
+  `assets/vendor/three/` and used to render the [3D model of the sewage system](system-3d.html).
+  Full licence text at `assets/vendor/three/LICENSE`; provenance and update notes at
+  `assets/vendor/three/README.md`.
+- **Leaflet** (1.9.4) — BSD-2-Clause, © Volodymyr Agafonkin / CloudMade. Loaded from unpkg by the
+  [geographic map](geo.html).
+- **lunr.js** (2.3.9) — MIT licence, © 2020 Oliver Nightingale. Vendored at `assets/js/lunr.min.js` for
+  [site search](search.html).

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chicago Sewer System — 3D Model</title>
+<meta name="description" content="Every tunnel, drop shaft, pump, reservoir and treatment tank in Chicago's combined sewer system, built to scale in 3D from cited dimensions — rotate it, zoom it, and run storms through it.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🕳️</text></svg>">
+<style>
+  :root {
+    --bg:#eef2f7; --panel:#ffffff; --panel2:#f5f7fa; --ink:#1a202c; --ink2:#5a6676; --ink3:#8b97a6;
+    --line:#d8dde5; --accent:#2b6cb0; --warn:#c0532a; --bad:#c53030; --good:#2c9a8f;
+    --ms:#c98a2e; --cal:#7fae3f; --udp:#4aa3c4;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#11161d; --panel:#1a2027; --panel2:#141a21; --ink:#dde4ec; --ink2:#9fb0c2; --ink3:#6e7d8d;
+      --line:#2b343f; --accent:#6ba3d6; --warn:#d98a5a; --bad:#e06565; --good:#4aae9f; }
+  }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; overflow:hidden;
+    font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+    background:var(--bg); color:var(--ink); -webkit-font-smoothing:antialiased; }
+  a { color:var(--accent); }
+  .sitenav { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;
+    padding:9px 20px; background:var(--panel); border-bottom:1px solid var(--line); z-index:40; position:relative; }
+  .sitenav .brand { font-weight:700; color:var(--ink); text-decoration:none; font-size:15px; }
+  .sitenav .links { display:flex; gap:15px; flex-wrap:wrap; }
+  .sitenav .links a { color:var(--ink2); text-decoration:none; font-size:13px; }
+  .sitenav .links a:hover { color:var(--accent); }
+
+  #shell { display:grid; grid-template-columns: 1fr 372px; height:calc(100% - 41px); }
+  body.collapsed #shell { grid-template-columns: 1fr 0px; }
+  #stage { position:relative; min-width:0; }
+  #view { position:absolute; inset:0; }
+  #view canvas { display:block; }
+
+  /* floating over the canvas */
+  #exagbadge { position:absolute; left:14px; top:12px; z-index:10; background:var(--panel);
+    border:1px solid var(--line); border-radius:7px; padding:6px 11px; font-size:12px; color:var(--ink2);
+    box-shadow:0 2px 12px rgba(0,0,0,.14); }
+  #exagbadge b { color:var(--ink); }
+  #exagbadge.true { border-color:var(--good); color:var(--good); }
+  #intro { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:30;
+    width:min(560px, calc(100% - 36px)); max-height:calc(100% - 40px); overflow-y:auto;
+    background:var(--panel); border:1px solid var(--line); border-radius:11px; padding:20px 23px 18px;
+    box-shadow:0 12px 44px rgba(0,0,0,.36); }
+  #intro.gone { display:none; }
+  #intro h2 { margin:0 0 9px; font-size:19px; }
+  #intro p { margin:0 0 10px; font-size:13px; color:var(--ink2); line-height:1.6; }
+  #intro p b { color:var(--ink); }
+  #intro p.tiny { font-size:11.5px; color:var(--ink3); }
+  #intro .introfoot { position:sticky; bottom:-18px; background:var(--panel); padding:8px 0 2px;
+    margin-top:2px; }
+  #intro #introGo { margin-top:0; padding:7px 18px; border-radius:7px; border:1px solid var(--accent);
+    background:var(--accent); color:#fff; font-size:13px; cursor:pointer; font-weight:600; }
+  #introX { position:absolute; right:10px; top:8px; border:0; background:none; color:var(--ink3);
+    font-size:20px; cursor:pointer; line-height:1; }
+  #introX:hover { color:var(--ink); }
+  #hud { position:absolute; left:14px; top:52px; z-index:10; display:flex; gap:10px; align-items:flex-start; }
+  #csobox { background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--line);
+    border-radius:8px; padding:9px 13px; min-width:236px; box-shadow:0 2px 12px rgba(0,0,0,.14); }
+  #csobox.active { border-left-color:var(--bad); }
+  #csobox .k { font-size:10.5px; text-transform:uppercase; letter-spacing:.07em; color:var(--ink3); }
+  #csobox .v { font-size:25px; font-weight:750; font-variant-numeric:tabular-nums; line-height:1.15; }
+  #csobox.active .v { color:var(--bad); }
+  #csobox .v span { font-size:12px; font-weight:500; color:var(--ink2); }
+  #csobox .r { font-size:11.5px; color:var(--ink2); }
+  #panelToggle { position:absolute; right:10px; top:12px; z-index:12; width:30px; height:30px; border-radius:7px;
+    border:1px solid var(--line); background:var(--panel); color:var(--ink2); cursor:pointer; font-size:14px; }
+  .lbl { font:600 11px/1 -apple-system,system-ui,sans-serif; color:var(--ink); background:var(--panel);
+    border:1px solid var(--line); border-radius:4px; padding:2.5px 6px; white-space:nowrap;
+    opacity:.93; transform:translateY(-7px); pointer-events:none; }
+  .lbl.pump { color:#9a6cc0; }
+  .lbl.plant { color:var(--good); }
+  .lbl.res { color:#5aa0c8; }
+
+  /* timeline strip */
+  #timeline { position:absolute; left:0; right:0; bottom:0; z-index:9; background:var(--panel);
+    border-top:1px solid var(--line); padding:7px 14px 9px; }
+  #trow { display:flex; align-items:center; gap:12px; }
+  #play { width:38px; height:31px; border-radius:7px; border:1px solid var(--line); background:var(--panel2);
+    color:var(--ink); cursor:pointer; font-size:12px; }
+  #play:hover { border-color:var(--accent); }
+  #clock { font-variant-numeric:tabular-nums; font-weight:700; min-width:66px; font-size:14px; }
+  #rainrate { font-size:12px; color:var(--accent); min-width:70px; font-variant-numeric:tabular-nums; }
+  #scrub { flex:1; accent-color:var(--accent); }
+  #speed { width:88px; accent-color:var(--accent); }
+  #chartwrap { position:relative; height:52px; margin-top:5px; }
+  #chart, #playhead { position:absolute; inset:0; width:100%; height:100%; }
+  #chartmax { position:absolute; right:3px; top:1px; font-size:10.5px; color:var(--ink3); }
+  #chartleg { display:flex; gap:12px; font-size:10.5px; color:var(--ink3); margin-top:2px; flex-wrap:wrap; }
+  #chartleg i { display:inline-block; width:13px; height:2.5px; vertical-align:middle; margin-right:4px; }
+
+  /* right panel */
+  #panel { background:var(--panel); border-left:1px solid var(--line); overflow:hidden;
+    display:flex; flex-direction:column; }
+  body.collapsed #panel { display:none; }
+  #tabs { display:flex; border-bottom:1px solid var(--line); flex:none; }
+  #tabs button { flex:1; padding:9px 4px; border:0; background:none; color:var(--ink2); cursor:pointer;
+    font-size:12px; border-bottom:2px solid transparent; }
+  #tabs button.on { color:var(--ink); border-bottom-color:var(--accent); font-weight:600; }
+  .tabpane { display:none; overflow-y:auto; padding:13px 15px 26px; }
+  .tabpane.on { display:block; }
+  h4 { margin:17px 0 7px; font-size:11px; text-transform:uppercase; letter-spacing:.075em; color:var(--ink3); font-weight:700; }
+  h4:first-child { margin-top:2px; }
+  .lrow { display:flex; align-items:center; gap:8px; padding:2.5px 0; font-size:12.5px; cursor:pointer; color:var(--ink2); }
+  .lrow:hover { color:var(--ink); }
+  .ctl { margin:8px 0; }
+  .ctl label { display:flex; justify-content:space-between; font-size:12px; color:var(--ink2); margin-bottom:3px; }
+  .ctl label b { color:var(--ink); font-variant-numeric:tabular-nums; }
+  .ctl input[type=range] { width:100%; accent-color:var(--accent); }
+  select { width:100%; padding:6px 8px; border-radius:6px; border:1px solid var(--line);
+    background:var(--panel2); color:var(--ink); font-size:12.5px; }
+  .btnrow { display:flex; gap:7px; margin:9px 0; }
+  .btnrow button, button.mini { flex:1; padding:6px 9px; border-radius:6px; border:1px solid var(--line);
+    background:var(--panel2); color:var(--ink); cursor:pointer; font-size:12px; }
+  .btnrow button:hover, button.mini:hover { border-color:var(--accent); color:var(--accent); }
+  .hint, .note, .cfgnote, #scennote, #routenote, #recnote { font-size:11.5px; color:var(--ink2); line-height:1.5; }
+  .note { margin:9px 0 0; }
+  .cfgnote, #scennote { margin-top:7px; padding:7px 9px; background:var(--panel2); border-radius:6px;
+    border-left:2px solid var(--line); }
+
+  .gauge { margin-bottom:7px; }
+  .gl { display:flex; justify-content:space-between; font-size:11.5px; color:var(--ink2); }
+  .gl b { color:var(--ink); font-variant-numeric:tabular-nums; }
+  .gb { height:7px; background:var(--panel2); border:1px solid var(--line); border-radius:4px; overflow:hidden; margin:2px 0 1px; }
+  .gb i { display:block; height:100%; transition:width .12s linear; }
+  .gauge.full .gb { border-color:var(--bad); }
+  .gv { font-size:10.5px; color:var(--ink3); font-variant-numeric:tabular-nums; }
+  .gsep { height:1px; background:var(--line); margin:11px 0 9px; }
+
+  .srow { display:flex; justify-content:space-between; gap:10px; padding:4px 0; border-bottom:1px solid var(--line); font-size:12.5px; }
+  .srow b { font-variant-numeric:tabular-nums; }
+  .srow.bad b { color:var(--bad); }
+  .valid { margin-top:10px; padding:9px 11px; background:var(--panel2); border-left:2px solid var(--good);
+    border-radius:6px; font-size:11.5px; color:var(--ink2); line-height:1.55; }
+
+  table.spec { width:100%; border-collapse:collapse; margin:9px 0; }
+  table.spec th { text-align:left; font-weight:500; color:var(--ink2); font-size:11.5px; padding:4px 8px 4px 0;
+    vertical-align:top; width:44%; }
+  table.spec td { font-size:12px; padding:4px 0; vertical-align:top; }
+  .chip { display:inline-block; font-size:9.5px; padding:1px 5px; border-radius:9px; margin-left:3px;
+    border:1px solid var(--line); color:var(--ink3); white-space:nowrap; cursor:help; }
+  .chip.sourced { color:var(--good); border-color:var(--good); }
+  .chip.derived { color:var(--accent); border-color:var(--accent); }
+  .chip.assumed { color:var(--warn); border-color:var(--warn); }
+  .conflict { margin:9px 0; padding:8px 10px; border-left:2px solid var(--warn); background:var(--panel2);
+    border-radius:6px; font-size:11.5px; color:var(--ink2); }
+  #inspector h3 { margin:0; font-size:15px; }
+  #inspector .sub { color:var(--ink3); font-size:11.5px; margin-top:1px; }
+
+  table.fid { width:100%; border-collapse:collapse; margin:7px 0 14px; font-size:11px; }
+  table.fid th { text-align:left; color:var(--ink3); font-weight:600; padding:3px 5px 3px 0;
+    border-bottom:1px solid var(--line); font-size:10px; text-transform:uppercase; letter-spacing:.04em; }
+  table.fid td { padding:3px 5px 3px 0; border-bottom:1px solid var(--line); font-variant-numeric:tabular-nums; }
+  table.fid i { color:var(--ink3); font-style:normal; }
+  table.fid tr.warn td i { color:var(--warn); }
+  #caveats ul { padding-left:16px; margin:5px 0; }
+  #caveats li { font-size:11.5px; color:var(--ink2); margin-bottom:6px; line-height:1.5; }
+  #ladder { width:100%; height:152px; margin-bottom:6px; }
+  .evbtn { display:flex; justify-content:space-between; width:100%; padding:5px 8px; margin-bottom:4px;
+    border:1px solid var(--line); border-radius:5px; background:var(--panel2); color:var(--ink2);
+    cursor:pointer; font-size:11.5px; }
+  .evbtn:hover { border-color:var(--accent); color:var(--ink); }
+  .evbtn b { font-variant-numeric:tabular-nums; }
+  #recnote { margin-top:7px; }
+
+  @media (max-width:900px) {
+    #shell { grid-template-columns:1fr; grid-template-rows: 1fr 46%; }
+    body.collapsed #shell { grid-template-rows: 1fr 0; }
+    #panel { border-left:0; border-top:1px solid var(--line); }
+  }
+</style>
+</head>
+<body>
+<nav class="sitenav">
+  <a class="brand" href="./">💧 Chicago's Water System</a>
+  <div class="links" id="navlinks"></div>
+</nav>
+
+<div id="shell">
+  <div id="stage">
+    <div id="view"></div>
+    <div id="exagbadge"></div>
+    <button id="panelToggle" title="Show/hide the panel">⇥</button>
+    <div id="intro">
+      <button id="introX" title="Close">×</button>
+      <h2>Chicago's sewage system, to scale</h2>
+      <p>Drawn from this archive's cited documents: the Deep Tunnel at its published diameters,
+        236 of MWRD's own catalogued drop shafts, three reservoirs sized so the solid you see holds
+        exactly the gallons MWRD publishes, and Stickney's nine 160-foot primary tanks. The layout is
+        MWRD's own GIS, projected to metres.</p>
+      <p><b>Drag</b> to orbit, <b>scroll</b> to zoom, <b>right-drag</b> to pan. <b>Click anything</b>
+        for its real size and the source of that number. Then pick a storm and press play.</p>
+      <p class="tiny">Vertical scale is exaggerated ×18 by default so a 300-foot-deep tunnel reads
+        against a 50-kilometre-wide system; the badge top-left always says by how much.</p>
+      <div class="introfoot"><button id="introGo">Start</button></div>
+  </div>
+  <div id="hud"><div id="csobox"></div></div>
+    <div id="timeline">
+      <div id="trow">
+        <button id="play" title="Play the storm">▶</button>
+        <span id="clock">0h 00m</span>
+        <span id="rainrate">dry</span>
+        <input id="scrub" type="range" min="0" max="100" value="0" step="1">
+        <input id="speed" type="range" min="1" max="40" value="8" step="1" title="Playback speed">
+        <span id="speedv" style="font-size:11px;color:var(--ink3);min-width:26px">8×</span>
+      </div>
+      <div id="chartwrap"><canvas id="chart"></canvas><canvas id="playhead"></canvas><span id="chartmax"></span></div>
+      <div id="chartleg">
+        <span><i style="background:#c98a2e"></i>Mainstream</span>
+        <span><i style="background:#b5762a"></i>Des Plaines</span>
+        <span><i style="background:#7fae3f"></i>Calumet</span>
+        <span><i style="background:#4aa3c4"></i>Upper Des Plaines</span>
+        <span><i style="background:#5aa0c8"></i>reservoirs</span>
+        <span><i style="background:#d64545"></i>cumulative CSO</span>
+        <span style="opacity:.8">shaded band = rainfall intensity</span>
+      </div>
+    </div>
+  </div>
+
+  <aside id="panel">
+    <div id="tabs">
+      <button data-tab="storm" class="on">Storm</button>
+      <button data-tab="view">View</button>
+      <button data-tab="inspect">Inspect</button>
+      <button data-tab="notes">Model notes</button>
+    </div>
+
+    <div class="tabpane on" id="tab-storm">
+      <h4>System build-out</h4>
+      <select id="config"></select>
+      <h4>Storm</h4>
+      <select id="scenario"></select>
+      <div id="scennote"></div>
+      <div class="ctl"><label>Total rainfall <b id="rainv">2.00 in</b></label>
+        <input id="rain" type="range" min="0" max="12" step="0.05" value="2"></div>
+      <div class="ctl"><label>Over <b id="durv">24 h</b></label>
+        <input id="dur" type="range" min="1" max="48" step="1" value="24"></div>
+      <div class="ctl"><label>Hyetograph shape</label>
+        <select id="shape"><option value="peaked">Centre-peaked (realistic)</option>
+          <option value="uniform">Uniform intensity</option></select></div>
+      <div class="ctl"><label>Runoff coefficient <b id="runoffv">0.32</b></label>
+        <input id="runoff" type="range" min="10" max="90" step="1" value="32"></div>
+      <div class="ctl"><label>Dewatering limited by</label>
+        <select id="pumplimit"><option value="plant">Receiving plant's spare capacity</option>
+          <option value="nameplate">Pump nameplate only</option></select></div>
+
+      <h4>Result</h4>
+      <div id="summary"></div>
+
+      <h4>Storage and plant load</h4>
+      <div id="gauges"></div>
+
+      <h4>Recorded discharge events</h4>
+      <p class="hint">MWRD's own pumping-station log, largest days first. Picking one sets the matching
+        build-out state so you can compare the model against what was actually recorded.</p>
+      <div id="eventlist"></div>
+      <div id="recnote"></div>
+    </div>
+
+    <div class="tabpane" id="tab-view">
+      <h4>Scale</h4>
+      <div class="ctl"><label>Vertical exaggeration <b id="vexagv">×18</b></label>
+        <input id="vexag" type="range" min="1" max="60" step="1" value="18"></div>
+      <div class="ctl"><label>Conduit width exaggeration <b id="dexagv">×34</b></label>
+        <input id="dexag" type="range" min="1" max="80" step="1" value="34"></div>
+      <p class="hint"><b>Horizontal distances are always true</b> — nothing here stretches them.
+        The system is about 50 km across and 90 m deep, so at 1:1 it reads as a sheet, and an
+        8-metre tunnel is a hair. The vertical slider stretches the whole vertical axis, the standard
+        geologic-section convention: depths, tank heights and reservoir depths all grow together, so
+        shapes are honest in plan but taller than life. The conduit slider widens pipe and shaft
+        <i>radii</i> only, and never touches reservoir, tank or building dimensions. Set both to 1:1,
+        or use the “fly here at true 1:1 scale” button on any inspected object, to see true shape.</p>
+      <div class="btnrow">
+        <button id="truescale">1:1 true scale</button>
+        <button id="defscale">Readable default</button>
+      </div>
+      <div class="btnrow"><button id="frameall">Frame the whole system</button></div>
+
+      <h4>Tunnel route</h4>
+      <select id="routemode">
+        <option value="corridor">As traced — shafts exact</option>
+        <option value="calibrated">Length-calibrated — mileage exact</option>
+      </select>
+      <div id="routenote" class="hint" style="margin-top:6px">Drop shafts sit exactly on their MWRD
+        coordinates; the route follows the traced surface corridor, which is longer than the published tunnel.</div>
+
+      <h4>Layers</h4>
+      <div id="layers"></div>
+
+      <h4>Pipe sizes, true to scale</h4>
+      <canvas id="ladder"></canvas>
+      <p class="hint">Every circle is a real cross-section at one common scale, from the 4-inch minimum
+        on private property to the 33-foot maximum bore of the Deep Tunnel, with a 5&nbsp;ft 11&nbsp;in
+        person for reference. The city's own mains run 4&nbsp;in to 204&nbsp;in; MWRD's intercepting
+        sewers run 6&nbsp;in to 27&nbsp;ft.</p>
+    </div>
+
+    <div class="tabpane" id="tab-inspect">
+      <div id="inspector" class="empty"></div>
+    </div>
+
+    <div class="tabpane" id="tab-notes">
+      <h4>How closely the drawing matches the published figures</h4>
+      <div id="fidelity"></div>
+      <h4>What this model does not know</h4>
+      <div id="caveats"></div>
+      <h4>Provenance tags</h4>
+      <p class="hint"><span class="chip sourced">doc09</span> a figure published in a cited source,
+        traceable through this archive's own document set.
+        <span class="chip derived">derived</span> computed here from sourced inputs; the computation is
+        named in the tooltip.
+        <span class="chip assumed">assumed</span> typical engineering practice, not sourced — treat as
+        illustrative only.</p>
+      <h4>The simulation</h4>
+      <p class="hint">A mass balance, not a hydraulic model. It conserves volume across the published
+        storage capacities, plant design flows and pump capacities, and it routes each basin's excess
+        down the tunnel system that actually serves it. It does not solve for head, velocity, air
+        entrainment, surge or travel time, so it will not tell you when a particular shaft chokes or
+        where a pressure wave goes. Its one fitted parameter is the runoff coefficient, set to 0.32
+        because that is the value that reproduces MWRD's recorded pumping-station discharge for
+        13 September 2008.</p>
+      <h4>Sources</h4>
+      <div id="sourcelist"></div>
+    </div>
+  </aside>
+</div>
+
+<script>
+  const LOCAL = location.protocol === 'file:';
+  document.getElementById('navlinks').innerHTML = [
+    ['Flow map', LOCAL ? 'index.html' : './'],
+    ['Geographic map', 'geo.html'],
+    ['3D model', 'system-3d.html'],
+    ['Deep Tunnel timeline', 'deep-tunnel-timeline.html'],
+    ['Restoration timeline', 'restoration-timeline.html'],
+    ['Overview', LOCAL ? '00-SYSTEM-OVERVIEW.md' : '00-SYSTEM-OVERVIEW.html'],
+    ['Documents', 'docs/'], ['Galleries', LOCAL ? 'images/' : 'gallery/'], ['Data', 'data/'],
+    ['Search', LOCAL ? 'search.md' : 'search.html'],
+    ['Sources', LOCAL ? 'SOURCES.md' : 'SOURCES.html'],
+  ].map(([t, h]) => '<a href="' + h + '">' + t + '</a>').join('');
+  const hide = () => document.getElementById('intro').classList.add('gone');
+  document.getElementById('introX').addEventListener('click', hide);
+  document.getElementById('introGo').addEventListener('click', hide);
+  addEventListener('keydown', e => { if (e.key === 'Escape') hide(); });
+</script>
+<script src="map-data/system3d.js"></script>
+<script type="importmap">
+{ "imports": {
+  "three": "./assets/vendor/three/three.module.js",
+  "three/addons/": "./assets/vendor/three/addons/"
+} }
+</script>
+<script type="module">
+  const D = window.SYS3D;
+  document.getElementById('sourcelist').innerHTML = Object.entries(D.sources)
+    .filter(([k, v]) => v[1])
+    .map(([k, v]) => '<div class="srow"><span>' + v[0] + '</span><a href="' + v[1] + '">' + k + '</a></div>')
+    .join('');
+</script>
+<script type="module" src="assets/js/system3d/app.js"></script>
+</body>
+</html>

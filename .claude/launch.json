@@ -13,8 +13,23 @@
     {
       "name": "static-preview",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8743", "--bind", "127.0.0.1"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8743",
+        "--bind",
+        "127.0.0.1"
+      ],
       "port": 8743
+    },
+    {
+      "name": "sewer3d",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": [
+        "-c",
+        "cd /Users/bryanoswald/Documents/Research/ChicagoSewers && exec python3 -m http.server 8744 --bind 127.0.0.1"
+      ],
+      "port": 8744
     }
   ]
 }

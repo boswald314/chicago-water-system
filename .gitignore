@@ -3,7 +3,7 @@ images/
 sources/
 .DS_Store
 _site/
-vendor/
+/vendor/
 .bundle/
 .jekyll-cache/
 rag/.venv/
