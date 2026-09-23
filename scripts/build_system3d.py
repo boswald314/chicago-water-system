@@ -91,27 +91,27 @@ DOWNSTREAM = {'mainstream': (41.7795, -87.8398), 'desplaines': (41.7790, -87.833
 
 SYSTEMS = {
     'mainstream': dict(
-        name='Mainstream Tunnel System', color='#c98a2e',
+        name='Mainstream Tunnel System', color='#e2a33c',
         lengthMi=S(40.5, 'mi', 'doc09'), storageMG=S(1200, 'MG', 'doc09'),
         diaFt=S([8, 33], 'ft', 'doc09', 'MWRD’s facility page gives 13–33 ft; the 1972-plan-derived 8 ft low end is used here'),
         depthFt=S([240, 300], 'ft', 'doc09'),
         route='Wilmette Pumping Station south to the Mainstream Pumping Station, Hodgkins',
         pump='ps-mainstream', reservoir='res-mccook', plant='wrp-stickney', basins=['NORTH', 'CENTRAL']),
     'desplaines': dict(
-        name='Des Plaines Tunnel System', color='#b5762a',
+        name='Des Plaines Tunnel System', color='#d9698f',
         lengthMi=S(26.6, 'mi', 'doc07', '25.6 mi in MWRD’s 2017 report; 26.6 mi in the 2024–25 reports'),
         storageMG=S(420, 'MG', 'doc07', '405–420 MG across report years'),
         diaFt=S([10, 33], 'ft', 'doc07'), depthFt=S([150, 300], 'ft', 'doc09'),
         route='Des Plaines River corridor, converging on McCook Reservoir and the Mainstream Pumping Station',
         pump='ps-mainstream', reservoir='res-mccook', plant='wrp-stickney', basins=['CENTRAL']),
     'calumet': dict(
-        name='Calumet Tunnel System', color='#7fae3f',
+        name='Calumet Tunnel System', color='#86c44e',
         lengthMi=S(36.7, 'mi', 'doc09'), storageMG=S(630, 'MG', 'doc09'),
         diaFt=S([9, 30], 'ft', 'doc09'), depthFt=S([150, 300], 'ft', 'doc09'),
         route='Cal-Sag Channel and Little Calumet River to the Indiana state line, converging on the Calumet TARP Pumping Station',
         pump='ps-calumet-tarp', reservoir='res-thornton', plant='wrp-calumet', basins=['SOUTH']),
     'udp': dict(
-        name='Upper Des Plaines (O’Hare) Tunnel System', color='#4aa3c4',
+        name='Upper Des Plaines (O’Hare) Tunnel System', color='#4fbde0',
         lengthMi=S(6.6, 'mi', 'doc09'), storageMG=S(70, 'MG', 'doc09'),
         diaFt=S([9, 20], 'ft', 'doc09', '20 ft for 4.2 mi, 16 ft for 2.0 mi, 9 ft for the remainder'),
         depthFt=S([150, 200], 'ft', 'doc09'),
@@ -403,13 +403,13 @@ def poly_area_m2(coords):
 
 BASIN_META = {
     'CENTRAL': dict(name='Central basin', plant='wrp-stickney', systems=['mainstream', 'desplaines'],
-                    color='#c98a2e', relief=['ps-racine', 'ps-westchester']),
+                    color='#e2a33c', relief=['ps-racine', 'ps-westchester']),
     'NORTH':   dict(name='North basin', plant='wrp-obrien', systems=['mainstream'],
                     color='#8a6fc4', relief=['ps-north-branch', 'ps-wilmette']),
     'SOUTH':   dict(name='South basin', plant='wrp-calumet', systems=['calumet'],
-                    color='#7fae3f', relief=['ps-95th', 'ps-122nd', 'ps-125th']),
+                    color='#86c44e', relief=['ps-95th', 'ps-122nd', 'ps-125th']),
     'OHARE':   dict(name='O’Hare basin', plant='wrp-kirie', systems=['udp'],
-                    color='#4aa3c4', relief=[]),
+                    color='#4fbde0', relief=[]),
     'LEMONT':  dict(name='Lemont basin', plant='wrp-lemont', systems=[], color='#9aa4b0', relief=[]),
 }
 

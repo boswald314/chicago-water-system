@@ -5,8 +5,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
-import { SewerModel, CONFIGS } from './sim.js?v=5';
-import * as SC from './scene.js?v=5';
+import { SewerModel, CONFIGS } from './sim.js?v=6';
+import * as SC from './scene.js?v=6';
 
 const D = window.SYS3D;
 const FT = SC.FT;
@@ -52,8 +52,97 @@ scene.fog = new THREE.Fog(scene.background.getHex(), 60000, 240000);
 const camera = new THREE.PerspectiveCamera(45, host.clientWidth / host.clientHeight, 20, 500000);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
-controls.dampingFactor = 0.08;
+controls.dampingFactor = 0.11;
 controls.maxPolarAngle = Math.PI * 0.497;
+controls.zoomToCursor = true;          // wheel zooms toward what is under the mouse
+controls.zoomSpeed = 0.85;
+controls.rotateSpeed = 0.75;
+controls.panSpeed = 0.9;
+controls.minDistance = 30;
+controls.maxDistance = 400000;
+controls.mouseButtons = { LEFT: THREE.MOUSE.ROTATE, MIDDLE: THREE.MOUSE.DOLLY, RIGHT: THREE.MOUSE.PAN };
+controls.touches = { ONE: THREE.TOUCH.ROTATE, TWO: THREE.TOUCH.DOLLY_PAN };
+
+/* --- keyboard: arrows orbit, shift+arrows pan, +/- zoom, Home frames the
+ * system, Esc clears the selection. Keys are read as held state and applied
+ * every frame with easing, so the motion is continuous rather than stepped. */
+const KEYS = new Set();
+let shiftHeld = false;
+const keyVel = { az: 0, pol: 0, panX: 0, panY: 0, dolly: 0 };
+addEventListener('keydown', e => {
+  shiftHeld = e.shiftKey;
+  if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA')) return;
+  if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', '+', '=', '-', '_', 'Home', 'Escape', '?'].includes(e.key)) {
+    KEYS.add(e.key);
+    if (e.key === 'Home') frameAll();
+    if (e.key === 'Escape') { inspect(null); clearHi(); }
+    if (e.key === '?') $('#keyhelp').classList.toggle('on');
+  }
+  if (e.key === 'l' || e.key === 'L') {
+    if (!(e.target && ['INPUT', 'SELECT', 'TEXTAREA'].includes(e.target.tagName)))
+      $('#legend').classList.toggle('hidden');
+    e.preventDefault();
+  }
+});
+addEventListener('keyup', e => { KEYS.delete(e.key); shiftHeld = e.shiftKey; });
+addEventListener('blur', () => { KEYS.clear(); shiftHeld = false; });
+
+const _sph = new THREE.Spherical(), _off = new THREE.Vector3();
+function applyKeys(dt) {
+  const shift = shiftHeld;
+  const tgtAz = (KEYS.has('ArrowLeft') ? 1 : 0) - (KEYS.has('ArrowRight') ? 1 : 0);
+  const tgtPol = (KEYS.has('ArrowUp') ? 1 : 0) - (KEYS.has('ArrowDown') ? 1 : 0);
+  const tgtDolly = (KEYS.has('-') || KEYS.has('_') ? 1 : 0) - (KEYS.has('+') || KEYS.has('=') ? 1 : 0);
+  const ease = 1 - Math.pow(0.001, dt);          // smooth ramp in and out
+  keyVel.az += ((shift ? 0 : tgtAz) - keyVel.az) * ease;
+  keyVel.pol += ((shift ? 0 : tgtPol) - keyVel.pol) * ease;
+  keyVel.panX += ((shift ? tgtAz : 0) - keyVel.panX) * ease;
+  keyVel.panY += ((shift ? tgtPol : 0) - keyVel.panY) * ease;
+  keyVel.dolly += (tgtDolly - keyVel.dolly) * ease;
+  if (Math.abs(keyVel.az) + Math.abs(keyVel.pol) + Math.abs(keyVel.dolly) +
+      Math.abs(keyVel.panX) + Math.abs(keyVel.panY) < 1e-3) return;
+  _off.copy(camera.position).sub(controls.target);
+  _sph.setFromVector3(_off);
+  _sph.theta += keyVel.az * 1.4 * dt;
+  _sph.phi = Math.max(0.02, Math.min(controls.maxPolarAngle, _sph.phi - keyVel.pol * 1.0 * dt));
+  _sph.radius = Math.max(controls.minDistance, Math.min(controls.maxDistance,
+    _sph.radius * Math.pow(2.2, keyVel.dolly * dt)));
+  _off.setFromSpherical(_sph);
+  if (keyVel.panX || keyVel.panY) {
+    const right = new THREE.Vector3().setFromMatrixColumn(camera.matrix, 0);
+    const fwd = new THREE.Vector3().crossVectors(camera.up, right).normalize();
+    const k = _sph.radius * 0.9 * dt;
+    controls.target.addScaledVector(right, -keyVel.panX * k).addScaledVector(fwd, keyVel.panY * k);
+  }
+  camera.position.copy(controls.target).add(_off);
+  camera.lookAt(controls.target);
+}
+
+/* --- double-click: make whatever is under the cursor the pivot. This is the
+ * fix for orbiting feeling wrong after you have zoomed off somewhere else: the
+ * orbit centre stays where it was until you tell it otherwise. */
+let pivotAnim = null;
+function repivot(pt) {
+  pivotAnim = { t0: performance.now(), dur: 520,
+                from: controls.target.clone(), to: pt.clone(),
+                camFrom: camera.position.clone() };
+}
+renderer.domElement.addEventListener('dblclick', e => {
+  const r = renderer.domElement.getBoundingClientRect();
+  const m = new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1,
+                              -((e.clientY - r.top) / r.height) * 2 + 1);
+  ray.setFromCamera(m, camera);
+  const hits = ray.intersectObjects(pickables, false);
+  let pt = null;
+  if (hits.length) pt = hits[0].point.clone();
+  else {
+    // fall back to the ground plane
+    const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+    const p = new THREE.Vector3();
+    if (ray.ray.intersectPlane(plane, p)) pt = p;
+  }
+  if (pt) repivot(pt);
+});
 
 scene.add(new THREE.HemisphereLight(0xdfe9f5, 0x28303a, dark ? 1.6 : 2.1));
 const sun = new THREE.DirectionalLight(0xffffff, dark ? 1.15 : 1.5);
@@ -81,6 +170,8 @@ const labelObjs = [];
 const M = {
   water: new THREE.MeshStandardMaterial({ color: SC.COL.water, roughness: 0.22, metalness: 0.12,
     emissive: 0x0d3a52, emissiveIntensity: 0.55, side: THREE.DoubleSide }),
+  waterFull: new THREE.MeshStandardMaterial({ color: 0x5aa7d6, roughness: 0.2, metalness: 0.12,
+    emissive: 0x7a2a1a, emissiveIntensity: 0.55, side: THREE.DoubleSide }),
   shaft: new THREE.MeshStandardMaterial({ color: SC.COL.shaft, roughness: 0.75, metalness: 0.15 }),
   shaftWater: new THREE.MeshStandardMaterial({ color: SC.COL.waterHi, roughness: 0.2,
     emissive: 0x1d6f92, emissiveIntensity: 0.8, transparent: true, opacity: 0.92 }),
@@ -97,7 +188,7 @@ const M = {
   basin: new THREE.MeshBasicMaterial({ color: SC.COL.basin, transparent: true, opacity: 0.17,
     side: THREE.DoubleSide, depthWrite: false }),
   outfall: new THREE.MeshStandardMaterial({ color: SC.COL.outfall, roughness: 0.6, emissive: 0x3d0e0e }),
-  hi: new THREE.MeshBasicMaterial({ color: 0xffd166, wireframe: true, transparent: true, opacity: 0.9 }),
+  hi: new THREE.MeshBasicMaterial({ color: 0xffd166, wireframe: true, transparent: true, opacity: 0.55 }),
 };
 const tunnelMat = {};
 for (const [sid, s] of Object.entries(D.systems)) {
@@ -558,6 +649,29 @@ function buildPumps() {
 }
 
 let groundMesh = null, gridMesh = null;
+let rain = null;
+function buildRain() {
+  const box = new THREE.Box3();
+  for (const b of D.basins) for (const ring of b.outline) for (const p of ring)
+    box.expandByPoint(new THREE.Vector3(p[0], 0, p[1]));
+  if (box.isEmpty()) return;
+  const N = 3200, pos = new Float32Array(N * 3), seed = new Float32Array(N);
+  const sz = box.getSize(new THREE.Vector3()), mn = box.min;
+  for (let i = 0; i < N; i++) {
+    pos[i * 3] = mn.x + Math.random() * sz.x;
+    pos[i * 3 + 1] = Math.random();
+    pos[i * 3 + 2] = mn.z + Math.random() * sz.z;
+    seed[i] = Math.random();
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const mat = new THREE.PointsMaterial({ color: 0x9ec9ea, size: 120, sizeAttenuation: true,
+    transparent: true, opacity: 0, depthWrite: false });
+  const pts = new THREE.Points(g, mat);
+  pts.frustumCulled = false;
+  world.add(pts);
+  rain = { pts, pos, seed, N, mat, H: 2600 };
+}
 function buildGround() {
   const box = new THREE.Box3();
   for (const t of D.tunnels) for (const p of t.corridor) box.expandByPoint(new THREE.Vector3(p[0], 0, p[1]));
@@ -748,6 +862,7 @@ function applyFrame(force) {
       if (cd.sid !== sid) continue;
       cd.w.update(level, ST.vExag, ST.dExag);
       cd.wm.visible = frac > 0.0008;
+      cd.wm.material = frac > 0.985 ? M.waterFull : M.water;
       const ps = particles[cd.feat.id];
       if (ps) ps.level = level;
     }
@@ -903,6 +1018,21 @@ function applyFrame(force) {
     p.rate = q;
   }
   renderReadout(f);
+  // what the system is doing right now, in words
+  const ph = $('#phase');
+  const anyPump = f.pumpedRate > 1;
+  const filling = Object.values(f.systems).some(s => s.inflow > 1);
+  let txt, cls = '';
+  if (f.csoRate > 1) { txt = `<b>Discharging</b> — the tunnels and reservoirs are full; ${num(f.csoRate)} MGD is going to the rivers untreated`; cls = 'cso'; }
+  else if (f.inHr > 0.005 && filling) { txt = `<b>Raining ${f.inHr.toFixed(2)} in/hr</b> — excess is going down the drop shafts`; cls = 'rain'; }
+  else if (anyPump) { txt = `<b>Dewatering</b> — pumping ${num(f.pumpedRate)} MGD back up to the plants`; }
+  else if (f.t === 0) { txt = '<b>Dry weather</b> — press play'; }
+  else { txt = '<b>Dry weather</b> — storage is empty again'; }
+  ph.className = cls; ph.innerHTML = txt;
+  // basins glow with rainfall intensity
+  const rainK = Math.min(1, f.inHr / 0.5);
+  layerG.basins.children.forEach(m => { m.material.opacity = 0.11 + rainK * 0.14; });
+  ST.rainK = rainK;
 }
 
 /* ================================================================== UI */
@@ -1065,6 +1195,20 @@ function drawChart() {
   F.forEach((f, i) => { const y = h - (f.csoCum / maxC) * h * 0.92; i ? ctx.lineTo(x(f.t), y) : ctx.moveTo(x(f.t), y); });
   ctx.stroke(); ctx.setLineDash([]);
   $('#chartmax').textContent = maxC > 1 ? `CSO peak ${num(maxC)} MG` : 'no CSO';
+  // event markers: rain ends, first discharge, storage back to empty
+  const marks = [];
+  if (ST.run.opts.hours > 0) marks.push([ST.run.opts.hours, 'rain ends', '#5a96c8']);
+  const firstCso = F.find(f => f.csoRate > 1);
+  if (firstCso) marks.push([firstCso.t, 'first discharge', '#d64545']);
+  if (ST.run.summary.emptyHr) marks.push([ST.run.summary.emptyHr, 'empty', '#2c9a8f']);
+  ctx.font = `${9.5 * devicePixelRatio}px -apple-system,system-ui,sans-serif`;
+  ctx.textAlign = 'left';
+  for (const [t, lbl, col] of marks) {
+    const xx = x(t);
+    ctx.strokeStyle = col; ctx.lineWidth = devicePixelRatio; ctx.setLineDash([3 * devicePixelRatio, 3 * devicePixelRatio]);
+    ctx.beginPath(); ctx.moveTo(xx, 0); ctx.lineTo(xx, h); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = col; ctx.fillText(lbl, xx + 3 * devicePixelRatio, h - 4 * devicePixelRatio);
+  }
 }
 
 function drawPlayhead() {
@@ -1161,7 +1305,10 @@ function frameAll() {
   const s = box.getSize(new THREE.Vector3());
   // distance that just fits the footprint, allowing for the camera's own tilt
   const vFov = camera.fov * Math.PI / 180;
-  const hFov = 2 * Math.atan(Math.tan(vFov / 2) * camera.aspect);
+  // the pane can be zero-height for a frame while the app lays out, which
+  // would push a NaN into the camera and never recover
+  const aspect = (isFinite(camera.aspect) && camera.aspect > 0.05) ? camera.aspect : 1.6;
+  const hFov = 2 * Math.atan(Math.tan(vFov / 2) * aspect);
   const dist = Math.max(s.x / 2 / Math.tan(hFov / 2), (s.z * 0.62) / 2 / Math.tan(vFov / 2)) * 0.98;
   controls.target.set(c.x, -900, c.z);
   const az = -0.42, el = 0.42;                    // looking from the south-east, tilted down
@@ -1200,6 +1347,44 @@ const mouse = new THREE.Vector2();
 let hiMesh = null;
 
 renderer.domElement.addEventListener('pointerdown', e => { mouse.sx = e.clientX; mouse.sy = e.clientY; });
+let hoverT = 0;
+renderer.domElement.addEventListener('pointermove', e => {
+  const now = performance.now();
+  if (now - hoverT < 60) return;           // throttle the raycast
+  hoverT = now;
+  const r = renderer.domElement.getBoundingClientRect();
+  mouse.x = ((e.clientX - r.left) / r.width) * 2 - 1;
+  mouse.y = -((e.clientY - r.top) / r.height) * 2 + 1;
+  ray.setFromCamera(mouse, camera);
+  const hits = ray.intersectObjects(pickables.filter(m => {
+    let p = m; while (p) { if (p.name && ST.layers[p.name] === 0) return false; p = p.parent; }
+    return true;
+  }), false);
+  const rank = k => (k === 'basin' ? 2 : k === 'outfalls' ? 1 : 0);
+  let hit = null, best = 99;
+  for (const x of hits) {
+    const rr = info.get(x.object.uuid);
+    if (!rr) continue;
+    const q = rank(rr.kind);
+    if (q < best) { best = q; hit = x; }
+    if (q === 0) break;
+  }
+  const tip = $('#tip');
+  if (!hit) { tip.style.display = 'none'; renderer.domElement.style.cursor = ''; return; }
+  const rec = info.get(hit.object.uuid);
+  let name = rec.title, sub = rec.sub || '';
+  if (rec.kind === 'shaftset') {
+    const sh = rec.items[hit.instanceId];
+    name = sh.name || sh.tc;
+    sub = sh.system ? D.systems[sh.system].name : 'interceptor connection';
+  }
+  tip.innerHTML = `<b>${esc(name)}</b>${sub ? `<span>${esc(sub)}</span>` : ''}<i>click for dimensions · double-click to orbit here</i>`;
+  tip.style.display = 'block';
+  tip.style.left = (e.clientX - r.left + 14) + 'px';
+  tip.style.top = (e.clientY - r.top + 14) + 'px';
+  renderer.domElement.style.cursor = 'pointer';
+});
+renderer.domElement.addEventListener('pointerleave', () => { $('#tip').style.display = 'none'; });
 renderer.domElement.addEventListener('pointerup', e => {
   if (Math.hypot(e.clientX - mouse.sx, e.clientY - mouse.sy) > 5) return;
   const r = renderer.domElement.getBoundingClientRect();
@@ -1254,13 +1439,43 @@ renderer.domElement.addEventListener('pointerup', e => {
   highlight(hit.object);
 });
 
-function clearHi() { if (hiMesh) { world.remove(hiMesh); hiMesh = null; } }
+let hiChip = null, hiDim = null;
+function clearHi() {
+  if (hiMesh) { world.remove(hiMesh); hiMesh = null; }
+  if (hiChip) { layerG.labels.remove(hiChip); hiChip = null; }
+  if (hiDim) { world.remove(hiDim); hiDim = null; }
+}
+/** A vertical dimension line from grade down to the object, labelled in feet,
+ *  so depth is legible on the model itself rather than only in the panel. */
+function depthDim(x, z, yTop, yBottom, title) {
+  const pts = [new THREE.Vector3(x, Math.max(yTop, 0), z), new THREE.Vector3(x, yBottom, z)];
+  const g = new THREE.Group();
+  g.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),
+    new THREE.LineDashedMaterial({ color: 0xffd166, dashSize: 90, gapSize: 60 })));
+  g.children[0].computeLineDistances();
+  const tick = (y) => new THREE.Line(new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(x - 120, y, z), new THREE.Vector3(x + 120, y, z)]),
+    new THREE.LineBasicMaterial({ color: 0xffd166 }));
+  g.add(tick(Math.max(yTop, 0)), tick(yBottom));
+  const d = document.createElement('div');
+  d.className = 'lbl sel';
+  const ft = -yBottom / ST.vExag / FT;
+  d.innerHTML = `<b>${esc(title)}</b>` + (ft > 3 ? `<i>${ft.toFixed(0)} ft below grade</i>` : '');
+  const o = new CSS2DObject(d);
+  o.position.set(x, Math.max(yTop, 0) + 40, z);
+  layerG.labels.add(o);
+  hiChip = o;
+  world.add(g);
+  hiDim = g;
+}
 function highlight(m) {
   clearHi();
   const b = new THREE.Box3().setFromObject(m);
   const s = b.getSize(new THREE.Vector3()), c = b.getCenter(new THREE.Vector3());
-  hiMesh = new THREE.Mesh(new THREE.BoxGeometry(s.x * 1.06 + 60, s.y * 1.06 + 60, s.z * 1.06 + 60), M.hi);
+  hiMesh = new THREE.Mesh(new THREE.BoxGeometry(s.x * 1.04 + 40, s.y * 1.04 + 40, s.z * 1.04 + 40), M.hi);
   hiMesh.position.copy(c); world.add(hiMesh);
+  const rec = info.get(m.uuid);
+  depthDim(c.x, c.z, b.max.y, b.min.y, rec ? rec.title : '');
 }
 function highlightInstance(im, id) {
   clearHi();
@@ -1269,6 +1484,9 @@ function highlightInstance(im, id) {
   m4.decompose(p, q, s);
   hiMesh = new THREE.Mesh(new THREE.BoxGeometry(s.x * 4 + 200, s.y * 1.1, s.z * 4 + 200), M.hi);
   hiMesh.position.copy(p); world.add(hiMesh);
+  const rec = info.get(im.uuid);
+  const it = rec && rec.items ? rec.items[id] : null;
+  depthDim(p.x, p.z, p.y + s.y / 2, p.y - s.y / 2, it ? (it.name || it.tc) : '');
 }
 
 /* ================================================================== loop */
@@ -1277,6 +1495,16 @@ function animate(now) {
   requestAnimationFrame(animate);
   const dt = Math.min(0.1, (now - last) / 1000); last = now;
 
+  if (!isFinite(camera.position.x) || !isFinite(controls.target.x)) frameAll();
+  applyKeys(dt);
+  if (pivotAnim) {
+    const k = Math.min(1, (now - pivotAnim.t0) / pivotAnim.dur);
+    const e = 1 - Math.pow(1 - k, 3);
+    const delta = new THREE.Vector3().lerpVectors(pivotAnim.from, pivotAnim.to, e).sub(controls.target);
+    controls.target.add(delta);
+    camera.position.add(delta);            // slide, do not swing
+    if (k >= 1) pivotAnim = null;
+  }
   if (flying) {
     const k = Math.min(1, (now - flying.t0) / flying.dur);
     const e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
@@ -1339,9 +1567,11 @@ function animate(now) {
     l.div.style.display = dd > l.d ? 'none' : '';
   }
   // combined sewer overflow leaving for the river
+  const pulse = 1 + 0.35 * Math.sin(now / 160);
   for (const po of Object.values(plantObjects)) {
     for (const cp of (po.csoPaths || [])) {
-      if (!cp.v) { cp.cpts.visible = false; continue; }
+      if (!cp.v) { cp.cpts.visible = false; cp.marker.scale.setScalar(1); continue; }
+      cp.marker.scale.setScalar(1.6 * pulse);
       cp.cpts.visible = true;
       const total = cp.ccum[cp.ccum.length - 1] || 1;
       const step = SC.displaySpeed(cp.v, FLOW_BASE) * dt / total;
@@ -1431,10 +1661,52 @@ function animate(now) {
     }
     po.pts.geometry.attributes.position.needsUpdate = true;
   }
+  if (rain) {
+    const k = ST.rainK || 0;
+    rain.mat.opacity = k * 0.32;
+    rain.pts.visible = k > 0.01;
+    if (rain.pts.visible) {
+      const H = rain.H * Math.max(1, ST.vExag / 12);
+      const fall = dt * 1.1;
+      for (let i = 0; i < rain.N; i++) {
+        let y = rain.pos[i * 3 + 1] / H;
+        y -= fall * (0.7 + rain.seed[i] * 0.6);
+        if (y < 0) y += 1;
+        rain.pos[i * 3 + 1] = y * H;
+      }
+      rain.pts.geometry.attributes.position.needsUpdate = true;
+    }
+  }
+  updateNavHud();
   for (const k in ST.layers) if (layerG[k]) layerG[k].visible = !!ST.layers[k];
   controls.update();
   renderer.render(scene, camera);
   labelRenderer.render(scene, camera);
+}
+
+/* ============================================================= nav HUD */
+const _hudTmp = new THREE.Vector3();
+let _hudLast = 0;
+function updateNavHud() {
+  const now = performance.now();
+  if (now - _hudLast < 90) return;
+  _hudLast = now;
+  // compass: azimuth of the view direction, north being -z
+  _hudTmp.subVectors(controls.target, camera.position); _hudTmp.y = 0;
+  const az = Math.atan2(_hudTmp.x, -_hudTmp.z);
+  if (isFinite(az)) $('#needle').setAttribute('transform', `rotate(${(-az * 180 / Math.PI).toFixed(1)} 20 20)`);
+  // scale bar: metres per pixel at the pivot distance, snapped to a round length
+  const dist = camera.position.distanceTo(controls.target);
+  const mPerPx = 2 * dist * Math.tan(camera.fov * Math.PI / 360) / host.clientHeight;
+  const target = mPerPx * 110;
+  const nice = [10, 20, 50, 100, 200, 500, 1000, 1609.344, 3218.7, 8046.7, 16093.4, 32186.9, 80467.2];
+  let L = nice[0];
+  for (const n of nice) if (n <= target) L = n;
+  $('#scalebar i').style.width = (L / mPerPx).toFixed(0) + 'px';
+  $('#scaletxt').textContent = L >= 1609 ? `${(L / 1609.344).toFixed(0)} mi` : (L >= 1000 ? `${(L / 1000).toFixed(0)} km` : `${L} m`);
+  // depth of the pivot, in the model's own vertical exaggeration
+  const dFt = -controls.target.y / ST.vExag / FT;
+  $('#depthtxt').textContent = dFt > 5 ? `pivot ${dFt.toFixed(0)} ft below grade` : 'pivot at grade';
 }
 
 /* ================================================================ wiring */
@@ -1538,6 +1810,7 @@ function buildUI() {
       requestAnimationFrame(() => { drawLadder(); if (ST.run) { drawChart(); } });
     }
   });
+  $('#legendX').addEventListener('click', () => $('#legend').classList.add('hidden'));
   $('#panelToggle').addEventListener('click', () => {
     document.body.classList.toggle('collapsed');
     setTimeout(resize, 260);
@@ -1554,6 +1827,7 @@ function resize() {
   const w = host.clientWidth, h = host.clientHeight;
   if (!w || !h) return;
   camera.aspect = w / h; camera.updateProjectionMatrix();
+  if (!isFinite(camera.position.x)) frameAll();
   renderer.setSize(w, h); labelRenderer.setSize(w, h);
   if (ST.run) drawChart();
   drawLadder();
@@ -1563,6 +1837,7 @@ addEventListener('resize', resize);
 /* ================================================================== go */
 buildUI();
 buildGround();
+buildRain();
 buildSurface();
 buildTunnels();
 buildShafts();
@@ -1579,6 +1854,6 @@ inspect(null);
 animate(performance.now());
 
 // handle for debugging and for driving the view from the console
-window.__S3D = { THREE, scene, world, camera, controls, ST, D, layerG, conduits,
+window.__S3D = { THREE, scene, world, camera, controls, ST, D, layerG, conduits, KEYS, keyVel,
                  resObjects, plantObjects, pumpObjects, shaftSets, particles,
                  setScale, flyTo, runSim, applyFrame, frameAll, model };

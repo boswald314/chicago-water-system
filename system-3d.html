@@ -56,6 +56,45 @@
   #introX { position:absolute; right:10px; top:8px; border:0; background:none; color:var(--ink3);
     font-size:20px; cursor:pointer; line-height:1; }
   #introX:hover { color:var(--ink); }
+  #tip { position:absolute; z-index:25; display:none; pointer-events:none; background:var(--panel);
+    border:1px solid var(--line); border-radius:6px; padding:5px 9px; font-size:12px; max-width:260px;
+    box-shadow:0 3px 14px rgba(0,0,0,.28); }
+  #tip b { display:block; color:var(--ink); }
+  #tip span { display:block; color:var(--ink2); font-size:11px; }
+  #tip i { display:block; color:var(--ink3); font-style:normal; font-size:10px; margin-top:2px; }
+  #legend { position:absolute; right:52px; top:12px; z-index:10; background:var(--panel); border:1px solid var(--line);
+    border-radius:8px; padding:7px 11px 8px; font-size:11px; color:var(--ink2); max-width:250px;
+    box-shadow:0 2px 12px rgba(0,0,0,.14); }
+  #legend.hidden { display:none; }
+  #legend .lhd { display:flex; justify-content:space-between; align-items:center; font-weight:700; color:var(--ink);
+    font-size:11px; text-transform:uppercase; letter-spacing:.06em; margin-bottom:4px; }
+  #legend .lhd button { border:0; background:none; color:var(--ink3); cursor:pointer; font-size:14px; line-height:1; }
+  .lrow2 { display:flex; align-items:center; gap:6px; padding:1.5px 0; line-height:1.3; }
+  .lrow2 .sw { width:16px; height:5px; border-radius:2px; flex:none; }
+  .lrow2 .sw.bar { width:4px; height:14px; }
+  .lrow2 .dot { width:9px; height:9px; border-radius:50%; flex:none; display:inline-block; }
+  #phase { margin-top:8px; background:var(--panel); border:1px solid var(--line); border-radius:8px;
+    padding:6px 11px; font-size:12px; color:var(--ink2); min-width:236px; box-shadow:0 2px 12px rgba(0,0,0,.14); }
+  #phase b { color:var(--ink); }
+  #phase.rain b { color:var(--accent); }
+  #phase.cso b { color:var(--bad); }
+  #navhud { position:absolute; right:14px; bottom:158px; z-index:10; display:flex; flex-direction:column;
+    align-items:flex-end; gap:8px; pointer-events:none; }
+  #compass { width:44px; height:44px; background:var(--panel); border:1px solid var(--line); border-radius:50%;
+    box-shadow:0 2px 10px rgba(0,0,0,.18); }
+  #compass svg { width:100%; height:100%; }
+  #scalebar { display:flex; align-items:center; gap:7px; font-size:11px; color:var(--ink2); background:var(--panel);
+    border:1px solid var(--line); border-radius:6px; padding:3px 8px; font-variant-numeric:tabular-nums; }
+  #scalebar i { display:block; height:5px; border:2px solid var(--ink); border-top:0; width:80px; }
+  #depthbar { font-size:11px; color:var(--ink2); background:var(--panel); border:1px solid var(--line);
+    border-radius:6px; padding:3px 8px; font-variant-numeric:tabular-nums; }
+  #keyhelp { position:absolute; left:50%; bottom:170px; transform:translateX(-50%); z-index:26; display:none;
+    background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:10px 14px; font-size:12px;
+    color:var(--ink2); box-shadow:0 8px 30px rgba(0,0,0,.3); line-height:1.9; }
+  #keyhelp.on { display:block; }
+  #keyhelp b { display:block; color:var(--ink); margin-bottom:2px; }
+  kbd { display:inline-block; padding:0 5px; border:1px solid var(--line); border-bottom-width:2px; border-radius:4px;
+    background:var(--panel2); color:var(--ink); font:600 10.5px/1.5 -apple-system,system-ui,sans-serif; margin:0 1px; }
   #hud { position:absolute; left:14px; top:52px; z-index:10; display:flex; gap:10px; align-items:flex-start; }
   #csobox { background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--line);
     border-radius:8px; padding:9px 13px; min-width:236px; box-shadow:0 2px 12px rgba(0,0,0,.14); }
@@ -91,6 +130,10 @@
   .lbl.stage i { font-style:normal; color:var(--ink3); font-size:9.5px; }
   .lbl.stage i.hrt { color:#6fc3e8; font-weight:600; }
   .lbl.stage.solids { border-left-color:#b09050; }
+  .lbl.sel { border-color:#ffd166; color:var(--ink); display:flex; flex-direction:column; gap:1px; padding:3px 8px; }
+  .lbl.sel b { font-size:11px; }
+  .lbl.sel i { font-style:normal; color:#ffd166; font-size:10px; }
+  .lbl { box-shadow:0 1px 5px rgba(0,0,0,.22); }
 
   /* timeline strip */
   #timeline { position:absolute; left:0; right:0; bottom:0; z-index:9; background:var(--panel);
@@ -209,13 +252,41 @@
         236 of MWRD's own catalogued drop shafts, three reservoirs sized so the solid you see holds
         exactly the gallons MWRD publishes, and Stickney's nine 160-foot primary tanks. The layout is
         MWRD's own GIS, projected to metres.</p>
-      <p><b>Drag</b> to orbit, <b>scroll</b> to zoom, <b>right-drag</b> to pan. <b>Click anything</b>
-        for its real size and the source of that number. Then pick a storm and press play.</p>
+      <p><b>Drag</b> to orbit, <b>scroll</b> to zoom toward the cursor, <b>right-drag</b> to pan,
+        <b>double-click</b> to orbit around a new spot, <b>arrow keys</b> to rotate.
+        <b>Click anything</b> for its real size and the source of that number. Then pick a storm and
+        press play. Press <kbd>?</kbd> any time for the key list.</p>
       <p class="tiny">Vertical scale is exaggerated ×18 by default so a 300-foot-deep tunnel reads
         against a 50-kilometre-wide system; the badge top-left always says by how much.</p>
       <div class="introfoot"><button id="introGo">Start</button></div>
   </div>
-  <div id="hud"><div id="csobox"></div></div>
+  <div id="hud"><div id="csobox"></div><div id="phase"></div></div>
+  <div id="tip"></div>
+  <div id="legend">
+    <div class="lhd">Legend <button id="legendX" title="Hide (L)">−</button></div>
+    <div class="lrow2"><i class="sw" style="background:#e2a33c"></i>Mainstream tunnel</div>
+    <div class="lrow2"><i class="sw" style="background:#d9698f"></i>Des Plaines tunnel</div>
+    <div class="lrow2"><i class="sw" style="background:#86c44e"></i>Calumet tunnel</div>
+    <div class="lrow2"><i class="sw" style="background:#4fbde0"></i>Upper Des Plaines tunnel</div>
+    <div class="lrow2"><i class="sw" style="background:#2d93cc;height:8px"></i>water held in tunnel / reservoir</div>
+    <div class="lrow2"><i class="sw bar" style="background:#9aa4b0"></i>drop shaft (TARP)</div>
+    <div class="lrow2"><i class="sw bar" style="background:#5f6c7a"></i>interceptor connection</div>
+    <div class="lrow2"><i class="dot" style="background:#2c9a8f"></i>treatment plant · <i class="dot" style="background:#b07acc"></i>pumping station</div>
+    <div class="lrow2"><i class="dot" style="background:#d64545"></i>CSO discharge point — pulses while discharging</div>
+    <div class="lrow2"><i class="sw" style="background:#9fe3ff;height:3px"></i>flow (speed ∝ √velocity)</div>
+  </div>
+  <div id="navhud">
+    <div id="compass" title="North"><svg viewBox="0 0 40 40"><g id="needle"><path d="M20 4 L26 22 L20 18 L14 22 Z" fill="#d64545"/><path d="M20 36 L14 18 L20 22 L26 18 Z" fill="#8b97a6"/></g><text x="20" y="11" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">N</text></svg></div>
+    <div id="scalebar"><i></i><span id="scaletxt">1 mi</span></div>
+    <div id="depthbar"><span id="depthtxt"></span></div>
+  </div>
+  <div id="keyhelp">
+    <b>Navigation</b>
+    <div><kbd>drag</kbd> orbit · <kbd>right-drag</kbd> pan · <kbd>wheel</kbd> zoom to cursor</div>
+    <div><kbd>dbl-click</kbd> orbit around that point</div>
+    <div><kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd> rotate · <kbd>shift</kbd>+arrows pan · <kbd>+</kbd><kbd>−</kbd> zoom</div>
+    <div><kbd>Home</kbd> frame the system · <kbd>Esc</kbd> deselect · <kbd>L</kbd> legend · <kbd>?</kbd> this card</div>
+  </div>
     <div id="timeline">
       <div id="trow">
         <button id="play" title="Play the storm">▶</button>
@@ -227,10 +298,10 @@
       </div>
       <div id="chartwrap"><canvas id="chart"></canvas><canvas id="playhead"></canvas><span id="chartmax"></span></div>
       <div id="chartleg">
-        <span><i style="background:#c98a2e"></i>Mainstream</span>
-        <span><i style="background:#b5762a"></i>Des Plaines</span>
-        <span><i style="background:#7fae3f"></i>Calumet</span>
-        <span><i style="background:#4aa3c4"></i>Upper Des Plaines</span>
+        <span><i style="background:#e2a33c"></i>Mainstream</span>
+        <span><i style="background:#d9698f"></i>Des Plaines</span>
+        <span><i style="background:#86c44e"></i>Calumet</span>
+        <span><i style="background:#4fbde0"></i>Upper Des Plaines</span>
         <span><i style="background:#5aa0c8"></i>reservoirs</span>
         <span><i style="background:#d64545"></i>cumulative CSO</span>
         <span style="opacity:.8">shaded band = rainfall intensity</span>
@@ -389,7 +460,7 @@
   document.getElementById('introGo').addEventListener('click', hide);
   addEventListener('keydown', e => { if (e.key === 'Escape') hide(); });
 </script>
-<script src="map-data/system3d.js?v=5"></script>
+<script src="map-data/system3d.js?v=6"></script>
 <script type="importmap">
 { "imports": {
   "three": "./assets/vendor/three/three.module.js",
@@ -403,6 +474,6 @@
     .map(([k, v]) => '<div class="srow"><span>' + v[0] + '</span><a href="' + v[1] + '">' + k + '</a></div>')
     .join('');
 </script>
-<script type="module" src="assets/js/system3d/app.js?v=5"></script>
+<script type="module" src="assets/js/system3d/app.js?v=6"></script>
 </body>
 </html>
