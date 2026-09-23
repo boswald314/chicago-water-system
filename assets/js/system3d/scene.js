@@ -41,12 +41,33 @@ export class Conduit {
     const verts = this.n * this.ring;
     this.pos = new Float32Array(verts * 3);
     this.nrm = new Float32Array(verts * 3);
+    this.cum = [0];
+    for (let i = 1; i < this.n; i++)
+      this.cum.push(this.cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+    const uv = new Float32Array(verts * 2), fl = new Float32Array(verts);
+    for (let i = 0; i < this.n; i++)
+      for (let j = 0; j < this.ring; j++) {
+        uv[(i * this.ring + j) * 2] = j / this.ring; uv[(i * this.ring + j) * 2 + 1] = this.cum[i];
+        fl[i * this.ring + j] = this.cum[i];
+      }
+    this.vel = new Float32Array(verts);
     this.geom = new THREE.BufferGeometry();
     this.geom.setAttribute('position', new THREE.BufferAttribute(this.pos, 3));
     this.geom.setAttribute('normal', new THREE.BufferAttribute(this.nrm, 3));
+    this.geom.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
+    this.geom.setAttribute('aFlow', new THREE.BufferAttribute(fl, 1));
+    this.geom.setAttribute('aVel', new THREE.BufferAttribute(this.vel, 1));
     this.geom.setIndex(this._index());
     this.update(1, 1);
   }
+
+  /** Uniform display speed along the whole bore (pressurised mains). */
+  setVelocity(v) {
+    this.vel.fill(v);
+    this.geom.attributes.aVel.needsUpdate = true;
+  }
+
+  get length() { return this.cum[this.n - 1]; }
 
   _frames() {
     // parallel-transport-ish frames: tunnels are near-horizontal, so a fixed
@@ -144,6 +165,10 @@ export class ConduitWater {
       for (let j = 0; j < this.ring; j++) this.flow[i * this.ring + j] = this.cum[i];
     this.geom.setAttribute('aFlow', new THREE.BufferAttribute(this.flow, 1));
     this.geom.setAttribute('aVel', new THREE.BufferAttribute(this.vel, 1));
+    const uv = new Float32Array(verts * 2);
+    for (let i = 0; i < conduit.n; i++)
+      for (let j = 0; j < this.ring; j++) { uv[(i * this.ring + j) * 2] = j / (this.ring - 1); uv[(i * this.ring + j) * 2 + 1] = this.cum[i]; }
+    this.geom.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
     const idx = [];
     for (let i = 0; i < conduit.n - 1; i++) {
       for (let j = 0; j < this.ring - 1; j++) {
@@ -154,6 +179,26 @@ export class ConduitWater {
     }
     this.geom.setIndex(idx);
     this.level = Infinity;
+
+    // the free surface: a strip across the chord at the water level. This is
+    // what makes it read as water in a pipe rather than a lit-up wall. It
+    // closes to nothing when the bore runs full and pressurised.
+    this.spos = new Float32Array(conduit.n * 2 * 3);
+    this.svel = new Float32Array(conduit.n * 2);
+    const sfl = new Float32Array(conduit.n * 2), suv = new Float32Array(conduit.n * 4);
+    for (let i = 0; i < conduit.n; i++) {
+      sfl[i * 2] = sfl[i * 2 + 1] = this.cum[i];
+      suv[i * 4] = 0; suv[i * 4 + 1] = this.cum[i]; suv[i * 4 + 2] = 1; suv[i * 4 + 3] = this.cum[i];
+    }
+    this.surf = new THREE.BufferGeometry();
+    this.surf.setAttribute('position', new THREE.BufferAttribute(this.spos, 3));
+    this.surf.setAttribute('uv', new THREE.BufferAttribute(suv, 2));
+    this.surf.setAttribute('aFlow', new THREE.BufferAttribute(sfl, 1));
+    this.surf.setAttribute('aVel', new THREE.BufferAttribute(this.svel, 1));
+    const sidx = [];
+    for (let i = 0; i < conduit.n - 1; i++) { const a = i * 2; sidx.push(a, a + 2, a + 1, a + 1, a + 2, a + 3); }
+    this.surf.setIndex(sidx);
+    this.surfaceOpen = false;
   }
 
   /** Per-point display speed from a velocity function of (index). */
@@ -161,14 +206,17 @@ export class ConduitWater {
     for (let i = 0; i < this.c.n; i++) {
       const v = fn(i);
       for (let j = 0; j < this.ring; j++) this.vel[i * this.ring + j] = v;
+      this.svel[i * 2] = this.svel[i * 2 + 1] = v;
     }
     this.geom.attributes.aVel.needsUpdate = true;
+    this.surf.attributes.aVel.needsUpdate = true;
   }
 
   /** level: metres below ground (positive down). Above the pipe crown the
    *  section is full; below the invert it is dry and collapses to the axis. */
   update(level, vExag, dExag) {
     const c = this.c;
+    let anyOpen = false;
     for (let i = 0; i < c.n; i++) {
       const [x, z] = c.pts[i];
       const r = c.radii[i] * dExag;
@@ -189,9 +237,20 @@ export class ConduitWater {
         this.pos[k + 1] = y + rr * Math.sin(a);
         this.pos[k + 2] = z + nz * rr * Math.cos(a);
       }
+      // chord endpoints at the water surface (a hair inside the wall)
+      const open = h > 0 && h < 0.995;
+      const half = open ? r * Math.sin(th) * 0.985 : 0;
+      const ys = open ? y + r * -Math.cos(th) : y;
+      const k2 = i * 6;
+      this.spos[k2] = x + nx * half; this.spos[k2 + 1] = ys; this.spos[k2 + 2] = z + nz * half;
+      this.spos[k2 + 3] = x - nx * half; this.spos[k2 + 4] = ys; this.spos[k2 + 5] = z - nz * half;
+      if (open) anyOpen = true;
     }
     this.geom.attributes.position.needsUpdate = true;
     this.geom.computeBoundingSphere();
+    this.surf.attributes.position.needsUpdate = true;
+    this.surf.computeBoundingSphere();
+    this.surfaceOpen = anyOpen;
     this.level = level;
   }
 }
@@ -469,6 +528,9 @@ export function makeFlowMaterial(base, opts = {}) {
     uUseUV: { value: opts.useUV ? 1 : 0 },
     uDir: { value: opts.dir == null ? 1 : opts.dir },
     uHi: { value: new THREE.Color(opts.hi || 0xbdf0ff) },
+    uFresnel: { value: opts.fresnel || 0 },      // rim glow for glassy shells
+    uRings: { value: opts.rings || 0 },          // lining-ring spacing, metres (0 = none)
+    uStreak: { value: opts.streak == null ? 1 : opts.streak },   // 1 = water streaks, 0 = plain bands
   };
   base.onBeforeCompile = sh => {
     Object.assign(sh.uniforms, u);
@@ -476,22 +538,51 @@ export function makeFlowMaterial(base, opts = {}) {
       .replace('#include <common>', `#include <common>
         attribute float aFlow; attribute float aVel;
         uniform float uUseUV; uniform float uLen; uniform float uSpeed;
-        varying float vFlow; varying float vVel;`)
+        varying float vFlow; varying float vVel; varying vec2 vUvF; varying vec3 vNrmW; varying vec3 vPosW;`)
       .replace('#include <begin_vertex>', `#include <begin_vertex>
         vFlow = uUseUV > 0.5 ? uv.y * uLen : aFlow;
-        vVel = uUseUV > 0.5 ? uSpeed : aVel;`);
+        vVel = uUseUV > 0.5 ? uSpeed : aVel;
+        vUvF = uv;
+        vNrmW = normalize(mat3(modelMatrix) * normal);
+        vPosW = (modelMatrix * vec4(position, 1.0)).xyz;`);
     sh.fragmentShader = sh.fragmentShader
       .replace('#include <common>', `#include <common>
         uniform float uTime; uniform float uWave; uniform float uStrength; uniform float uDir;
-        uniform vec3 uHi; varying float vFlow; varying float vVel;`)
+        uniform float uFresnel; uniform float uRings; uniform float uStreak;
+        uniform vec3 uHi; varying float vFlow; varying float vVel; varying vec2 vUvF; varying vec3 vNrmW; varying vec3 vPosW;
+        float hash21(vec2 p) { p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }`)
       .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
         {
           float ph = (vFlow - uDir * vVel * uTime) / max(uWave, 1.0);
-          float b1 = 0.5 + 0.5 * sin(ph * 6.28318);
-          float b2 = 0.5 + 0.5 * sin(ph * 6.28318 * 2.7 + 1.3);
-          float band = pow(b1, 3.0) * 0.8 + pow(b2, 5.0) * 0.35;
           float k = clamp(vVel / 60.0, 0.15, 1.0);      // faster water glows harder
+          float band;
+          if (uStreak > 0.5) {
+            // water: streaks that vary across the width, plus drifting sparkle
+            float lane = vUvF.x * 5.0;
+            float laneJ = hash21(vec2(floor(lane), 3.0));
+            float s1 = pow(0.5 + 0.5 * sin((ph + laneJ) * 6.28318), 6.0);
+            float s2 = pow(0.5 + 0.5 * sin((ph * 1.9 + laneJ * 2.0 + vUvF.x) * 6.28318), 10.0);
+            float ripple = 0.5 + 0.5 * sin(vUvF.x * 18.85 + ph * 12.0);
+            float sp = step(0.93, hash21(vec2(floor(ph * 8.0) + floor(lane), floor(vUvF.x * 30.0))));
+            band = s1 * 0.55 + s2 * 0.45 + ripple * 0.12 + sp * 0.5;
+            band *= smoothstep(0.0, 0.02, vVel);
+          } else {
+            float b1 = 0.5 + 0.5 * sin(ph * 6.28318);
+            float b2 = 0.5 + 0.5 * sin(ph * 6.28318 * 2.7 + 1.3);
+            band = pow(b1, 3.0) * 0.8 + pow(b2, 5.0) * 0.35;
+          }
           totalEmissiveRadiance += uHi * band * uStrength * k;
+          if (uFresnel > 0.0) {
+            vec3 vdir = normalize(cameraPosition - vPosW);
+            float fr = pow(1.0 - abs(dot(normalize(vNrmW), vdir)), 3.0);
+            totalEmissiveRadiance += diffuseColor.rgb * fr * uFresnel;
+          }
+          if (uRings > 0.0) {
+            float rg = fract(vFlow / uRings);
+            float seam = 1.0 - smoothstep(0.0, 0.06, min(rg, 1.0 - rg));
+            totalEmissiveRadiance += diffuseColor.rgb * seam * 0.35;
+            diffuseColor.rgb *= 1.0 - seam * 0.25;
+          }
         }`);
   };
   base.customProgramCacheKey = () => 'flow';

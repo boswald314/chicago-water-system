@@ -16,8 +16,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
-import { SewerModel, CONFIGS } from './sim.js?v=7';
-import * as SC from './scene.js?v=7';
+import { SewerModel, CONFIGS } from './sim.js?v=8';
+import * as SC from './scene.js?v=8';
 
 const D = window.SYS3D;
 const FT = SC.FT;
@@ -40,13 +40,18 @@ const FLOW_BASE = 900;
 /* Drop-shaft plunge, drawn at an energy-dissipated design value rather than
  * free fall, which over 250 ft would reach ~40 m/s. Assumed. */
 const PLUNGE_MS = 8.0;
+/* Playback: simulated time per real second. Fine steps at the bottom so a
+ * single storm can be watched, coarse at the top for the ten-day drawdown. */
+const SPEEDS = [[5 / 60, '5 min / s'], [15 / 60, '15 min / s'], [0.5, '30 min / s'], [1, '1 h / s'],
+                [2, '2 h / s'], [4, '4 h / s'], [8, '8 h / s'], [24, '1 day / s']];
+const speedHrs = () => SPEEDS[ST.speedIx][0];
 
 /* ============================================================ 1. state */
 const ST = {
   vExag: 18, dExag: 34, route: 'corridor',
-  playing: false, speed: 8, pos: 0, run: null,
+  playing: false, speedIx: 3, pos: 0, run: null,
   storm: { inches: 2.0, hours: 24, shape: 'peaked', runoffC: 0.32, config: 'today', pumpLimit: 'plant' },
-  layers: { geo: 1, tunnels: 1, water: 1, shafts: 1, connections: 0, links: 1, reservoirs: 1, plants: 1,
+  layers: { geo: 1, contours: 1, tunnels: 1, water: 1, shafts: 1, connections: 0, links: 1, reservoirs: 1, plants: 1,
             pumps: 1, outfalls: 0, basins: 1, labels: 1, flow: 1 },
   selected: null, rainK: 0,
 };
@@ -300,8 +305,12 @@ function flowClone(base, over) {
   return m;
 }
 const M = {
-  water: flow({ color: 0x2f8fbf, roughness: 0.22, metalness: 0.12, emissive: 0x0d3a52, emissiveIntensity: 0.55, side: THREE.DoubleSide }, { wave: 260, strength: 0.75 }),
-  waterFull: flow({ color: 0x5aa7d6, roughness: 0.2, metalness: 0.12, emissive: 0x7a2a1a, emissiveIntensity: 0.55, side: THREE.DoubleSide }, { wave: 260, strength: 0.75, hi: 0xffc9a8 }),
+  // pressurised mains between facilities: full-bore tubes
+  pipeSewage: flow({ color: 0x8a6a3a, roughness: 0.5, emissive: 0x3a2a12, emissiveIntensity: 0.5, transparent: true, opacity: 0.9 }, { wave: 240, strength: 1.0, hi: 0xffd9a0, fresnel: 0.5 }),
+  pipeReturn: flow({ color: 0xd9a24a, roughness: 0.45, emissive: 0x4a3410, emissiveIntensity: 0.6, transparent: true, opacity: 0.92 }, { wave: 240, strength: 1.1, hi: 0xffe7a0, fresnel: 0.5 }),
+  pipeEffluent: flow({ color: 0x2c9a8f, roughness: 0.3, emissive: 0x0e3d38, emissiveIntensity: 0.6, transparent: true, opacity: 0.9 }, { wave: 220, strength: 1.0, hi: 0xa8fff0, fresnel: 0.5 }),
+  pipeTunnel: flow({ color: 0x2f8fbf, roughness: 0.22, metalness: 0.12, emissive: 0x0d3a52, emissiveIntensity: 0.55, transparent: true, opacity: 0.9 }, { wave: 240, strength: 0.9, fresnel: 0.5 }),
+  pipeCso: flow({ color: 0xd64545, roughness: 0.5, emissive: 0x4a1010, emissiveIntensity: 0.6, transparent: true, opacity: 0.9 }, { wave: 220, strength: 1.2, hi: 0xffb39a, fresnel: 0.5 }),
   shaft: std({ color: SC.COL.shaft, roughness: 0.75, metalness: 0.15 }),
   conn: std({ color: SC.COL.connection, roughness: 0.85 }),
   rock: std({ color: dark ? 0x4d5761 : 0x8f99a5, roughness: 0.96, side: THREE.DoubleSide, flatShading: true }),
@@ -314,13 +323,8 @@ const M = {
   outfall: std({ color: SC.COL.outfall, roughness: 0.6, emissive: 0x3d0e0e }),
   hi: new THREE.MeshBasicMaterial({ color: 0xffd166, wireframe: true, transparent: true, opacity: 0.55 }),
   riser: flow({ color: 0xc9a227, roughness: 0.4, metalness: 0.5, emissive: 0x3a2a05, emissiveIntensity: 0.6 }, { useUV: true, len: 100, speed: 0, wave: 18, strength: 1.1, hi: 0xffe7a0 }),
-  cso: flow({ color: 0xd64545, roughness: 0.5, emissive: 0x4a1010, emissiveIntensity: 0.6, transparent: true, opacity: 0.85, side: THREE.DoubleSide }, { wave: 220, strength: 1.2, hi: 0xffb39a }),
   train: flow({ color: 0x3f8fb0, roughness: 0.3, emissive: 0x0d3a52, emissiveIntensity: 0.6, transparent: true, opacity: 0.9, side: THREE.DoubleSide }, { wave: 60, strength: 1.0 }),
   // links between facilities: sewage (interceptors, return mains), treated effluent, reservoir connections
-  linkSewage: flow({ color: 0x8a6a3a, roughness: 0.5, emissive: 0x3a2a12, emissiveIntensity: 0.5, transparent: true, opacity: 0.9, side: THREE.DoubleSide }, { wave: 240, strength: 1.0, hi: 0xffd9a0 }),
-  linkReturn: flow({ color: 0xd9a24a, roughness: 0.45, emissive: 0x4a3410, emissiveIntensity: 0.6, transparent: true, opacity: 0.92, side: THREE.DoubleSide }, { wave: 240, strength: 1.1, hi: 0xffe7a0 }),
-  linkEffluent: flow({ color: 0x2c9a8f, roughness: 0.3, emissive: 0x0e3d38, emissiveIntensity: 0.6, transparent: true, opacity: 0.9, side: THREE.DoubleSide }, { wave: 220, strength: 1.0, hi: 0xa8fff0 }),
-  linkTunnel: flow({ color: 0x2f8fbf, roughness: 0.22, metalness: 0.12, emissive: 0x0d3a52, emissiveIntensity: 0.55, side: THREE.DoubleSide }, { wave: 240, strength: 0.9 }),
   tankWall: std({ color: 0xb4bec9, roughness: 0.85, metalness: 0.05, side: THREE.DoubleSide }),
   solidsWall: std({ color: 0x8a7f6a, roughness: 0.85, metalness: 0.05, side: THREE.DoubleSide }),
   lake: new THREE.MeshBasicMaterial({ color: dark ? 0x1d3a52 : 0x9ec4de, transparent: true, opacity: dark ? 0.35 : 0.45, side: THREE.DoubleSide, depthWrite: false }),
@@ -330,8 +334,15 @@ const M = {
 };
 const tunnelMat = {};
 for (const [sid, s] of Object.entries(D.systems))
-  tunnelMat[sid] = std({ color: new THREE.Color(s.color), roughness: 0.82, metalness: 0.06, transparent: true, opacity: 0.62,
-    side: THREE.DoubleSide, depthWrite: false, emissive: new THREE.Color(s.color).multiplyScalar(0.18) });
+  tunnelMat[sid] = flow({ color: new THREE.Color(s.color), roughness: 0.55, metalness: 0.1, transparent: true, opacity: 0.34,
+    side: THREE.DoubleSide, depthWrite: false, emissive: new THREE.Color(s.color).multiplyScalar(0.12) },
+    { strength: 0, streak: 0, fresnel: 0.9, rings: 520 });
+M.waterBody = flow({ color: 0x1f6f9a, roughness: 0.35, metalness: 0.1, emissive: 0x0a2d40, emissiveIntensity: 0.6, side: THREE.DoubleSide },
+  { wave: 220, strength: 0.35, hi: 0x8fd3f0 });
+M.waterSurf = flow({ color: 0x3aa3d8, roughness: 0.08, metalness: 0.3, emissive: 0x145d85, emissiveIntensity: 0.7, side: THREE.DoubleSide,
+  transparent: true, opacity: 0.96 }, { wave: 200, strength: 1.25, hi: 0xdff6ff });
+M.waterSurfFull = flow({ color: 0x5aa7d6, roughness: 0.2, metalness: 0.12, emissive: 0x7a2a1a, emissiveIntensity: 0.55, side: THREE.DoubleSide },
+  { wave: 220, strength: 0.9, hi: 0xffc9a8 });
 const shaftWaterMat = {};
 for (const sid of Object.keys(D.systems))
   shaftWaterMat[sid] = flow({ color: SC.COL.waterHi, roughness: 0.2, emissive: 0x1d6f92, emissiveIntensity: 0.8, transparent: true, opacity: 0.92 },
@@ -360,11 +371,6 @@ function flowRibbon(pts, width) {
   g.setAttribute('aVel', new THREE.Float32BufferAttribute(vel, 1));
   g.setIndex(idx); g.computeVertexNormals(); g.userData.cum = cum;
   return g;
-}
-function setRibbonSpeed(geo, s) {
-  const a = geo.attributes.aVel.array;
-  for (let i = 0; i < a.length; i++) a[i] = s;
-  geo.attributes.aVel.needsUpdate = true;
 }
 function addLabel(text, x, z, y, cls, maxDist) {
   const d = el('div', 'lbl ' + (cls || '')); d.textContent = text;
@@ -446,6 +452,31 @@ function buildGeo() {
     addLabel(lk.name, cx, cz, 6, 'geo', 40000);
   }
 }
+/* Ground contours, fetched on demand: 10-ft lines from USGS-derived terrain
+ * tiles, drawn at grade as thin line work. The 580 ft line is the shoreline. */
+async function buildContours() {
+  let data;
+  try { data = await (await fetch('map-data/gis/contours.json')).json(); }
+  catch (e) { console.warn('contours unavailable', e); return; }
+  const major = new THREE.LineBasicMaterial({ color: dark ? 0x7d8fa5 : 0x5f6f80, transparent: true, opacity: 0.55 });
+  const minor = new THREE.LineBasicMaterial({ color: dark ? 0x4a5666 : 0x8a97a6, transparent: true, opacity: 0.35 });
+  let labelled = 0;
+  for (const lv of data.levels) {
+    const isMajor = lv.ft % 50 === 0;
+    for (const ln of lv.lines) {
+      const pts = ln.map(p => V3(p[0], 5, p[1]));
+      const g = new THREE.BufferGeometry().setFromPoints(pts);
+      const m = new THREE.Line(g, isMajor ? major : minor); layerG.contours.add(m);
+      // label the long lines, in the middle, at the elevation, only when close
+      if (isMajor && ln.length > 30 && labelled < 80) {
+        const mid = pts[Math.floor(pts.length / 2)];
+        addLabel(`${lv.ft} ft`, mid.x, mid.z, 6, 'contour', 22000); labelled++;
+      }
+    }
+  }
+  D.contourMeta = data.meta;
+}
+
 function buildSurface() {
   for (const w of D.waterways) if (w.pts.length >= 2) layerG.geo.add(new THREE.Mesh(SC.ribbon(w.pts, 140, 6), M.river));
   for (const b of D.basins) {
@@ -474,7 +505,8 @@ function buildTunnels() {
     const c = new SC.Conduit(pts2(f), f.depth.map(d => d * FT), f.dia.map(d => d * FT / 2), { ring: 12 });
     const mesh = new THREE.Mesh(c.geom, tunnelMat[f.system]); mesh.renderOrder = 2; layerG.tunnels.add(mesh);
     const w = new SC.ConduitWater(c);
-    const wm = new THREE.Mesh(w.geom, M.water); wm.renderOrder = 3; layerG.water.add(wm);
+    const wm = new THREE.Mesh(w.geom, M.waterBody); wm.renderOrder = 3; layerG.water.add(wm);
+    const sm = new THREE.Mesh(w.surf, M.waterSurf); sm.renderOrder = 4; layerG.water.add(sm);
     const sys = D.systems[f.system];
     reg(mesh, { kind: 'tunnel', title: f.name, sub: sys.name,
       rows: [['Diameter along this reach', `${f.dia[0].toFixed(1)}–${f.dia[f.dia.length - 1].toFixed(1)} ft`, 'derived'],
@@ -488,7 +520,7 @@ function buildTunnels() {
           const A = c.wetted(Math.floor(c.n / 2), cd.level), v = SC.conduitVelocity(Math.max(s.inflow, s.pumped), A);
           return A > 0.01 ? `${(v * 3.281).toFixed(2)} ft/s through ${num(A * 10.764)} sq ft of wetted bore` : 'dry';
         }, 'derived']], note: f.note, doc: 'doc09' });
-    conduits.push({ sid: f.system, c, w, mesh, wm, feat: f, level: null });
+    conduits.push({ sid: f.system, c, w, mesh, wm, sm, feat: f, level: null });
     (sysConduits[f.system] = sysConduits[f.system] || []).push(c);
   }
   for (const sid of Object.keys(sysConduits)) sysGeomVol[sid] = sysConduits[sid].reduce((a, c) => a + c.volumeAt(-1e9), 0);
@@ -644,8 +676,11 @@ function buildPlants() {
       if (c.x == null) continue;
       const pth = [V3(lay.inlet.x, y, lay.inlet.z), V3(c.x - f.x, y, c.z - f.z)];
       if (c.ox != null) pth.push(V3(c.ox - f.x, y, c.oz - f.z));
-      const geo = flowRibbon(pth, 70);
-      const ribbon = new THREE.Mesh(geo, M.cso); ribbon.renderOrder = 4; ribbon.visible = false; grp.add(ribbon);
+      const dia = 2 * Math.sqrt((c.areaM2 || 14) / Math.PI);
+      const cc = new SC.Conduit(pth.map(p => [p.x, p.z]), pth.map(p => -p.y / ST.vExag), pth.map(() => dia / 2), { ring: 10 });
+      cc.update(ST.vExag, ST.dExag * 0.6);
+      const ribbon = new THREE.Mesh(cc.geom, M.pipeCso); ribbon.renderOrder = 4; ribbon.visible = false; grp.add(ribbon);
+      const geo = cc;
       const guide = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pth), new THREE.LineDashedMaterial({ color: 0xd64545, dashSize: 260, gapSize: 170, transparent: true, opacity: 0.25 }));
       guide.computeLineDistances(); grp.add(guide);
       const marker = new THREE.Mesh(new THREE.ConeGeometry(120, 260, 7), std({ color: 0xd64545, emissive: 0x4a1010 }));
@@ -736,11 +771,14 @@ const EFFLUENT = { 'wrp-stickney': 'Chicago Sanitary and Ship Canal', 'wrp-calum
 const INTERCEPTOR = { 'ps-racine': 'wrp-stickney', 'ps-westchester': 'wrp-stickney', 'ps-north-branch': 'wrp-obrien',
   'ps-95th': 'wrp-calumet', 'ps-122nd': 'wrp-calumet', 'ps-125th': 'wrp-calumet' };
 function addLink(o) {
-  const geo = flowRibbon(o.pts, o.width);
-  const mesh = new THREE.Mesh(geo, o.mat); mesh.renderOrder = 3; layerG.links.add(mesh);
-  const l = Object.assign({ geo, mesh, q: 0, v: 0, areaM2: Math.PI * (o.diaM / 2) ** 2 }, o);
+  // a real tube: 2-D route plus a depth per point, so the Conduit class can
+  // carry it at true diameter under the same exaggeration as the tunnels
+  const c = new SC.Conduit(o.pts.map(p => [p.x, p.z]), o.pts.map(p => -p.y / ST.vExag), o.pts.map(() => o.diaM / 2), { ring: 10 });
+  c.update(ST.vExag, ST.dExag * (o.dScale || 1));
+  const mesh = new THREE.Mesh(c.geom, o.mat); mesh.renderOrder = 3; layerG.links.add(mesh);
+  const l = Object.assign({ c, mesh, q: 0, v: 0, areaM2: Math.PI * (o.diaM / 2) ** 2 }, o);
   reg(mesh, { kind: 'link', title: o.title, sub: o.sub,
-    rows: [['Drawn as', `${num(o.diaM / FT)} ft diameter conduit, ${num(geo.userData.cum[geo.userData.cum.length - 1] / 1609.344)} mi`, o.diaSrc || 'assumed'],
+    rows: [['Drawn as', `${num(o.diaM / FT)} ft diameter conduit, ${num(c.length / 1609.344)} mi`, o.diaSrc || 'assumed'],
       ['Route', 'straight between the real endpoints — the alignment is not published', 'assumed'],
       ['Carrying now', () => Math.abs(l.q) > 1 ? `${num(Math.abs(l.q))} MGD at ${(l.v * 3.281).toFixed(2)} ft/s ${l.q < 0 ? '(reversed)' : ''}` : 'nothing', 'derived']],
     note: o.note, doc: o.doc });
@@ -759,7 +797,7 @@ function buildLinks() {
       // inflow tunnel: tunnel end -> reservoir floor edge
       const rdepth = -(res.geom.D * 0.5) * ST.vExag;
       const dia = sid === 'calumet' ? 30 * FT : sid === 'udp' ? 12 * FT : 20 * FT;
-      addLink({ kind: 'inflow', sid, res: res.id, mat: M.linkTunnel, width: dia * ST.dExag * 0.9, diaM: dia,
+      addLink({ kind: 'inflow', sid, res: res.id, mat: M.pipeTunnel, diaM: dia,
         diaSrc: sid === 'udp' ? 'assumed' : 'doc10',
         pts: [V3(end.x, yTun, end.z), V3(res.x, rdepth, res.z)],
         title: `${sys.name.replace(/ Tunnel System.*/, '')} → ${res.short}`, sub: 'reservoir inflow tunnel',
@@ -770,7 +808,7 @@ function buildLinks() {
         seen.add('drain:' + res.id + ps.id);
         // dewatering: reservoir -> pumping station shaft (the water goes back the way it came, then to the pumps)
         const psDepth = -(ps.geom.shaftM || end.depthM) * ST.vExag;
-        addLink({ kind: 'drain', sid, res: res.id, sids: Object.keys(D.systems).filter(x => D.systems[x].reservoir === res.id), mat: M.linkReturn, width: dia * ST.dExag * 0.7, diaM: dia * 0.8, diaSrc: 'assumed',
+        addLink({ kind: 'drain', sid, res: res.id, sids: Object.keys(D.systems).filter(x => D.systems[x].reservoir === res.id), mat: M.pipeReturn, diaM: dia * 0.8, diaSrc: 'assumed',
           pts: [V3(res.x, rdepth, res.z), V3(ps.x - 60, psDepth, ps.z - 60)],
           title: `${res.short} → ${ps.short}`, sub: 'reservoir dewatering',
           note: 'Stored flow is drawn back out of the reservoir to the pumping station once the tunnel has room, and lifted to the plant. This is the return leg the reservoir exists for.', doc: 'doc10' });
@@ -781,7 +819,7 @@ function buildLinks() {
       // return main: pump station (top of the lift) -> plant inlet
       const inlet = plantObjects[plant.id].inlet;
       const dia = (ps.spec.riserFt ? ps.spec.riserFt.v : 8) * FT;
-      addLink({ kind: 'return', sid, sids: Object.keys(D.systems).filter(x => D.systems[x].pump === ps.id), mat: M.linkReturn, width: Math.max(dia * ST.dExag * 0.8, 24), diaM: dia, diaSrc: ps.spec.riserFt ? ps.spec.riserFt.s : 'assumed',
+      addLink({ kind: 'return', sid, sids: Object.keys(D.systems).filter(x => D.systems[x].pump === ps.id), mat: M.pipeReturn, diaM: dia, diaSrc: ps.spec.riserFt ? ps.spec.riserFt.s : 'assumed',
         pts: [V3(ps.x, yGrade + 2, ps.z), V3(inlet.x, inlet.y, inlet.z)],
         title: `${ps.short} → ${plant.short}`, sub: 'pumped return to treatment',
         note: `After the lift of ${ps.spec.liftFt ? num(ps.spec.liftFt.v) + ' ft' : 'the shaft'}, captured flow is returned to the plant on top of its dry-weather load, which is why the return rate is set by the plant’s spare capacity rather than the pumps.`, doc: 'doc09' });
@@ -790,7 +828,7 @@ function buildLinks() {
   // interceptor trunks: relief pumping station -> plant inlet (dry-weather flow)
   for (const [psId, plantId] of Object.entries(INTERCEPTOR)) {
     const ps = facById(psId), po = plantObjects[plantId]; if (!ps || !po) continue;
-    addLink({ kind: 'interceptor', plant: plantId, mat: M.linkSewage, width: 12 * FT * ST.dExag * 0.7, diaM: 12 * FT, diaSrc: 'assumed',
+    addLink({ kind: 'interceptor', plant: plantId, mat: M.pipeSewage, diaM: 12 * FT, diaSrc: 'assumed',
       pts: [V3(ps.x, yInter, ps.z), V3(po.inlet.x, yInter, po.inlet.z), V3(po.inlet.x, po.inlet.y, po.inlet.z)],
       title: `${ps.short} → ${po.f.short}`, sub: 'intercepting sewer (dry-weather flow)',
       note: 'MWRD’s ~560 miles of intercepting sewers, 6 in to 27 ft in diameter, carry dry-weather sewage to the plants. Their alignments are not published; this trunk runs straight from the relief station that sits on it to the plant, at a typical interceptor depth.', doc: 'doc07' });
@@ -799,7 +837,7 @@ function buildLinks() {
   for (const [plantId, water] of Object.entries(EFFLUENT)) {
     const po = plantObjects[plantId]; if (!po) continue;
     const w = nearestWaterPoint(water, po.outlet); if (!w) continue;
-    addLink({ kind: 'effluent', plant: plantId, mat: M.linkEffluent, width: 10 * FT * ST.dExag * 0.7, diaM: 10 * FT, diaSrc: 'assumed',
+    addLink({ kind: 'effluent', plant: plantId, mat: M.pipeEffluent, diaM: 10 * FT, diaSrc: 'assumed',
       pts: [po.outlet.clone(), V3(w.x, yGrade, w.z)],
       title: `${po.f.short} → ${water.replace('wb-dupage', 'West Branch DuPage River')}`, sub: 'treated effluent outfall',
       note: 'Clarified, disinfected water leaving the plant for its receiving stream. Stickney’s goes to the Sanitary and Ship Canal and on to the Illinois and Mississippi.', doc: po.f.doc });
@@ -829,6 +867,7 @@ function applyScale() {
 }
 function buildGeoLabels() {
   const G = D.geo; if (!G) return;
+  layerG.contours.children.filter(c => c.userData.lbl).forEach(c => layerG.contours.remove(c));
   if (G.shoreline && G.shoreline.length) { const mid = G.shoreline[Math.floor(G.shoreline.length / 2)]; addLabel('Lake Michigan', mid[0] + 9000, mid[1], 6, 'geo', 1e9); }
   for (const lk of (G.lakes || [])) addLabel(lk.name, lk.pts.reduce((a, p) => a + p[0], 0) / lk.pts.length, lk.pts.reduce((a, p) => a + p[1], 0) / lk.pts.length, 6, 'geo', 40000);
 }
@@ -877,8 +916,9 @@ function syncView(snap, dt = 1 / 60) {
       if (cd.sid !== sid) continue;
       cd.level = level;
       cd.w.update(level, ST.vExag, ST.dExag);
-      cd.wm.visible = frac > 0.0008 && ST.layers.water === 1;
-      cd.wm.material = frac > 0.985 ? M.waterFull : M.water;
+      cd.wm.visible = frac > 0.0008;
+      cd.sm.visible = cd.wm.visible && cd.w.surfaceOpen;
+      cd.sm.material = frac > 0.985 ? M.waterSurfFull : M.waterSurf;
       cd.w.setVelocity(i => q > 0.5 ? disp(SC.conduitVelocity(q, cd.c.wetted(i, level))) : 0);
     }
   }
@@ -951,7 +991,7 @@ function syncView(snap, dt = 1 / 60) {
       cp.share = share; cp.passed = passed; cp.backup = Math.max(0, share - passed);
       cp.v = share > 1 ? SC.conduitVelocity(passed, cp.spec.areaM2 || 14) : 0;
       cp.on = share > 1; cp.ribbon.visible = cp.on;
-      setRibbonSpeed(cp.geo, disp(cp.v));
+      cp.geo.setVelocity(disp(cp.v));
       cp.guide.material.opacity = cp.on ? 0.6 : 0.25;
       cp.marker.material.emissiveIntensity = cp.on ? 1.4 : 0.15;
     }
@@ -970,8 +1010,8 @@ function syncView(snap, dt = 1 / 60) {
       q = st ? Math.max(0, st.flow - ret) / n : 0;
     } else if (l.kind === 'effluent') { const st = V.plants[l.plant]; q = st ? st.flow : 0; }
     l.q = q; l.v = SC.conduitVelocity(q, l.areaM2);
-    setRibbonSpeed(l.geo, disp(l.v));
-    l.mesh.material.opacity = q > 1 ? 0.92 : 0.28;
+    l.c.setVelocity(disp(l.v));
+    l.mesh.material.opacity = q > 1 ? 0.92 : 0.3;
   }
   ST.rainK = Math.min(1, V.inHr / 0.5);
   layerG.basins.children.forEach(m => { m.material.opacity = 0.11 + ST.rainK * 0.14; });
@@ -1153,7 +1193,7 @@ function updateNavHud(now) {
 
 /* ============================================================ 7. wiring */
 function buildUI() {
-  const names = { geo: 'Geography (lake, rivers, district)', tunnels: 'Deep tunnels', water: 'Water in the tunnels', shafts: 'TARP drop shafts',
+  const names = { geo: 'Geography (lake, rivers, district)', contours: 'Ground contours (10 ft)', tunnels: 'Deep tunnels', water: 'Water in the tunnels', shafts: 'TARP drop shafts',
     connections: 'Interceptor connecting structures', links: 'Conduits between facilities', reservoirs: 'Reservoirs', plants: 'Treatment plants',
     pumps: 'Pumping stations', outfalls: 'CSO outfalls (441)', basins: 'Combined sewer areas', labels: 'Labels', flow: 'Flow animation' };
   const box = $('#layers');
@@ -1202,7 +1242,8 @@ function buildUI() {
   $('#shape').addEventListener('change', e => { ST.storm.shape = e.target.value; runSim(); });
   $('#pumplimit').addEventListener('change', e => { ST.storm.pumpLimit = e.target.value; runSim(); });
   $('#play').addEventListener('click', () => togglePlay());
-  $('#speed').addEventListener('input', e => { ST.speed = +e.target.value; $('#speedv').textContent = ST.speed + '×'; });
+  $('#speed').addEventListener('input', e => { ST.speedIx = +e.target.value; $('#speedv').textContent = SPEEDS[ST.speedIx][1]; });
+  $('#speedv').textContent = SPEEDS[ST.speedIx][1];
   $('#scrub').addEventListener('input', e => { ST.pos = +e.target.value; });
   document.addEventListener('click', e => {
     const b = e.target.closest('[data-focus]'); if (b) flyTo(b.getAttribute('data-focus'));
@@ -1239,7 +1280,7 @@ function animate(now) {
   applyKeys(dt); stepCamAnim(now);
   if (ST.run) {
     if (ST.playing) {
-      ST.pos += dt * ST.speed / ST.run.dtHr;
+      ST.pos += dt * speedHrs() / ST.run.dtHr;
       if (ST.pos >= ST.run.frames.length - 1) { ST.pos = ST.run.frames.length - 1; togglePlay(false); }
       $('#scrub').value = ST.pos;
     }
@@ -1280,7 +1321,7 @@ function animate(now) {
   labelRenderer.render(scene, camera);
 }
 
-buildUI(); buildGround(); buildGeo(); buildSurface(); buildTunnels(); buildShafts(); buildReservoirs(); buildPlants(); buildPumps(); buildLinks();
+buildUI(); buildGround(); buildGeo(); buildSurface(); buildContours(); buildTunnels(); buildShafts(); buildReservoirs(); buildPlants(); buildPumps(); buildLinks();
 frameAll();
 $('#scennote').textContent = D.sim.scenarios.find(s => s.id === 'design').note;
 runSim();

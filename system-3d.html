@@ -130,6 +130,8 @@
   .lbl.stage i { font-style:normal; color:var(--ink3); font-size:9.5px; }
   .lbl.stage i.hrt { color:#6fc3e8; font-weight:600; }
   .lbl.stage.solids { border-left-color:#b09050; }
+  .lbl.contour { font-size:9.5px; color:var(--ink3); background:transparent; border:0; box-shadow:none; padding:0 3px; opacity:.8; }
+  .lbl.geo { color:#5aa0c8; background:transparent; border:0; box-shadow:none; font-style:italic; font-weight:500; }
   .lbl.sel { border-color:#ffd166; color:var(--ink); display:flex; flex-direction:column; gap:1px; padding:3px 8px; }
   .lbl.sel b { font-size:11px; }
   .lbl.sel i { font-style:normal; color:#ffd166; font-size:10px; }
@@ -275,6 +277,7 @@
     <div class="lrow2"><i class="dot" style="background:#d64545"></i>CSO discharge point — pulses while discharging</div>
     <div class="lrow2"><i class="sw" style="background:#d9a24a"></i>pumped return · <i class="sw" style="background:#8a6a3a"></i>interceptor · <i class="sw" style="background:#2c9a8f"></i>effluent</div>
     <div class="lrow2"><i class="sw" style="background:#9ec4de;height:8px;opacity:.6"></i>Lake Michigan · thin lines = rivers, district edge</div>
+    <div class="lrow2"><i class="sw" style="background:#7d8fa5;height:1px"></i>10-ft ground contours (USGS via terrain tiles)</div>
     <div class="lrow2"><i class="sw" style="background:#9fe3ff;height:3px"></i>moving light = flow (speed ∝ √velocity)</div>
   </div>
   <div id="navhud">
@@ -295,8 +298,8 @@
         <span id="clock">0h 00m</span>
         <span id="rainrate">dry</span>
         <input id="scrub" type="range" min="0" max="100" value="0" step="1">
-        <input id="speed" type="range" min="1" max="40" value="8" step="1" title="Playback speed">
-        <span id="speedv" style="font-size:11px;color:var(--ink3);min-width:26px">8×</span>
+        <input id="speed" type="range" min="0" max="7" value="3" step="1" title="Playback speed: simulated time per real second">
+        <span id="speedv" style="font-size:11px;color:var(--ink3);min-width:74px;font-variant-numeric:tabular-nums">1 h / s</span>
       </div>
       <div id="chartwrap"><canvas id="chart"></canvas><canvas id="playhead"></canvas><span id="chartmax"></span></div>
       <div id="chartleg">
@@ -326,9 +329,9 @@
       <select id="scenario"></select>
       <div id="scennote"></div>
       <div class="ctl"><label>Total rainfall <b id="rainv">2.00 in</b></label>
-        <input id="rain" type="range" min="0" max="12" step="0.05" value="2"></div>
+        <input id="rain" type="range" min="0" max="40" step="0.1" value="2"></div>
       <div class="ctl"><label>Over <b id="durv">24 h</b></label>
-        <input id="dur" type="range" min="1" max="48" step="1" value="24"></div>
+        <input id="dur" type="range" min="1" max="336" step="1" value="24"></div>
       <div class="ctl"><label>Hyetograph shape</label>
         <select id="shape"><option value="peaked">Centre-peaked (realistic)</option>
           <option value="uniform">Uniform intensity</option></select></div>
@@ -423,6 +426,12 @@
           rating implies. Once more arrives than the station can pass, the velocity stops rising and
           the surplus is reported as backing up the collection system instead.</li>
       </ul>
+      <h4>Ground contours</h4>
+      <p class="hint">10-foot elevation contours from AWS Terrain Tiles (Mapzen terrarium encoding, USGS
+        NED/3DEP underneath), sampled at about 160 m, smoothed and simplified. Lake Michigan sits at
+        ~579 ft, so the 580-ft line is effectively the shoreline; the far-west moraine climbs past
+        750 ft. The model still draws the ground flat — Chicago's relief is small next to the
+        150–300 ft tunnel depth — so these are reference lines only, labelled where you zoom in.</p>
       <p class="hint">Real velocities here span four orders of magnitude, from about 0.01 ft/s
         creeping through a final settling tank to a plunge of 26 ft/s down a shaft. Animating them
         literally would leave the basins frozen and the shafts teleporting, so the on-screen speed is
@@ -462,7 +471,7 @@
   document.getElementById('introGo').addEventListener('click', hide);
   addEventListener('keydown', e => { if (e.key === 'Escape') hide(); });
 </script>
-<script src="map-data/system3d.js?v=7"></script>
+<script src="map-data/system3d.js?v=8"></script>
 <script type="importmap">
 { "imports": {
   "three": "./assets/vendor/three/three.module.js",
@@ -476,6 +485,6 @@
     .map(([k, v]) => '<div class="srow"><span>' + v[0] + '</span><a href="' + v[1] + '">' + k + '</a></div>')
     .join('');
 </script>
-<script type="module" src="assets/js/system3d/app.js?v=7"></script>
+<script type="module" src="assets/js/system3d/app.js?v=8"></script>
 </body>
 </html>

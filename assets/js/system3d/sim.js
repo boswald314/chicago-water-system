@@ -97,7 +97,11 @@ export class SewerModel {
 
     let excessCum = 0, capturedCum = 0, treatedCum = 0;
     const frames = [];
-    const total = Math.max(o.hours + o.tailHr, 72);
+    // long storms need a long tail to watch the drawdown; coarser steps keep
+    // a ten-day storm to a few thousand frames
+    const total = Math.max(o.hours + Math.max(o.tailHr, o.hours * 1.2), 72);
+    if (total > 600) o.dtHr = 0.5;
+    if (total > 1500) o.dtHr = 1.0;
 
     for (let t = 0; t <= total + 1e-9; t += o.dtHr) {
       const inHr = intensity(o.shape, t, o.inches, o.hours);
