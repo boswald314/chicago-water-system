@@ -311,7 +311,8 @@ const M = {
   pipeEffluent: flow({ color: 0x2c9a8f, roughness: 0.3, emissive: 0x0e3d38, emissiveIntensity: 0.6, transparent: true, opacity: 0.9 }, { wave: 220, strength: 1.0, hi: 0xa8fff0, fresnel: 0.5 }),
   pipeTunnel: flow({ color: 0x2f8fbf, roughness: 0.22, metalness: 0.12, emissive: 0x0d3a52, emissiveIntensity: 0.55, transparent: true, opacity: 0.9 }, { wave: 240, strength: 0.9, fresnel: 0.5 }),
   pipeCso: flow({ color: 0xd64545, roughness: 0.5, emissive: 0x4a1010, emissiveIntensity: 0.6, transparent: true, opacity: 0.9 }, { wave: 220, strength: 1.2, hi: 0xffb39a, fresnel: 0.5 }),
-  shaft: std({ color: SC.COL.shaft, roughness: 0.75, metalness: 0.15 }),
+  shaft: flow({ color: SC.COL.shaft, roughness: 0.6, metalness: 0.15, transparent: true, opacity: 0.32, depthWrite: false, side: THREE.DoubleSide },
+    { strength: 0, streak: 0, fresnel: 0.9 }),
   conn: std({ color: SC.COL.connection, roughness: 0.85 }),
   rock: std({ color: dark ? 0x4d5761 : 0x8f99a5, roughness: 0.96, side: THREE.DoubleSide, flatShading: true }),
   resWater: flow({ color: 0x2d93cc, roughness: 0.12, metalness: 0.25, emissive: 0x11557a, emissiveIntensity: 0.75, transparent: true, opacity: 0.97, side: THREE.DoubleSide },
@@ -345,8 +346,8 @@ M.waterSurfFull = flow({ color: 0x5aa7d6, roughness: 0.2, metalness: 0.12, emiss
   { wave: 220, strength: 0.9, hi: 0xffc9a8 });
 const shaftWaterMat = {};
 for (const sid of Object.keys(D.systems))
-  shaftWaterMat[sid] = flow({ color: SC.COL.waterHi, roughness: 0.2, emissive: 0x1d6f92, emissiveIntensity: 0.8, transparent: true, opacity: 0.92 },
-    { useUV: true, len: 90, speed: SC.displaySpeed(PLUNGE_MS, FLOW_BASE), wave: 14, strength: 1.2, dir: -1 });
+  shaftWaterMat[sid] = flow({ color: 0x9fe3ff, roughness: 0.15, emissive: 0x2b8fc0, emissiveIntensity: 1.1, transparent: true, opacity: 0.95 },
+    { useUV: true, len: 90, speed: 0, wave: 14, strength: 1.35, dir: -1, hi: 0xd9f4ff });
 
 /* ================================================ 4. building the world */
 const pts2 = feat => ST.route === 'corridor' ? feat.corridor : feat.pts;
@@ -543,7 +544,7 @@ function buildShafts() {
     const mesh = new THREE.InstancedMesh(cyl, isConn ? M.conn : M.shaft, items.length); mesh.frustumCulled = false;
     (isConn ? layerG.connections : layerG.shafts).add(mesh);
     let wmesh = null;
-    if (!isConn) { wmesh = new THREE.InstancedMesh(cylUV, shaftWaterMat[key], items.length); wmesh.frustumCulled = false; layerG.shafts.add(wmesh); }
+    if (!isConn) { wmesh = new THREE.InstancedMesh(cylUV, shaftWaterMat[key], items.length); wmesh.frustumCulled = false; wmesh.renderOrder = 5; layerG.shafts.add(wmesh); }
     shaftSets.push({ sid: isConn ? null : key, mesh, wmesh, items, drive: -1 });
     reg(mesh, { kind: 'shaftset', key, items });
   }
@@ -559,6 +560,15 @@ function positionShafts() {
       set.mesh.setMatrixAt(i, _d.matrix); s._y = d;
     });
     set.mesh.instanceMatrix.needsUpdate = true; set.drive = -1;
+    if (set.sid) {
+      const hs = set.items.map(i => i._y).sort((a, b) => a - b), h = hs[Math.floor(hs.length / 2)] || 1;
+      const u = shaftWaterMat[set.sid].userData.flow;
+      u.uLen.value = h;
+      u.uWave.value = Math.max(8, h / 7);
+      // a plunge at the design velocity crosses the real shaft in ~10 s; on
+      // screen a column should take about a second, whatever the exaggeration
+      u.uSpeed.value = Math.min(SC.displaySpeed(PLUNGE_MS, FLOW_BASE), h / 0.9);
+    }
   }
 }
 
@@ -998,7 +1008,7 @@ function syncView(snap, dt = 1 / 60) {
     const s = V.systems[set.sid], drive = clamp01((s ? s.inflow : 0) / 3000);
     if (Math.abs(drive - set.drive) > 0.002) {
       set.drive = drive;
-      const rr = (10 * FT) / 2 * ST.dExag * 0.62;
+      const rr = (10 * FT) / 2 * ST.dExag * 0.8;
       set.items.forEach((sh, i) => {
         const d = sh._y || 1, h = Math.max(d * drive, 1e-3);
         _d.rotation.set(0, 0, 0); _d.position.set(sh.x, -d + h / 2, sh.z); _d.scale.set(rr, h, rr); _d.updateMatrix(); set.wmesh.setMatrixAt(i, _d.matrix);
