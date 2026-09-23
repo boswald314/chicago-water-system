@@ -5,8 +5,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
-import { SewerModel, CONFIGS } from './sim.js';
-import * as SC from './scene.js';
+import { SewerModel, CONFIGS } from './sim.js?v=2';
+import * as SC from './scene.js?v=2';
 
 const D = window.SYS3D;
 const FT = SC.FT;
@@ -80,8 +80,9 @@ const M = {
   conn: new THREE.MeshStandardMaterial({ color: SC.COL.connection, roughness: 0.85 }),
   rock: new THREE.MeshStandardMaterial({ color: dark ? 0x4d5761 : 0x8f99a5, roughness: 0.96,
     side: THREE.DoubleSide, flatShading: true }),
-  resWater: new THREE.MeshStandardMaterial({ color: SC.COL.water, roughness: 0.14, metalness: 0.2,
-    emissive: 0x0b3348, emissiveIntensity: 0.5, transparent: true, opacity: 0.93 }),
+  resWater: new THREE.MeshStandardMaterial({ color: 0x2d93cc, roughness: 0.12, metalness: 0.25,
+    emissive: 0x11557a, emissiveIntensity: 0.75, transparent: true, opacity: 0.97,
+    side: THREE.DoubleSide }),
   pad: new THREE.MeshStandardMaterial({ color: dark ? 0x333c47 : 0xbac3ce, roughness: 1 }),
   tank: new THREE.MeshStandardMaterial({ color: SC.COL.plant, roughness: 0.6, metalness: 0.08 }),
   bldg: new THREE.MeshStandardMaterial({ color: SC.COL.pump, roughness: 0.7 }),
@@ -230,8 +231,10 @@ function buildReservoirs() {
       ],
       note: f.note, doc: f.doc, facId: f.id,
     });
-    resObjects[f.id] = { f, grp, pit, rim, water: null, bench, k: 1, builtMG: f.spec.capFullMG.v };
-    addLabel(f.short + ' Reservoir', f.x, f.z, 30, 'res', 60000);
+    // no floating gauge: the water level drawn inside the structure IS the readout
+    resObjects[f.id] = { f, grp, pit, rim, water: null, waterline: null, bench, k: 1,
+                         builtMG: f.spec.capFullMG.v };
+    addLabel(f.short, f.x, f.z, 30, 'res', 60000);
   }
 }
 
@@ -242,61 +245,150 @@ function buildPlants() {
     const g = f.geom;
     const grp = new THREE.Group();
     grp.position.set(f.x, 0, f.z);
-    const pad = new THREE.Mesh(new THREE.BoxGeometry(g.siteL, 3 * ST.vExag, g.siteW), M.pad);
-    pad.position.y = 1.5 * ST.vExag;
+    const pad = new THREE.Mesh(new THREE.BoxGeometry(g.siteL, 2 * ST.vExag, g.siteW), M.pad);
+    pad.position.y = ST.vExag;
     grp.add(pad);
+
     const rows = [
       ['Design average flow', `${f.spec.daf.v.toLocaleString()} MGD`, f.spec.daf.s],
       ['Design maximum flow', `${f.spec.dmf.v.toLocaleString()} MGD`, f.spec.dmf.s],
       ['Reported average flow', `${f.spec.avg.v.toLocaleString()} MGD`, f.spec.avg.s],
-      ['Site', `${f.spec.acres.v} acres (drawn ${num(g.siteL)} × ${num(g.siteW)} m)`, f.spec.acres.s],
+      ['Site', `${f.spec.acres.v} acres (drawn ${num(g.siteL)} \u00d7 ${num(g.siteW)} m)`, f.spec.acres.s],
     ];
-    const tanks = SC.layoutPlant(g);
+    if (!f.basin) rows.push(['In the storm model',
+      'held at its reported average flow \u2014 this plant serves separate-sewer suburbs that are ' +
+      'not inside MWRD\u2019s combined-sewer areas, so no storm flow is routed to it', 'derived']);
+
+    const lay = SC.layoutPlant(g);
     const byRow = {};
-    for (const t of tanks) (byRow[t.row] = byRow[t.row] || []).push(t);
+    for (const t of lay.tanks) (byRow[t.row] = byRow[t.row] || []).push(t);
+    const nStage = Math.max(1, lay.train.length);
     const dummy = new THREE.Object3D();
+    const stageMeshes = {}, waterMeshes = {};
+
     for (const [rid, list] of Object.entries(byRow)) {
       const spec = g.rows.find(r => r.id === rid);
       const proto = list[0];
-      const geo = proto.type === 'cyl'
-        ? new THREE.CylinderGeometry(1, 1, 1, 22)
+      const idx = lay.train.findIndex(t => t.id === rid);
+      const frac = spec.train === 'solids' ? 1 : (idx < 0 ? 0.5 : idx / Math.max(1, nStage - 1));
+
+      const shell = proto.type === 'cyl'
+        ? new THREE.CylinderGeometry(1, 1, 1, 24, 1, true)
         : new THREE.BoxGeometry(1, 1, 1);
-      const im = new THREE.InstancedMesh(geo, M.tank.clone(), list.length);
-      im.material.color.offsetHSL(0, 0, (Object.keys(byRow).indexOf(rid) - 2) * 0.045);
+      const wallMat = new THREE.MeshStandardMaterial({
+        color: spec.train === 'solids' ? 0x8a7f6a : 0xb4bec9,
+        roughness: 0.85, metalness: 0.05, side: THREE.DoubleSide });
+      const im = new THREE.InstancedMesh(shell, wallMat, list.length);
+
+      // the water the plant is actually treating, graded raw -> clarified
+      const wgeo = proto.type === 'cyl'
+        ? new THREE.CylinderGeometry(1, 1, 1, 24) : new THREE.BoxGeometry(1, 1, 1);
+      const wmat = new THREE.MeshStandardMaterial({
+        color: SC.trainColor(frac), roughness: 0.22, metalness: 0.15,
+        emissive: new THREE.Color(SC.trainColor(frac)).multiplyScalar(0.18) });
+      const wim = new THREE.InstancedMesh(wgeo, wmat, list.length);
+
       list.forEach((t, i) => {
-        const h = Math.max(t.h * ST.vExag, 0.5);
-        dummy.position.set(t.x, h / 2 + 3 * ST.vExag, t.z);
+        const h = Math.max(t.h * ST.vExag, 0.4);
+        const wh = h * 0.86;
+        dummy.rotation.set(0, 0, 0);
+        dummy.position.set(t.x, h / 2 + 2 * ST.vExag, t.z);
         if (t.type === 'cyl') dummy.scale.set(t.r, h, t.r);
         else dummy.scale.set(t.L, h, t.W);
-        dummy.rotation.set(0, 0, 0);
         dummy.updateMatrix();
         im.setMatrixAt(i, dummy.matrix);
+        dummy.position.set(t.x, wh / 2 + 2 * ST.vExag, t.z);
+        if (t.type === 'cyl') dummy.scale.set(t.r * 0.94, wh, t.r * 0.94);
+        else dummy.scale.set(t.L * 0.94, wh, t.W * 0.94);
+        dummy.updateMatrix();
+        wim.setMatrixAt(i, dummy.matrix);
       });
-      im.instanceMatrix.needsUpdate = true;
-      im.frustumCulled = false;
-      grp.add(im);
-      const dims = spec.shape === 'cyl' ? `${spec.n} tanks, ${num(spec.dia)} m dia × ${num(spec.D)} m deep`
-        : spec.shape === 'box' ? `${spec.n} tanks, ${num(spec.L)} × ${num(spec.W)} × ${num(spec.D)} m`
+      im.instanceMatrix.needsUpdate = true; im.frustumCulled = false;
+      wim.instanceMatrix.needsUpdate = true; wim.frustumCulled = false;
+      grp.add(im); grp.add(wim);
+      stageMeshes[rid] = im; waterMeshes[rid] = wim;
+
+      const dims = spec.shape === 'cyl'
+        ? `${spec.n} ${spec.n === 1 ? 'tank' : 'tanks'}, ${num(spec.dia)} m dia \u00d7 ${num(spec.D)} m deep`
+        : spec.shape === 'box'
+        ? `${spec.n} ${spec.n === 1 ? 'tank' : 'tanks'}, ${num(spec.L)} \u00d7 ${num(spec.W)} \u00d7 ${num(spec.D)} m`
         : `${spec.acres} acres of surface, ${num(spec.D)} m deep`;
-      rows.push([spec.label, dims, Object.values(spec.src || {}).includes('doc11') || Object.values(spec.src || {}).includes('doc12') ? 'doc11' : (spec.src && spec.src.n) || 'assumed']);
+      const srcTag = (spec.src && (spec.src.n === 'doc11' || spec.src.dia === 'doc11')) ? 'doc11'
+        : (spec.src && spec.src.n) || 'assumed';
+      rows.push([spec.label, dims, srcTag]);
       reg(im, {
-        kind: 'tankrow', title: `${f.short} — ${spec.label}`, sub: f.name,
+        kind: 'tankrow', title: `${f.short} \u2014 ${spec.label}`,
+        sub: `${f.name} \u00b7 ${spec.train === 'solids' ? 'solids handling' : 'stage ' + spec.stage + ' of the water train'}`,
         rows: [['Count', `${spec.n}`, (spec.src && spec.src.n) || 'assumed'],
                ['Dimensions', dims, (spec.src && (spec.src.dia || spec.src.L || spec.src.acres)) || 'assumed'],
-               ['Depth', `${num(spec.D)} m`, (spec.src && spec.src.D) || 'assumed']],
+               ['Depth', `${num(spec.D)} m`, (spec.src && spec.src.D) || 'assumed'],
+               ['Arrangement on the site', 'schematic \u2014 the counts and sizes are the sourced part', 'assumed']],
         note: spec.note, doc: f.doc, facId: f.id,
       });
+
+      // stage label, only once you are close enough to read it
+      const anchor = spec.train === 'solids'
+        ? lay.solids.find(x => x.id === rid) : lay.train[idx];
+      if (anchor) {
+        const d = document.createElement('div');
+        d.className = 'lbl stage' + (spec.train === 'solids' ? ' solids' : '');
+        d.innerHTML = `<b>${spec.train === 'solids' ? '' : (spec.stage + '. ')}${esc(spec.label)}</b>` +
+                      `<i>${esc(dims)}</i>`;
+        const tier = (spec.train === 'solids' ? 3 : (spec.stage % 3));
+        const yy = (proto.h * ST.vExag) + 16 + tier * 26;
+        const o = new CSS2DObject(d);
+        o.position.set(f.x + anchor.x, yy, f.z + anchor.z);
+        layerG.labels.add(o);
+        labelObjs.push({ o, y: yy, d: 2600, div: d, abs: true });
+      }
     }
-    if (g.compact) {
-      const b = new THREE.Mesh(new THREE.BoxGeometry(g.siteL * 0.45, 12 * ST.vExag, g.siteW * 0.45), M.tank);
-      b.position.y = 6 * ST.vExag + 3 * ST.vExag;
-      grp.add(b);
+
+    // --- the process flow line: influent in, through the train, effluent out
+    const y = 2 * ST.vExag + 3;
+    const linePts = [new THREE.Vector3(lay.inlet.x, y, lay.inlet.z)];
+    for (const t of lay.train) linePts.push(new THREE.Vector3(t.x, y, t.z));
+    linePts.push(new THREE.Vector3(lay.outlet.x, y, lay.outlet.z));
+    const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(linePts),
+      new THREE.LineBasicMaterial({ color: 0x6fc3e8, transparent: true, opacity: 0.55 }));
+    grp.add(line);
+    if (lay.solids.length && lay.solidsTap) {
+      const sp = [new THREE.Vector3(lay.solidsTap.x, y, lay.solidsTap.z)];
+      for (const t of lay.solids) sp.push(new THREE.Vector3(t.x, y, t.z));
+      grp.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(sp),
+        new THREE.LineBasicMaterial({ color: 0xb09050, transparent: true, opacity: 0.5 })));
     }
+
+    // flow animation along the train, density set by the plant's modelled load
+    const N = 90;
+    const ppos = new Float32Array(N * 3);
+    const pg = new THREE.BufferGeometry();
+    pg.setAttribute('position', new THREE.BufferAttribute(ppos, 3));
+    const pmat = new THREE.PointsMaterial({ color: 0x9fe3ff, size: 26, sizeAttenuation: true,
+      transparent: true, opacity: 0, depthWrite: false });
+    const pts = new THREE.Points(pg, pmat);
+    pts.frustumCulled = false;
+    grp.add(pts);
+    const cum = [0];
+    for (let i = 1; i < linePts.length; i++) cum.push(cum[i - 1] + linePts[i].distanceTo(linePts[i - 1]));
+
+    // live flow readout over the plant
+    const gauge = document.createElement('div');
+    gauge.className = 'lbl plant gauge3d';
+    const gObj = new CSS2DObject(gauge);
+    gObj.position.set(f.x, 60, f.z);
+    layerG.labels.add(gObj);
+    labelObjs.push({ o: gObj, y: 60, d: f.spec.dmf.v >= 400 ? 30000 : 14000, div: gauge });
+
     for (const x of (f.extras || [])) rows.push([x.label, x.v, x.s]);
     layerG.plants.add(grp);
-    reg(pad, { kind: 'plant', title: f.name, sub: 'Water reclamation plant', rows,
-               note: f.note, doc: f.doc, facId: f.id });
-    plantObjects[f.id] = { f, grp, pad };
+    reg(pad, {
+      kind: 'plant', title: f.name,
+      sub: `Water reclamation plant \u00b7 ${lay.train.length}-stage train` +
+           (g.trainSourced ? ' (sequence sourced, tank sizes assumed)' : ''),
+      rows, note: f.note, doc: f.doc, facId: f.id });
+    plantObjects[f.id] = { f, grp, pad, lay, pts, ppos, pmat, N,
+                           linePts, cum, prog: new Float32Array(N).map((_, i) => i / N),
+                           gauge, gObj, waterMeshes };
     if (f.spec.dmf.v >= 400) addLabel(f.short, f.x, f.z, 30, 'plant', 46000);
     else addLabel(f.short, f.x, f.z, 30, 'plant', 17000);
   }
@@ -353,6 +445,17 @@ function buildPumps() {
       pumpObjects[f.id] = { f, grp, riser, shaft: sh };
     } else pumpObjects[f.id] = { f, grp };
     layerG.pumps.add(grp);
+    if (f.kind === 'tarp-ps' && f.system) {
+      const tg = document.createElement('div');
+      tg.className = 'lbl tun gauge3d';
+      const tObj = new CSS2DObject(tg);
+      tObj.position.set(f.x, 92, f.z);
+      layerG.labels.add(tObj);
+      labelObjs.push({ o: tObj, y: 92, d: 34000, div: tg });
+      pumpObjects[f.id].gauge = tg;
+      pumpObjects[f.id].gObj = tObj;
+      pumpObjects[f.id].sid = f.system;
+    }
     reg(hall, { kind: 'pump', title: f.name, sub: f.kind === 'tarp-ps' ? 'TARP dewatering pumping station' : 'MWRD sewage pumping station',
                 rows, note: f.note, doc: f.doc, facId: f.id, conflict: f.conflict });
     addLabel(f.short, f.x, f.z, 22, 'pump', f.kind === 'tarp-ps' ? 46000 : 15000);
@@ -432,31 +535,35 @@ function addLabel(text, x, z, y, cls, maxDist) {
 }
 
 /* --------------------------------------------------------- flow particles */
+/* One particle stream PER TUNNEL FEATURE. Concatenating a system's features
+ * into a single path made particles leap between the end of one leg and the
+ * start of the next -- up to 29 km of straight line across the map, following
+ * nothing. Branches converge, they are not a single chain, so each feature
+ * carries its own stream and its own flow share. */
 function buildParticles() {
   layerG.particles.clear();
   for (const k of Object.keys(particles)) delete particles[k];
-  for (const [sid, sys] of Object.entries(D.systems)) {
-    const feats = D.tunnels.filter(t => t.system === sid).sort((a, b) => a.order - b.order || a.f0 - b.f0);
-    const path = [];
-    for (const f of feats) {
-      const p = pts2(f);
-      for (let i = 0; i < p.length; i++)
-        path.push([p[i][0], -f.depth[i] * FT, p[i][1]]);
-    }
-    if (path.length < 2) continue;
+  for (const f of D.tunnels) {
+    const p2 = pts2(f);
+    if (p2.length < 2) continue;
+    const path = p2.map((q, i) => [q[0], -f.depth[i] * FT, q[1]]);
     const cum = [0];
     for (let i = 1; i < path.length; i++)
       cum.push(cum[i - 1] + Math.hypot(path[i][0] - path[i - 1][0], path[i][2] - path[i - 1][2]));
-    const N = 260;
+    const len = cum[cum.length - 1];
+    if (len < 200) continue;
+    const N = Math.max(24, Math.min(220, Math.round(len / 420)));
     const pos = new Float32Array(N * 3);
     const g = new THREE.BufferGeometry();
     g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-    const pmat = new THREE.PointsMaterial({ color: SC.COL.waterHi, size: 420, sizeAttenuation: true,
-      transparent: true, opacity: 0.0, depthWrite: false });
+    const pmat = new THREE.PointsMaterial({ color: SC.COL.waterHi, size: 380, sizeAttenuation: true,
+      transparent: true, opacity: 0, depthWrite: false });
     const pts = new THREE.Points(g, pmat);
     pts.frustumCulled = false;
     layerG.particles.add(pts);
-    particles[sid] = { pts, pos, path, cum, prog: new Float32Array(N).map(() => Math.random()), N, mat: pmat };
+    const prog = new Float32Array(N);
+    for (let i = 0; i < N; i++) prog[i] = i / N;
+    particles[f.id] = { pts, pos, path, cum, prog, N, mat: pmat, sid: f.system, len };
   }
 }
 
@@ -468,7 +575,7 @@ function applyScale() {
   applyBuildOut();
   rebuildPlants();
   rebuildPumps();
-  for (const l of labelObjs) l.o.position.y = l.y * Math.max(1, ST.vExag / 8);
+  for (const l of labelObjs) if (!l.abs) l.o.position.y = l.y * Math.max(1, ST.vExag / 8);
   ST.needLevels = true;
   applyFrame(true);
   $('#exagbadge').innerHTML = ST.vExag === 1 && ST.dExag === 1
@@ -555,9 +662,73 @@ function applyFrame(force) {
     const holds = (r.f.geom.geomMG) * (r.k * r.k);
     const frac = holds > 0 && s ? Math.max(0, Math.min(1, s.volMG / holds)) : 0;
     if (r.water) { r.grp.remove(r.water); r.water.geometry.dispose(); r.water = null; }
+    if (r.waterline) { r.grp.remove(r.waterline); r.waterline.geometry.dispose(); r.waterline = null; }
     const g = SC.frustumWaterGeometry(r.f.geom.L * r.k, r.f.geom.W * r.k,
                                       r.f.geom.D * ST.vExag, r.f.geom.insetM * r.k, frac);
-    if (g) { r.water = new THREE.Mesh(g, M.resWater); r.grp.add(r.water); }
+    if (g) {
+      r.water = new THREE.Mesh(g, M.resWater);
+      r.water.renderOrder = 1;
+      r.grp.add(r.water);
+      // a bright rim exactly at the surface, so the level reads as a level
+      const y = g.userData.surfaceY;
+      const D = r.f.geom.D * ST.vExag;
+      const t = (y + D) / (D || 1);                       // 0 at the floor, 1 at the rim
+      const hx = r.f.geom.L * r.k / 2, hz = r.f.geom.W * r.k / 2;
+      const inset = r.f.geom.insetM * r.k;
+      const ix = Math.max(1, hx - inset), iz = Math.max(1, hz - inset);
+      const wx = ix + (hx - ix) * t, wz = iz + (hz - iz) * t;
+      r.waterline = new THREE.Line(new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(-wx, y, -wz), new THREE.Vector3(wx, y, -wz),
+        new THREE.Vector3(wx, y, wz), new THREE.Vector3(-wx, y, wz),
+        new THREE.Vector3(-wx, y, -wz)]),
+        new THREE.LineBasicMaterial({ color: frac > 0.995 ? 0xff9a6b : 0x8ad8ff }));
+      r.waterline.renderOrder = 2;
+      r.grp.add(r.waterline);
+    }
+    if (r.gauge) {
+      // the gauge reports fill against the TARP allocation the model tracks;
+      // the drawn water fills the solid by volume, which for Thornton is the
+      // 4.8 BG CSO share of a 7.9 BG hole
+      const capMG = s ? s.capMG : 0;
+      const pct = capMG > 0 ? Math.max(0, Math.min(1, s.volMG / capMG)) : 0;
+      const off = capMG === 0;
+      r.gObj.visible = !!r.grp.visible;
+      r.gauge.classList.toggle('full', pct > 0.995);
+      r.gauge.classList.toggle('off', off);
+      r.gauge.innerHTML = off
+        ? `<b>${esc(r.f.short)}</b><i>not built yet</i>`
+        : `<b>${esc(r.f.short)}</b>
+           <span class="bar"><i style="width:${(pct * 100).toFixed(1)}%"></i></span>
+           <span class="pct">${(pct * 100).toFixed(0)}%</span>
+           <i>${num(s.volMG)} / ${num(capMG)} MG</i>`;
+    }
+  }
+  for (const po of Object.values(plantObjects)) {
+    const st = f.plants[po.f.id];
+    if (!st) continue;
+    po.rate = st.flow;
+    const pct = Math.max(0, Math.min(1, st.flow / st.dmf));
+    po.pmat.opacity = Math.min(0.9, 0.12 + pct * 0.8);
+    if (po.gauge) {
+      po.gauge.classList.toggle('full', pct > 0.995);
+      po.gauge.innerHTML = `<b>${esc(po.f.short)} WRP</b>
+        <span class="bar"><i style="width:${(pct * 100).toFixed(1)}%"></i></span>
+        <span class="pct">${(pct * 100).toFixed(0)}%</span>
+        <i>${num(st.flow)} / ${num(st.dmf)} MGD</i>`;
+    }
+  }
+  for (const po of Object.values(pumpObjects)) {
+    if (!po.gauge) continue;
+    const sysIds = Object.keys(D.systems).filter(sid => D.systems[sid].pump === po.f.id);
+    let vol = 0, cap = 0;
+    for (const sid of sysIds) { vol += f.systems[sid].volMG; cap += f.systems[sid].capMG; }
+    const pct = cap > 0 ? Math.max(0, Math.min(1, vol / cap)) : 0;
+    po.gObj.visible = cap > 0;
+    po.gauge.classList.toggle('full', pct > 0.995);
+    po.gauge.innerHTML = `<b>${esc(sysIds.map(x => D.systems[x].name.replace(/ Tunnel System.*/, '')).join(' + '))} tunnel</b>
+      <span class="bar"><i style="width:${(pct * 100).toFixed(1)}%"></i></span>
+      <span class="pct">${(pct * 100).toFixed(0)}%</span>
+      <i>${num(vol)} / ${num(cap)} MG</i>`;
   }
   // drop-shaft water columns: plunge depth scales with the system's inflow
   const dummy = new THREE.Object3D();
@@ -579,9 +750,9 @@ function applyFrame(force) {
     set.wmesh.instanceMatrix.needsUpdate = true;
     set.wmesh.visible = drive > 0.004;
   }
-  // particle intensity
-  for (const [sid, p] of Object.entries(particles)) {
-    const s = f.systems[sid];
+  // particle intensity, per feature, from its own system's flow
+  for (const p of Object.values(particles)) {
+    const s = f.systems[p.sid];
     const q = s ? Math.max(s.inflow, s.pumped) : 0;
     p.mat.opacity = Math.min(0.85, q / 900);
     p.rate = q;
@@ -816,6 +987,13 @@ function renderFidelity() {
       <td>${esc(f.geom.solvedFor)}</td></tr>`;
   }
   h += '</table>';
+  if (D.repairs && D.repairs.length) {
+    h += '<h4 style="margin-top:14px">Defects repaired in the traced geometry</h4>' +
+      '<p class="hint">Each of these showed up in the model as a straight line running across the ' +
+      'map, following nothing. They are errors in the corridor tracing, not modelling choices, and ' +
+      'the repair is applied in <code>scripts/build_system3d.py</code> where it can be audited.</p><ul>' +
+      D.repairs.map(r => `<li>${esc(r)}</li>`).join('') + '</ul>';
+  }
   $('#fidelity').innerHTML = h;
   $('#caveats').innerHTML = '<ul>' + D.meta.caveats.map(c => `<li>${esc(c)}</li>`).join('') + '</ul>';
 }
@@ -973,8 +1151,10 @@ function animate(now) {
     for (const p of Object.values(particles)) {
       if (!p.rate) { p.pts.visible = false; continue; }
       p.pts.visible = true;
-      const total = p.cum[p.cum.length - 1] || 1;
-      const v = Math.min(0.09, 0.004 + p.rate / 40000);
+      const total = p.len || 1;
+      // travel at a speed, not a fraction of length, so a short spur and a long
+      // trunk move at the same pace
+      const v = Math.min(0.09, (600 + p.rate * 1.1) / total);
       for (let i = 0; i < p.N; i++) {
         p.prog[i] = (p.prog[i] + v * dt) % 1;
         const d = p.prog[i] * total;
@@ -994,6 +1174,29 @@ function animate(now) {
   for (const l of labelObjs) {
     const dd = camera.position.distanceTo(l.o.position);
     l.div.style.opacity = dd > l.d ? 0 : (dd > l.d * 0.78 ? String(1 - (dd - l.d * 0.78) / (l.d * 0.22)) : '.94');
+    l.div.style.display = dd > l.d ? 'none' : '';
+  }
+  // flow through each treatment plant's process train
+  for (const po of Object.values(plantObjects)) {
+    if (!po.rate) { po.pts.visible = false; continue; }
+    const near = camera.position.distanceTo(po.grp.position) < 26000;
+    po.pts.visible = near;
+    if (!near) continue;
+    const total = po.cum[po.cum.length - 1] || 1;
+    const v = Math.min(0.5, (0.04 + po.rate / 2600)) / Math.max(1, total / 900);
+    for (let i = 0; i < po.N; i++) {
+      po.prog[i] = (po.prog[i] + v * dt) % 1;
+      const d = po.prog[i] * total;
+      let k = 1;
+      while (k < po.cum.length - 1 && po.cum[k] < d) k++;
+      const seg = (po.cum[k] - po.cum[k - 1]) || 1;
+      const u = (d - po.cum[k - 1]) / seg;
+      const a = po.linePts[k - 1], b = po.linePts[k];
+      po.ppos[i * 3] = a.x + (b.x - a.x) * u;
+      po.ppos[i * 3 + 1] = a.y;
+      po.ppos[i * 3 + 2] = a.z + (b.z - a.z) * u;
+    }
+    po.pts.geometry.attributes.position.needsUpdate = true;
   }
   for (const k in ST.layers) if (layerG[k]) layerG[k].visible = !!ST.layers[k];
   controls.update();

@@ -106,9 +106,14 @@ export class SewerModel {
         csoRate: 0, csoCum: 0, pumpedRate: 0,
       };
 
-      // plant load starts with each basin's intercepted dry+wet flow
+      // Plant load starts with each basin's intercepted dry+wet flow. Egan and
+      // Hanover Park serve separate-sewer suburbs that are not in MWRD's
+      // combined-sewer basins, so no basin routes to them -- but they are still
+      // treating their own sanitary flow, and drawing them at zero would be a
+      // lie about the system rather than a gap in the model.
       const plantLoad = {};
-      for (const pid of Object.keys(D.plants)) plantLoad[pid] = 0;
+      for (const [pid, pl] of Object.entries(D.plants))
+        plantLoad[pid] = pl.basin ? 0 : pl.avg;
 
       // --- 1. generation and interception ------------------------------
       const excess = {};

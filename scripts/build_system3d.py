@@ -132,19 +132,30 @@ FAC_SPEC = {
         basin='CENTRAL', doc='doc11',
         note='The largest wastewater treatment plant in the world by design capacity. Receives dry-weather flow through the intercepting sewers and Racine Avenue PS, plus everything the Mainstream Pumping Station lifts out of the Deep Tunnel and McCook Reservoir.',
         units=[
-            dict(id='grit', label='Aerated grit tanks', n=S(6, 'tanks', 'doc11'),
-                 shape='box', L=S(132, 'ft', 'doc11'), W=S(40, 'ft', 'assumed'), D=S(14, 'ft', 'assumed')),
-            dict(id='primary', label='Primary settling tanks', n=S(9, 'tanks', 'doc11'),
+            dict(id='grit', label='Aerated grit tanks', n=S(6, 'tanks', 'doc11'), train='water', stage=1,
+                 shape='box', L=S(132, 'ft', 'doc11'), W=S(40, 'ft', 'assumed'), D=S(14, 'ft', 'assumed'),
+                 note='Grit \u2014 sand, grit and eggshell \u2014 settles out here so it cannot wear out '
+                      'the pumps and pipework downstream. Air keeps the organic matter in suspension.'),
+            dict(id='primary', label='Primary settling tanks', n=S(9, 'tanks', 'doc11'), train='water', stage=2,
                  shape='cyl', dia=S(160, 'ft', 'doc11'), D=S(14, 'ft', 'assumed'),
                  note='Nine 160-ft circular tanks built 2013–2018 under Contract 04-128-3P, replacing Imhoff Batteries A and B.'),
             dict(id='imhoff', label='Imhoff tanks, Battery C (original)', n=S(36, 'tanks', 'doc11', 'Battery C share of ~108 tanks across three batteries'),
+                 train='water', stage=2,
                  shape='box', L=S(120, 'ft', 'assumed'), W=S(20, 'ft', 'assumed'), D=S(30, 'ft', 'assumed'),
                  note='Batteries A and B were demolished by 2018; Battery C is slated for retirement under the 2009 master plan.'),
             dict(id='aeration', label='Activated-sludge aeration tanks', acres=S(36, 'acre', 'doc11'),
-                 shape='basin-array', D=S(15, 'ft', 'assumed'), lanes=S(4, 'passes', 'assumed')),
+                 train='water', stage=3,
+                 shape='basin-array', D=S(15, 'ft', 'assumed'), lanes=S(4, 'passes', 'assumed'),
+                 note='Air blown through 36 acres of tank keeps a cultivated population of '
+                      'microorganisms eating the dissolved and suspended organic load. 10,000 hp '
+                      'blowers at 13 kV supply the air.'),
             dict(id='final', label='Final settling tanks', n=S(96, 'tanks', 'doc11', 'single-source figure, unverified elsewhere'),
-                 shape='cyl', dia=S(125, 'ft', 'assumed'), D=S(12, 'ft', 'assumed')),
+                 train='water', stage=4,
+                 shape='cyl', dia=S(125, 'ft', 'assumed'), D=S(12, 'ft', 'assumed'),
+                 note='The activated sludge settles back out; most of it is returned to the head of '
+                      'the aeration tanks, and the clarified water goes to the canal.'),
             dict(id='digest', label='Anaerobic digesters', n=S(12, 'digesters', 'assumed'),
+                 train='solids', stage=5,
                  shape='cyl', dia=S(110, 'ft', 'assumed'), D=S(35, 'ft', 'assumed'),
                  note='Digests Stickney’s own solids plus imported solids from Egan, Kirie, O’Brien and Lemont.'),
         ],
@@ -399,6 +410,76 @@ def _plen(pts):
     return sum(math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1])
                for i in range(1, len(pts)))
 
+def _seg(a, b):
+    return math.hypot(a[0] - b[0], a[1] - b[1])
+
+
+def repair_geometry(pts, label=''):
+    """Clean three defects inherited from the corridor-tracing in tunnels.json.
+
+    These are real errors in the source geometry, not modelling choices, and
+    each one shows up in the render as a straight line shooting across the map:
+
+      1. OUT-AND-BACK SPUR -- a facility point spliced between two copies of the
+         same corridor point (the Calumet TARP Pumping Station sits this way
+         inside tarp_calumet, 4.4 km out and 4.4 km back). The connection is
+         real, so the point is lifted out as its own short spur rather than
+         deleted.
+      2. ZIGZAG -- two interleaved corridors merged into one polyline, so the
+         line alternates between them (the Torrence Ave leg bounces twice
+         between the Calumet River and the Little Calumet, 4.4 km each way).
+      3. SPURIOUS TAIL -- the traced surface waterway runs on past the tunnel's
+         terminus and the terminus is then appended as the last point, leaving
+         a long jump back (tarp_des_plaines follows the Des Plaines River all
+         the way to Lockport, 25 km past McCook, then leaps back to McCook).
+
+    Returns (cleaned_points, spurs, log).
+    """
+    p = [list(x) for x in pts]
+    spurs, log = [], []
+
+    i = 1
+    while i < len(p) - 1:
+        if _seg(p[i - 1], p[i + 1]) < 60 and _seg(p[i - 1], p[i]) > 300:
+            spurs.append([p[i - 1][:], p[i][:]])
+            log.append(f'{label}: lifted a {_seg(p[i - 1], p[i]) / 1000:.2f} km out-and-back spur '
+                       f'at point {i} into its own feature')
+            del p[i]
+            if i < len(p) - 1 and _seg(p[i - 1], p[i]) < 60:
+                del p[i]
+            continue
+        i += 1
+
+    changed = True
+    while changed and len(p) > 3:
+        changed = False
+        segs = [_seg(p[k], p[k - 1]) for k in range(1, len(p))]
+        med = sorted(segs)[len(segs) // 2] or 1.0
+        for i in range(1, len(p) - 1):
+            direct = _seg(p[i - 1], p[i + 1])
+            detour = _seg(p[i - 1], p[i]) + _seg(p[i], p[i + 1])
+            if direct > 0 and detour > 3.0 * direct and _seg(p[i - 1], p[i]) > 2.5 * med:
+                log.append(f'{label}: removed a zigzag point at {i} '
+                           f'({detour / 1000:.2f} km detour across a {direct / 1000:.2f} km gap)')
+                del p[i]
+                changed = True
+                break
+
+    segs = [_seg(p[k], p[k - 1]) for k in range(1, len(p))]
+    med = sorted(segs)[len(segs) // 2] or 1.0
+    if len(p) > 3 and segs[-1] > 4 * med:
+        last = p[-1]
+        for j in range(len(p) - 2):
+            if _seg(p[j], last) < 1.8 * med:
+                if j < len(p) - 2:
+                    dropped = sum(_seg(p[k], p[k - 1]) for k in range(j + 1, len(p) - 1))
+                    log.append(f'{label}: dropped {dropped / 1000:.1f} km of traced corridor running '
+                               f'past the terminus, and the jump back to it')
+                    p = p[:j + 1] + [last]
+                break
+    return p, spurs, log
+
+
 def _smooth(pts, n):
     """Laplacian smoothing with fixed endpoints. Converges a meandering surface
     corridor toward the straight shaft-to-shaft runs a bored tunnel actually
@@ -439,12 +520,17 @@ def _fit_taper(dmin, dmax, target_area, samples):
 
 
 def build_tunnels(tunnels_raw):
-    feats = []
+    feats, repairs, spur_feats = [], [], []
     for t in tunnels_raw:
         spec = TUNNEL_SPEC.get(t['id'])
         if not spec:
             continue
-        pts = [list(proj(a, b)) for a, b in t['geometry']]
+        raw = [list(proj(a, b)) for a, b in t['geometry']]
+        pts, spurs, rlog = repair_geometry(raw, t['id'])
+        repairs += rlog
+        for k, sp in enumerate(spurs):
+            spur_feats.append(dict(id=f"{t['id']}-spur{k + 1}", parent=t['id'],
+                                   system=spec['system'], pts=sp))
         # orient upstream -> downstream against the system's terminus
         dn = proj(*DOWNSTREAM[spec['system']])
         d0 = math.hypot(pts[0][0] - dn[0], pts[0][1] - dn[1])
@@ -566,8 +652,25 @@ def build_tunnels(tunnels_raw):
             meanDiaFt=round(2 * math.sqrt(target_area / math.pi), 2),
             diaRange=[dmin, dmax])
         fidelity[sid] = fid
+    # spurs: short real connections lifted out of the main lines above
+    for sp in spur_feats:
+        parent = next((o for o in out if o['id'] == sp['parent']), None)
+        depth = parent['depth'][len(parent['depth']) // 2] if parent else 250.0
+        dia = parent['dia'][len(parent['dia']) // 2] if parent else 15.0
+        out.append(dict(
+            id=sp['id'], name=(parent['name'] if parent else sp['system']) + ' \u2014 connection spur',
+            system=sp['system'], order=9, f0=1.0, f1=1.0,
+            pts=[[round(x, 1), round(z, 1)] for x, z in sp['pts']],
+            corridor=[[round(x, 1), round(z, 1)] for x, z in sp['pts']],
+            dia=[dia, dia], depth=[depth, depth], fpos=[1.0, 1.0],
+            lenM=round(_plen(sp['pts'])), lenMi=round(_plen(sp['pts']) / 1609.344, 2),
+            corridorMi=round(_plen(sp['pts']) / 1609.344, 2), reversed=False, spur=True,
+            approx=True, doc='doc09',
+            note='Lifted out of the parent tunnel line, where this facility connection was spliced '
+                 'in as an out-and-back detour. The connection is real; drawing it inside the main '
+                 'line was not.'))
     out.sort(key=lambda t: (t['system'], t['order']))
-    return out, fidelity
+    return out, fidelity, repairs
 
 
 SHAFT_PREFIX = [
@@ -768,19 +871,81 @@ def reservoir_geometry(spec):
                 deltaPct=round(100.0 * (geomV / 133680.556 - capMG) / capMG, 1))
 
 
+TRAIN_BY_ID = {'grit': ('water', 1), 'primary': ('water', 2), 'imhoff': ('water', 2),
+               'aeration': ('water', 3), 'final': ('water', 4), 'uv': ('water', 5),
+               'filter': ('water', 5), 'disinfect': ('water', 5), 'digest': ('solids', 6)}
+
+# Treatment trains for the satellite plants. doc13 gives the SEQUENCE in words
+# for each plant; the tank counts and sizes are not published, so the stages
+# are drawn at sizes scaled from the plant's design flow and tagged 'assumed'.
+COMPACT_TRAIN = {
+    'wrp-kirie': ['screen', 'grit', 'aeration', 'final', 'filter', 'disinfect', 'postair'],
+    'wrp-egan': ['screen', 'grit', 'aeration', 'final', 'filter', 'disinfect'],
+    'wrp-hanoverpark': ['screen', 'grit', 'aeration', 'final', 'filter', 'disinfect'],
+    'wrp-lemont': ['screen', 'grit', 'aeration', 'final', 'disinfect'],
+}
+STAGE_LABEL = {
+    'screen': 'Screening', 'grit': 'Grit removal', 'primary': 'Primary settling',
+    'aeration': 'Activated sludge (aeration)', 'final': 'Final settling',
+    'filter': 'Tertiary filtration', 'disinfect': 'Chlorination / dechlorination',
+    'postair': 'Post-aeration', 'uv': 'UV disinfection', 'imhoff': 'Imhoff tanks',
+    'digest': 'Anaerobic digestion',
+}
+
+
 def wrp_geometry(spec):
     """Lay the sourced tank inventory out on the plant's sourced acreage.
     Tank counts and sizes are sourced; the arrangement on the site is not."""
     if spec.get('compact') or not spec.get('units'):
+        # Draw the sourced treatment SEQUENCE. Stage sizes are scaled from the
+        # plant's design maximum flow against Stickney's sourced tank sizes, and
+        # every dimension here is tagged 'assumed' because none is published.
         acres = spec['acres']['v']
-        side = math.sqrt(acres * 43560.0) * FT
-        return dict(siteL=round(side * 1.4, 1), siteW=round(side / 1.4, 1), rows=[], compact=True)
+        side = math.sqrt(acres * 43560.0)
+        siteL, siteW = side * 1.5, side / 1.5
+        stages = COMPACT_TRAIN.get(spec.get('_id'), ['screen', 'grit', 'aeration', 'final', 'disinfect'])
+        f = math.sqrt(max(spec['dmf']['v'], 1) / 1440.0)          # vs Stickney DMF
+        rows = []
+        for k, sid in enumerate(stages):
+            if sid in ('final',):
+                n = max(2, round(8 * f))
+                dia_ft = max(125 * f, 60)
+                rows.append(dict(id=sid, label=STAGE_LABEL[sid], shape='cyl', n=n,
+                                 dia=round(dia_ft * FT, 2), D=round(12 * FT, 2),
+                                 footM2=round(n * math.pi * (dia_ft * FT / 2) ** 2),
+                                 train='water', stage=k + 1,
+                                 src={'n': 'assumed', 'dia': 'assumed', 'D': 'assumed'}))
+            elif sid == 'aeration':
+                am2 = max(36 * 4046.856 * (spec['dmf']['v'] / 1440.0), 8000.0)
+                bl = math.sqrt(am2 * 3.2)
+                rows.append(dict(id=sid, label=STAGE_LABEL[sid], shape='basin-array', n=4,
+                                 L=round(bl, 1), W=round(am2 / bl, 1), D=round(15 * FT, 2),
+                                 acres=round(am2 / 4046.856, 2), footM2=round(am2),
+                                 train='water', stage=k + 1,
+                                 src={'acres': 'derived', 'D': 'assumed'}))
+            else:
+                n = max(2, round(4 * f))
+                # floor the assumed sizes: these are scaled placeholders, and a
+                # half-metre-wide tank is not a credible drawing of anything
+                Lf, Wf = max(110 * f, 55), max(34 * f, 18)
+                rows.append(dict(id=sid, label=STAGE_LABEL[sid], shape='box', n=n,
+                                 L=round(Lf * FT, 2), W=round(Wf * FT, 2), D=round(12 * FT, 2),
+                                 footM2=round(n * Lf * Wf * FT * FT),
+                                 train='water', stage=k + 1,
+                                 src={'n': 'assumed', 'L': 'assumed', 'D': 'assumed'}))
+        covered = sum(r['footM2'] for r in rows)
+        return dict(siteL=round(siteL * FT, 1), siteW=round(siteW * FT, 1), rows=rows,
+                    siteM2=round(acres * 4046.856), tankM2=covered,
+                    coveragePct=round(100.0 * covered / (acres * 4046.856), 1),
+                    compact=True, trainSourced=True)
     acres = spec['acres']['v']
     side = math.sqrt(acres * 43560.0)
     siteL, siteW = side * 1.45, side / 1.45
     rows = []
     for u in spec['units']:
-        r = dict(id=u['id'], label=u['label'], shape=u['shape'], note=u.get('note'))
+        tr, st = TRAIN_BY_ID.get(u['id'], ('water', 9))
+        r = dict(id=u['id'], label=u['label'], shape=u['shape'], note=u.get('note'),
+                 train=u.get('train', tr), stage=u.get('stage', st))
         if u['shape'] == 'cyl':
             r.update(n=u['n']['v'], dia=round(u['dia']['v'] * FT, 2), D=round(u['D']['v'] * FT, 2))
             r['footM2'] = round(u['n']['v'] * math.pi * (u['dia']['v'] * FT / 2) ** 2)
@@ -796,6 +961,7 @@ def wrp_geometry(spec):
                      acres=u['acres']['v'], footM2=round(am2))
         r['src'] = {k: u[k]['s'] for k in ('n', 'dia', 'D', 'L', 'W', 'acres') if k in u}
         rows.append(r)
+    rows.sort(key=lambda r: r['stage'])
     covered = sum(r['footM2'] for r in rows)
     return dict(siteL=round(siteL * FT, 1), siteW=round(siteW * FT, 1), rows=rows,
                 siteM2=round(acres * 4046.856), tankM2=covered,
@@ -823,6 +989,7 @@ def build_facilities(fac_raw, tunnels3d):
         if spec['kind'] == 'reservoir':
             rec['geom'] = reservoir_geometry(spec)
         elif spec['kind'] == 'wrp':
+            spec['_id'] = spec_id
             rec['geom'] = wrp_geometry(spec)
         else:
             npump = spec.get('pumps', {}).get('v', 4)
@@ -962,7 +1129,7 @@ def main():
     gis = load('gis/cso-outfall-points.geojson', {'features': []})
 
     basins = build_basins()
-    tunnels, fidelity = build_tunnels(tun_raw)
+    tunnels, fidelity, repairs = build_tunnels(tun_raw)
     shafts = build_shafts(ref, gis, tunnels)
     facs = build_facilities(fac_raw, tunnels)
 
@@ -1010,7 +1177,8 @@ def main():
         ),
         sources=SOURCES,
         systems={k: {kk: vv for kk, vv in v.items()} for k, v in SYSTEMS.items()},
-        basins=basins, tunnels=tunnels, fidelity=fidelity, shafts=shafts, facilities=facs,
+        basins=basins, tunnels=tunnels, fidelity=fidelity, repairs=repairs,
+        shafts=shafts, facilities=facs,
         outfalls=outfalls, waterways=build_waterways(), ladder=ladder,
         sim=build_sim(basins, facs),
     )
@@ -1026,6 +1194,10 @@ def main():
           f'({tl:.1f} mi drawn), {len(shafts)} shafts, {len(outfalls)} outfalls, '
           f'{len(out["waterways"])} waterways, {len(out["sim"]["events"])} recorded events '
           f'({round(os.path.getsize(dst)/1024)} KB)')
+    if repairs:
+        print(f'   geometry repairs ({len(repairs)}):')
+        for r in repairs:
+            print(f'     - {r}')
     sc = collections.Counter((s['system'] or 'interceptor', s['kind']) for s in shafts)
     orph = sum(1 for s in shafts if s.get('orphan'))
     dists = sorted(s['dist'] for s in shafts if s.get('dist') is not None)

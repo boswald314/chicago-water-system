@@ -262,38 +262,75 @@ export function frustumWaterGeometry(L, W, D, inset, fillFrac) {
  * is schematic and the viewer says so.
  */
 export function layoutPlant(geom) {
-  const out = [];
+  const out = { tanks: [], train: [], solids: [], L: geom.siteL, W: geom.siteW };
   if (!geom.rows || !geom.rows.length) return out;
   const L = geom.siteL, W = geom.siteW;
-  const n = geom.rows.length;
-  const bandW = L / n;
-  geom.rows.forEach((row, ri) => {
-    const cx = -L / 2 + bandW * (ri + 0.5);
+  const water = geom.rows.filter(r => r.train !== 'solids');
+  const solid = geom.rows.filter(r => r.train === 'solids');
+  const bandW = L / Math.max(1, water.length);
+  const zWater = -W * 0.12;                 // water train runs down the site
+  const zSolid = W * 0.30;                  // solids branch off to one side
+
+  const place = (row, cx, cz, zSpan) => {
+    const put = t => { out.tanks.push(t); };
     if (row.shape === 'cyl') {
-      const r = row.dia / 2, gap = row.dia * 1.12;
-      const perCol = Math.max(1, Math.floor(Math.min(W, W) / gap));
+      const gap = row.dia * 1.14;
+      const perCol = Math.max(1, Math.floor(zSpan / gap));
       const cols = Math.ceil(row.n / perCol);
       for (let i = 0; i < row.n; i++) {
         const c = Math.floor(i / perCol), k = i % perCol;
-        out.push({ row: row.id, type: 'cyl', r, h: row.D,
-                   x: cx + (c - (cols - 1) / 2) * gap,
-                   z: -((perCol - 1) / 2) * gap + k * gap });
+        put({ row: row.id, stage: row.stage, train: row.train, type: 'cyl',
+              r: row.dia / 2, h: row.D,
+              x: cx + (c - (cols - 1) / 2) * gap,
+              z: cz - ((perCol - 1) / 2) * gap + k * gap });
       }
     } else if (row.shape === 'box') {
-      const gap = row.W * 1.3;
-      for (let i = 0; i < row.n; i++) {
-        out.push({ row: row.id, type: 'box', L: row.L, W: row.W, h: row.D,
-                   x: cx, z: -((row.n - 1) / 2) * gap + i * gap });
-      }
-    } else {                                  // serpentine aeration passes
+      const gap = row.W * 1.35;
+      for (let i = 0; i < row.n; i++)
+        put({ row: row.id, stage: row.stage, train: row.train, type: 'box',
+              L: row.L, W: row.W, h: row.D,
+              x: cx, z: cz - ((row.n - 1) / 2) * gap + i * gap });
+    } else {                                 // serpentine aeration passes
       const passes = row.n, pw = row.W / passes;
-      for (let i = 0; i < passes; i++) {
-        out.push({ row: row.id, type: 'box', L: Math.min(row.L, L * 0.9), W: pw * 0.82,
-                   h: row.D, x: cx, z: -row.W / 2 + pw * (i + 0.5) });
-      }
+      for (let i = 0; i < passes; i++)
+        put({ row: row.id, stage: row.stage, train: row.train, type: 'box',
+              L: Math.min(row.L, L * 0.92), W: pw * 0.84, h: row.D,
+              x: cx, z: cz - row.W / 2 + pw * (i + 0.5) });
     }
+  };
+
+  water.forEach((row, i) => {
+    const cx = -L / 2 + bandW * (i + 0.5);
+    place(row, cx, zWater, W * 0.62);
+    out.train.push({ id: row.id, label: row.label, x: cx, z: zWater, stage: row.stage, row });
   });
+  const sBand = L / Math.max(1, solid.length + 1);
+  solid.forEach((row, i) => {
+    const cx = -L / 2 + sBand * (i + 1.5);
+    place(row, cx, zSolid, W * 0.34);
+    out.solids.push({ id: row.id, label: row.label, x: cx, z: zSolid, stage: row.stage, row });
+  });
+  // influent arrives at the head of the train, effluent leaves past the tail
+  out.inlet = { x: -L / 2 - L * 0.06, z: zWater };
+  out.outlet = { x: L / 2 + L * 0.06, z: zWater };
+  // the solids branch leaves the primary/final tanks
+  out.solidsTap = out.train.length ? { x: out.train[Math.min(1, out.train.length - 1)].x, z: zWater } : null;
   return out;
+}
+
+/** Water surface inside a tank, drawn a little below the rim. */
+export function tankWaterLevel(h) { return h * 0.86; }
+
+/** Colour of the water at a given point in the treatment train: raw sewage at
+ *  the head, clarified effluent at the tail. */
+export function trainColor(f) {
+  const raw = [0x6b, 0x52, 0x2e], mid = [0x4d, 0x72, 0x74], clean = [0x3f, 0xa8, 0xc4];
+  const t = Math.max(0, Math.min(1, f));
+  const a = t < 0.5 ? raw : mid, b = t < 0.5 ? mid : clean;
+  const u = t < 0.5 ? t * 2 : (t - 0.5) * 2;
+  return (Math.round(a[0] + (b[0] - a[0]) * u) << 16) |
+         (Math.round(a[1] + (b[1] - a[1]) * u) << 8) |
+          Math.round(a[2] + (b[2] - a[2]) * u);
 }
 
 /* --------------------------------------------------------------- helpers */

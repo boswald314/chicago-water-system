@@ -73,6 +73,23 @@
   .lbl.pump { color:#9a6cc0; }
   .lbl.plant { color:var(--good); }
   .lbl.res { color:#5aa0c8; }
+  .lbl.tun { color:#c98a2e; }
+  .lbl.gauge3d { display:flex; align-items:center; gap:5px; padding:2px 6px; font-size:9.5px; opacity:.92;
+    background:var(--panel); border-radius:5px; white-space:nowrap; }
+  .lbl.gauge3d b { font-weight:700; }
+  .lbl.gauge3d .bar { display:inline-block; width:38px; height:5px; border-radius:3px;
+    background:var(--panel2); border:1px solid var(--line); overflow:hidden; }
+  .lbl.gauge3d .bar i { display:block; height:100%; background:currentColor; }
+  .lbl.gauge3d .pct { font-weight:700; font-variant-numeric:tabular-nums; min-width:26px; text-align:right; }
+  .lbl.gauge3d i { font-style:normal; color:var(--ink3); font-variant-numeric:tabular-nums; }
+  .lbl.gauge3d.full { border-color:var(--bad); color:var(--bad); }
+  .lbl.gauge3d.off { opacity:.5; }
+  .lbl.stage { display:flex; flex-direction:column; gap:1px; padding:3px 7px; font-size:10px;
+    max-width:180px; box-shadow:0 1px 6px rgba(0,0,0,.25);
+    line-height:1.3; text-align:left; border-left:2px solid #6fc3e8; }
+  .lbl.stage b { font-size:10.5px; font-weight:700; color:var(--ink); }
+  .lbl.stage i { font-style:normal; color:var(--ink3); font-size:9.5px; }
+  .lbl.stage.solids { border-left-color:#b09050; }
 
   /* timeline strip */
   #timeline { position:absolute; left:0; right:0; bottom:0; z-index:9; background:var(--panel);
@@ -155,8 +172,9 @@
   table.fid td { padding:3px 5px 3px 0; border-bottom:1px solid var(--line); font-variant-numeric:tabular-nums; }
   table.fid i { color:var(--ink3); font-style:normal; }
   table.fid tr.warn td i { color:var(--warn); }
-  #caveats ul { padding-left:16px; margin:5px 0; }
-  #caveats li { font-size:11.5px; color:var(--ink2); margin-bottom:6px; line-height:1.5; }
+  #caveats ul, #fidelity ul { padding-left:16px; margin:5px 0; }
+  #caveats li, #fidelity li { font-size:11.5px; color:var(--ink2); margin-bottom:6px; line-height:1.5; }
+  #fidelity code { font-size:10.5px; background:var(--panel2); padding:1px 4px; border-radius:3px; }
   #ladder { width:100%; height:152px; margin-bottom:6px; }
   .evbtn { display:flex; justify-content:space-between; width:100%; padding:5px 8px; margin-bottom:4px;
     border:1px solid var(--line); border-radius:5px; background:var(--panel2); color:var(--ink2);
@@ -345,7 +363,7 @@
   document.getElementById('introGo').addEventListener('click', hide);
   addEventListener('keydown', e => { if (e.key === 'Escape') hide(); });
 </script>
-<script src="map-data/system3d.js"></script>
+<script src="map-data/system3d.js?v=2"></script>
 <script type="importmap">
 { "imports": {
   "three": "./assets/vendor/three/three.module.js",
@@ -359,6 +377,6 @@
     .map(([k, v]) => '<div class="srow"><span>' + v[0] + '</span><a href="' + v[1] + '">' + k + '</a></div>')
     .join('');
 </script>
-<script type="module" src="assets/js/system3d/app.js"></script>
+<script type="module" src="assets/js/system3d/app.js?v=2"></script>
 </body>
 </html>
