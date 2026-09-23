@@ -89,6 +89,7 @@
     line-height:1.3; text-align:left; border-left:2px solid #6fc3e8; }
   .lbl.stage b { font-size:10.5px; font-weight:700; color:var(--ink); }
   .lbl.stage i { font-style:normal; color:var(--ink3); font-size:9.5px; }
+  .lbl.stage i.hrt { color:#6fc3e8; font-weight:600; }
   .lbl.stage.solids { border-left-color:#b09050; }
 
   /* timeline strip */
@@ -331,6 +332,31 @@
         named in the tooltip.
         <span class="chip assumed">assumed</span> typical engineering practice, not sourced — treat as
         illustrative only.</p>
+      <h4>How fast the water moves</h4>
+      <p class="hint">Nothing in the model moves at a uniform speed. Every animated flow is driven by
+        a computed velocity:</p>
+      <ul class="hint" style="padding-left:16px">
+        <li><b>Tunnels</b> — flow divided by the <i>wetted</i> area of the bore at that exact point,
+          so a nearly empty 33-foot tunnel runs fast and the same tunnel running full runs slow.</li>
+        <li><b>Drop shafts</b> — a plunge, drawn at an energy-dissipated design value rather than free
+          fall, which over 250 ft would reach about 130 ft/s. The "Chicago style" plunge shaft exists
+          precisely to destroy that energy.</li>
+        <li><b>Force mains</b> — flow over the riser's own area, moving upward while the pumps run.</li>
+        <li><b>Treatment plants</b> — each unit process holds the water for its volume divided by the
+          flow, so the particles crawl through the aeration basin for hours and dart along the
+          channels between tanks. The residence time is printed on each stage and it shortens as the
+          storm load rises, which is exactly what happens in the real plant.</li>
+        <li><b>CSO outfalls</b> — the discharge each station is rated to pass, over the area that
+          rating implies. Once more arrives than the station can pass, the velocity stops rising and
+          the surplus is reported as backing up the collection system instead.</li>
+      </ul>
+      <p class="hint">Real velocities here span four orders of magnitude, from about 0.01 ft/s
+        creeping through a final settling tank to a plunge of 26 ft/s down a shaft. Animating them
+        literally would leave the basins frozen and the shafts teleporting, so the on-screen speed is
+        proportional to the <b>square root</b> of the computed velocity. The ordering and the
+        relative differences survive; the computed value in ft/s is printed on the element, so the
+        real number is never hidden behind the animation.</p>
+
       <h4>The simulation</h4>
       <p class="hint">A mass balance, not a hydraulic model. It conserves volume across the published
         storage capacities, plant design flows and pump capacities, and it routes each basin's excess
@@ -363,7 +389,7 @@
   document.getElementById('introGo').addEventListener('click', hide);
   addEventListener('keydown', e => { if (e.key === 'Escape') hide(); });
 </script>
-<script src="map-data/system3d.js?v=2"></script>
+<script src="map-data/system3d.js?v=5"></script>
 <script type="importmap">
 { "imports": {
   "three": "./assets/vendor/three/three.module.js",
@@ -377,6 +403,6 @@
     .map(([k, v]) => '<div class="srow"><span>' + v[0] + '</span><a href="' + v[1] + '">' + k + '</a></div>')
     .join('');
 </script>
-<script type="module" src="assets/js/system3d/app.js?v=2"></script>
+<script type="module" src="assets/js/system3d/app.js?v=5"></script>
 </body>
 </html>

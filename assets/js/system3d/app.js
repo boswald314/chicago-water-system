@@ -5,8 +5,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
-import { SewerModel, CONFIGS } from './sim.js?v=2';
-import * as SC from './scene.js?v=2';
+import { SewerModel, CONFIGS } from './sim.js?v=5';
+import * as SC from './scene.js?v=5';
 
 const D = window.SYS3D;
 const FT = SC.FT;
@@ -16,6 +16,12 @@ const num = n => n == null ? '—' :
   (Math.abs(n) >= 1000 ? Math.round(n).toLocaleString() :
    Math.abs(n) >= 10 ? n.toFixed(0) : Math.abs(n) >= 1 ? n.toFixed(1) : n.toFixed(2));
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+/* Metres of on-screen travel per second for water moving at V_REF (1 m/s).
+ * Everything in the model is animated off this one constant through
+ * SC.displaySpeed, so every speed you see is in true proportion to every
+ * other one. */
+const FLOW_BASE = 900;
 
 const ST = {
   vExag: 18, dExag: 34, route: 'corridor', trueScale: false,
@@ -67,6 +73,7 @@ const sysGeomVol = {};
 const shaftSets = [];
 const resObjects = {};
 const plantObjects = {};
+const stageLabelNodes = {};
 const pumpObjects = {};
 const particles = {};
 const labelObjs = [];
@@ -165,8 +172,32 @@ function buildShafts() {
     reg(mesh, { kind: 'shaftset', key, items });
   }
   positionShafts();
-  // lateral connectors, only where route calibration displaces the tunnel
-  layerG.shafts.userData.connectors = null;
+  buildPlunge();
+}
+
+/* Water falling down the drop shafts. A "Chicago style" plunge shaft is a
+ * split air/water shaft with a vent chamber at the top, engineered from 1975
+ * physical hydraulic-model testing at the St Anthony Falls laboratory
+ * specifically to dissipate the energy of a fall of this size. The plunge is
+ * drawn at a design-limited velocity rather than free fall, which over 250 ft
+ * would reach about 130 ft/s. */
+const PLUNGE_MS = 8.0;              // assumed, energy-dissipated design value
+function buildPlunge() {
+  for (const set of shaftSets) {
+    if (!set.sid) continue;
+    const per = 3, N = set.items.length * per;
+    const pos = new Float32Array(N * 3);
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const mat = new THREE.PointsMaterial({ color: 0xb8ecff, size: 300, sizeAttenuation: true,
+      transparent: true, opacity: 0, depthWrite: false });
+    const pts = new THREE.Points(g, mat);
+    pts.frustumCulled = false;
+    layerG.shafts.add(pts);
+    const prog = new Float32Array(N);
+    for (let i = 0; i < N; i++) prog[i] = Math.random();
+    set.plunge = { pts, pos, mat, prog, N, per };
+  }
 }
 
 function positionShafts() {
@@ -340,6 +371,8 @@ function buildPlants() {
         o.position.set(f.x + anchor.x, yy, f.z + anchor.z);
         layerG.labels.add(o);
         labelObjs.push({ o, y: yy, d: 2600, div: d, abs: true });
+        stageLabelNodes[f.id] = stageLabelNodes[f.id] || {};
+        stageLabelNodes[f.id][rid] = { div: d, spec, dims };
       }
     }
 
@@ -358,7 +391,9 @@ function buildPlants() {
         new THREE.LineBasicMaterial({ color: 0xb09050, transparent: true, opacity: 0.5 })));
     }
 
-    // flow animation along the train, density set by the plant's modelled load
+    // flow animation along the train. Speed is NOT constant: each unit process
+    // holds the water for volume / flow, so the particles crawl through the
+    // aeration basin and dart along the channels between tanks.
     const N = 90;
     const ppos = new Float32Array(N * 3);
     const pg = new THREE.BufferGeometry();
@@ -370,6 +405,54 @@ function buildPlants() {
     grp.add(pts);
     const cum = [0];
     for (let i = 1; i < linePts.length; i++) cum.push(cum[i - 1] + linePts[i].distanceTo(linePts[i - 1]));
+
+    // --- where the flow leaves untreated when everything upstream is full.
+    // These sit at the relief pumping stations, not at the plant: excess never
+    // reaches the plant at all, which is the point worth drawing.
+    const csoPaths = [];
+    for (const c of (f.cso || [])) {
+      if (c.x == null) continue;
+      const pth = [new THREE.Vector3(lay.inlet.x, y, lay.inlet.z),
+                   new THREE.Vector3(c.x - f.x, y, c.z - f.z)];
+      if (c.ox != null) pth.push(new THREE.Vector3(c.ox - f.x, y, c.oz - f.z));
+      const lm = new THREE.LineDashedMaterial({ color: 0xd64545, dashSize: 260, gapSize: 170,
+        transparent: true, opacity: 0.5 });
+      const lg = new THREE.BufferGeometry().setFromPoints(pth);
+      const ln = new THREE.Line(lg, lm);
+      ln.computeLineDistances();
+      grp.add(ln);
+      const marker = new THREE.Mesh(new THREE.ConeGeometry(120, 260, 7),
+        new THREE.MeshStandardMaterial({ color: 0xd64545, emissive: 0x4a1010 }));
+      const last = pth[pth.length - 1];
+      marker.position.set(last.x, 130, last.z);
+      marker.rotation.x = Math.PI;
+      grp.add(marker);
+      reg(marker, {
+        kind: 'cso', title: `${f.short} \u2014 ${c.outfall}`,
+        sub: 'combined sewer overflow discharge point',
+        rows: [['Discharges to', c.water, c.s],
+               ['Structure', c.oloc || (D.facilities.find(x => x.id === c.at) || {}).name || '\u2014', 'gis'],
+               ['Opens when', 'the interceptors, the tunnel and the reservoir are all at their limit', 'derived']],
+        note: c.note || 'Excess never reaches the plant. It is held back in the collection ' +
+                        'system, goes down the drop shafts into the Deep Tunnel, and only once ' +
+                        'the tunnel and its reservoir are full does it leave here, untreated.',
+        doc: f.doc, facId: f.id,
+      });
+      const CN = 34;
+      const cpos = new Float32Array(CN * 3);
+      const cg = new THREE.BufferGeometry();
+      cg.setAttribute('position', new THREE.BufferAttribute(cpos, 3));
+      const cmat = new THREE.PointsMaterial({ color: 0xff8b6b, size: 330, sizeAttenuation: true,
+        transparent: true, opacity: 0, depthWrite: false });
+      const cpts = new THREE.Points(cg, cmat);
+      cpts.frustumCulled = false;
+      grp.add(cpts);
+      const ccum = [0];
+      for (let i = 1; i < pth.length; i++) ccum.push(ccum[i - 1] + pth[i].distanceTo(pth[i - 1]));
+      const cprog = new Float32Array(CN);
+      for (let i = 0; i < CN; i++) cprog[i] = i / CN;
+      csoPaths.push({ pth, ccum, cpts, cpos, cmat, cprog, CN, marker, line: ln, spec: c });
+    }
 
     // live flow readout over the plant
     const gauge = document.createElement('div');
@@ -388,7 +471,7 @@ function buildPlants() {
       rows, note: f.note, doc: f.doc, facId: f.id });
     plantObjects[f.id] = { f, grp, pad, lay, pts, ppos, pmat, N,
                            linePts, cum, prog: new Float32Array(N).map((_, i) => i / N),
-                           gauge, gObj, waterMeshes };
+                           gauge, gObj, waterMeshes, budget: null, stageLabels: {}, csoPaths };
     if (f.spec.dmf.v >= 400) addLabel(f.short, f.x, f.z, 30, 'plant', 46000);
     else addLabel(f.short, f.x, f.z, 30, 'plant', 17000);
   }
@@ -442,7 +525,19 @@ function buildPumps() {
       riser.position.set(sr * 0.9, -d / 2, 0);
       riser.scale.set(g.riserM / 2 * ST.dExag, d, g.riserM / 2 * ST.dExag);
       grp.add(riser);
-      pumpObjects[f.id] = { f, grp, riser, shaft: sh };
+      const RN = 26;
+      const rpos = new Float32Array(RN * 3);
+      const rg = new THREE.BufferGeometry();
+      rg.setAttribute('position', new THREE.BufferAttribute(rpos, 3));
+      const rmat = new THREE.PointsMaterial({ color: 0xffd98a, size: 240, sizeAttenuation: true,
+        transparent: true, opacity: 0, depthWrite: false });
+      const rpts = new THREE.Points(rg, rmat);
+      rpts.frustumCulled = false;
+      grp.add(rpts);
+      const rprog = new Float32Array(RN);
+      for (let i = 0; i < RN; i++) rprog[i] = i / RN;
+      pumpObjects[f.id] = { f, grp, riser, shaft: sh, rpts, rpos, rmat, rprog, RN,
+                            riserX: sr * 0.9, riserR: g.riserM / 2, depth: d };
     } else pumpObjects[f.id] = { f, grp };
     layerG.pumps.add(grp);
     if (f.kind === 'tarp-ps' && f.system) {
@@ -563,7 +658,9 @@ function buildParticles() {
     layerG.particles.add(pts);
     const prog = new Float32Array(N);
     for (let i = 0; i < N; i++) prog[i] = i / N;
-    particles[f.id] = { pts, pos, path, cum, prog, N, mat: pmat, sid: f.system, len };
+    const cd = conduits.find(c => c.feat.id === f.id);
+    particles[f.id] = { pts, pos, path, cum, prog, N, mat: pmat, sid: f.system, len,
+                        conduit: cd ? cd.c : null, vAt: new Float32Array(N) };
   }
 }
 
@@ -651,6 +748,8 @@ function applyFrame(force) {
       if (cd.sid !== sid) continue;
       cd.w.update(level, ST.vExag, ST.dExag);
       cd.wm.visible = frac > 0.0008;
+      const ps = particles[cd.feat.id];
+      if (ps) ps.level = level;
     }
   }
   // reservoirs
@@ -707,6 +806,42 @@ function applyFrame(force) {
     const st = f.plants[po.f.id];
     if (!st) continue;
     po.rate = st.flow;
+    po.budget = SC.plantTimeBudget(po.lay.train, Math.max(st.flow, 0.1),
+                                   po.lay.inlet, po.lay.outlet);
+    const bas = po.f.basin ? f.basins[po.f.basin] : null;
+    const csoRate = bas ? (bas.cso || 0) : 0;
+    po.csoRate = csoRate;
+    for (const cp of (po.csoPaths || [])) {
+      const on = csoRate > 1;
+      cp.cmat.opacity = on ? 0.95 : 0;
+      cp.line.material.opacity = on ? 0.95 : 0.22;
+      cp.marker.material.emissiveIntensity = on ? 1.4 : 0.15;
+      cp.marker.scale.setScalar(on ? 1.6 : 1);
+      // Split the basin's discharge across its outfalls in proportion to what
+      // each station is rated to pass, not evenly -- Outfall 150's 129 MGD
+      // station cannot take the same share as Bubbly Creek's 3,878 MGD one.
+      const totalRated = (po.csoPaths || []).reduce((a, x) => a + (x.spec.ratedMGD || 200), 0) || 1;
+      const share = csoRate * ((cp.spec.ratedMGD || 200) / totalRated);
+      cp.share = share;
+      cp.over = cp.spec.ratedMGD ? share > cp.spec.ratedMGD : false;
+      // A conduit cannot pass more than it can pass. Once the share exceeds the
+      // station's rating the velocity stops rising and the surplus surcharges
+      // back up the collection system instead -- which is what puts water in
+      // basements.
+      const passed = cp.spec.ratedMGD ? Math.min(share, cp.spec.ratedMGD) : share;
+      cp.passed = passed;
+      cp.backup = Math.max(0, share - passed);
+      cp.v = on ? SC.conduitVelocity(passed, cp.spec.areaM2 || 14) : 0;
+    }
+    const labs = stageLabelNodes[po.f.id] || {};
+    for (const seg of po.budget.segs) {
+      if (seg.kind !== 'dwell') continue;
+      const L = labs[seg.id];
+      if (!L) continue;
+      L.div.innerHTML = `<b>${L.spec.train === 'solids' ? '' : (L.spec.stage + '. ')}${esc(L.spec.label)}</b>` +
+        `<i>${esc(L.dims)}</i>` +
+        `<i class="hrt">holds it ${fmtDur(seg.hrt)} \u00b7 ${(seg.v * 3.281).toFixed(2)} ft/s</i>`;
+    }
     const pct = Math.max(0, Math.min(1, st.flow / st.dmf));
     po.pmat.opacity = Math.min(0.9, 0.12 + pct * 0.8);
     if (po.gauge) {
@@ -718,6 +853,15 @@ function applyFrame(force) {
     }
   }
   for (const po of Object.values(pumpObjects)) {
+    if (po.rpts) {
+      const sysIds = Object.keys(D.systems).filter(sid => D.systems[sid].pump === po.f.id);
+      const q = sysIds.reduce((a, sid) => a + f.systems[sid].pumped, 0);
+      po.pumped = q;
+      // velocity up the force main is flow over the riser's own area
+      const A = Math.PI * po.riserR * po.riserR;
+      po.riserV = SC.conduitVelocity(q, A);
+      po.rmat.opacity = q > 1 ? 0.9 : 0;
+    }
     if (!po.gauge) continue;
     const sysIds = Object.keys(D.systems).filter(sid => D.systems[sid].pump === po.f.id);
     let vol = 0, cap = 0;
@@ -749,6 +893,7 @@ function applyFrame(force) {
     });
     set.wmesh.instanceMatrix.needsUpdate = true;
     set.wmesh.visible = drive > 0.004;
+    if (set.plunge) { set.plunge.mat.opacity = Math.min(0.9, drive * 1.5); set.plunge.drive = drive; }
   }
   // particle intensity, per feature, from its own system's flow
   for (const p of Object.values(particles)) {
@@ -855,6 +1000,13 @@ function renderSummary() {
 }
 
 /* ------------------------------------------------------------- the chart */
+function fmtDur(sec) {
+  if (!isFinite(sec) || sec <= 0) return '\u2014';
+  if (sec < 90) return `${sec.toFixed(0)} s`;
+  if (sec < 5400) return `${(sec / 60).toFixed(0)} min`;
+  return `${(sec / 3600).toFixed(1)} h`;
+}
+
 function bottleneck(s) {
   let slow = Object.entries(s.boundBy || {}).filter(([sid, b]) => b === 'plant' &&
     ST.run.frames[0].systems[sid].capMG > 0);
@@ -1152,13 +1304,23 @@ function animate(now) {
       if (!p.rate) { p.pts.visible = false; continue; }
       p.pts.visible = true;
       const total = p.len || 1;
-      // travel at a speed, not a fraction of length, so a short spur and a long
-      // trunk move at the same pace
-      const v = Math.min(0.09, (600 + p.rate * 1.1) / total);
       for (let i = 0; i < p.N; i++) {
-        p.prog[i] = (p.prog[i] + v * dt) % 1;
-        const d = p.prog[i] * total;
+        const d0 = p.prog[i] * total;
         let lo = 0, hi = p.cum.length - 1;
+        while (lo < hi - 1) { const m = (lo + hi) >> 1; if (p.cum[m] < d0) lo = m; else hi = m; }
+        // velocity here is the real one: flow divided by the wetted area of the
+        // bore at this point, so a nearly-empty 33 ft tunnel runs fast and the
+        // same tunnel running full runs slow
+        let vReal = 1.0;
+        if (p.conduit && p.level != null) {
+          const A = p.conduit.wetted(Math.min(lo, p.conduit.n - 1), p.level);
+          vReal = SC.conduitVelocity(p.rate, A);
+        }
+        p.vAt[i] = vReal;
+        const step = SC.displaySpeed(vReal, FLOW_BASE) * dt / total;
+        p.prog[i] = (p.prog[i] + step) % 1;
+        const d = p.prog[i] * total;
+        lo = 0; hi = p.cum.length - 1;
         while (lo < hi - 1) { const m = (lo + hi) >> 1; if (p.cum[m] < d) lo = m; else hi = m; }
         const seg = (p.cum[hi] - p.cum[lo]) || 1;
         const t = (d - p.cum[lo]) / seg;
@@ -1176,25 +1338,96 @@ function animate(now) {
     l.div.style.opacity = dd > l.d ? 0 : (dd > l.d * 0.78 ? String(1 - (dd - l.d * 0.78) / (l.d * 0.22)) : '.94');
     l.div.style.display = dd > l.d ? 'none' : '';
   }
+  // combined sewer overflow leaving for the river
+  for (const po of Object.values(plantObjects)) {
+    for (const cp of (po.csoPaths || [])) {
+      if (!cp.v) { cp.cpts.visible = false; continue; }
+      cp.cpts.visible = true;
+      const total = cp.ccum[cp.ccum.length - 1] || 1;
+      const step = SC.displaySpeed(cp.v, FLOW_BASE) * dt / total;
+      for (let i = 0; i < cp.CN; i++) {
+        cp.cprog[i] = (cp.cprog[i] + step) % 1;
+        const d = cp.cprog[i] * total;
+        let k = 1;
+        while (k < cp.ccum.length - 1 && cp.ccum[k] < d) k++;
+        const seg = (cp.ccum[k] - cp.ccum[k - 1]) || 1;
+        const u = (d - cp.ccum[k - 1]) / seg;
+        const a = cp.pth[k - 1], b = cp.pth[k];
+        cp.cpos[i * 3] = a.x + (b.x - a.x) * u;
+        cp.cpos[i * 3 + 1] = a.y;
+        cp.cpos[i * 3 + 2] = a.z + (b.z - a.z) * u;
+      }
+      cp.cpts.geometry.attributes.position.needsUpdate = true;
+    }
+  }
+  // flow being lifted up the pumping stations' force mains
+  for (const po of Object.values(pumpObjects)) {
+    if (!po.rpts) continue;
+    if (!po.pumped) { po.rpts.visible = false; continue; }
+    po.rpts.visible = true;
+    const step = SC.displaySpeed(po.riserV, FLOW_BASE) * dt / Math.max(po.depth, 1);
+    for (let i = 0; i < po.RN; i++) {
+      po.rprog[i] = (po.rprog[i] + step) % 1;
+      po.rpos[i * 3] = po.riserX;
+      po.rpos[i * 3 + 1] = -po.depth + po.rprog[i] * po.depth;
+      po.rpos[i * 3 + 2] = 0;
+    }
+    po.rpts.geometry.attributes.position.needsUpdate = true;
+  }
+  // water plunging down the drop shafts
+  for (const set of shaftSets) {
+    const pl = set.plunge;
+    if (!pl) continue;
+    if (!pl.drive) { pl.pts.visible = false; continue; }
+    pl.pts.visible = true;
+    const step = SC.displaySpeed(PLUNGE_MS, FLOW_BASE) * dt;
+    for (let i = 0; i < pl.N; i++) {
+      const sh = set.items[Math.floor(i / pl.per)];
+      const depth = sh._y || 1;
+      pl.prog[i] = (pl.prog[i] + step / Math.max(depth, 1)) % 1;
+      pl.pos[i * 3] = sh.x;
+      pl.pos[i * 3 + 1] = -pl.prog[i] * depth;
+      pl.pos[i * 3 + 2] = sh.z;
+    }
+    pl.pts.geometry.attributes.position.needsUpdate = true;
+  }
   // flow through each treatment plant's process train
   for (const po of Object.values(plantObjects)) {
-    if (!po.rate) { po.pts.visible = false; continue; }
+    if (!po.rate || !po.budget) { po.pts.visible = false; continue; }
     const near = camera.position.distanceTo(po.grp.position) < 26000;
     po.pts.visible = near;
     if (!near) continue;
-    const total = po.cum[po.cum.length - 1] || 1;
-    const v = Math.min(0.5, (0.04 + po.rate / 2600)) / Math.max(1, total / 900);
+    const segs = po.budget.segs;
+    const y = po.linePts.length ? po.linePts[0].y : 0;
     for (let i = 0; i < po.N; i++) {
-      po.prog[i] = (po.prog[i] + v * dt) % 1;
-      const d = po.prog[i] * total;
-      let k = 1;
-      while (k < po.cum.length - 1 && po.cum[k] < d) k++;
-      const seg = (po.cum[k] - po.cum[k - 1]) || 1;
-      const u = (d - po.cum[k - 1]) / seg;
-      const a = po.linePts[k - 1], b = po.linePts[k];
-      po.ppos[i * 3] = a.x + (b.x - a.x) * u;
-      po.ppos[i * 3 + 1] = a.y;
-      po.ppos[i * 3 + 2] = a.z + (b.z - a.z) * u;
+      // advance through the cycle in proportion to how long each segment
+      // really holds the water
+      let ph = po.prog[i];
+      let k = 0;
+      while (k < segs.length - 1 && segs[k].t1 <= ph) k++;
+      const sg = segs[k];
+      const dwellFrac = (sg.t1 - sg.t0) || 1e-6;
+      const step = SC.displaySpeed(sg.v, FLOW_BASE) * dt / Math.max(sg.len, 1) * dwellFrac;
+      ph = (ph + step) % 1;
+      po.prog[i] = ph;
+      k = 0;
+      while (k < segs.length - 1 && segs[k].t1 <= ph) k++;
+      const s2 = segs[k];
+      const u = ((ph - s2.t0) / ((s2.t1 - s2.t0) || 1e-6));
+      let px, pz;
+      if (s2.kind === 'dwell') {
+        // milling about inside the unit rather than sliding past it
+        const a = (u * Math.PI * 2) + i;
+        const r = s2.len * 0.28;
+        px = s2.from.x + Math.cos(a) * r;
+        pz = s2.from.z + Math.sin(a) * r * 0.5;
+      } else {
+        px = s2.from.x + (s2.to.x - s2.from.x) * u;
+        pz = s2.from.z + (s2.to.z - s2.from.z) * u;
+      }
+      po.ppos[i * 3] = px;
+      po.ppos[i * 3 + 1] = y;
+      po.ppos[i * 3 + 2] = pz;
     }
     po.pts.geometry.attributes.position.needsUpdate = true;
   }

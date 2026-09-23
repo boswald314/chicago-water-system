@@ -376,3 +376,55 @@ export function label(text, cls) {
   d.textContent = text;
   return d;
 }
+
+/* ------------------------------------------------------- flow velocity */
+/* Real velocities in this system span four orders of magnitude: about
+ * 0.03 m/s creeping through an aeration basin, 1-3 m/s down a tunnel, and a
+ * plunge of 10 m/s or more inside a drop shaft. Animating those literally
+ * means the aeration basin looks frozen while the shafts teleport. The display
+ * speed is therefore proportional to the SQUARE ROOT of the computed velocity:
+ * the ordering and the relative differences survive, the range becomes
+ * watchable, and the computed velocity itself is printed on the element so the
+ * real number is never hidden behind the animation. */
+export const V_REF = 1.0;              // m/s
+export function displaySpeed(vReal, base) {
+  const v = Math.max(0, vReal);
+  return base * Math.sqrt(v / V_REF);
+}
+
+/** 1 MGD in cubic metres per second. */
+export const MGD_TO_M3S = 0.0438126;
+
+/** Velocity through a conduit of wetted area A (m^2) carrying Q (MGD). */
+export function conduitVelocity(qMGD, areaM2) {
+  if (areaM2 <= 0.01) return 0;
+  return Math.min(12, (qMGD * MGD_TO_M3S) / areaM2);
+}
+
+/** Build a residence-time budget along a plant's process train.
+ *  Each stage holds water for volume / flow; the channels between stages are
+ *  short transits at a typical channel velocity. Returns segments carrying
+ *  both the real velocity and the share of the cycle they occupy. */
+export function plantTimeBudget(train, qMGD, inlet, outlet, channelVel = 0.9) {
+  const Q = Math.max(qMGD * MGD_TO_M3S, 1e-4);
+  const segs = [];
+  const nodes = [inlet, ...train.map(t => ({ x: t.x, z: t.z, stage: t })), outlet];
+  for (let i = 1; i < nodes.length; i++) {
+    const a = nodes[i - 1], b = nodes[i];
+    const len = Math.hypot(b.x - a.x, b.z - a.z);
+    // transit along the channel into this node
+    segs.push({ from: a, to: b, len, kind: 'channel',
+                v: channelVel, t: len / channelVel });
+    // then dwell inside the unit process itself
+    if (b.stage && b.stage.row && b.stage.row.volM3) {
+      const hrt = b.stage.row.volM3 / Q;                 // seconds
+      const span = Math.max(b.stage.row.L || b.stage.row.dia || 40, 20);
+      segs.push({ from: b, to: b, len: span, kind: 'dwell', id: b.stage.id,
+                  v: span / Math.max(hrt, 1), t: hrt, hrt });
+    }
+  }
+  const total = segs.reduce((a, s) => a + s.t, 0) || 1;
+  let acc = 0;
+  for (const s of segs) { s.t0 = acc / total; acc += s.t; s.t1 = acc / total; }
+  return { segs, totalSec: total };
+}

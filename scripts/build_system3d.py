@@ -323,6 +323,47 @@ FAC_SPEC = {
         note='West lobe of the quarry, in service March 2003, decommissioned September 2022 after capturing 58+ BG in 83 fill events. Drawn faded: standing but retired.'),
 }
 
+# Where flow leaves the system untreated when the plant, the interceptors, the
+# tunnels and the reservoirs are all at their limit. These are the NPDES-listed
+# CSO discharge points associated with each plant; note that they sit at the
+# relief PUMPING STATIONS upstream, not at the plant itself -- excess never
+# reaches the plant, which is exactly the thing worth drawing.
+PLANT_CSO = {
+    'wrp-stickney': [
+        dict(outfall='Bubbly Creek discharge', at='ps-racine',
+             water='South Fork of the South Branch (Bubbly Creek)', s='doc07',
+             note='RAPS began operation in 1939 discharging raw sewage to Bubbly Creek; a decade '
+                  'later dry-weather flow was diverted to the plant instead. In an extreme storm it '
+                  'can still put up to 6,000 cfs into the creek.'),
+        dict(outfall='Outfall 150', at='ps-westchester', water='Addison Creek', s='doc07',
+             note='TARP structure DS-D34-AI. A 2023 relief sewer contract aims to cut how often '
+                  'this one opens.'),
+    ],
+    'wrp-calumet': [
+        dict(outfall='Outfall 151', at='ps-95th', water='Calumet River', s='doc12'),
+        dict(outfall='Outfall 752', at='ps-122nd', water='Calumet River', s='doc12'),
+        dict(outfall='TARP Outfall 004 (\u201cEdbrook Gate\u201d)', at='ps-125th',
+             water='Little Calumet River', s='doc12'),
+    ],
+    'wrp-obrien': [
+        dict(outfall='Discharge 107', at='ps-north-branch', water='North Branch Chicago River',
+             s='doc12',
+             note='One of a 31-outfall TARP-tributary network on this receiving water. MWRD\u2019s own '
+                  'log records 303 discharge events here totalling about 41,884 MG, the largest '
+                  '1,348.9 MG on 13 September 2008.'),
+    ],
+    'wrp-kirie': [
+        dict(outfall='Outfall 111', at=None, water='Weller\u2019s Creek', s='doc13',
+             note='Reached via TARP; the Upper Des Plaines system is pure gravity into Majewski.'),
+    ],
+    'wrp-lemont': [
+        dict(outfall='Wet Weather Treatment Facility', at=None,
+             water='Chicago Sanitary and Ship Canal', s='doc13',
+             note='Unusually, Lemont treats its own excess: a 5-MG underground reservoir gives storm '
+                  'flow above plant capacity primary treatment and disinfection before the canal.'),
+    ],
+}
+
 # map archive facility ids -> our spec ids
 FAC_ID_MAP = {
     'wrp-stickney': 'wrp-stickney', 'wrp-calumet': 'wrp-calumet', 'wrp-obrien': 'wrp-obrien',
@@ -913,6 +954,7 @@ def wrp_geometry(spec):
                 rows.append(dict(id=sid, label=STAGE_LABEL[sid], shape='cyl', n=n,
                                  dia=round(dia_ft * FT, 2), D=round(12 * FT, 2),
                                  footM2=round(n * math.pi * (dia_ft * FT / 2) ** 2),
+                                 volM3=round(n * math.pi * (dia_ft * FT / 2) ** 2 * 12 * FT),
                                  train='water', stage=k + 1,
                                  src={'n': 'assumed', 'dia': 'assumed', 'D': 'assumed'}))
             elif sid == 'aeration':
@@ -921,7 +963,7 @@ def wrp_geometry(spec):
                 rows.append(dict(id=sid, label=STAGE_LABEL[sid], shape='basin-array', n=4,
                                  L=round(bl, 1), W=round(am2 / bl, 1), D=round(15 * FT, 2),
                                  acres=round(am2 / 4046.856, 2), footM2=round(am2),
-                                 train='water', stage=k + 1,
+                                 volM3=round(am2 * 15 * FT), train='water', stage=k + 1,
                                  src={'acres': 'derived', 'D': 'assumed'}))
             else:
                 n = max(2, round(4 * f))
@@ -931,7 +973,7 @@ def wrp_geometry(spec):
                 rows.append(dict(id=sid, label=STAGE_LABEL[sid], shape='box', n=n,
                                  L=round(Lf * FT, 2), W=round(Wf * FT, 2), D=round(12 * FT, 2),
                                  footM2=round(n * Lf * Wf * FT * FT),
-                                 train='water', stage=k + 1,
+                                 volM3=round(n * Lf * Wf * 12 * FT ** 3), train='water', stage=k + 1,
                                  src={'n': 'assumed', 'L': 'assumed', 'D': 'assumed'}))
         covered = sum(r['footM2'] for r in rows)
         return dict(siteL=round(siteL * FT, 1), siteW=round(siteW * FT, 1), rows=rows,
@@ -960,6 +1002,7 @@ def wrp_geometry(spec):
             r.update(n=lanes, L=round(bl, 1), W=round(am2 / bl, 1), D=round(u['D']['v'] * FT, 2),
                      acres=u['acres']['v'], footM2=round(am2))
         r['src'] = {k: u[k]['s'] for k in ('n', 'dia', 'D', 'L', 'W', 'acres') if k in u}
+        r['volM3'] = round(r['footM2'] * r['D'])
         rows.append(r)
     rows.sort(key=lambda r: r['stage'])
     covered = sum(r['footM2'] for r in rows)
@@ -968,7 +1011,7 @@ def wrp_geometry(spec):
                 coveragePct=round(100.0 * covered / (acres * 4046.856), 1))
 
 
-def build_facilities(fac_raw, tunnels3d):
+def build_facilities(fac_raw, tunnels3d, outfall_pts):
     out = []
     byid = {f['id']: f for f in fac_raw}
     for src_id, spec_id in FAC_ID_MAP.items():
@@ -986,6 +1029,33 @@ def build_facilities(fac_raw, tunnels3d):
         for k in ('basin', 'system', 'plant', 'pump', 'conflict', 'retired', 'stage2', 'extras', 'shape'):
             if k in spec:
                 rec[k] = spec[k]
+        if spec_id in PLANT_CSO:
+            rec['cso'] = []
+            for c in PLANT_CSO[spec_id]:
+                entry = dict(c)
+                at = c.get('at')
+                if at:
+                    tgt = next((x for x in fac_raw
+                                if FAC_ID_MAP.get(x['id']) == at), None)
+                    if tgt:
+                        ax, az = proj(tgt['lat'], tgt['lng'])
+                        entry['x'], entry['z'] = ax, az
+                        st = FAC_SPEC.get(at, {})
+                        rated = st.get('capMGD', {}).get('v')
+                        if rated:
+                            entry['ratedMGD'] = rated
+                            # discharge area implied by the station's rated
+                            # capacity at a 3 m/s design velocity
+                            entry['areaM2'] = round(rated * 0.0438126 / 3.0, 1)
+                        best, bd = None, 1e18
+                        for of in outfall_pts:
+                            dd = (of[0] - ax) ** 2 + (of[1] - az) ** 2
+                            if dd < bd:
+                                bd, best = dd, of
+                        if best and math.sqrt(bd) < 6000:
+                            entry['ox'], entry['oz'] = best[0], best[1]
+                            entry['oloc'] = best[2]
+                rec['cso'].append(entry)
         if spec['kind'] == 'reservoir':
             rec['geom'] = reservoir_geometry(spec)
         elif spec['kind'] == 'wrp':
@@ -1131,7 +1201,6 @@ def main():
     basins = build_basins()
     tunnels, fidelity, repairs = build_tunnels(tun_raw)
     shafts = build_shafts(ref, gis, tunnels)
-    facs = build_facilities(fac_raw, tunnels)
 
     outfalls = []
     for f in gis.get('features', []):
@@ -1140,6 +1209,8 @@ def main():
         x, z = proj(c[1], c[0])
         outfalls.append([x, z, p.get('LOCATION') or '', p.get('TARP_CONNECTION') or '',
                          p.get('OWNER') or '', p.get('WATERWAY_REACH') or ''])
+
+    facs = build_facilities(fac_raw, tunnels, outfalls)
 
     # city-sewer size ladder, for the true-scale cross-section ruler
     city_sizes = [4, 6, 8, 10, 12, 15, 18, 21, 24, 27, 30, 33, 36, 42, 48, 54, 60, 66, 72, 78]
