@@ -130,6 +130,22 @@
   .lbl.stage i { font-style:normal; color:var(--ink3); font-size:9.5px; }
   .lbl.stage i.hrt { color:#6fc3e8; font-weight:600; }
   .lbl.stage.solids { border-left-color:#b09050; }
+  .stormbtn { display:grid; grid-template-columns: 1fr auto; gap:1px 8px; width:100%; padding:6px 9px; margin-bottom:5px;
+    border:1px solid var(--line); border-radius:6px; background:var(--panel2); color:var(--ink2); cursor:pointer; text-align:left; font-size:11.5px; }
+  .stormbtn:hover { border-color:var(--accent); color:var(--ink); }
+  .stormbtn.on { border-color:var(--accent); background:var(--panel); color:var(--ink); }
+  .stormbtn b { font-variant-numeric:tabular-nums; color:var(--ink); }
+  .stormbtn span { color:var(--ink3); font-size:10.5px; grid-column:1 / span 2; }
+  .stormbtn i { font-style:normal; font-variant-numeric:tabular-nums; text-align:right; }
+  #stormnote, #compare { margin-top:8px; }
+  table.cmp { width:100%; border-collapse:collapse; font-size:11.5px; margin-top:6px; }
+  table.cmp th { text-align:left; color:var(--ink3); font-weight:600; font-size:10px; text-transform:uppercase; letter-spacing:.04em; padding:3px 4px 3px 0; border-bottom:1px solid var(--line); }
+  table.cmp td { padding:3px 4px 3px 0; border-bottom:1px solid var(--line); font-variant-numeric:tabular-nums; }
+  table.cmp td.n { text-align:right; }
+  table.cmp tr.tot td { font-weight:700; color:var(--ink); }
+  table.cmp .ratio { color:var(--ink3); }
+  table.cmp .ratio.far { color:var(--warn); }
+  .synth.off { opacity:.45; pointer-events:none; }
   .lbl.level { font-size:10.5px; color:#8ad8ff; background:rgba(10,30,45,.8); border-color:#3a7fa6; padding:2px 6px; transform:translate(-50%,-50%); }
   .lbl.level b { font-size:12px; }
   .lbl.level.full { color:#ff9a6b; border-color:#ff9a6b; }
@@ -282,6 +298,8 @@
     <div class="lrow2"><i class="sw" style="background:#d9a24a"></i>pumped return · <i class="sw" style="background:#8a6a3a"></i>interceptor · <i class="sw" style="background:#2c9a8f"></i>effluent</div>
     <div class="lrow2"><i class="sw" style="background:#9ec4de;height:8px;opacity:.6"></i>Lake Michigan · thin lines = rivers, district edge</div>
     <div class="lrow2"><i class="sw" style="background:#7d8fa5;height:1px"></i>10-ft ground contours (USGS via terrain tiles)</div>
+    <div class="lrow2"><i class="sw" style="background:#6fb8ff;height:8px"></i>standing water where the sewers are over capacity</div>
+    <div class="lrow2"><i class="sw" style="background:#3b6e8f;height:8px;width:24px"></i>rivers swell with what the outfalls pass</div>
     <div class="lrow2"><i class="sw" style="background:#9fe3ff;height:3px"></i>moving light = flow (speed ∝ √velocity)</div>
   </div>
   <div id="navhud">
@@ -329,9 +347,17 @@
     <div class="tabpane on" id="tab-storm">
       <h4>System build-out</h4>
       <select id="config"></select>
-      <h4>Storm</h4>
+      <h4>Recorded storms — the ten largest since 2006</h4>
+      <p class="hint">Real hourly rain from up to ten ASOS gauges around the region, seven days of lead-in
+        so the ground and the tunnels start in their real state, run against the system as it stood that
+        year. Pick one, then compare the model with what MWRD's pumping stations actually logged.</p>
+      <div id="stormlist"></div>
+      <div id="stormnote"></div>
+      <div id="compare"></div>
+      <h4>Or a synthetic storm</h4>
       <select id="scenario"></select>
       <div id="scennote"></div>
+      <div class="synth">
       <div class="ctl"><label>Total rainfall <b id="rainv">2.00 in</b></label>
         <input id="rain" type="range" min="0" max="40" step="0.1" value="2"></div>
       <div class="ctl"><label>Over <b id="durv">24 h</b></label>
@@ -339,8 +365,12 @@
       <div class="ctl"><label>Hyetograph shape</label>
         <select id="shape"><option value="peaked">Centre-peaked (realistic)</option>
           <option value="uniform">Uniform intensity</option></select></div>
-      <div class="ctl"><label>Runoff coefficient <b id="runoffv">0.32</b></label>
+      </div>
+      <div class="ctl"><label>Runoff coefficient (dry ground) <b id="runoffv">0.32</b></label>
         <input id="runoff" type="range" min="10" max="90" step="1" value="32"></div>
+      <p class="hint">Runoff rises toward 0.62 as the ground saturates, on the rain of the previous 72 hours
+        — an antecedent-moisture adjustment in the NRCS style. Without it a long wet week produces far too
+        little flow.</p>
       <div class="ctl"><label>Dewatering limited by</label>
         <select id="pumplimit"><option value="plant">Receiving plant's spare capacity</option>
           <option value="nameplate">Pump nameplate only</option></select></div>
@@ -430,6 +460,22 @@
           rating implies. Once more arrives than the station can pass, the velocity stops rising and
           the surplus is reported as backing up the collection system instead.</li>
       </ul>
+      <h4>Recorded storms and the comparison</h4>
+      <p class="hint">Event ranking: multi-day runs of wet days at O'Hare and Midway (NCEI GHCN-Daily), ranked by
+        the larger gauge total, 2006–2026. Hourly rain from the Iowa Environmental Mesonet's ASOS archive
+        for O'Hare, Midway, Wheeling, DuPage, Romeoville, Lansing, Waukegan, Aurora and Kenosha; each basin
+        is rained by inverse-distance weighting of those gauges at its centroid, so a storm that dumps
+        8 in on O'Hare and nothing on Midway (July 2011) hits the North and Central basins differently.
+        The comparison is against MWRD's own pumping-station discharge log, summed over the event window
+        plus two days. The log covers only the six stations, not the gravity outfalls, so the model's
+        "passed through the stations" figure is the like-for-like number. Across the ten storms the
+        geometric-mean ratio of modelled to recorded is about 1.1, with individual storms from 0.6× to 2.8×.</p>
+      <h4>Standing water</h4>
+      <p class="hint">When a basin's overflow exceeds what its outfalls are rated to pass, the surplus
+        surcharges the collection system and stands in the streets. The model pools that volume in the
+        basin's lowest ground from the same terrain grid as the contours (a stage–storage curve from the
+        real DEM), and drains it back out through the outfalls once they have room. It is where the water
+        goes, not a hydraulic flood map: no street network, no curbs, no time for it to get there.</p>
       <h4>Ground contours</h4>
       <p class="hint">10-foot elevation contours from AWS Terrain Tiles (Mapzen terrarium encoding, USGS
         NED/3DEP underneath), sampled at about 160 m, smoothed and simplified. Lake Michigan sits at
@@ -475,7 +521,7 @@
   document.getElementById('introGo').addEventListener('click', hide);
   addEventListener('keydown', e => { if (e.key === 'Escape') hide(); });
 </script>
-<script src="map-data/system3d.js?v=9"></script>
+<script src="map-data/system3d.js?v=10"></script>
 <script type="importmap">
 { "imports": {
   "three": "./assets/vendor/three/three.module.js",
@@ -489,6 +535,6 @@
     .map(([k, v]) => '<div class="srow"><span>' + v[0] + '</span><a href="' + v[1] + '">' + k + '</a></div>')
     .join('');
 </script>
-<script type="module" src="assets/js/system3d/app.js?v=9"></script>
+<script type="module" src="assets/js/system3d/app.js?v=10"></script>
 </body>
 </html>

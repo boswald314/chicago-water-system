@@ -61,7 +61,35 @@ export class SewerModel {
   constructor(data) {
     this.d = data.sim;
     this.basins = {};
-    for (const b of data.basins) this.basins[b.id] = b;
+    for (const b of data.basins) {
+      this.basins[b.id] = b;
+      // centroid of the outline rings, for reading a gauge field
+      let sx = 0, sz = 0, n = 0;
+      for (const ring of (b.outline || [])) for (const p of ring) { sx += p[0]; sz += p[1]; n++; }
+      b.cx = n ? sx / n : 0; b.cz = n ? sz / n : 0;
+    }
+    // what the relief pumping stations in each basin are rated to pass to the
+    // river; gravity outfalls add some, so a factor above 1 (assumed)
+    this.reliefCap = {};
+    for (const [bid, b] of Object.entries(this.basins)) {
+      const cap = (b.relief || []).map(id => this.d.relief[id]).filter(Boolean).reduce((a, x) => a + x.capMGD, 0);
+      this.reliefCap[bid] = cap > 0 ? cap * 1.5 : 1e9;
+    }
+  }
+
+  /** Rain at a basin's centroid at hour t: a recorded storm's gauges by
+   *  inverse-distance weighting, or the synthetic hyetograph. */
+  rainAt(b, o, t) {
+    if (!o.hyeto) return intensity(o.shape, t, o.inches, o.hours);
+    const h = Math.floor(t), f = t - h;
+    let wsum = 0, v = 0;
+    for (const g of o.hyeto.gauges) {
+      const d2 = Math.max(1e6, (g.x - b.cx) ** 2 + (g.z - b.cz) ** 2);
+      const w = 1 / d2;
+      const a = g.hourly[h] || 0, bq = g.hourly[h + 1] || 0;
+      v += w * (a + (bq - a) * f); wsum += w;
+    }
+    return wsum ? v / wsum : 0;
   }
 
   /** Run the whole storm up front and return every frame, so the timeline can
@@ -70,9 +98,15 @@ export class SewerModel {
     const o = Object.assign({
       inches: 2.0, hours: 24, shape: 'peaked', runoffC: 0.32,
       config: 'today', dtHr: 0.25, tailHr: 264, pumpLimit: 'plant',
+      // Antecedent moisture: the volumetric runoff coefficient rises toward
+      // runoffMax as the ground saturates, on the rain of the previous 72 h
+      // (an NRCS-AMC-style adjustment; the 0.32 base is the calibrated
+      // single-day value). Set amcK to 0 to switch it off.
+      runoffMax: 0.62, amcK: 2.5,
     }, opts);
     const cfg = CONFIGS.find(c => c.id === o.config) || CONFIGS[3];
     const D = this.d;
+    if (o.hyeto) { o.hours = o.hyeto.hours; o.inches = 0; }
 
     // --- capacities for this build-out state -----------------------------
     const tunCap = {}, resCap = {};
@@ -96,6 +130,12 @@ export class SewerModel {
     for (const rid of Object.keys(D.relief)) csoByStation[rid] = 0;
 
     let excessCum = 0, capturedCum = 0, treatedCum = 0;
+    const rain72 = [];                              // (t, inches) area-weighted, for antecedent moisture
+    const passedByStation = {};
+    for (const rid of Object.keys(D.relief)) passedByStation[rid] = 0;
+    const pooled = {};                              // MG standing in the streets, per basin
+    for (const bid of Object.keys(this.basins)) pooled[bid] = 0;
+    let rainCum = 0;
     const frames = [];
     // long storms need a long tail to watch the drawdown; coarser steps keep
     // a ten-day storm to a few thousand frames
@@ -104,10 +144,22 @@ export class SewerModel {
     if (total > 1500) o.dtHr = 1.0;
 
     for (let t = 0; t <= total + 1e-9; t += o.dtHr) {
-      const inHr = intensity(o.shape, t, o.inches, o.hours);
+      // rain is read per basin so a storm can be heavier on one side of town
+      const rainB = {};
+      let areaSum = 0, inHrW = 0;
+      for (const [bid, b] of Object.entries(this.basins)) {
+        rainB[bid] = this.rainAt(b, o, t);
+        inHrW += rainB[bid] * b.areaSqMi.v; areaSum += b.areaSqMi.v;
+      }
+      const inHr = areaSum ? inHrW / areaSum : 0;
+      rainCum += inHr * o.dtHr;
+      rain72.push([t, inHr * o.dtHr]);
+      while (rain72.length && rain72[0][0] < t - 72) rain72.shift();
+      const ant = rain72.reduce((a, x) => a + x[1], 0);
+      const cEff = o.amcK > 0 ? o.runoffC + (o.runoffMax - o.runoffC) * (1 - Math.exp(-ant / o.amcK)) : o.runoffC;
       const fr = {
         t, inHr, basins: {}, systems: {}, reservoirs: {}, plants: {},
-        csoRate: 0, csoCum: 0, pumpedRate: 0,
+        csoRate: 0, csoCum: 0, pumpedRate: 0, pooledMG: 0,
       };
 
       // Plant load starts with each basin's intercepted dry+wet flow. Egan and
@@ -126,7 +178,7 @@ export class SewerModel {
         const plant = D.plants[b.plant];
         if (!plant) { excess[bid] = 0; continue; }
         const dwf = plant.avg;
-        const runoff = o.runoffC * inHr * A * UNITS.MGD_PER_IN_HR_SQMI;
+        const runoff = cEff * rainB[bid] * A * UNITS.MGD_PER_IN_HR_SQMI;
         const gen = dwf + runoff;
         const cap = plant.dmf;                        // interceptor capture limit
         const intercepted = Math.min(gen, cap);
@@ -134,7 +186,7 @@ export class SewerModel {
         plantLoad[b.plant] += intercepted;
         excess[bid] = ex;
         excessCum += ex * o.dtHr / 24;
-        fr.basins[bid] = { gen, intercepted, excess: ex, runoff, dwf, inHr };
+        fr.basins[bid] = { gen, intercepted, excess: ex, runoff, dwf, inHr: rainB[bid], cEff };
       }
 
       // --- 2. excess down the drop shafts into the tunnels ---------------
@@ -209,12 +261,37 @@ export class SewerModel {
           }, 0);
           if (sysIn > 0) r += overflow[sid] * (excess[bid] * share) / sysIn;
         }
+        // the river takes what the outfalls can pass; the surplus surcharges the
+        // collection system and stands in the streets until there is room again
+        const cap = this.reliefCap[bid];
+        const passed = Math.min(r, cap);
+        const backup = r - passed;
+        pooled[bid] += backup * o.dtHr / 24;
+        // standing water drains back through the outfalls once they have room;
+        // it still reaches the river, just later -- which is what the stations
+        // log as discharge the day after the rain
+        let drainRate = 0;
+        if (r < cap && pooled[bid] > 0) {
+          const drain = Math.min(pooled[bid], (cap - r) * o.dtHr / 24);
+          pooled[bid] -= drain;
+          drainRate = drain * 24 / o.dtHr;
+        }
         csoCum[bid] += r * o.dtHr / 24;
         csoRate += r;
         fr.basins[bid].cso = r;
+        fr.basins[bid].csoPassed = passed + drainRate;
+        fr.basins[bid].backup = backup;
+        fr.basins[bid].pooledMG = pooled[bid];
+        fr.pooledMG += pooled[bid];
+        fr.basins[bid]._drainRate = drainRate;
         const relief = (b.relief || []).map(id => D.relief[id]).filter(Boolean);
         const tot = relief.reduce((a, x) => a + x.capMGD, 0) || 1;
-        for (const x of relief) csoByStation[x.id] += r * (x.capMGD / tot) * o.dtHr / 24;
+        for (const x of relief) {
+          csoByStation[x.id] += r * (x.capMGD / tot) * o.dtHr / 24;
+          // what MWRD's log can see: the station actually passing flow, capped
+          // at its rating, plus its share of the backed-up water draining out later
+          passedByStation[x.id] += (Math.min(r * (x.capMGD / tot), x.capMGD) + fr.basins[bid]._drainRate * (x.capMGD / tot)) * o.dtHr / 24;
+        }
       }
 
       for (const [sid, s] of Object.entries(D.systems)) {
@@ -245,13 +322,19 @@ export class SewerModel {
     const csoTotal = Object.values(csoCum).reduce((a, b) => a + b, 0);
     return {
       opts: o, config: cfg, frames, dtHr: o.dtHr, totalHr: total,
+      leadHr: o.hyeto ? (o.hyeto.leadHr || 0) : 0,
       summary: {
-        rainIn: o.inches, durHr: o.hours,
-        rainVolMG: this.rainVolume(o.inches),
+        rainIn: o.hyeto ? rainCum : o.inches, durHr: o.hours,
+        rainVolMG: this.rainVolume(o.hyeto ? rainCum : o.inches),
+        peakPooledMG: Math.max(...frames.map(f => f.pooledMG)),
+        peakPooledByBasin: Object.fromEntries(Object.keys(this.basins).map(bid =>
+          [bid, Math.max(...frames.map(f => (f.basins[bid] || {}).pooledMG || 0))])),
         excessMG: excessCum,
         csoMG: csoTotal,
         csoByBasin: Object.assign({}, csoCum),
         csoByStation: Object.assign({}, csoByStation),
+        passedByStation,
+        passedMG: Object.values(passedByStation).reduce((a, b) => a + b, 0),
         treatedMG: treatedCum,
         capturePct: excessCum > 0 ? 100 * (1 - csoTotal / excessCum) : 100,
         peakTunnelFill: Object.fromEntries(Object.keys(D.systems).map(sid =>

@@ -16,8 +16,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
-import { SewerModel, CONFIGS } from './sim.js?v=9';
-import * as SC from './scene.js?v=9';
+import { SewerModel, CONFIGS } from './sim.js?v=10';
+import * as SC from './scene.js?v=10';
 
 const D = window.SYS3D;
 const FT = SC.FT;
@@ -51,15 +51,16 @@ const ST = {
   vExag: 18, dExag: 34, route: 'corridor',
   playing: false, speedIx: 3, pos: 0, run: null,
   storm: { inches: 2.0, hours: 24, shape: 'peaked', runoffC: 0.32, config: 'today', pumpLimit: 'plant' },
-  layers: { geo: 1, contours: 1, tunnels: 1, water: 1, shafts: 1, connections: 0, links: 1, reservoirs: 1, plants: 1,
+  layers: { geo: 1, contours: 1, flood: 1, tunnels: 1, water: 1, shafts: 1, connections: 0, links: 1, reservoirs: 1, plants: 1,
             pumps: 1, outfalls: 0, basins: 1, labels: 1, flow: 1 },
+  storms: null, pools: null, recorded: null,
   selected: null, rainK: 0,
 };
 /* The eased live view of the simulation. Everything drawn reads from here,
  * never from a raw frame, so scrubbing, playing and switching scenarios all
  * move the water continuously. */
 const V = { systems: {}, reservoirs: {}, plants: {}, basins: {}, csoRate: 0, csoCum: 0,
-            inHr: 0, pumpedRate: 0, t: 0, ready: false };
+            inHr: 0, pumpedRate: 0, pooledMG: 0, t: 0, ready: false };
 
 const host = $('#view');
 const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
@@ -402,15 +403,27 @@ function buildGround() {
   grid.position.set(c.x, 1, c.z); grid.material.transparent = true; grid.material.opacity = 0.42; world.add(grid);
   world.userData.bounds = box;
 
-  const rb = new THREE.Box3();
-  for (const b of D.basins) for (const ring of b.outline) for (const p of ring) rb.expandByPoint(V3(p[0], 0, p[1]));
-  if (!rb.isEmpty()) {
-    const N = 3200, pos = new Float32Array(N * 3), seed = new Float32Array(N), s2 = rb.getSize(new THREE.Vector3()), mn = rb.min;
-    for (let i = 0; i < N; i++) { pos[i * 3] = mn.x + Math.random() * s2.x; pos[i * 3 + 1] = Math.random(); pos[i * 3 + 2] = mn.z + Math.random() * s2.z; seed[i] = Math.random(); }
-    const rg = new THREE.BufferGeometry(); rg.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  rain = [];
+  const inRing = (x, z, ring) => { let ins = false; for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const xi = ring[i][0], zi = ring[i][1], xj = ring[j][0], zj = ring[j][1];
+    if ((zi > z) !== (zj > z) && x < (xj - xi) * (z - zi) / ((zj - zi) || 1e-9) + xi) ins = !ins; } return ins; };
+  for (const b of D.basins) {
+    if (!b.outline.length) continue;
+    const rb = new THREE.Box3();
+    for (const ring of b.outline) for (const p of ring) rb.expandByPoint(V3(p[0], 0, p[1]));
+    const s2 = rb.getSize(new THREE.Vector3()), mn = rb.min;
+    const N = Math.max(120, Math.round(b.areaSqMi.v * 9)), pos = new Float32Array(N * 3), seed = new Float32Array(N);
+    let placed = 0, tries = 0;
+    while (placed < N && tries < N * 30) {
+      tries++;
+      const x = mn.x + Math.random() * s2.x, z = mn.z + Math.random() * s2.z;
+      if (!b.outline.some(r => inRing(x, z, r))) continue;
+      pos[placed * 3] = x; pos[placed * 3 + 1] = Math.random(); pos[placed * 3 + 2] = z; seed[placed] = Math.random(); placed++;
+    }
+    const rg = new THREE.BufferGeometry(); rg.setAttribute('position', new THREE.BufferAttribute(pos.subarray(0, placed * 3), 3));
     const mat = new THREE.PointsMaterial({ color: 0x9ec9ea, size: 70, sizeAttenuation: true, transparent: true, opacity: 0, depthWrite: false });
     const pts = new THREE.Points(rg, mat); pts.frustumCulled = false; world.add(pts);
-    rain = { pts, pos, seed, N, mat, H: 2600 };
+    rain.push({ bid: b.id, pts, pos, seed, N: placed, mat, H: 2600 });
   }
 }
 /* Rough geography: everything here is line work at grade, or a translucent
@@ -453,6 +466,68 @@ function buildGeo() {
     addLabel(lk.name, cx, cz, 6, 'geo', 40000);
   }
 }
+/* Standing water: each basin's lowest ground cells (from the DEM), filled
+ * from the bottom with the modelled backed-up volume. */
+const pools = {};
+async function buildPools() {
+  let data;
+  try { data = await (await fetch('map-data/gis/basin-pools.json')).json(); }
+  catch (e) { console.warn('pools unavailable', e); return; }
+  ST.pools = data;
+  const mat = std({ color: 0x4aa8f0, roughness: 0.15, metalness: 0.2, emissive: 0x1a5f9a, emissiveIntensity: 0.6, transparent: true, opacity: 0.85, depthWrite: false });
+  for (const [bid, b] of Object.entries(data.basins)) {
+    const n = b.cells.length, cellM = b.cellM;
+    const im = new THREE.InstancedMesh(new THREE.BoxGeometry(cellM, 1, cellM), mat, n);
+    im.frustumCulled = false; im.count = 0; im.renderOrder = 1;
+    layerG.flood.add(im);
+    // stage-storage: cumulative volume (m^3) up to each cell's elevation
+    const cum = new Float64Array(n + 1);
+    for (let i = 0; i < n; i++) { const dz = i ? (b.cells[i][0] - b.cells[i - 1][0]) * FT : 0; cum[i + 1] = cum[i] + i * dz * cellM * cellM; }
+    pools[bid] = { b, im, cum, shown: -1 };
+    reg(im, { kind: 'flood', title: `Standing water — ${(D.basins.find(x => x.id === bid) || {}).name || bid}`, sub: 'sewers over capacity',
+      rows: [['Volume standing', () => `${num((V.basins[bid] || {}).pooledMG || 0)} MG`, 'derived'],
+             ['Lowest ground in the basin', `${b.lowest} ft`, 'derived'],
+             ['Where it is drawn', 'the basin’s lowest ground cells, filled from the bottom (stage–storage from the terrain grid)', 'derived']],
+      note: 'What the outfalls cannot pass surcharges the collection system and stands in the low ground until there is room to drain it. This is where the water goes, not a hydraulic flood map.', doc: 'doc14' });
+  }
+}
+function syncPools() {
+  for (const [bid, p] of Object.entries(pools)) {
+    const vol = ((V.basins[bid] || {}).pooledMG || 0) * 3785.41;      // m^3
+    if (Math.abs(vol - p.shown) < 50) continue;
+    p.shown = vol;
+    const { b, im, cum } = p, cells = b.cells, cellM = b.cellM, n = cells.length;
+    if (vol < 1) { im.count = 0; continue; }
+    // level L: cum(i) + i * (L - elev_i) * cell^2 = vol, for the i cells below L
+    let i = 1; while (i < n && cum[i + 1] < vol) i++;
+    const L = cells[i - 1][0] * FT + (vol - cum[i]) / (i * cellM * cellM);
+    let k = 0;
+    for (let c = 0; c < i; c++) {
+      const depth = (L - cells[c][0] * FT) * ST.vExag;
+      if (depth <= 0.02) continue;
+      _d.rotation.set(0, 0, 0); _d.position.set(cells[c][1], depth / 2 + 2, cells[c][2]); _d.scale.set(1, depth, 1);
+      _d.updateMatrix(); im.setMatrixAt(k++, _d.matrix);
+    }
+    im.count = k; im.instanceMatrix.needsUpdate = true;
+  }
+}
+/* Rivers swell with what the outfalls actually pass into them. Straight
+ * mapping of each basin's relief stations to the reach they discharge to. */
+const REACH = { 'bubbly-creek-south-fork': ['CENTRAL'], 'south-branch-chicago-river': ['CENTRAL'], 'chicago-sanitary-and-ship-canal': ['CENTRAL'],
+  'north-branch-chicago-river': ['NORTH'], 'north-shore-channel': ['NORTH'], 'chicago-river-main-stem': ['NORTH'],
+  'calumet-river': ['SOUTH'], 'little-calumet-river': ['SOUTH'], 'cal-sag-channel': ['SOUTH'] };
+const rivers = [];
+function syncRivers() {
+  for (const r of rivers) {
+    const q = (REACH[r.id] || []).reduce((a, bid) => a + ((V.basins[bid] || {}).passed || 0), 0);
+    const swell = 1 + Math.min(3.5, q / 900);
+    if (Math.abs(swell - r.swell) < 0.03) continue;
+    r.swell = swell;
+    r.mesh.geometry.dispose(); r.mesh.geometry = SC.ribbon(r.pts, 140 * swell, 6);
+    r.mesh.material.opacity = 0.7 + Math.min(0.3, (swell - 1) * 0.15);
+  }
+}
+
 /* Ground contours, fetched on demand: 10-ft lines from USGS-derived terrain
  * tiles, drawn at grade as thin line work. The 580 ft line is the shoreline. */
 async function buildContours() {
@@ -479,11 +554,14 @@ async function buildContours() {
 }
 
 function buildSurface() {
-  for (const w of D.waterways) if (w.pts.length >= 2) layerG.geo.add(new THREE.Mesh(SC.ribbon(w.pts, 140, 6), M.river));
+  for (const w of D.waterways) if (w.pts.length >= 2) {
+    const mesh = new THREE.Mesh(SC.ribbon(w.pts, 140, 6), M.river.clone()); layerG.geo.add(mesh);
+    rivers.push({ id: w.id, pts: w.pts, mesh, swell: 1 });
+  }
   for (const b of D.basins) {
     for (const g of SC.polyShape(b.outline, 2)) {
       const mm = M.basin.clone(); mm.color = new THREE.Color(b.color); mm.opacity = 0.13;
-      const m = new THREE.Mesh(g, mm); layerG.basins.add(m);
+      const m = new THREE.Mesh(g, mm); m.userData.bid = b.id; layerG.basins.add(m);
       reg(m, { kind: 'basin', title: b.name, sub: 'MWRD combined sewer area',
         rows: [['Combined sewer area', `${b.areaSqMi.v} sq mi`, b.areaSqMi.s], ['Treatment plant', (facById(b.plant) || {}).name || b.plant, 'gis'],
                ['TARP systems', b.systems.map(s => D.systems[s].name).join(', ') || 'none', 'doc09']],
@@ -930,33 +1008,80 @@ function buildGeoLabels() {
 
 /* =================================== 5. the live view of the simulation */
 const model = new SewerModel(D);
+async function buildStorms() {
+  let data;
+  try { data = await (await fetch('map-data/storms.json')).json(); } catch (e) { console.warn('storms unavailable', e); return; }
+  ST.storms = data;
+  const box = $('#stormlist');
+  for (const st of data.storms) {
+    const g = st.gauges[0];
+    const b = el('button', 'stormbtn',
+      `<b>${st.start} → ${st.end}</b><i>${g ? g.totalIn.toFixed(2) + ' in at ' + esc(g.name) : ''}</i>` +
+      `<span>${st.gauges.length} gauges · O'Hare ${st.ghcn.ORD} in, Midway ${st.ghcn.MDW} in · MWRD logged ${st.recordedTotalMG.toLocaleString()} MG</span>`);
+    b.dataset.id = st.id;
+    b.addEventListener('click', () => pickStorm(st.id));
+    box.appendChild(b);
+  }
+}
+function pickStorm(id) {
+  const st = ST.storms && ST.storms.storms.find(x => x.id === id);
+  ST.recorded = st || null;
+  document.querySelectorAll('.stormbtn').forEach(x => x.classList.toggle('on', st && x.dataset.id === st.id));
+  document.querySelector('.synth').classList.toggle('off', !!st);
+  if (st) {
+    ST.storm.hyeto = st; ST.storm.config = st.era; $('#config').value = st.era;
+    $('#stormnote').innerHTML = `<div class="cfgnote">Raining <b>${esc(st.start)}</b> to <b>${esc(st.end)}</b> from ${st.gauges.length} gauges, with seven days of real lead-in, against the system as built in ${esc(CONFIGS.find(c => c.id === st.era).label)}. Heaviest: ${st.gauges.slice(0, 3).map(g => `${esc(g.name)} ${g.totalIn.toFixed(2)} in`).join(', ')}.</div>`;
+  } else { delete ST.storm.hyeto; $('#stormnote').innerHTML = ''; $('#compare').innerHTML = ''; }
+  runSim();
+}
+function renderCompare() {
+  const st = ST.recorded, s = ST.run.summary;
+  if (!st) { $('#compare').innerHTML = ''; return; }
+  const ids = ['ps-north-branch', 'ps-racine', 'ps-westchester', 'ps-95th', 'ps-122nd', 'ps-125th'];
+  let h = '<table class="cmp"><tr><th>Station</th><th>MWRD logged</th><th>Modelled passed</th><th></th></tr>';
+  let recT = 0, modT = 0;
+  for (const id of ids) {
+    const f = facById(id), rec = st.recordedCsoMG[id] || 0, mod = s.passedByStation[id] || 0;
+    recT += rec; modT += mod;
+    const ratio = rec > 0 ? mod / rec : null;
+    h += `<tr><td>${esc(f ? f.short : id)}</td><td class="n">${num(rec)}</td><td class="n">${num(mod)}</td><td class="ratio${ratio && (ratio > 2 || ratio < 0.5) ? ' far' : ''}">${ratio ? ratio.toFixed(2) + '×' : (mod > 1 ? 'not logged' : '—')}</td></tr>`;
+  }
+  const rt = recT > 0 ? modT / recT : null;
+  h += `<tr class="tot"><td>Six stations</td><td class="n">${num(recT)}</td><td class="n">${num(modT)}</td><td class="ratio${rt && (rt > 2 || rt < 0.5) ? ' far' : ''}">${rt ? rt.toFixed(2) + '×' : '—'}</td></tr></table>`;
+  h += `<p class="hint">Modelled total overflow including gravity outfalls the log does not cover: <b>${num(s.csoMG)} MG</b>; peak standing water <b>${num(s.peakPooledMG)} MG</b>; ` +
+       Object.entries(s.peakResFill).filter(([k]) => ST.run.frames[0].reservoirs[k].capMG > 0).map(([k, v]) => `${esc((facById(k) || {}).short || k)} peaked at ${(v * 100).toFixed(0)}%`).join(', ') + '.</p>';
+  $('#compare').innerHTML = h;
+}
+
 function runSim() {
   ST.run = model.run(ST.storm);
-  ST.pos = 0;
+  ST.pos = ST.run.leadHr ? Math.max(0, ST.run.leadHr / ST.run.dtHr - 4) : 0;
   $('#scrub').max = ST.run.frames.length - 1; $('#scrub').value = 0;
-  applyBuildOut(); drawChart(); renderSummary(); syncView(true);
+  applyBuildOut(); drawChart(); renderSummary(); renderCompare(); syncView(true);
+  $('#scrub').value = ST.pos;
 }
 function sampleFrame(pos) {
   const F = ST.run.frames, i = Math.max(0, Math.min(F.length - 1, Math.floor(pos))), j = Math.min(F.length - 1, i + 1), k = clamp01(pos - i);
   const a = F[i], b = F[j], mix = (x, y) => lerp(x, y, k);
   const out = { t: mix(a.t, b.t), inHr: mix(a.inHr, b.inHr), csoRate: mix(a.csoRate, b.csoRate), csoCum: mix(a.csoCum, b.csoCum),
-    pumpedRate: mix(a.pumpedRate, b.pumpedRate), systems: {}, reservoirs: {}, plants: {}, basins: {} };
+    pumpedRate: mix(a.pumpedRate, b.pumpedRate), pooledMG: mix(a.pooledMG || 0, b.pooledMG || 0), systems: {}, reservoirs: {}, plants: {}, basins: {} };
   for (const sid of Object.keys(a.systems)) out.systems[sid] = { vol: mix(a.systems[sid].volMG, b.systems[sid].volMG), cap: a.systems[sid].capMG,
     inflow: mix(a.systems[sid].inflow, b.systems[sid].inflow), pumped: mix(a.systems[sid].pumped, b.systems[sid].pumped) };
   for (const rid of Object.keys(a.reservoirs)) out.reservoirs[rid] = { vol: mix(a.reservoirs[rid].volMG, b.reservoirs[rid].volMG), cap: a.reservoirs[rid].capMG,
     net: (b.reservoirs[rid].volMG - a.reservoirs[rid].volMG) / ST.run.dtHr * 24 };      // MGD, + filling
   for (const pid of Object.keys(a.plants)) out.plants[pid] = { flow: mix(a.plants[pid].flow, b.plants[pid].flow), dmf: a.plants[pid].dmf };
-  for (const bid of Object.keys(a.basins)) out.basins[bid] = { cso: mix(a.basins[bid].cso || 0, b.basins[bid].cso || 0), intercepted: mix(a.basins[bid].intercepted || 0, b.basins[bid].intercepted || 0) };
+  for (const bid of Object.keys(a.basins)) out.basins[bid] = { cso: mix(a.basins[bid].cso || 0, b.basins[bid].cso || 0), intercepted: mix(a.basins[bid].intercepted || 0, b.basins[bid].intercepted || 0),
+    inHr: mix(a.basins[bid].inHr || 0, b.basins[bid].inHr || 0), pooledMG: mix(a.basins[bid].pooledMG || 0, b.basins[bid].pooledMG || 0), passed: mix(a.basins[bid].csoPassed || 0, b.basins[bid].csoPassed || 0) };
   return out;
 }
 function easeView(target, dt, snap) {
   const k = snap ? 1 : 1 - Math.pow(0.02, dt);
   const ez = (obj, key, val) => { obj[key] = obj[key] == null || snap ? val : lerp(obj[key], val, k); };
-  ez(V, 't', target.t); ez(V, 'inHr', target.inHr); ez(V, 'csoRate', target.csoRate); ez(V, 'csoCum', target.csoCum); ez(V, 'pumpedRate', target.pumpedRate);
+  ez(V, 't', target.t); ez(V, 'inHr', target.inHr); ez(V, 'csoRate', target.csoRate); ez(V, 'csoCum', target.csoCum); ez(V, 'pumpedRate', target.pumpedRate); ez(V, 'pooledMG', target.pooledMG);
   for (const [sid, s] of Object.entries(target.systems)) { const o = V.systems[sid] = V.systems[sid] || {}; ez(o, 'vol', s.vol); ez(o, 'inflow', s.inflow); ez(o, 'pumped', s.pumped); o.cap = s.cap; }
   for (const [rid, r] of Object.entries(target.reservoirs)) { const o = V.reservoirs[rid] = V.reservoirs[rid] || {}; ez(o, 'vol', r.vol); ez(o, 'net', r.net); o.cap = r.cap; }
   for (const [pid, p] of Object.entries(target.plants)) { const o = V.plants[pid] = V.plants[pid] || {}; ez(o, 'flow', p.flow); o.dmf = p.dmf; }
-  for (const [bid, b] of Object.entries(target.basins)) { const o = V.basins[bid] = V.basins[bid] || {}; ez(o, 'cso', b.cso); ez(o, 'intercepted', b.intercepted); }
+  for (const [bid, b] of Object.entries(target.basins)) { const o = V.basins[bid] = V.basins[bid] || {}; ez(o, 'cso', b.cso); ez(o, 'intercepted', b.intercepted); ez(o, 'inHr', b.inHr); ez(o, 'pooledMG', b.pooledMG); ez(o, 'passed', b.passed); }
   V.ready = true;
 }
 /** Push the live view into the geometry. Runs every render tick. */
@@ -1082,7 +1207,8 @@ function syncView(snap, dt = 1 / 60) {
     l.mesh.material.opacity = q > 1 ? 0.92 : 0.3;
   }
   ST.rainK = Math.min(1, V.inHr / 0.5);
-  layerG.basins.children.forEach(m => { m.material.opacity = 0.11 + ST.rainK * 0.14; });
+  syncPools(); syncRivers();
+  layerG.basins.children.forEach(m => { const b = m.userData.bid; const k = Math.min(1, ((V.basins[b] || {}).inHr || 0) / 0.5); m.material.opacity = 0.11 + k * 0.16; });
 }
 
 /* ============================================ 6. panels and readouts */
@@ -1131,7 +1257,8 @@ function renderReadout() {
   cso.innerHTML = `<div class="k">Combined sewer overflow</div><div class="v">${num(V.csoCum)} <span>MG discharged</span></div><div class="r">${V.csoRate > 1 ? `discharging now at ${num(V.csoRate)} MGD` : 'no overflow'}</div><div class="r">pumped back for treatment: ${num(V.pumpedRate)} MGD</div>`;
   const ph = $('#phase'), filling = Object.values(V.systems).some(s => s.inflow > 1);
   let txt, cls = '';
-  if (V.csoRate > 1) { txt = `<b>Discharging</b> — the tunnels and reservoirs are full; ${num(V.csoRate)} MGD is going to the rivers untreated`; cls = 'cso'; }
+  if (V.pooledMG > 5) { txt = `<b>Flooding</b> — ${num(V.pooledMG)} MG is standing in the streets; the outfalls are passing all they can`; cls = 'cso'; }
+  else if (V.csoRate > 1) { txt = `<b>Discharging</b> — the tunnels and reservoirs are full; ${num(V.csoRate)} MGD is going to the rivers untreated`; cls = 'cso'; }
   else if (V.inHr > 0.005 && filling) { txt = `<b>Raining ${V.inHr.toFixed(2)} in/hr</b> — excess is going down the drop shafts`; cls = 'rain'; }
   else if (V.pumpedRate > 1) txt = `<b>Dewatering</b> — pumping ${num(V.pumpedRate)} MGD back up to the plants`;
   else if (ST.pos < 0.5) txt = '<b>Dry weather</b> — press play';
@@ -1194,7 +1321,10 @@ function drawChart() {
   ctx.stroke(); ctx.setLineDash([]);
   $('#chartmax').textContent = maxC > 1 ? `CSO peak ${num(maxC)} MG` : 'no CSO';
   const marks = [];
-  if (ST.run.opts.hours > 0) marks.push([ST.run.opts.hours, 'rain ends', '#5a96c8']);
+  if (ST.run.leadHr) {
+    ctx.fillStyle = 'rgba(120,130,150,.12)'; ctx.fillRect(0, 0, x(ST.run.leadHr), h);
+    marks.push([ST.run.leadHr, 'storm begins', '#9fb0c2']);
+  } else if (ST.run.opts.hours > 0) marks.push([ST.run.opts.hours, 'rain ends', '#5a96c8']);
   const firstCso = F.find(f => f.csoRate > 1); if (firstCso) marks.push([firstCso.t, 'first discharge', '#d64545']);
   if (ST.run.summary.emptyHr) marks.push([ST.run.summary.emptyHr, 'empty', '#2c9a8f']);
   ctx.font = `${9.5 * px}px -apple-system,system-ui,sans-serif`; ctx.textAlign = 'left';
@@ -1261,7 +1391,7 @@ function updateNavHud(now) {
 
 /* ============================================================ 7. wiring */
 function buildUI() {
-  const names = { geo: 'Geography (lake, rivers, district)', contours: 'Ground contours (10 ft)', tunnels: 'Deep tunnels', water: 'Water in the tunnels', shafts: 'TARP drop shafts',
+  const names = { geo: 'Geography (lake, rivers, district)', contours: 'Ground contours (10 ft)', flood: 'Standing water & swollen rivers', tunnels: 'Deep tunnels', water: 'Water in the tunnels', shafts: 'TARP drop shafts',
     connections: 'Interceptor connecting structures', links: 'Conduits between facilities', reservoirs: 'Reservoirs', plants: 'Treatment plants',
     pumps: 'Pumping stations', outfalls: 'CSO outfalls (441)', basins: 'Combined sewer areas', labels: 'Labels', flow: 'Flow animation' };
   const box = $('#layers');
@@ -1301,6 +1431,7 @@ function buildUI() {
   bind('#dur', e => { ST.storm.hours = +e.target.value; $('#durv').textContent = ST.storm.hours + ' h'; runSim(); });
   bind('#runoff', e => { ST.storm.runoffC = +e.target.value / 100; $('#runoffv').textContent = ST.storm.runoffC.toFixed(2); runSim(); });
   $('#scenario').addEventListener('change', e => {
+    if (ST.recorded) pickStorm(null);
     const s = D.sim.scenarios.find(x => x.id === e.target.value); if (!s) return;
     ST.storm.inches = s.inches; ST.storm.hours = s.hours || 1;
     $('#rain').value = s.inches; $('#rainv').textContent = s.inches.toFixed(2) + ' in'; $('#dur').value = ST.storm.hours; $('#durv').textContent = ST.storm.hours + ' h';
@@ -1368,14 +1499,18 @@ function animate(now) {
   const pulse = 1 + 0.35 * Math.sin(now / 160);
   for (const po of Object.values(plantObjects)) for (const cp of po.csoPaths) cp.marker.scale.setScalar(cp.on ? 1.6 * pulse : 1);
   if (rain) {
-    // rain reads at city scale; up close it is just squares, so it fades out
+    // rain reads at city scale; up close it is just squares, so it fades out.
+    // Each basin's cloud follows its own gauge-weighted intensity.
     const near = clamp01((camera.position.distanceTo(controls.target) - 4000) / 12000);
-    rain.mat.opacity = lerp(rain.mat.opacity, ST.rainK * 0.32 * near, 1 - Math.pow(0.05, dt));
-    rain.pts.visible = rain.mat.opacity > 0.01;
-    if (rain.pts.visible) {
-      const H = rain.H * Math.max(1, ST.vExag / 12);
-      for (let i = 0; i < rain.N; i++) { let y = rain.pos[i * 3 + 1] / H - dt * 1.1 * (0.7 + rain.seed[i] * 0.6); if (y < 0) y += 1; rain.pos[i * 3 + 1] = y * H; }
-      rain.pts.geometry.attributes.position.needsUpdate = true;
+    for (const rc of rain) {
+      const inHr = V.basins[rc.bid] ? (V.basins[rc.bid].inHr || 0) : 0;
+      const k = Math.min(1, inHr / 0.5);
+      rc.mat.opacity = lerp(rc.mat.opacity, k * 0.34 * near, 1 - Math.pow(0.05, dt));
+      rc.pts.visible = rc.mat.opacity > 0.01;
+      if (!rc.pts.visible) continue;
+      const H = rc.H * Math.max(1, ST.vExag / 12), fall = dt * (0.9 + k * 0.8);
+      for (let i = 0; i < rc.N; i++) { let y = rc.pos[i * 3 + 1] / H - fall * (0.7 + rc.seed[i] * 0.6); if (y < 0) y += 1; rc.pos[i * 3 + 1] = y * H; }
+      rc.pts.geometry.attributes.position.needsUpdate = true;
     }
   }
   for (const l of labelObjs) {
@@ -1390,6 +1525,7 @@ function animate(now) {
 }
 
 buildUI(); buildGround(); buildGeo(); buildSurface(); buildContours(); buildTunnels(); buildShafts(); buildReservoirs(); buildPlants(); buildPumps(); buildLinks();
+buildStorms(); buildPools();
 frameAll();
 $('#scennote').textContent = D.sim.scenarios.find(s => s.id === 'design').note;
 runSim();
@@ -1397,4 +1533,4 @@ setScale(18, 34);
 renderFidelity(); drawLadder(); inspect(null);
 animate(performance.now());
 
-window.__S3D = { THREE, scene, world, camera, controls, ST, V, D, layerG, conduits, resObjects, plantObjects, pumpObjects, shaftSets, links, setScale, flyTo, runSim, syncView, frameAll, model, KEYS };
+window.__S3D = { THREE, scene, world, camera, controls, ST, V, D, layerG, conduits, resObjects, plantObjects, pumpObjects, shaftSets, links, pools, rivers, setScale, flyTo, runSim, syncView, frameAll, pickStorm, model, KEYS };

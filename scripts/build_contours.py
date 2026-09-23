@@ -260,5 +260,56 @@ def main():
     json.dump(dict(meta=meta, levels=levels), open(OUT, 'w'), separators=(',', ':'))
     print(f'contours.json: {total} lines across {len(levels)} levels ({os.path.getsize(OUT) // 1024} KB)')
 
-if __name__ == '__main__':
+if __name__ == '__main__' and '--pools' not in sys.argv:
     main()
+
+
+# ============================================================ basin pooling
+def build_pools():
+    """Where water goes when the sewers cannot take it: for each combined-sewer
+    basin, the ground cells inside it ordered from lowest up, so the viewer can
+    fill the basin's depressions from the bottom with the modelled backed-up
+    volume (a stage-storage curve from the real DEM). Only the lowest 30% of
+    cells per basin are shipped; nothing plausible pools above that."""
+    sysd = json.loads(open(os.path.join(ROOT, 'map-data', 'system3d.js')).read().split('=', 1)[1].rsplit(';', 1)[0])
+    grid, tx0, ty0, W, H = build_grid()
+    K = 2
+    g = blur([[v * 3.28084 for v in row] for row in downsample(grid, K)])
+    Hs, Ws = len(g), len(g[0])
+    cell_m = (40075016.686 * math.cos(math.radians(LAT0)) / (256 * 2 ** Z)) * K
+    def rc_to_model(r, c):
+        lat, lng = tile_latlng(tx0 + (c + 0.5) * K / 256.0, ty0 + (r + 0.5) * K / 256.0, Z)
+        return proj(lat, lng)
+    def inside(pt, ring):
+        x, z = pt; n = len(ring); ins = False
+        for i in range(n):
+            x1, z1 = ring[i]; x2, z2 = ring[(i + 1) % n]
+            if (z1 > z) != (z2 > z) and x < (x2 - x1) * (z - z1) / ((z2 - z1) or 1e-9) + x1: ins = not ins
+        return ins
+    out = {}
+    for b in sysd['basins']:
+        rings = b.get('outline') or []
+        if not rings: continue
+        bx = [p[0] for r in rings for p in r]; bz = [p[1] for r in rings for p in r]
+        cells = []
+        for r in range(Hs):
+            for c in range(Ws):
+                x, z = rc_to_model(r, c)
+                if x < min(bx) or x > max(bx) or z < min(bz) or z > max(bz): continue
+                if g[r][c] < 570: continue                       # lake, not land
+                if any(inside((x, z), ring) for ring in rings):
+                    cells.append((round(g[r][c], 1), round(x), round(z)))
+        cells.sort()
+        keep = cells[:max(20, int(len(cells) * 0.30))]
+        out[b['id']] = dict(cellM=round(cell_m), n=len(cells), lowest=keep[0][0] if keep else None,
+                            cells=[[e, x, z] for e, x, z in keep])
+        print(f"  {b['id']:8s} cells={len(cells):6d} lowest={keep[0][0] if keep else None} ft shipped={len(keep)}", file=sys.stderr)
+    dst = os.path.join(ROOT, 'map-data', 'gis', 'basin-pools.json')
+    json.dump(dict(meta=dict(source='same terrain grid as contours.json; cells are the lowest 30% of each basin, ascending',
+                             use='stage-storage: volume pooled at level L = sum over cells with elev < L of (L - elev) * cellM^2'),
+                   basins=out), open(dst, 'w'), separators=(',', ':'))
+    print(f'basin-pools.json: {os.path.getsize(dst) // 1024} KB')
+
+
+if __name__ == '__main__' and '--pools' in sys.argv:
+    build_pools()
