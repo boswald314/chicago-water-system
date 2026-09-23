@@ -273,7 +273,9 @@
     <div class="lrow2"><i class="sw bar" style="background:#5f6c7a"></i>interceptor connection</div>
     <div class="lrow2"><i class="dot" style="background:#2c9a8f"></i>treatment plant · <i class="dot" style="background:#b07acc"></i>pumping station</div>
     <div class="lrow2"><i class="dot" style="background:#d64545"></i>CSO discharge point — pulses while discharging</div>
-    <div class="lrow2"><i class="sw" style="background:#9fe3ff;height:3px"></i>flow (speed ∝ √velocity)</div>
+    <div class="lrow2"><i class="sw" style="background:#d9a24a"></i>pumped return · <i class="sw" style="background:#8a6a3a"></i>interceptor · <i class="sw" style="background:#2c9a8f"></i>effluent</div>
+    <div class="lrow2"><i class="sw" style="background:#9ec4de;height:8px;opacity:.6"></i>Lake Michigan · thin lines = rivers, district edge</div>
+    <div class="lrow2"><i class="sw" style="background:#9fe3ff;height:3px"></i>moving light = flow (speed ∝ √velocity)</div>
   </div>
   <div id="navhud">
     <div id="compass" title="North"><svg viewBox="0 0 40 40"><g id="needle"><path d="M20 4 L26 22 L20 18 L14 22 Z" fill="#d64545"/><path d="M20 36 L14 18 L20 22 L26 18 Z" fill="#8b97a6"/></g><text x="20" y="11" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">N</text></svg></div>
@@ -460,7 +462,7 @@
   document.getElementById('introGo').addEventListener('click', hide);
   addEventListener('keydown', e => { if (e.key === 'Escape') hide(); });
 </script>
-<script src="map-data/system3d.js?v=6"></script>
+<script src="map-data/system3d.js?v=7"></script>
 <script type="importmap">
 { "imports": {
   "three": "./assets/vendor/three/three.module.js",
@@ -474,6 +476,6 @@
     .map(([k, v]) => '<div class="srow"><span>' + v[0] + '</span><a href="' + v[1] + '">' + k + '</a></div>')
     .join('');
 </script>
-<script type="module" src="assets/js/system3d/app.js?v=6"></script>
+<script type="module" src="assets/js/system3d/app.js?v=7"></script>
 </body>
 </html>

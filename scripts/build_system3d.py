@@ -1106,7 +1106,8 @@ def build_waterways():
             'north-shore-channel', 'chicago-sanitary-ship-canal', 'cal-sag-channel',
             'calumet-river', 'little-calumet-river', 'grand-calumet-river-il',
             'des-plaines-river-lyons-lockport', 'bubbly-creek-south-fork',
-            'north-shore-channel-wilmette', 'lake-michigan-shore'}
+            'north-shore-channel-wilmette', 'lake-michigan-shore', 'wb-dupage-river', 'salt-creek',
+            'higgins-creek', 'addison-creek', 'weller-creek'}
     out = []
     for w in ww:
         if w['id'] not in keep and 'channel' not in w['id'] and 'canal' not in w['id']:
@@ -1118,6 +1119,66 @@ def build_waterways():
         out.append(dict(id=w['id'], name=w.get('name', w['id']),
                         pts=[list(proj(a, b)) for a, b in g[::step]]))
     return out
+
+
+# ============================================================== geography
+def build_geo():
+    """Rough geographic context, all derived from data already in the repo:
+    the district outline from MWRD's CSO monitoring areas, a Lake Michigan
+    shoreline taken as the eastern edge of that outline, every MWRD waterway
+    centreline, and the two Calumet-area lakes."""
+    geo = dict(district=[], shoreline=[], waterways=[], lakes=[])
+    g = load('gis/cso-monitoring-areas.geojson', {'features': []})
+    rings = []
+    for f in g.get('features', []):
+        gm = f['geometry']
+        polys = [gm['coordinates']] if gm['type'] == 'Polygon' else gm['coordinates']
+        for poly in polys:
+            ring = poly[0]
+            if poly_area_m2(poly) < 3.0e6:
+                continue
+            step = max(1, len(ring) // 220)
+            pts = [proj(c[1], c[0]) for c in ring[::step]]
+            rings.append(pts)
+            geo['district'].append([[round(x, 1), round(z, 1)] for x, z in pts])
+    # shoreline: for each 500 m band of northing, the easternmost district point
+    allpts = [p for r in rings for p in r]
+    if allpts:
+        zmin = min(p[1] for p in allpts); zmax = max(p[1] for p in allpts)
+        band = 500.0
+        n = int((zmax - zmin) / band) + 1
+        best = [None] * n
+        for x, z in allpts:
+            k = int((z - zmin) / band)
+            if best[k] is None or x > best[k][0]:
+                best[k] = (x, z)
+        # the district only meets the lake along its city-side east edge; where
+        # the boundary turns inland (far north, far south) it is not a shore
+        line = [b for b in best if b and b[0] > 6000 and b[1] < 26000]   # north of the state line
+        # light smoothing so the shore does not zigzag on polygon vertices
+        sm = []
+        for i, (x, z) in enumerate(line):
+            xs = [line[j][0] for j in range(max(0, i - 2), min(len(line), i + 3))]
+            sm.append([round(sum(xs) / len(xs), 1), round(z, 1)])
+        geo['shoreline'] = sm
+    mw = load('gis/mwrd-waterways.geojson', {'features': []})
+    for f in mw.get('features', []):
+        gm = f['geometry']
+        lines = [gm['coordinates']] if gm['type'] == 'LineString' else gm['coordinates']
+        for ln in lines:
+            if len(ln) < 2:
+                continue
+            step = max(1, len(ln) // 18)
+            geo['waterways'].append(dict(name=f['properties'].get('WATERWAY_NAME') or '',
+                                         pts=[[round(x), round(z)] for x, z in
+                                              (proj(c[1], c[0]) for c in ln[::step])]))
+    for w in load('waterways-modern.json', []):
+        if w['id'] in ('lake-calumet', 'wolf-lake'):
+            pts = [proj(a, b) for a, b in w.get('geometry', [])]
+            if len(pts) > 4:
+                geo['lakes'].append(dict(name=w.get('name', w['id']),
+                                         pts=[[round(x, 1), round(z, 1)] for x, z in pts]))
+    return geo
 
 
 # ============================================================ simulation model
@@ -1250,7 +1311,7 @@ def main():
         systems={k: {kk: vv for kk, vv in v.items()} for k, v in SYSTEMS.items()},
         basins=basins, tunnels=tunnels, fidelity=fidelity, repairs=repairs,
         shafts=shafts, facilities=facs,
-        outfalls=outfalls, waterways=build_waterways(), ladder=ladder,
+        outfalls=outfalls, waterways=build_waterways(), geo=build_geo(), ladder=ladder,
         sim=build_sim(basins, facs),
     )
 

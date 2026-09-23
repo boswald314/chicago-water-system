@@ -132,6 +132,18 @@ export class ConduitWater {
     this.pos = new Float32Array(verts * 3);
     this.geom = new THREE.BufferGeometry();
     this.geom.setAttribute('position', new THREE.BufferAttribute(this.pos, 3));
+    // flow coordinate (metres along the conduit) and per-point display speed,
+    // read by the flow shader so bands travel at the local velocity
+    this.flow = new Float32Array(verts);
+    this.vel = new Float32Array(verts);
+    this.cum = [0];
+    for (let i = 1; i < conduit.n; i++)
+      this.cum.push(this.cum[i - 1] + Math.hypot(conduit.pts[i][0] - conduit.pts[i - 1][0],
+                                                 conduit.pts[i][1] - conduit.pts[i - 1][1]));
+    for (let i = 0; i < conduit.n; i++)
+      for (let j = 0; j < this.ring; j++) this.flow[i * this.ring + j] = this.cum[i];
+    this.geom.setAttribute('aFlow', new THREE.BufferAttribute(this.flow, 1));
+    this.geom.setAttribute('aVel', new THREE.BufferAttribute(this.vel, 1));
     const idx = [];
     for (let i = 0; i < conduit.n - 1; i++) {
       for (let j = 0; j < this.ring - 1; j++) {
@@ -142,6 +154,15 @@ export class ConduitWater {
     }
     this.geom.setIndex(idx);
     this.level = Infinity;
+  }
+
+  /** Per-point display speed from a velocity function of (index). */
+  setVelocity(fn) {
+    for (let i = 0; i < this.c.n; i++) {
+      const v = fn(i);
+      for (let j = 0; j < this.ring; j++) this.vel[i * this.ring + j] = v;
+    }
+    this.geom.attributes.aVel.needsUpdate = true;
   }
 
   /** level: metres below ground (positive down). Above the pipe crown the
@@ -427,4 +448,115 @@ export function plantTimeBudget(train, qMGD, inlet, outlet, channelVel = 0.9) {
   let acc = 0;
   for (const s of segs) { s.t0 = acc / total; acc += s.t; s.t1 = acc / total; }
   return { segs, totalSec: total };
+}
+
+/* ---------------------------------------------------------- flow shader */
+/**
+ * Turn a MeshStandardMaterial into flowing water. Bands of light travel along
+ * the surface at a speed that can vary point by point, so a full tunnel crawls,
+ * an empty one runs, and a plunge shaft streams. The flow coordinate comes
+ * from a per-vertex `aFlow` attribute (metres along the conduit) when the
+ * geometry has one, else from uv.y scaled by `uLen`; the speed comes from
+ * `aVel` when present, else the `uSpeed` uniform.
+ */
+export function makeFlowMaterial(base, opts = {}) {
+  const u = {
+    uTime: { value: 0 },
+    uSpeed: { value: opts.speed || 0 },          // display metres per second
+    uWave: { value: opts.wave || 120 },          // band wavelength, metres
+    uStrength: { value: opts.strength == null ? 0.9 : opts.strength },
+    uLen: { value: opts.len || 1 },              // uv fallback: metres per uv unit
+    uUseUV: { value: opts.useUV ? 1 : 0 },
+    uDir: { value: opts.dir == null ? 1 : opts.dir },
+    uHi: { value: new THREE.Color(opts.hi || 0xbdf0ff) },
+  };
+  base.onBeforeCompile = sh => {
+    Object.assign(sh.uniforms, u);
+    sh.vertexShader = sh.vertexShader
+      .replace('#include <common>', `#include <common>
+        attribute float aFlow; attribute float aVel;
+        uniform float uUseUV; uniform float uLen; uniform float uSpeed;
+        varying float vFlow; varying float vVel;`)
+      .replace('#include <begin_vertex>', `#include <begin_vertex>
+        vFlow = uUseUV > 0.5 ? uv.y * uLen : aFlow;
+        vVel = uUseUV > 0.5 ? uSpeed : aVel;`);
+    sh.fragmentShader = sh.fragmentShader
+      .replace('#include <common>', `#include <common>
+        uniform float uTime; uniform float uWave; uniform float uStrength; uniform float uDir;
+        uniform vec3 uHi; varying float vFlow; varying float vVel;`)
+      .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
+        {
+          float ph = (vFlow - uDir * vVel * uTime) / max(uWave, 1.0);
+          float b1 = 0.5 + 0.5 * sin(ph * 6.28318);
+          float b2 = 0.5 + 0.5 * sin(ph * 6.28318 * 2.7 + 1.3);
+          float band = pow(b1, 3.0) * 0.8 + pow(b2, 5.0) * 0.35;
+          float k = clamp(vVel / 60.0, 0.15, 1.0);      // faster water glows harder
+          totalEmissiveRadiance += uHi * band * uStrength * k;
+        }`);
+  };
+  base.customProgramCacheKey = () => 'flow';
+  base.userData.flow = u;
+  return base;
+}
+
+/** Advance every flow material's clock. */
+export function tickFlow(materials, t) {
+  for (const m of materials) if (m.userData.flow) m.userData.flow.uTime.value = t;
+}
+
+/* --------------------------------------------- in-place reservoir water */
+/**
+ * A frustum of water whose eight vertices are rewritten each frame instead
+ * of rebuilding the geometry, so the level can be animated every tick with no
+ * allocation. Same volume-true fill as frustumWaterGeometry.
+ */
+export class FrustumWater {
+  constructor() {
+    this.geom = new THREE.BufferGeometry();
+    this.pos = new Float32Array(8 * 3);
+    this.geom.setAttribute('position', new THREE.BufferAttribute(this.pos, 3));
+    this.geom.setAttribute('uv', new THREE.Float32BufferAttribute(
+      [0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1], 2));
+    this.geom.setIndex([0, 1, 2, 0, 2, 3, 4, 6, 5, 4, 7, 6,
+      0, 1, 5, 0, 5, 4, 1, 2, 6, 1, 6, 5, 2, 3, 7, 2, 7, 6, 3, 0, 4, 3, 4, 7]);
+    this.surfaceY = 0;
+    this.surfaceHalf = [0, 0];
+    this._acc = null;
+  }
+  /** Precompute the volume table for a given frustum so per-frame fill is a lookup. */
+  setShape(L, W, D, inset) {
+    this.L = L; this.W = W; this.D = D;
+    const hx = L / 2, hz = W / 2;
+    this.ix = Math.max(1, hx - inset); this.iz = Math.max(1, hz - inset);
+    const N = 160, acc = new Float64Array(N + 1);
+    let s = 0;
+    for (let k = 0; k < N; k++) {
+      const t = (k + 0.5) / N;
+      const x = this.ix + (hx - this.ix) * t, z = this.iz + (hz - this.iz) * t;
+      s += 4 * x * z * (D / N);
+      acc[k + 1] = s;
+    }
+    this._acc = acc; this._total = s;
+    return this;
+  }
+  update(fillFrac) {
+    const f = Math.max(0, Math.min(1, fillFrac));
+    const acc = this._acc, N = acc.length - 1;
+    const target = f * this._total;
+    let k = 0;
+    while (k < N && acc[k + 1] < target) k++;
+    const t = Math.min(1, (k + (k < N ? (target - acc[k]) / Math.max(acc[k + 1] - acc[k], 1e-9) : 0)) / N);
+    const hx = this.L / 2, hz = this.W / 2;
+    const tx = this.ix + (hx - this.ix) * t, tz = this.iz + (hz - this.iz) * t;
+    const y0 = -this.D, y1 = -this.D + this.D * t;
+    const p = this.pos;
+    const v = [-this.ix, y0, -this.iz, this.ix, y0, -this.iz, this.ix, y0, this.iz, -this.ix, y0, this.iz,
+               -tx, y1, -tz, tx, y1, -tz, tx, y1, tz, -tx, y1, tz];
+    for (let i = 0; i < 24; i++) p[i] = v[i];
+    this.geom.attributes.position.needsUpdate = true;
+    this.geom.computeVertexNormals();
+    this.geom.computeBoundingSphere();
+    this.surfaceY = y1; this.surfaceHalf = [tx, tz];
+    return f > 0.0005;
+  }
 }
