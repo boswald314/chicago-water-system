@@ -525,6 +525,57 @@
         plus two days. The log covers only the six stations, not the gravity outfalls, so the model's
         "passed through the stations" figure is the like-for-like number. Across the ten storms the
         geometric-mean ratio of modelled to recorded is about 1.1, with individual storms from 0.6× to 2.8×.</p>
+      <h4>Checking the model past the six pumping stations</h4>
+      <p class="hint">The discharge log above covers six stations. It cannot say which gravity outfalls
+        opened, whether the system was pushed to reverse into the lake, or where water stood. Three
+        further records, assembled per storm in <code>map-data/storm-validation.json</code>, can —
+        none of them covering all ten storms:</p>
+      <ul class="hint" style="padding-left:16px">
+        <li><b>MWRD's CSO Event Synopsis Report</b> (apps.mwrd.org/csoreports) — every outfall's
+          tide-gate open and close timestamp, with its waterway reach and receiving plant, plus MWRD's
+          own three-basin rain-gauge totals. The earliest selectable date is 1 April 2016, so of the ten
+          storms only October 2017 and May 2020 are covered. Only days on which a CSO happened appear in
+          its date list, which makes an empty window inside the covered period a recorded <i>absence</i>
+          of overflow rather than a gap. For both covered storms MWRD logged overflows in 15–16 reaches
+          across the North Shore Channel, North Branch, Des Plaines, Salt Creek and Ship Canal — and in
+          no Calumet-system reach at all, which is what the model predicts for both.</li>
+        <li><b>MWRD's "Reversals to Lake Michigan (1985–Present)"</b> — the dated, per-structure ledger
+          of every occasion the lakefront gates or locks were opened and the river ran backwards into the
+          lake, in million gallons at O'Brien, the Chicago River Controlling Works and Wilmette. Nine of
+          the ten storms have a reversal inside their window; August 2014 has none, and the table shows
+          that year's only event was in June, so this is a true negative rather than a missing row.
+          Reversal is a last-resort act, not a measure of overflow, but it ranks the storms by how hard
+          the system was pressed: the model's total CSO volume ranks them the same way to a Spearman
+          correlation of about +0.88, against +0.59 for rainfall alone.</li>
+        <li><b>Chicago 311 service requests</b> — "Water in Basement" and "Water On Street", the only
+          direct observation of where water actually stood. The city's 311 dataset begins in July 2018
+          and these two request types first appear on 19 December 2018, so of the ten storms only
+          May 2020 is covered; the twelve historical 311 extracts the city publishes for 2011–2018 are
+          all non-water categories. In that one storm, basement complaints run from about ten a day to
+          713 on 17 May, and cluster on the far Northwest Side — the same Des Plaines and upper North
+          Branch outfalls that dominate MWRD's own gate log for those days.</li>
+      </ul>
+      <p class="hint">Nulls in that file mean not found, never zero, and the coverage flags differ per
+        source and per storm. No per-storm TARP capture volume, reservoir or tunnel fill, or
+        flooded-basement count was found for any of the ten: MWRD publishes those only as multi-year
+        cumulative totals, which are carried in the file's <code>meta.context</code> with their quotes.</p>
+      <p class="hint"><b>Where the standing-water layer fails.</b> Only one of the ten storms falls
+        inside 311 coverage, so the check was repeated on eight further rain events ranked from the same
+        gauges by the same rule, all of them after December 2018. The model predicts <i>zero</i> standing
+        water for seven of the eight — including the two worst basement floods in the entire 311 record,
+        17 August 2025 (3,783 water-in-basement complaints in one day) and 2 July 2023 (the storm MWRD
+        says flooded more than 70,000 homes and forced 1,142.6 million gallons back into the lake).
+        In both, the model's tunnels fill but McCook never spills, so nothing overflows and nothing
+        pools. The rank correlation against 311 basement complaints is therefore about +0.25, which is
+        no better than rainfall alone. Two causes, and they compound: the gauges are 10–30 miles apart
+        and genuinely miss a convective cell sitting over the West Side, and the model has no conveyance
+        limit upstream of the interceptors — it assumes every drop reaches TARP, when in reality the
+        neighbourhood sewers surcharge and back into basements long before the reservoirs are full.
+        The standing-water layer should be read as "where the surplus would go if the collection system
+        could deliver it," not as a flood forecast. Against the harder, coarser observable — how much
+        water MWRD was forced to send back into Lake Michigan — the model does far better, ranking the
+        ten storms at about +0.88.</p>
+
       <h4>Standing water</h4>
       <p class="hint">When a basin's overflow exceeds what its outfalls are rated to pass, the surplus
         surcharges the collection system and stands in the streets. The model pools that volume in the
