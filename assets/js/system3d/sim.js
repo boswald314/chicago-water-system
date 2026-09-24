@@ -103,6 +103,18 @@ export class SewerModel {
       // (an NRCS-AMC-style adjustment; the 0.32 base is the calibrated
       // single-day value). Set amcK to 0 to switch it off.
       runoffMax: 0.62, amcK: 2.5,
+      // Runoff routing: a catchment does not hand its rain to the interceptor
+      // the instant it falls. Water needs a time of concentration to reach a
+      // sewer, and the collection system stores it on the way, so the flow
+      // arrives spread over hours. The generated runoff is pushed through a
+      // Nash cascade of routeN linear reservoirs with time constant routeK
+      // hours: lag to the hydrograph peak is about (routeN-1)*routeK and the
+      // centroid lag is routeN*routeK (3 h at the defaults). ASSUMED, typical
+      // practice: n=2, K=1.5 h is the usual range quoted for large urban
+      // combined-sewer catchments of this size, and this archive holds no
+      // MWRD unit hydrograph for these basins. Set routeN to 0 to switch it
+      // off and get the old instantaneous response.
+      routeN: 2, routeK: 1.5,
     }, opts);
     const cfg = CONFIGS.find(c => c.id === o.config) || CONFIGS[3];
     const D = this.d;
@@ -143,6 +155,13 @@ export class SewerModel {
     if (total > 600) o.dtHr = 0.5;
     if (total > 1500) o.dtHr = 1.0;
 
+    // routing state has to be built after dtHr has settled above, and carried
+    // across every timestep: one cascade of linear reservoirs per basin
+    const routeS = {};
+    const nRoute = Math.max(0, Math.round(o.routeN || 0));
+    for (const bid of Object.keys(this.basins)) routeS[bid] = new Array(nRoute).fill(0);
+    const dtDays = o.dtHr / 24, kDays = (o.routeK || 0) / 24;
+
     for (let t = 0; t <= total + 1e-9; t += o.dtHr) {
       // rain is read per basin so a storm can be heavier on one side of town
       const rainB = {};
@@ -179,14 +198,17 @@ export class SewerModel {
         if (!plant) { excess[bid] = 0; continue; }
         const dwf = plant.avg;
         const runoff = cEff * rainB[bid] * A * UNITS.MGD_PER_IN_HR_SQMI;
-        const gen = dwf + runoff;
+        // the catchment meters its runoff out over hours; dry-weather flow is
+        // already in the pipes and arrives unrouted
+        const runoffRouted = this.routeStep(routeS[bid], runoff, dtDays, kDays);
+        const gen = dwf + runoffRouted;
         const cap = plant.dmf;                        // interceptor capture limit
         const intercepted = Math.min(gen, cap);
         const ex = gen - intercepted;
         plantLoad[b.plant] += intercepted;
         excess[bid] = ex;
         excessCum += ex * o.dtHr / 24;
-        fr.basins[bid] = { gen, intercepted, excess: ex, runoff, dwf, inHr: rainB[bid], cEff };
+        fr.basins[bid] = { gen, intercepted, excess: ex, runoff, runoffRouted, dwf, inHr: rainB[bid], cEff };
       }
 
       // --- 2. excess down the drop shafts into the tunnels ---------------
@@ -349,6 +371,31 @@ export class SewerModel {
         emptyHr: this.emptyTime(frames),
       },
     };
+  }
+
+  /** Push one timestep of a basin's runoff through its Nash cascade and return
+   *  the mean outflow rate over the step, in MGD.
+   *
+   *  Each reservoir is linear -- it releases what it holds in proportion to how
+   *  much it holds, dS/dt = I - S/K -- which for a constant inflow I over a step
+   *  of dt days has the exact solution S1 = S0*e^(-dt/K) + I*K*(1 - e^(-dt/K)).
+   *  Solving it exactly rather than stepping it forward means the answer does
+   *  not change with dtHr and no volume is created or lost: the outflow is read
+   *  back out of the step's own mass balance, (inflow volume - change in
+   *  storage) / dt, so the cascade conserves mass to machine precision.
+   *
+   *  S is the per-basin storage array (MG), mutated in place. */
+  routeStep(S, q, dtDays, kDays) {
+    if (!S.length || kDays <= 0 || dtDays <= 0) return q;
+    const e = Math.exp(-dtDays / kDays);
+    let inflow = q;                                 // MGD into the next reservoir
+    for (let i = 0; i < S.length; i++) {
+      const s0 = S[i];
+      const s1 = s0 * e + inflow * kDays * (1 - e);
+      S[i] = s1;
+      inflow = (inflow * dtDays + s0 - s1) / dtDays;
+    }
+    return inflow;
   }
 
   /** Total rain landing on the combined-sewer area, for context.
