@@ -69,11 +69,12 @@ export class SewerModel {
       b.cx = n ? sx / n : 0; b.cz = n ? sz / n : 0;
     }
     // what the relief pumping stations in each basin are rated to pass to the
-    // river; gravity outfalls add some, so a factor above 1 (assumed)
-    this.reliefCap = {};
+    // river; gravity outfalls add some, so a factor above 1 (assumed, and
+    // fitted -- see the reliefFactor option on run())
+    this.reliefRated = {};
     for (const [bid, b] of Object.entries(this.basins)) {
-      const cap = (b.relief || []).map(id => this.d.relief[id]).filter(Boolean).reduce((a, x) => a + x.capMGD, 0);
-      this.reliefCap[bid] = cap > 0 ? cap * 1.5 : 1e9;
+      this.reliefRated[bid] = (b.relief || []).map(id => this.d.relief[id])
+        .filter(Boolean).reduce((a, x) => a + x.capMGD, 0);
     }
   }
 
@@ -151,8 +152,24 @@ export class SewerModel {
       config: 'today', dtHr: 0.25, tailHr: 264, pumpLimit: 'plant',
       // Antecedent moisture: the volumetric runoff coefficient rises toward
       // runoffMax as the ground saturates, on the rain of the previous 72 h
-      // (an NRCS-AMC-style adjustment; the 0.32 base is the calibrated
-      // single-day value). Set amcK to 0 to switch it off.
+      // (an NRCS-AMC-style adjustment). Set amcK to 0 to switch it off.
+      //
+      // The 0.32 base was fitted years ago against a single day, 13 Sept 2008.
+      // Refitting runoffC, runoffMax, amcK, routeN, routeK and reliefFactor
+      // against all ten recorded storms on 24 Sept 2026 produced no set worth
+      // adopting, so these values stand unchanged. The fit drove three of the
+      // five knobs onto their bounds, did WORSE than these defaults on the two
+      // storms held out before fitting, and bought most of its improvement by
+      // pushing reliefFactor to 4 -- which routes the surplus out through
+      // gravity outfalls the stations never log and cuts the standing-water
+      // layer by three quarters, in a model already known to under-read
+      // basement flooding. The residuals it could not touch are the real
+      // problem and they are basin-structured, not global: against MWRD's log
+      // the Central basin runs about 0.76x and the South about 2.6x, a spread
+      // no single runoff coefficient can close.
+      // scripts/calibrate.mjs regenerates map-data/calibration.json, which
+      // holds the fitted set, the hold-out and leave-one-out results, the
+      // sensitivities and the trade-off profile behind that decision.
       runoffMax: 0.62, amcK: 2.5,
       // Runoff routing: a catchment does not hand its rain to the interceptor
       // the instant it falls. Water needs a time of concentration to reach a
@@ -176,10 +193,18 @@ export class SewerModel {
       // recorded storms MWRD publishes fill-event dates but no start volumes, so
       // nothing there fills this in yet -- see that file's `whereTheVolumesAre`.
       seed: null,
+      // Outfall capacity: how much more than the relief pumping stations'
+      // rated capacity a basin's outfalls can pass to the river. The gravity
+      // outfalls carry flow the stations never see, so the factor is above 1.
+      // ASSUMED; a basin with no relief station is left unlimited.
+      reliefFactor: 1.5,
     }, opts);
     const cfg = CONFIGS.find(c => c.id === o.config) || CONFIGS[3];
     const D = this.d;
     if (o.hyeto) { o.hours = o.hyeto.hours; o.inches = 0; }
+    const reliefCap = {};
+    for (const [bid, rated] of Object.entries(this.reliefRated))
+      reliefCap[bid] = rated > 0 ? rated * o.reliefFactor : 1e9;
 
     // --- capacities for this build-out state -----------------------------
     const tunCap = {}, resCap = {};
@@ -352,7 +377,7 @@ export class SewerModel {
         }
         // the river takes what the outfalls can pass; the surplus surcharges the
         // collection system and stands in the streets until there is room again
-        const cap = this.reliefCap[bid];
+        const cap = reliefCap[bid];
         const passed = Math.min(r, cap);
         const backup = r - passed;
         pooled[bid] += backup * o.dtHr / 24;
