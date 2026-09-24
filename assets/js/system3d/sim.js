@@ -77,19 +77,70 @@ export class SewerModel {
     }
   }
 
-  /** Rain at a basin's centroid at hour t: a recorded storm's gauges by
-   *  inverse-distance weighting, or the synthetic hyetograph. */
+  /** A storm's hyetographs, one array per gauge, in gauge order.
+   *
+   *  Gauges read once a day carry no hourly series of their own: storms.json
+   *  gives them a measured event total and the id of the nearest gauge that
+   *  does have a hyetograph, and the series is that gauge's shape scaled to
+   *  this gauge's total. Writing those arrays out would be a megabyte of
+   *  redundancy, so they are expanded here, once per storm. */
+  series(hy) {
+    const cache = this._sr || (this._sr = new Map());
+    if (cache.has(hy)) return cache.get(hy);
+    const by = {};
+    for (const g of hy.gauges) if (g.hourly) by[g.id] = g.hourly;
+    const out = hy.gauges.map(g => {
+      if (g.hourly) return g.hourly;
+      const shape = by[g.shapeFrom];
+      if (!shape) return [];
+      const sum = shape.reduce((a, x) => a + x, 0);
+      const k = sum > 0 ? g.totalIn / sum : 0;
+      return shape.map(x => x * k);
+    });
+    cache.set(hy, out);
+    return out;
+  }
+
+  /** Per-basin gauge weights for a recorded storm: the AREA average of the
+   *  inverse-distance field over the basin, not its value at one point.
+   *
+   *  Normalised IDW is linear in the gauge values -- rain(p,t) is
+   *  sum_g w_g(p) v_g(t) / sum_g w_g(p) -- so averaging it over the basin's
+   *  sample points collapses to a single weight per gauge, computed once per
+   *  storm, and each step is then a dot product. A basin with no sample grid
+   *  falls back to its centroid, which is the old behaviour. */
+  gaugeWeights(b, hy) {
+    const cache = this._gw || (this._gw = new Map());
+    let byBasin = cache.get(hy);
+    if (!byBasin) cache.set(hy, byBasin = {});
+    if (byBasin[b.id]) return byBasin[b.id];
+    const gs = hy.gauges;
+    const pts = (b.samples && b.samples.length) ? b.samples : [[b.cx, b.cz]];
+    const w = new Float64Array(gs.length), wi = new Float64Array(gs.length);
+    for (const p of pts) {
+      let wsum = 0;
+      for (let i = 0; i < gs.length; i++) {
+        const d2 = Math.max(1e6, (gs[i].x - p[0]) ** 2 + (gs[i].z - p[1]) ** 2);
+        wi[i] = 1 / d2; wsum += wi[i];
+      }
+      if (wsum) for (let i = 0; i < gs.length; i++) w[i] += wi[i] / wsum;
+    }
+    for (let i = 0; i < gs.length; i++) w[i] /= pts.length;
+    return (byBasin[b.id] = w);
+  }
+
+  /** Rain over a basin's area at hour t: a recorded storm's gauge field
+   *  area-averaged over the basin, or the synthetic hyetograph. */
   rainAt(b, o, t) {
     if (!o.hyeto) return intensity(o.shape, t, o.inches, o.hours);
     const h = Math.floor(t), f = t - h;
-    let wsum = 0, v = 0;
-    for (const g of o.hyeto.gauges) {
-      const d2 = Math.max(1e6, (g.x - b.cx) ** 2 + (g.z - b.cz) ** 2);
-      const w = 1 / d2;
-      const a = g.hourly[h] || 0, bq = g.hourly[h + 1] || 0;
-      v += w * (a + (bq - a) * f); wsum += w;
+    const gs = this.series(o.hyeto), w = this.gaugeWeights(b, o.hyeto);
+    let v = 0;
+    for (let i = 0; i < gs.length; i++) {
+      const a = gs[i][h] || 0, bq = gs[i][h + 1] || 0;
+      v += w[i] * (a + (bq - a) * f);
     }
-    return wsum ? v / wsum : 0;
+    return v;
   }
 
   /** Run the whole storm up front and return every frame, so the timeline can

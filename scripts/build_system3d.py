@@ -401,6 +401,45 @@ def poly_area_m2(coords):
         a -= ring_area_m2(h)
     return a
 
+def _in_rings(x, z, rings):
+    """Even-odd ray cast against every ring of a basin's projected polygons.
+    Outer rings and holes are tested together, which is correct as long as the
+    CSA polygons do not overlap each other (MWRD's do not)."""
+    inside = False
+    for ring in rings:
+        n = len(ring)
+        j = n - 1
+        for i in range(n):
+            xi, zi = ring[i]
+            xj, zj = ring[j]
+            if (zi > z) != (zj > z) and x < (xj - xi) * (z - zi) / (zj - zi) + xi:
+                inside = not inside
+            j = i
+    return inside
+
+def sample_grid(rings, m2, target=300):
+    """A regular lattice of points inside a basin, for area-averaging a gauge
+    field over the basin instead of reading it at the centroid. Spacing is set
+    from the basin's own area so every basin gets roughly `target` points; the
+    lattice is offset by half a cell so no point lands exactly on a boundary."""
+    if not rings or m2 <= 0:
+        return []
+    step = math.sqrt(m2 / target)
+    xs = [p[0] for r in rings for p in r]
+    zs = [p[1] for r in rings for p in r]
+    x0, x1, z0, z1 = min(xs), max(xs), min(zs), max(zs)
+    pts = []
+    z = z0 + step / 2
+    while z < z1:
+        x = x0 + step / 2
+        while x < x1:
+            if _in_rings(x, z, rings):
+                pts.append([round(x), round(z)])
+            x += step
+        z += step
+    return pts
+
+
 BASIN_META = {
     'CENTRAL': dict(name='Central basin', plant='wrp-stickney', systems=['mainstream', 'desplaines'],
                     color='#e2a33c', relief=['ps-racine', 'ps-westchester']),
@@ -417,6 +456,7 @@ def build_basins():
     g = load('gis/combined-sewer-areas.geojson', {'features': []})
     area = collections.defaultdict(float)
     outline = collections.defaultdict(list)
+    rings = collections.defaultdict(list)     # every ring, holes included, for sampling
     for f in g['features']:
         p = f['properties']
         b = p.get('Basin')
@@ -427,6 +467,8 @@ def build_basins():
         for poly in polys:
             a = poly_area_m2(poly)
             area[b] += a
+            for r in poly:
+                rings[b].append([proj(c[1], c[0]) for c in r])
             if a > 2.0e6:            # keep only the substantial rings as outlines
                 ring = poly[0]
                 step = max(1, len(ring) // 160)
@@ -442,7 +484,11 @@ def build_basins():
             areaSqMi=S(round(m2 / 2589988.11, 2), 'sq mi', 'gis',
                        'geodesic area of MWRD’s own Combined Sewer Area polygons'),
             areaM2=round(m2),
-            outline=outline.get(b, [])))
+            outline=outline.get(b, []),
+            # points inside the basin at which the model reads a storm's gauge
+            # field, so a basin is rained by its area average rather than by
+            # whatever happens to fall on its centroid
+            samples=sample_grid(rings.get(b, []), m2)))
     return out
 
 
@@ -1372,7 +1418,8 @@ def main():
               f'{f["sourcedMi"]:5.1f} ({f["lenDeltaPct"]:+5.1f}%)  |  volume {f["drawnMG"]:7.1f} vs '
               f'{f["sourcedMG"]:6.0f} MG ({f["volDeltaPct"]:+5.1f}%)  taper p={f["taperExp"]}')
     for b in basins:
-        print(f'   basin {b["id"]:8s} {b["areaSqMi"]["v"]:7.2f} sq mi  ({len(b["outline"])} outline rings)')
+        print(f'   basin {b["id"]:8s} {b["areaSqMi"]["v"]:7.2f} sq mi  ({len(b["outline"])} outline rings, '
+              f'{len(b["samples"])} rain samples)')
     for f in facs:
         if f['kind'] == 'reservoir':
             g = f['geom']
