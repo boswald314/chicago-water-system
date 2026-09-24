@@ -1,0 +1,271 @@
+{
+  "meta": {
+    "purpose": "What MWRD's own records say the TARP tunnels and reservoirs were doing during each of the ten recorded storms in storms.json — so the model's antecedent state can be seeded from the record instead of from an empty system, and so the model's peak fills can be checked against a reported fill.",
+    "whatMwrdPublishes": "MWRD's public, event-level record of TARP storage is its Monitoring and Research Department's annual IEPA groundwater-monitoring reports. Those report fill events as DATES, not as volumes: a tunnel fill event is logged when the water in the TARP tunnels reaches -150 ft Chicago City Datum (CCD); a Thornton Composite fill event while the reservoir is above -280 ft CCD; McCook 'high-stage operation' above -265 ft CCD (raised from -280 ft CCD in January 2018); a Majewski (O'Hare CUP) fill event whenever the reservoir is used to store TARP combined sewage. The TARP Status Reports and fact sheets give only lifetime cumulative capture.",
+    "whereTheVolumesAre": "MWRD does keep the per-event volume tables — 'McCook Reservoir Fill Events' and 'Thornton Composite Reservoir Fill Events' — and files them annually with USEPA and DOJ under the 2011 consent decree (US & Illinois v. MWRDGC, N.D. Ill. 1:11-cv-08859). They are NOT published: the annual report PDF says only 'A table showing the dates and respective volumes captured by the McCook Reservoir is provided on the enclosed thumb drive' (MWRD, 2020 NPDES Permits Consent Decree Annual Report, Item 1, https://mwrd.org/media/896). Checked and absent from the 2019, 2020, 2021, 2022, 2023 and 2025 report PDFs. A FOIA request to MWRD, or a docket pull, is the route to per-event start/peak/capture volumes. Also unpublished: MWRD's elevation-storage curve for McCook and the Mainstream Deep Tunnel, which it supplied to the National Weather Service for NWS Technical Attachment TA-2302 — without it the daily tunnel elevations MWRD does publish (see 2017-10-14) cannot be turned into gallons.",
+    "consequence": "No MWRD document located gives a reservoir volume at the START of any of these ten storms, so NO storm carries a seedable start volume. What is recorded here is (a) fill-event dates, used as an independent check on the model's peak fills and as evidence about whether the system started a storm empty, and (b) for 14-19 May 2020 only, one dated snapshot of PEAK stored volume from a trade-press report quoting MWRD.",
+    "units": "MG = million gallons. startPct/peakPct are fractions of the reservoir's in-service TARP capacity for that era (Majewski 350 MG, Thornton 4,800 MG CSO share, McCook Stage 1 3,500 MG). ft CCD = Chicago City Datum, 579.48 ft above mean sea level.",
+    "convention": "null means not found, not zero. Every populated field carries its source and a verbatim quote. Fields whose value was read off a sampling schedule rather than stated outright are marked inferred:true.",
+    "compiled": "September 2026"
+  },
+  "storms": {
+    "2007-08-18": {
+      "reservoirs": {
+        "res-majewski": {
+          "startPct": null, "startMG": null, "peakPct": null, "capturedMG": null,
+          "full": null, "fillEvent": null, "date": "2007-08-08",
+          "source": "MWRD M&R, 'Tunnel and Reservoir Plan O'Hare CUP Reservoir Water Quality Monitoring Wells, 2007 Annual Groundwater Monitoring Report' (2008), pp.7-8 — sources/mwrd-mr-reports/2008-2007-ohare-tarp-groundwater-monitoring-report.pdf",
+          "quote": "The O'Hare CUP Reservoir experienced two fill events that required sampling in 2007. The first fill event began on December 21, 2006, and the second on August 8, 2007.",
+          "note": "The 8 Aug 2007 fill is three days before this storm's t0 (2007-08-11), so Majewski was in use immediately before the model's window opens. AMBIGUOUS for the storm itself: no fill event is named for 18-25 Aug 2007, but the same report series states that 'If two fill events occurred within six weeks, the monitoring results were grouped together', so a second August fill could be hidden inside the 8 Aug grouping. Do not read this as 'Majewski did not fill'."
+        },
+        "res-thornton": null,
+        "res-mccook": null
+      },
+      "tunnels": null,
+      "notes": "No tunnel fill-event dates found for 2007: the fill-event-based tunnel monitoring program (trigger -150 ft CCD) dates from the 2017-2019 study period; the 2000s tunnel reports are quarterly/annual well sampling without an event list."
+    },
+    "2008-09-12": {
+      "reservoirs": {
+        "res-majewski": {
+          "startPct": null, "startMG": null, "peakPct": null, "capturedMG": null,
+          "full": null, "fillEvent": true, "date": "2008-09-13/2008-09-15",
+          "source": "MWRD M&R, 'Tunnel and Reservoir Plan O'Hare CUP Reservoir Water Quality Monitoring Wells, 2008 Annual Groundwater Monitoring Report' (2009), pp.9-10 — sources/mwrd-mr-reports/2009-2008-ohare-tarp-groundwater-monitoring-report.pdf",
+          "quote": "The O'Hare CUP Reservoir experienced six fill events during 2008. They occurred on February 17, 2008, March 3, 2008, July 20, 2008, September 4, 2008, September 13-15, 2008, and December 29, 2008.",
+          "note": "Two of the six 2008 fills bracket this storm: 4 Sept 2008, one day before this storm's t0 (2008-09-05), and 13-15 Sept 2008, inside the storm window itself. Majewski did not start this storm empty."
+        },
+        "res-thornton": null,
+        "res-mccook": null
+      },
+      "tunnels": null,
+      "notes": "Majewski filled twice around this storm, so the Upper Des Plaines tunnels were full at least twice. No volumes published."
+    },
+    "2009-06-16": {
+      "reservoirs": {
+        "res-majewski": {
+          "startPct": null, "startMG": null, "peakPct": null, "capturedMG": null,
+          "full": null, "fillEvent": false, "date": "2009",
+          "source": "MWRD M&R, 'Tunnel and Reservoir Plan O'Hare Chicagoland Underflow Plan Reservoir Water Quality Monitoring Wells, 2009 Annual Groundwater Monitoring Report' (2010), p.9 — sources/mwrd-mr-reports/2010-tunnel-and-reservoir-plan-ohare-chicagoland-underflow-plan-reservoir-water-quali.pdf",
+          "quote": "The O'Hare CUP Reservoir experienced four fill events during 2009. They occurred on February 27, 2009, March 9, 2009, June 23, 2009, and December 25, 2009.",
+          "note": "None of the four 2009 fills falls in this storm's window (16-19 June plus two days' lag) or its lead-in week (from 2009-06-09). The nearest, 23 June 2009, is four days after the window closes. Majewski was not used for this storm."
+        },
+        "res-thornton": null,
+        "res-mccook": null
+      },
+      "tunnels": null,
+      "notes": "The smallest of the ten storms by recorded discharge (1,717 MG) and the only one before 2015 with an explicit, dated 'no Majewski fill' reading."
+    },
+    "2010-07-23": {
+      "reservoirs": {
+        "res-majewski": {
+          "startPct": null, "startMG": null, "peakPct": null, "capturedMG": null,
+          "full": null, "fillEvent": true, "date": "2010-07-24",
+          "source": "MWRD M&R, 'Tunnel and Reservoir Plan Gloria Alitto Majewski Chicagoland Underflow Plan Reservoir Water Quality Monitoring Wells, 2010 Annual Groundwater Monitoring Report' (2011), pp.9-10 — sources/mwrd-mr-reports/2011-tunnel-and-reservoir-plan-gloria-alitto-majewski-chicagoland-underflow-plan-rese.pdf",
+          "quote": "The Reservoir experienced two fill events during 2010. They occurred on May 13, 2010, and July 24, 2010.",
+          "note": "The 24 July 2010 fill is inside the storm window (23-25 July). The other 2010 fill, 13 May, is well outside the lead-in week, so Majewski plausibly started this storm empty."
+        },
+        "res-thornton": null,
+        "res-mccook": null
+      },
+      "tunnels": null,
+      "notes": null
+    },
+    "2011-05-22": {
+      "reservoirs": {
+        "res-majewski": {
+          "startPct": null, "startMG": null, "peakPct": null, "capturedMG": null,
+          "full": null, "fillEvent": true, "date": "2011-05-26/2011-05-28",
+          "source": "MWRD M&R, 'Tunnel and Reservoir Plan Gloria Alitto Majewski CUP Reservoir Water Quality Monitoring Wells, 2011 Annual Groundwater Monitoring Report' (2012), pp.9-10 — sources/mwrd-mr-reports/2012-tarp-majewski-reservoir-water-2011-groundwater-monitoring-report.pdf",
+          "quote": "The Reservoir experienced three fill events during 2011. They occurred on May 26, 2011, May 28, 2011, and July 23, 2011.",
+          "note": "Two fills fall inside this storm's 22-29 May window, two days apart — the report groups their post-fill sampling 'because the second fill event occurred within three days of the first'."
+        },
+        "res-thornton": null,
+        "res-mccook": null
+      },
+      "tunnels": null,
+      "notes": null
+    },
+    "2011-07-22": {
+      "reservoirs": {
+        "res-majewski": {
+          "startPct": null, "startMG": null, "peakPct": null, "capturedMG": null,
+          "full": null, "fillEvent": true, "date": "2011-07-23",
+          "source": "MWRD M&R, 'Tunnel and Reservoir Plan Gloria Alitto Majewski CUP Reservoir Water Quality Monitoring Wells, 2011 Annual Groundwater Monitoring Report' (2012), pp.9-10 — sources/mwrd-mr-reports/2012-tarp-majewski-reservoir-water-2011-groundwater-monitoring-report.pdf",
+          "quote": "The Reservoir experienced three fill events during 2011. They occurred on May 26, 2011, May 28, 2011, and July 23, 2011.",
+          "note": "The 23 July 2011 fill is inside the storm window (22-23 July). The previous fills, 26 and 28 May, are eight weeks earlier, outside the lead-in week."
+        },
+        "res-thornton": null,
+        "res-mccook": null
+      },
+      "tunnels": null,
+      "notes": null
+    },
+    "2013-04-15": {
+      "reservoirs": {
+        "res-majewski": {
+          "startPct": null, "startMG": null, "peakPct": null, "capturedMG": null,
+          "full": null, "fillEvent": true, "date": "2013-04-18/2013-04-21", "inferred": true,
+          "source": "MWRD M&R Report No. 14-31, 'Tunnel and Reservoir Plan Gloria Alitto Majewski Chicagoland Underflow Plan Reservoir Water Quality Monitoring Wells' (2014), pp.5-7 — sources/mwrd-mr-reports/2014-14-31-tarp-gloria-alitto-majewski-chicagoland-underflow-plan-reservoir-water-qua.pdf",
+          "quote": "There were two major fill events during 2013. After each event, the wells were sampled for six consecutive weeks, i.e. 3/13/2013 through 4/17/2013 and 4/22/2013 though 5/29/2013.",
+          "note": "INFERRED: the report gives no fill dates, only the two six-week post-fill sampling runs. The second run opens 22 April 2013, four days after this storm ends, and weekly post-fill sampling starts in the week of the fill — so the second 2013 fill is most likely the 17-18 April storm. Treated as an inference, not a record. The first fill (sampling from 13 March) is five weeks before t0."
+        },
+        "res-thornton": null,
+        "res-mccook": null
+      },
+      "tunnels": null,
+      "notes": null
+    },
+    "2014-08-21": {
+      "reservoirs": {
+        "res-majewski": {
+          "startPct": 0, "startMG": 0, "peakPct": 0, "capturedMG": 0,
+          "full": false, "fillEvent": false, "date": "2014",
+          "source": "MWRD M&R, 'Tunnel and Reservoir Plan Gloria Alitto Majewski CUP Reservoir Water Quality Monitoring Wells, 2014 Annual Groundwater Monitoring Report' (2015), pp.5-7 — sources/mwrd-mr-reports/2015-tunnel-and-reservoir-plan-gloria-alitto-majewski-chicagoland-underflow-plan-rese.pdf",
+          "quote": "There were no major fill events at this site during 2014.",
+          "note": "A whole-year negative, so it covers this storm and its lead-in week without ambiguity: Majewski took no TARP combined sewage in 2014. This is the one storm where a zero start volume and a zero peak are positively sourced rather than assumed."
+        },
+        "res-thornton": null,
+        "res-mccook": null
+      },
+      "tunnels": null,
+      "notes": "Thornton Composite was not yet in service (operational November 2015) and McCook Stage 1 not until December 2017, so Majewski is the only reservoir in play."
+    },
+    "2017-10-14": {
+      "reservoirs": {
+        "res-majewski": {
+          "startPct": null, "startMG": null, "peakPct": null, "capturedMG": null,
+          "full": null, "fillEvent": true, "date": "2017-10-14/2017-10-16", "inferred": true,
+          "source": "MWRD M&R Report No. 18-23, 'Tunnel and Reservoir Plan Gloria Alitto Majewski Chicago Underflow Plan Reservoir Water Quality Monitoring Wells, Annual Groundwater Monitoring Report for 2017' (2018), pp.5-9 — sources/mwrd-mr-reports/2018-tunnel-and-reservoir-plan-gloria-alitto-majewski-chicagoland-underflow-plan-rese.pdf",
+          "quote": "There were four fill events at this site during the weeks of 3/28/17 through 11/21/17. As a result, Wells QK-1 through -4 were generally sampled for 11 consecutive weeks (3/28 - 6/07/17), following two consecutive fill events (1 and 2), and again for six consecutive weeks (07/21 - 08/23/17, 10/16 - 11/21/17), following fill events 3 and 4, respectively.",
+          "note": "INFERRED from the sampling schedule: the fourth 2017 fill's six-week run opens 16 October 2017, the first working day after this storm, and the 10/16/17 sample at well QK-1 reads >200,000 CFU/100 mL fecal coliform — a fresh combined-sewage fill. Date is inferred, the fill itself is recorded."
+        },
+        "res-thornton": {
+          "startPct": null, "startMG": null, "peakPct": null, "capturedMG": null,
+          "full": false, "fillEvent": null, "date": "2017-10-14",
+          "source": "Bound, not a measurement: WBEZ, 'Chicago's Deep Tunnel anti-flooding system nearly full after days of heavy rain' (6 July 2026) — https://www.wbez.org/environment/2026/07/06/chicago-deep-tunnel-historic-flooding-tarp-reservoir-weather-climate-change",
+          "quote": "[Thornton's] previous record fill was roughly 55% of capacity, in June 2019.",
+          "inferred": true,
+          "note": "INFERRED BOUND, secondary source: if Thornton's record fill before July 2026 was ~55% in June 2019, then its October 2017 peak was below ~55%. That is an upper bound on the model's Thornton peak for this storm, not a reading of it. MWRD published no Thornton Composite level or volume for October 2017 that could be located."
+        },
+        "res-mccook": {
+          "startPct": 0, "startMG": 0, "peakPct": 0, "capturedMG": 0,
+          "full": false, "fillEvent": false, "date": "2017-10-14",
+          "source": "MWRD, '2021 Budget Book', pp.24-25 — sources/current-projects/mwrd-2021-final-budget-book.pdf",
+          "quote": "The first stage opened on December 4, 2017 with 3.5 billion gallons of storage.",
+          "note": "McCook Stage 1 was not in service on 14 October 2017 — seven weeks before its opening — so its volume is structurally zero, not unknown."
+        }
+      },
+      "tunnels": {
+        "elevationsFtCCD": {
+          "volMG": null,
+          "series": {
+            "2017-10-05": { "desplaines": -232.5, "mainstream": -231.1, "calumet": -287.0, "udp": -71.5 },
+            "2017-10-06": { "desplaines": -231.5, "mainstream": -230.6, "calumet": -287.0, "udp": -70.6 },
+            "2017-10-07": { "desplaines": -230.4, "mainstream": -228.9, "calumet": -287.0, "udp": -69.8 },
+            "2017-10-08": { "desplaines": -222.7, "mainstream": -221.1, "calumet": -287.0, "udp": -68.2 },
+            "2017-10-09": { "desplaines": -228.8, "mainstream": -227.4, "calumet": -288.0, "udp": -71.5 },
+            "2017-10-10": { "desplaines": -232.8, "mainstream": -231.6, "calumet": -287.0, "udp": -71.0 },
+            "2017-10-11": { "desplaines": -121.3, "mainstream": -82.8, "calumet": -287.0, "udp": -61.4 },
+            "2017-10-12": { "desplaines": -150.1, "mainstream": -148.7, "calumet": -283.0, "udp": -69.6 },
+            "2017-10-13": { "desplaines": -184.0, "mainstream": -182.8, "calumet": -286.0, "udp": -70.5 },
+            "2017-10-14": { "desplaines": -46.5, "mainstream": -37.8, "calumet": -228.0, "udp": -53.1 },
+            "2017-10-16": { "desplaines": -4.4, "mainstream": -26.2, "calumet": -224.0, "udp": -36.0 },
+            "2017-10-17": { "desplaines": -155.9, "mainstream": -154.2, "calumet": -225.0, "udp": -36.0 },
+            "2017-10-18": { "desplaines": -175.5, "mainstream": -176.1, "calumet": -229.0, "udp": -44.9 },
+            "2017-10-19": { "desplaines": -184.6, "mainstream": -183.2, "calumet": -234.0, "udp": -66.1 }
+          },
+          "source": "MWRD M&R Report No. 21-02, 'Monitoring of Groundwater Quality Under Tunnel Fills Over the Years From 2017-2019' (Nov 2021), Table B-3 — sources/mwrd-mr-reports/2021-report-no-21-02-groundwater-quality-under-tunnel-fills-2017-2019.pdf",
+          "quote": "TABLE B-3 (Continued): DAILY AVERAGE OF WATER ELEVATION RELATIVE TO CHICAGO CITY DATUM AT UPPER DES PLAINES, DES PLAINES, MAINSTREAM, AND CALUMET TUNNELS OF THE TUNNEL AND RESERVOIR PLAN ... 10/07/17 -230.4 -228.9 -287.0 -69.8 ... 10/13/17 -184.0 -182.8 -286.0 -70.5 10/14/17 -46.5 -37.8 -228.0 -53.1",
+          "note": "The one primary, daily, quantitative record of antecedent tunnel state for any of the ten storms — but in feet CCD, not gallons, and MWRD does not publish the stage-storage curve that would convert it. Read straight: the Mainstream and Des Plaines tunnels sat near -230 ft CCD through 5-10 October (their dewatered baseline), filled hard on 11 October to -82.8 / -121.3, had only partly drawn down by 13 October (-182.8 / -184.0, still ~48 ft above baseline), and then took this storm on 14 October. So the tunnels did NOT start this storm empty. Table B-3 covers 2017-2019 only; there is no equivalent series for the other nine storms."
+        },
+        "mainstream": {
+          "volMG": null, "fillEvent": true, "date": "2017-10-11",
+          "source": "MWRD M&R Report No. 21-02, 'Monitoring of Groundwater Quality Under Tunnel Fills Over the Years From 2017-2019' (Nov 2021), Table 4 — sources/mwrd-mr-reports/2021-report-no-21-02-groundwater-quality-under-tunnel-fills-2017-2019.pdf",
+          "quote": "Days 2017 ... 10/11/17 1 10/11/17* 2 10/14/17 3 10/14/17 3 10/23/17 4 10/22/17 4",
+          "note": "Table 4 is 'Number of Days to Dewater the Des Plaines and Mainstream Tunnels to Levels Less Than -150 Feet Chicago City Datum'. Three fill events bracket this storm: 11 October (Mainstream took 2 days to dewater, Des Plaines 1), 14 October (3 days each) and 22-23 October (4 days). The 11 October fill had not finished dewatering when the storm arrived."
+        },
+        "calumet": {
+          "volMG": null, "fillEvent": true, "date": "2017-10-19", "inferred": true,
+          "source": "MWRD M&R Report No. 18-21, 'Tunnel and Reservoir Plan Calumet Tunnel System Annual Groundwater Monitoring Report' (2018), Tables 1-2, pp.11-12 — sources/mwrd-mr-reports/2018-18-21-tarp-calumet-2017-pdf.pdf",
+          "quote": "QC-2 F1 04/06/17 550 700 NA1 F2 05/04/17 NA NA NA F3 8/3/2017 NA NA NA F4 10/19/17 NA NA 40",
+          "note": "INFERRED from sampling dates: four Calumet tunnel fill events in 2017 (trigger: Calumet tunnel water reaches -150 ft CCD); the fourth is sampled from 19 October 2017, the week of this storm. Table B-3 above shows the Calumet tunnel flat at -287 ft CCD until 14 October and rising to -224 by 16 October — it filled with this storm and not before."
+        }
+      },
+      "notes": "The only storm of the ten in the Thornton-but-no-McCook era. MWRD's published record for it is dates and tunnel elevations: the Mainstream and Des Plaines tunnels had already filled on 11 October and were still draining when the storm arrived on the 14th; the Calumet tunnel filled with the storm itself; Majewski took combined sewage. No Thornton Composite level, percent-full or captured volume for 14-15 October 2017 was located in this archive, on mwrd.org, or in the published consent-decree reporting."
+    },
+    "2020-05-14": {
+      "reservoirs": {
+        "res-majewski": {
+          "startPct": null, "startMG": null, "peakPct": 0.69, "peakMG": 243, "capturedMG": null,
+          "full": false, "fillEvent": true, "date": "2020-05-17",
+          "source": "SECONDARY, quoting MWRD: Jeff Yoders, 'Chicago Sees Record Rainfall, Floods, Power Outages', Engineering News-Record, 18 May 2020 — https://www.enr.com/articles/49399-chicago-sees-record-rainfall-floods-power-outages",
+          "quote": "The Kirie TARP System Tunnel was 100% full, with 71 million gallons and its Majewski CUP System stored 243 million gallons of water.",
+          "sourcePrimaryDate": "MWRD M&R Report No. 21-28, 'Tunnel and Reservoir Plan Gloria Alitto Majewski CUP Underflow Plan Reservoir Water Quality Monitoring Wells, Annual Groundwater Monitoring Report for 2020' (July 2021), p.5 — sources/mwrd-mr-reports/2021-report-no-21-28-tunnel-and-reservoir-plan-gloria-alitto-majewski-cup-underflow-p.pdf",
+          "quotePrimaryDate": "Three fill events were observed during 2020. The first fill event occurred on March 17, 2020. The second and third fill events occurred on April 28, 2020, and May 14, 2020, respectively.",
+          "note": "243 MG against Majewski's 350 MG is 69 percent; the percentage is computed here, both gallon figures are quoted. The 243 MG is a PEAK on or about 17 May 2020, not a start volume. MWRD's own record puts a Majewski fill event ON this storm's start date, and an earlier one on 28 April 2020 — nine days before the model's t0 (2020-05-07) — so Majewski entered the model's window still drawing down to Kirie WRP. No start volume published."
+        },
+        "res-thornton": {
+          "startPct": null, "startMG": null, "peakPct": null, "peakMG": null, "capturedMG": null,
+          "full": false, "fillEvent": true, "date": "2020-05-15",
+          "source": "MWRD M&R Report No. 20-26, 'Thornton Composite Reservoir Groundwater Monitoring Report, Second Quarter 2020' (Aug 2020), p.2 — https://mwrd.org/media/1155",
+          "quote": "There were three fill events during the second quarter of 2020. These were the first three fill events of 2020. The first fill event began April 30 and lasted until May 11, requiring a single sampling conducted on May 4 - May 7. ... The second fill event began on May 15 and lasted until June 25.",
+          "note": "A fill event here means the reservoir stayed above -280 ft CCD. So Thornton WAS holding combined sewage at the model's t0 (7 May, inside fill event 1), drew back below the threshold on 11 May, three days before the storm, and refilled from 15 May for six weeks. Levels and volumes are not given. For scale only, and computed rather than quoted: the trade-press snapshot below puts the whole Calumet TARP system (Calumet tunnel 630 MG + Thornton) at 3,017 MG on 17 May, which would leave roughly 2,390 MG in Thornton if the tunnel were full — about half its 4,800 MG TARP share. Treat that as arithmetic on a secondary source, not a reading."
+        },
+        "res-mccook": {
+          "startPct": null, "startMG": null, "peakPct": 1.0, "peakMG": null, "capturedMG": null,
+          "full": true, "fillEvent": true, "date": "2020-05-17",
+          "source": "SECONDARY, quoting MWRD: Jeff Yoders, 'Chicago Sees Record Rainfall, Floods, Power Outages', Engineering News-Record, 18 May 2020 — https://www.enr.com/articles/49399-chicago-sees-record-rainfall-floods-power-outages",
+          "quote": "The McCook Tunnel and Reservoir Plan System was 100% full on May 17 with 4.97 billion gallons of water.",
+          "scope": "SYSTEM, not reservoir: the same article defines it — 'The McCook TARP system is comprised of the city's Mainstream Tunnel, the Des Plaines Tunnel, and the McCook Reservoir.' 4.97 BG against this model's 1,200 + 420 + 3,500 = 5,120 MG for those three, a 3 percent difference. 100 percent full for the system means McCook Reservoir itself was at its 3.5 BG Stage 1 capacity.",
+          "sourcePrimary": "MWRD M&R Report No. 21-21, 'Tunnel and Reservoir Plan McCook Reservoir Annual Groundwater Monitoring Report for 2020' (May 2021), pp.3, 5 — sources/mwrd-mr-reports/2021-report-no-21-21-tunnel-and-reservoir-plan-mccook-reservoir-annual-groundwater-mo.pdf",
+          "quotePrimary": "During the 2020 operation, there were 27 high-stage Reservoir events. One event lasted for over five weeks and would have required three samplings, but monitoring was suspended during this time due to the coronavirus pandemic based on approval from the IEPA. ... The Reservoir operated at high stage for a total of 188 days in 2020.",
+          "note": "High stage means McCook was above -265 ft CCD: 'High-stage monitoring is initiated when water elevation in the Reservoir exceeds -265 ft CCD. The initial high-stage/fill-event threshold of -280 ft CCD was increased to -265 ft CCD in January 2018' (same report, p.5). NOTE: docs/10-tarp-reservoirs.md currently gives McCook's high-stage threshold as -220 ft CCD, citing a different source; MWRD's own McCook monitoring report says -265 ft CCD, and the two should be reconciled. The report's sampled high-stage events run 1 (14 Jan) to 27 (9 Dec); events 5, 6 and 7 fall in the unsampled COVID gap between the event-4 sample on 12 Mar and the event-8 sample on 16 Jun 2020, and the first low-stage sampling of the year was not until 18-19 June 2020, 'after the Reservoir had been at low-stage for over four days'. So McCook held combined sewage across this storm and its lead-in week, and one of those events ran over five weeks. No start volume published."
+        }
+      },
+      "tunnels": {
+        "mainstream": {
+          "volMG": null, "fillEvent": true, "date": "2020-05-15",
+          "source": "MWRD M&R Report No. 21-24, 'Tunnel and Reservoir Plan Mainstream Tunnel System Annual Groundwater Monitoring Report' (2021), p.8 — sources/mwrd-mr-reports/2021-report-no-21-24-tunnel-and-reservoir-plan-mainstream-tunnel-system-annual-ground.pdf",
+          "quote": "During 2020, there were three tunnel fill events observed at the following dates: April 30, 2020, May 15, 2020, and October 22, 2020.",
+          "note": "The Mainstream tunnels reached -150 ft CCD on 30 April 2020 — SEVEN DAYS BEFORE this storm's t0 — and again on 15 May. The 30 April fill is the antecedent state the model cannot see, because its window opens on 7 May with everything empty. The same three dates are reported for the Des Plaines and Upper Des Plaines systems (Reports 21-25 p.8 and 21-26 p.8)."
+        },
+        "desplaines": {
+          "volMG": null, "fillEvent": true, "date": "2020-05-15",
+          "source": "MWRD M&R Report No. 21-25, 'Tunnel and Reservoir Plan Des Plaines Tunnel System Annual Groundwater Monitoring Report' (2021), p.8 — sources/mwrd-mr-reports/2021-report-no-21-25-tunnel-and-reservoir-plan-des-plaines-tunnel-system-annual-groun.pdf",
+          "quote": "During 2020, there were three tunnel fill events observed on the following dates: April 30, 2020, May 15, 2020, and October 22, 2020.",
+          "note": null
+        },
+        "udp": {
+          "volMG": null, "fillEvent": true, "date": "2020-05-15",
+          "source": "MWRD M&R Report No. 21-26, 'Tunnel and Reservoir Plan Upper Des Plaines Tunnel System Annual Groundwater Monitoring Report' (2021), p.8 — sources/mwrd-mr-reports/2021-report-no-21-26-tunnel-and-reservoir-plan-upper-des-plaines-tunnel-system-annual.pdf",
+          "quote": "During 2020, there were three tunnel fill events on the following dates: April 30, 2020, May 15, 2020, and October 22, 2020.",
+          "note": null
+        },
+        "calumet": {
+          "volMG": null, "fillEvent": true, "date": "2020-05-15",
+          "source": "MWRD M&R Report No. 21-29, 'Tunnel and Reservoir Plan Calumet Tunnel System Annual Groundwater Monitoring Report' (2021), p.8 — sources/mwrd-mr-reports/2021-report-no-21-29-tunnel-and-reservoir-plan-calumet-tunnel-system-annual-groundwat.pdf",
+          "quote": "During 2020, there were three tunnel fill events observed on the following dates: April 30, 2020, May 15, 2020, and October 22, 2020.",
+          "note": null
+        }
+      },
+      "context": {
+        "thorntonTransitional": {
+          "note": "The Thornton Transitional Reservoir is Thorn Creek overbank flood storage, NOT TARP combined-sewage storage, so it is not a seedable reservoir in this model. Its 2020 diversion table is the only event-level VOLUME MWRD publishes anywhere near this storm and is recorded here for scale: 1,359 MG on 29 April 2020 (1.62 in rain), 2,726 MG on 15 May 2020 (4.16 in) and 2,859 MG on 23 May 2020 (1.16 in).",
+          "source": "MWRD M&R Report No. 21-27, 'Tunnel and Reservoir Plan Thornton Transitional Flood Control Reservoir' (2021), Table 1, p.3 — sources/mwrd-mr-reports/2021-report-no-21-27-tunnel-and-reservoir-plan-thornton-transitional-flood-control-re.pdf",
+          "quote": "TABLE 1: DIVERSIONS TO THE THORNTON TRANSITIONAL FLOOD CONTROL RESERVOIR DURING 2020 ... 01/11/20 965 1.78 ... 04/29/20 1,359 1.62 ... 05/15/20 2,726 4.16 ... 05/23/20 2,859 1.16 ... 07/19/20 1,227 0.82"
+        },
+        "systemSnapshot17May2020": {
+          "note": "The only dated, quantitative snapshot of TARP storage found for any of these ten storms. SECONDARY (trade press quoting MWRD), and PEAK rather than start state, so it validates the model's peak fills, it does not seed the run.",
+          "source": "Jeff Yoders, 'Chicago Sees Record Rainfall, Floods, Power Outages', Engineering News-Record, 18 May 2020 — https://www.enr.com/articles/49399-chicago-sees-record-rainfall-floods-power-outages",
+          "quote": "The McCook Tunnel and Reservoir Plan System was 100% full on May 17 with 4.97 billion gallons of water. ... The Calumet TARP System was 36% full, with 3.017 billion gallons stored. ... The Kirie TARP System Tunnel was 100% full, with 71 million gallons and its Majewski CUP System stored 243 million gallons of water. ... Combined, they are currently holding more than 8 billion gallons of water.",
+          "caveat": "The 36 percent for Calumet is measured against Thornton's full 7.9 BG (630 + 7,900 = 8,530 MG; 3,017/8,530 = 35.4 percent), not against the 4.8 BG CSO share this model uses. Do not mix the two denominators."
+        },
+        "reversals": {
+          "note": "MWRD reversed the waterways into Lake Michigan on 15 May and 17-18 May 2020 — the backstop action TARP exists to avoid, and an independent sign the system was at its limit throughout this storm.",
+          "source": "docs/10-tarp-reservoirs.md, 'Notable events & incidents'",
+          "quote": "May 2020 storms. With the system overwhelmed, MWRD reversed the waterways into Lake Michigan on May 15 and May 17-18, 2020."
+        }
+      },
+      "notes": "The storm the model under-reads worst (0.59x). MWRD's record shows the system did not start it empty — the tunnels had filled on 30 April, Majewski on 28 April, Thornton was still above its -280 ft CCD threshold at t0, and McCook was in high-stage operation across the whole period — but gives no start volume for any of it. The COVID-19 suspension of TARP monitoring (mid-March to early June 2020, with IEPA approval) removed most of the post-fill sampling that would normally carry the dates."
+    }
+  }
+}
