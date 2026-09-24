@@ -1065,8 +1065,26 @@ function renderCompare() {
   }
   const rt = recT > 0 ? modT / recT : null;
   h += `<tr class="tot"><td>Six stations</td><td class="n">${num(recT)}</td><td class="n">${num(modT)}</td><td class="ratio${rt && (rt > 2 || rt < 0.5) ? ' far' : ''}">${rt ? rt.toFixed(2) + '×' : '—'}</td></tr></table>`;
-  h += `<p class="hint">Modelled total overflow including gravity outfalls the log does not cover: <b>${num(s.csoMG)} MG</b>; peak standing water <b>${num(s.peakPooledMG)} MG</b>; ` +
-       Object.entries(s.peakResFill).filter(([k]) => ST.run.frames[0].reservoirs[k].capMG > 0).map(([k, v]) => `${esc((facById(k) || {}).short || k)} peaked at ${(v * 100).toFixed(0)}%`).join(', ') + '.</p>';
+  h += `<p class="hint">Modelled total overflow including gravity outfalls the log does not cover: <b>${num(s.csoMG)} MG</b>; peak standing water <b>${num(s.peakPooledMG)} MG</b>.</p>`;
+  // reservoirs and tunnels: the model's peak beside what MWRD's own monitoring reports logged
+  const obs = st.observed || {};
+  const rrows = [];
+  for (const [rid, v] of Object.entries(s.peakResFill)) {
+    if (ST.run.frames[0].reservoirs[rid].capMG === 0) continue;
+    const o = (obs.reservoirs || {})[rid];
+    let rec = '—';
+    if (o) {
+      if (o.peakMG != null) rec = `${num(o.peakMG)} MG (${Math.round((o.peakPct || 0) * 100)}%) on ${esc(o.date || '')}`;
+      else if (o.fillEvent === true) rec = `fill event logged${o.date ? ' ' + esc(o.date) : ''}${o.inferred ? ' (inferred)' : ''}`;
+      else if (o.fillEvent === false) rec = 'no fill event logged';
+    }
+    rrows.push(`<tr><td>${esc((facById(rid) || {}).short || rid)}</td><td class="n">${(v * 100).toFixed(0)}%</td><td>${rec}</td></tr>`);
+  }
+  if (rrows.length) h += '<table class="cmp"><tr><th>Reservoir</th><th>model peak</th><th>MWRD monitoring reports</th></tr>' + rrows.join('') + '</table>';
+  const tn = obs.tunnels && Object.keys(obs.tunnels).length ? Object.entries(obs.tunnels).map(([k, t]) => `${esc(k)}: ${esc(t.note || t.quote || '')}`).join(' · ') : '';
+  if (tn) h += `<p class="hint">${tn}</p>`;
+  if (obs.notes) h += `<p class="hint">${esc(String(obs.notes).slice(0, 400))}</p>`;
+  h += `<p class="hint">MWRD's annual groundwater reports log every reservoir <i>fill event</i> by date but publish no volumes; the per-storm volumes go to USEPA on a consent-decree thumb drive. So "fill event logged" is a yes/no check on whether the model fills the reservoir at all.</p>`;
   $('#compare').innerHTML = h;
 }
 
