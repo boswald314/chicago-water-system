@@ -16,8 +16,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
-import { SewerModel, CONFIGS } from './sim.js?v=10';
-import * as SC from './scene.js?v=10';
+import { SewerModel, CONFIGS } from './sim.js?v=11';
+import * as SC from './scene.js?v=11';
 
 const D = window.SYS3D;
 const FT = SC.FT;
@@ -63,8 +63,11 @@ const V = { systems: {}, reservoirs: {}, plants: {}, basins: {}, csoRate: 0, cso
             inHr: 0, pumpedRate: 0, pooledMG: 0, t: 0, ready: false };
 
 const host = $('#view');
-const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+/* Phones and small tablets: coarse pointer or a narrow window. Drives the
+ * bottom-sheet layout, touch gestures and a lighter render budget. */
+const MOBILE = matchMedia('(max-width: 900px), (pointer: coarse) and (max-width: 1100px)').matches;
+const renderer = new THREE.WebGLRenderer({ antialias: !MOBILE, powerPreference: 'high-performance' });
+renderer.setPixelRatio(Math.min(devicePixelRatio, MOBILE ? 1.5 : 2));
 renderer.setSize(host.clientWidth, host.clientHeight);
 host.appendChild(renderer.domElement);
 const labelRenderer = new CSS2DRenderer();
@@ -228,7 +231,20 @@ function recordFor(hit) {
                    : 'A connecting structure on the intercepting sewers, not a TARP drop shaft.',
     doc: s.system ? 'doc09' : 'doc07' };
 }
-renderer.domElement.addEventListener('pointerdown', e => { mouse.sx = e.clientX; mouse.sy = e.clientY; });
+let lastTap = 0;
+renderer.domElement.addEventListener('pointerdown', e => {
+  mouse.sx = e.clientX; mouse.sy = e.clientY;
+  if (e.pointerType === 'touch') {
+    const now = performance.now();
+    if (now - lastTap < 320) {
+      const hit = pickAt(e.clientX, e.clientY);
+      let pt = hit ? hit.point.clone() : null;
+      if (!pt) { const p = new THREE.Vector3(); if (ray.ray.intersectPlane(new THREE.Plane(V3(0, 1, 0), 0), p)) pt = p; }
+      if (pt) repivot(pt);
+      lastTap = 0;
+    } else lastTap = now;
+  }
+});
 renderer.domElement.addEventListener('pointerup', e => {
   if (Math.hypot(e.clientX - mouse.sx, e.clientY - mouse.sy) > 5) return;
   const hit = pickAt(e.clientX, e.clientY);
@@ -245,6 +261,7 @@ renderer.domElement.addEventListener('dblclick', e => {
 });
 let hoverAt = 0;
 renderer.domElement.addEventListener('pointermove', e => {
+  if (e.pointerType === 'touch') return;
   const now = performance.now(); if (now - hoverAt < 60) return; hoverAt = now;
   const tip = $('#tip');
   const hit = pickAt(e.clientX, e.clientY);
@@ -412,7 +429,7 @@ function buildGround() {
     const rb = new THREE.Box3();
     for (const ring of b.outline) for (const p of ring) rb.expandByPoint(V3(p[0], 0, p[1]));
     const s2 = rb.getSize(new THREE.Vector3()), mn = rb.min;
-    const N = Math.max(120, Math.round(b.areaSqMi.v * 9)), pos = new Float32Array(N * 3), seed = new Float32Array(N);
+    const N = Math.max(80, Math.round(b.areaSqMi.v * (MOBILE ? 4 : 9))), pos = new Float32Array(N * 3), seed = new Float32Array(N);
     let placed = 0, tries = 0;
     while (placed < N && tries < N * 30) {
       tries++;
@@ -1222,7 +1239,9 @@ function inspect(rec) {
   const p = $('#inspector');
   if (!rec) { p.classList.add('empty'); p.innerHTML = '<p class="hint">Click any tunnel, shaft, tank, pump house, reservoir or connecting conduit to see its real dimensions and where they come from.</p>'; return; }
   p.classList.remove('empty'); renderInspector();
-  document.querySelector('[data-tab="inspect"]').click();
+  const tab = document.querySelector('[data-tab="inspect"]');
+  if (MOBILE && tab.classList.contains('on') && $('#panel').classList.contains('open')) return;   // already showing
+  tab.click();
 }
 let inspTick = 0;
 function renderInspector() {
@@ -1449,13 +1468,30 @@ function buildUI() {
     const t = e.target.closest('[data-tab]');
     if (t) {
       const n = t.getAttribute('data-tab');
+      if (MOBILE) {
+        const panel = $('#panel'), wasOn = t.classList.contains('on') && panel.classList.contains('open');
+        panel.classList.toggle('open', !wasOn);
+        document.body.classList.toggle('sheet-open', !wasOn);
+        setTimeout(resize, 240);
+      }
       document.querySelectorAll('[data-tab]').forEach(x => x.classList.toggle('on', x === t));
       document.querySelectorAll('.tabpane').forEach(p => p.classList.toggle('on', p.id === 'tab-' + n));
       if (n === 'notes') renderFidelity();
       requestAnimationFrame(() => { drawLadder(); if (ST.run) drawChart(); });
     }
   });
-  $('#legendX').addEventListener('click', () => $('#legend').classList.add('hidden'));
+  $('#legendX').addEventListener('click', () => { $('#legend').classList.add('hidden'); $('#legend').classList.remove('show'); });
+  $('#legendBtn').addEventListener('click', () => { const l = $('#legend'); l.classList.remove('hidden'); l.classList.toggle('show'); });
+  if (MOBILE) {
+    // a swipe down on the sheet's handle strip closes it
+    let y0 = null;
+    $('#tabs').addEventListener('touchstart', e => { y0 = e.touches[0].clientY; }, { passive: true });
+    $('#tabs').addEventListener('touchend', e => {
+      if (y0 != null && e.changedTouches[0].clientY - y0 > 40) { $('#panel').classList.remove('open'); document.body.classList.remove('sheet-open'); setTimeout(resize, 240); }
+      y0 = null;
+    }, { passive: true });
+    // the inspector opens the sheet when something is tapped
+  }
   $('#panelToggle').addEventListener('click', () => { document.body.classList.toggle('collapsed'); setTimeout(resize, 260); });
 }
 function togglePlay(v) {
@@ -1470,6 +1506,8 @@ function resize() {
   if (ST.run) drawChart(); drawLadder();
 }
 addEventListener('resize', resize);
+addEventListener('orientationchange', () => setTimeout(() => { resize(); frameAll(); }, 300));
+if (MOBILE) requestAnimationFrame(() => { resize(); frameAll(); });
 
 let last = performance.now(), clock = 0;
 function animate(now) {
