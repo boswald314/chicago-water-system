@@ -348,9 +348,9 @@
       <h4>System build-out</h4>
       <select id="config"></select>
       <h4>Recorded storms — the ten largest since 2006</h4>
-      <p class="hint">Real hourly rain from up to ten ASOS gauges around the region, seven days of lead-in
-        so the ground and the tunnels start in their real state, run against the system as it stood that
-        year. Pick one, then compare the model with what MWRD's pumping stations actually logged.</p>
+      <p class="hint">Real hourly rain from every gauge the region has — airport, co-op, USGS and volunteer —
+        seven days of lead-in so the ground and the tunnels start in their real state, run against the system
+        as it stood that year. Pick one, then compare the model with what MWRD's pumping stations actually logged.</p>
       <div id="stormlist"></div>
       <div id="stormnote"></div>
       <div id="compare"></div>
@@ -462,14 +462,21 @@
       </ul>
       <h4>Recorded storms and the comparison</h4>
       <p class="hint">Event ranking: multi-day runs of wet days at O'Hare and Midway (NCEI GHCN-Daily), ranked by
-        the larger gauge total, 2006–2026. Hourly rain from the Iowa Environmental Mesonet's ASOS archive
-        for O'Hare, Midway, Wheeling, DuPage, Romeoville, Lansing, Waukegan, Aurora and Kenosha; each basin
-        is rained by inverse-distance weighting of those gauges at its centroid, so a storm that dumps
-        8 in on O'Hare and nothing on Midway (July 2011) hits the North and Central basins differently.
+        the larger gauge total, 2006–2026. Ten ASOS stations sit 15 to 40 km apart, which is too coarse for a
+        convective storm, so the gauge field is built from four networks: the Iowa Environmental Mesonet's
+        ASOS archive, NCEI's co-op hourly gauges, USGS tipping buckets, and the GHCN-Daily co-op and CoCoRaHS
+        gauges, which contribute a measured event total and borrow their timing from the nearest hourly gauge.
+        That is 11 to 130 gauges per storm instead of ten. Each basin is then rained by the <i>area</i> average
+        of the inverse-distance field over a grid of points inside its own outline, not by the field at its
+        centroid — so rain that falls on the separate-sewered suburbs beyond a basin's edge stays out of it.
         The comparison is against MWRD's own pumping-station discharge log, summed over the event window
         plus two days. The log covers only the six stations, not the gravity outfalls, so the model's
         "passed through the stations" figure is the like-for-like number. Across the ten storms the
-        geometric-mean ratio of modelled to recorded is about 1.1, with individual storms from 0.6× to 2.8×.</p>
+        geometric-mean ratio of modelled to recorded is about 1.25, with individual storms from 0.6× to 2.6×.
+        That ratio sat nearer 1.0 while the model was reading ten ASOS gauges: the denser field finds more
+        rain than the airports did, so the 0.32 runoff coefficient — fitted back when the rain was
+        under-sampled — is now carrying a bias that belongs to the runoff, not the rainfall, and is due
+        a fresh calibration.</p>
       <h4>Standing water</h4>
       <p class="hint">When a basin's overflow exceeds what its outfalls are rated to pass, the surplus
         surcharges the collection system and stands in the streets. The model pools that volume in the
