@@ -9,7 +9,13 @@ Inputs (fetched separately, cached in the scratchpad):
   events_top.json                 event windows ranked from those two records
   hourly/<start>.csv              IEM ASOS 1-hour precipitation (p01i) for
                                   ORD MDW PWK DPA LOT IGQ GYY UGN ARR ENW
+  map-data/storm-observations.json  what MWRD's own records say each storm's
+                                  tunnels and reservoirs were doing (optional)
 Output: map-data/storms.json
+
+Run with --observed-only to re-merge storm-observations.json into an existing
+storms.json without refetching the rainfall inputs, which live in a scratchpad
+cache rather than in the repository.
 """
 import json, csv, os, sys, math, datetime, collections
 
@@ -49,6 +55,42 @@ def hourly(path, t0):
         # repeat partial amounts, so keep the max seen in the bin
         by[st][h] = max(by[st][h], val)
     return by, coords, seen
+
+OBSERVED_META = ('MWRD Monitoring and Research Department annual IEPA groundwater-monitoring reports, merged '
+                 'from map-data/storm-observations.json as storm.observed where MWRD recorded anything for '
+                 'that storm. MWRD logs fill events as dates, not volumes, so `observed` is mostly a check on '
+                 'the model rather than an input to it.')
+
+
+def merge_observed(out):
+    """Attach MWRD's own record of each storm to the storm itself, as `observed`,
+    so the viewer can show what the District reported beside what the model says.
+    Storms with nothing recorded are left without the key."""
+    path = os.path.join(ROOT, 'map-data', 'storm-observations.json')
+    if not os.path.exists(path):
+        return 0
+    obs = json.load(open(path)).get('storms', {})
+    n = 0
+    for s in out['storms']:
+        if s['id'] in obs:
+            s['observed'] = obs[s['id']]
+            n += 1
+    if n:
+        out['meta']['observed'] = OBSERVED_META
+    return n
+
+
+def write(out):
+    json.dump(out, open(os.path.join(ROOT, 'map-data', 'storms.json'), 'w'), separators=(',', ':'))
+    print('storms.json', os.path.getsize(os.path.join(ROOT, 'map-data', 'storms.json')) // 1024, 'KB')
+
+
+def observed_only():
+    """Re-merge the observations into the storms.json already on disk."""
+    out = json.load(open(os.path.join(ROOT, 'map-data', 'storms.json')))
+    print('merged observations into', merge_observed(out), 'of', len(out['storms']), 'storms')
+    write(out)
+
 
 def main():
     top = json.load(open(os.path.join(SCR, 'events_top.json')))[:10]
@@ -102,12 +144,12 @@ def main():
         recorded='MWRD pumping-station discharge log in data/mwrd-ps-cso-activity.csv, summed over the event window plus two days',
         caveat='Gauges are point measurements; convective storms vary sharply between them. The model rains each basin by inverse-distance weighting of the gauges around its centroid.'),
         storms=storms)
-    json.dump(out, open(os.path.join(ROOT, 'map-data', 'storms.json'), 'w'), separators=(',', ':'))
+    merge_observed(out)
     for s in storms:
         print(f"{s['start']}..{s['end']} {s['hours']:4d} h  gauges={len(s['gauges'])}  " +
               ' '.join(f"{g['id']}:{g['totalIn']}" for g in s['gauges'][:5]) +
               f"  | recorded CSO {s['recordedTotalMG']:,.0f} MG  era={s['era']}")
-    print('storms.json', os.path.getsize(os.path.join(ROOT, 'map-data', 'storms.json')) // 1024, 'KB')
+    write(out)
 
 if __name__ == '__main__':
-    main()
+    observed_only() if '--observed-only' in sys.argv else main()

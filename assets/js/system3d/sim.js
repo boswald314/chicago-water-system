@@ -103,6 +103,16 @@ export class SewerModel {
       // (an NRCS-AMC-style adjustment; the 0.32 base is the calibrated
       // single-day value). Set amcK to 0 to switch it off.
       runoffMax: 0.62, amcK: 2.5,
+      // Antecedent storage: what the tunnels and reservoirs already held at t0.
+      // Seven days of real lead-in rain builds that up from empty, which
+      // under-reads a storm arriving on weeks of rain, so a recorded storm can
+      // instead be started from what MWRD actually had in store that day:
+      //   seed: { reservoirs: {'res-mccook': MG}, systems: {mainstream: MG} }
+      // Volumes are clamped to whatever this build-out state has actually built.
+      // map-data/storm-observations.json holds the record; note that for the ten
+      // recorded storms MWRD publishes fill-event dates but no start volumes, so
+      // nothing there fills this in yet -- see that file's `whereTheVolumesAre`.
+      seed: null,
     }, opts);
     const cfg = CONFIGS.find(c => c.id === o.config) || CONFIGS[3];
     const D = this.d;
@@ -123,6 +133,12 @@ export class SewerModel {
     const tunVol = {}, resVol = {};
     for (const sid of Object.keys(D.systems)) tunVol[sid] = 0;
     for (const rid of Object.keys(D.reservoirs)) resVol[rid] = 0;
+    if (o.seed) {                                   // recorded antecedent state
+      for (const [sid, v] of Object.entries(o.seed.systems || {}))
+        if (sid in tunVol) tunVol[sid] = Math.max(0, Math.min(v, tunCap[sid]));
+      for (const [rid, v] of Object.entries(o.seed.reservoirs || {}))
+        if (rid in resVol) resVol[rid] = Math.max(0, Math.min(v, resCap[rid]));
+    }
 
     const csoCum = {};                              // per basin, MG
     const csoByStation = {};
