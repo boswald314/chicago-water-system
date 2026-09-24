@@ -260,7 +260,8 @@
     #navmenu { display:inline-block; border:1px solid var(--line); background:var(--panel2); color:var(--ink); border-radius:6px;
       padding:4px 10px; font-size:13px; cursor:pointer; }
     #shell { display:block; height:calc(100dvh - 41px); position:relative; }
-    #stage { position:absolute; inset:0; }
+    /* the stage gets its own stacking context so the sheet covers every HUD box and 3-D label */
+    #stage { position:absolute; inset:0; z-index:1; }
     /* bottom sheet */
     #panel { position:absolute; left:0; right:0; bottom:0; top:auto; height:46px; border-left:0; border-top:1px solid var(--line);
       border-radius:14px 14px 0 0; box-shadow:0 -6px 24px rgba(0,0,0,.28); transition:height .22s ease; z-index:30; display:flex; }
@@ -293,7 +294,10 @@
     #legend { display:none; right:8px; top:8px; max-width:70vw; font-size:10.5px; padding:6px 9px; }
     #legend.show { display:block; }
     #legendBtn { display:inline-block; }
-    #navhud { right:8px; bottom:112px; gap:5px; transform:scale(.85); transform-origin:bottom right; }
+    #navhud { right:8px; bottom:150px; gap:4px; transform:scale(.8); transform-origin:bottom right; }
+    #csobox .v { font-size:16px; line-height:1.1; }
+    #csobox .r:last-child { display:none; }
+    #hud { max-width:calc(100vw - 16px); }
     #keyhelp { display:none !important; }
     #tip { display:none !important; }
     /* fewer labels: keep facility names, drop the close-up detail */
