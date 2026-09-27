@@ -1,0 +1,1500 @@
+{
+  "generated": "2026-09-24",
+  "script": "scripts/calibrate.mjs",
+  "model": "assets/js/system3d/sim.js SewerModel.run",
+  "what": "Assumed hydrology parameters fitted to MWRD pumping-station discharge for ten recorded storms. Areas, plant/pump capacities and storage volumes are sourced and were not touched.",
+  "verdict": {
+    "adopted": false,
+    "betterHoldout": false,
+    "betterLoo": true,
+    "onRidge": true,
+    "reasons": [
+      "hold-out gets worse: RMS log 0.4059 -> 0.4592",
+      "3 of 5 parameters rest on a bound (runoffC lower, routeK lower, reliefFactor upper): the box stopped the search, not the data",
+      "runoffC is unidentified over 0.15-0.32 at a cost of under 0.02 in J"
+    ],
+    "viewerNote": "Tested against 10 recorded storms 2026-09-24; the fit did not generalise and the defaults were left alone. See map-data/calibration.json."
+  },
+  "objective": {
+    "primary": "RMS over storms of log(summary.passedMG / storm.recordedTotalMG)",
+    "secondary": "RMS over (storm x station group) of log((model+25)/(recorded+25)), groups {\"CENTRAL\":[\"ps-racine\",\"ps-westchester\"],\"NORTH\":[\"ps-north-branch\",\"ps-wilmette\"],\"SOUTH\":[\"ps-95th\",\"ps-122nd\",\"ps-125th\"]}",
+    "weightOnSecondary": 0.35,
+    "notInObjective": "Majewski fill events: a basin-specific shortfall a global runoff fit cannot address, reported as a diagnostic only."
+  },
+  "storms": {
+    "all": [
+      "2011-07-22",
+      "2008-09-12",
+      "2010-07-23",
+      "2020-05-14",
+      "2011-05-22",
+      "2013-04-15",
+      "2014-08-21",
+      "2007-08-18",
+      "2017-10-14",
+      "2009-06-16"
+    ],
+    "calibration": [
+      "2011-07-22",
+      "2008-09-12",
+      "2010-07-23",
+      "2020-05-14",
+      "2011-05-22",
+      "2007-08-18",
+      "2017-10-14",
+      "2009-06-16"
+    ],
+    "holdout": [
+      "2013-04-15",
+      "2014-08-21"
+    ],
+    "holdoutChosen": "Chosen before fitting: one spring and one summer storm, neither the largest nor the smallest nor the known outlier."
+  },
+  "defaults": {
+    "params": {
+      "runoffC": 0.32,
+      "runoffMax": 0.62,
+      "amcK": 2.5,
+      "routeN": 2,
+      "routeK": 1.5,
+      "reliefFactor": 1.5
+    },
+    "J": 0.887,
+    "primary": 0.5599,
+    "secondary": 0.9346,
+    "gmeanRatio": 1.1496,
+    "rmsLogAll": 0.5327,
+    "perStorm": [
+      {
+        "start": "2011-07-22",
+        "era": "tunnels",
+        "holdout": false,
+        "recordedMG": 2477.5,
+        "passedMG": 4163,
+        "ratio": 1.6802,
+        "csoMG": 4813,
+        "peakPooledMG": 1793,
+        "majewskiFillLogged": true,
+        "majewskiPeakFill": 0.3458,
+        "stations": {
+          "ps-racine": 2026,
+          "ps-north-branch": 968,
+          "ps-95th": 195,
+          "ps-122nd": 85,
+          "ps-125th": 260,
+          "ps-westchester": 67,
+          "ps-wilmette": 561
+        },
+        "groups": {
+          "CENTRAL": {
+            "modelMG": 2094,
+            "recordedMG": 1859.2,
+            "ratio": 1.1244
+          },
+          "NORTH": {
+            "modelMG": 1529,
+            "recordedMG": 409.1,
+            "ratio": 3.5792
+          },
+          "SOUTH": {
+            "modelMG": 540,
+            "recordedMG": 209.2,
+            "ratio": 2.4141
+          }
+        }
+      },
+      {
+        "start": "2008-09-12",
+        "era": "tunnels",
+        "holdout": false,
+        "recordedMG": 6313.9,
+        "passedMG": 15810,
+        "ratio": 2.504,
+        "csoMG": 19215,
+        "peakPooledMG": 4044,
+        "majewskiFillLogged": true,
+        "majewskiPeakFill": 0.8704,
+        "stations": {
+          "ps-racine": 6944,
+          "ps-north-branch": 3244,
+          "ps-95th": 1268,
+          "ps-122nd": 555,
+          "ps-125th": 1689,
+          "ps-westchester": 231,
+          "ps-wilmette": 1879
+        },
+        "groups": {
+          "CENTRAL": {
+            "modelMG": 7175,
+            "recordedMG": 4024,
+            "ratio": 1.7783
+          },
+          "NORTH": {
+            "modelMG": 5123,
+            "recordedMG": 1348.9,
+            "ratio": 3.747
+          },
+          "SOUTH": {
+            "modelMG": 3512,
+            "recordedMG": 941,
+            "ratio": 3.6611
+          }
+        }
+      },
+      {
+        "start": "2010-07-23",
+        "era": "tunnels",
+        "holdout": false,
+        "recordedMG": 4015.3,
+        "passedMG": 7387,
+        "ratio": 1.8397,
+        "csoMG": 8688,
+        "peakPooledMG": 3851,
+        "majewskiFillLogged": true,
+        "majewskiPeakFill": 0.3047,
+        "stations": {
+          "ps-racine": 3876,
+          "ps-north-branch": 1412,
+          "ps-95th": 416,
+          "ps-122nd": 182,
+          "ps-125th": 554,
+          "ps-westchester": 129,
+          "ps-wilmette": 818
+        },
+        "groups": {
+          "CENTRAL": {
+            "modelMG": 4005,
+            "recordedMG": 2905.5,
+            "ratio": 1.3752
+          },
+          "NORTH": {
+            "modelMG": 2230,
+            "recordedMG": 575.9,
+            "ratio": 3.7532
+          },
+          "SOUTH": {
+            "modelMG": 1151,
+            "recordedMG": 533.9,
+            "ratio": 2.1047
+          }
+        }
+      },
+      {
+        "start": "2020-05-14",
+        "era": "today",
+        "holdout": false,
+        "recordedMG": 7501.4,
+        "passedMG": 4693,
+        "ratio": 0.6256,
+        "csoMG": 5610,
+        "peakPooledMG": 1342,
+        "majewskiFillLogged": true,
+        "majewskiPeakFill": 0.0667,
+        "stations": {
+          "ps-racine": 2964,
+          "ps-north-branch": 1032,
+          "ps-95th": 0,
+          "ps-122nd": 0,
+          "ps-125th": 0,
+          "ps-westchester": 99,
+          "ps-wilmette": 598
+        },
+        "groups": {
+          "CENTRAL": {
+            "modelMG": 3062,
+            "recordedMG": 6322.4,
+            "ratio": 0.4864
+          },
+          "NORTH": {
+            "modelMG": 1630,
+            "recordedMG": 1179,
+            "ratio": 1.3748
+          },
+          "SOUTH": {
+            "modelMG": 0,
+            "recordedMG": 0,
+            "ratio": 1
+          }
+        }
+      },
+      {
+        "start": "2011-05-22",
+        "era": "tunnels",
+        "holdout": false,
+        "recordedMG": 3548.6,
+        "passedMG": 3546,
+        "ratio": 0.9992,
+        "csoMG": 3752,
+        "peakPooledMG": 32,
+        "majewskiFillLogged": true,
+        "majewskiPeakFill": 0,
+        "stations": {
+          "ps-racine": 1574,
+          "ps-north-branch": 710,
+          "ps-95th": 288,
+          "ps-122nd": 126,
+          "ps-125th": 384,
+          "ps-westchester": 52,
+          "ps-wilmette": 411
+        },
+        "groups": {
+          "CENTRAL": {
+            "modelMG": 1627,
+            "recordedMG": 2717.2,
+            "ratio": 0.6023
+          },
+          "NORTH": {
+            "modelMG": 1121,
+            "recordedMG": 729.9,
+            "ratio": 1.518
+          },
+          "SOUTH": {
+            "modelMG": 798,
+            "recordedMG": 101.4,
+            "ratio": 6.5106
+          }
+        }
+      },
+      {
+        "start": "2013-04-15",
+        "era": "tunnels",
+        "holdout": true,
+        "recordedMG": 4897.5,
+        "passedMG": 7582,
+        "ratio": 1.5481,
+        "csoMG": 9190,
+        "peakPooledMG": 2621,
+        "majewskiFillLogged": true,
+        "majewskiPeakFill": 0.3705,
+        "stations": {
+          "ps-racine": 3345,
+          "ps-north-branch": 1588,
+          "ps-95th": 584,
+          "ps-122nd": 255,
+          "ps-125th": 778,
+          "ps-westchester": 111,
+          "ps-wilmette": 920
+        },
+        "groups": {
+          "CENTRAL": {
+            "modelMG": 3457,
+            "recordedMG": 3223.4,
+            "ratio": 1.0718
+          },
+          "NORTH": {
+            "modelMG": 2509,
+            "recordedMG": 1109.6,
+            "ratio": 2.2331
+          },
+          "SOUTH": {
+            "modelMG": 1617,
+            "recordedMG": 564.6,
+            "ratio": 2.7844
+          }
+        }
+      },
+      {
+        "start": "2014-08-21",
+        "era": "tunnels",
+        "holdout": true,
+        "recordedMG": 4005.9,
+        "passedMG": 2761,
+        "ratio": 0.6893,
+        "csoMG": 3331,
+        "peakPooledMG": 447,
+        "majewskiFillLogged": false,
+        "majewskiPeakFill": 0,
+        "stations": {
+          "ps-racine": 1313,
+          "ps-north-branch": 410,
+          "ps-95th": 273,
+          "ps-122nd": 120,
+          "ps-125th": 364,
+          "ps-westchester": 44,
+          "ps-wilmette": 238
+        },
+        "groups": {
+          "CENTRAL": {
+            "modelMG": 1357,
+            "recordedMG": 3473,
+            "ratio": 0.395
+          },
+          "NORTH": {
+            "modelMG": 648,
+            "recordedMG": 300.1,
+            "ratio": 2.0693
+          },
+          "SOUTH": {
+            "modelMG": 757,
+            "recordedMG": 232.9,
+            "ratio": 3.0312
+          }
+        }
+      },
+      {
+        "start": "2007-08-18",
+        "era": "tunnels",
+        "holdout": false,
+        "recordedMG": 4651.9,
+        "passedMG": 5000,
+        "ratio": 1.0748,
+        "csoMG": 5717,
+        "peakPooledMG": 604,
+        "majewskiFillLogged": false,
+        "majewskiPeakFill": 0.0661,
+        "stations": {
+          "ps-racine": 1998,
+          "ps-north-branch": 834,
+          "ps-95th": 584,
+          "ps-122nd": 256,
+          "ps-125th": 779,
+          "ps-westchester": 66,
+          "ps-wilmette": 483
+        },
+        "groups": {
+          "CENTRAL": {
+            "modelMG": 2064,
+            "recordedMG": 3230.7,
+            "ratio": 0.6418
+          },
+          "NORTH": {
+            "modelMG": 1317,
+            "recordedMG": 896.3,
+            "ratio": 1.4562
+          },
+          "SOUTH": {
+            "modelMG": 1619,
+            "recordedMG": 525,
+            "ratio": 2.989
+          }
+        }
+      },
+      {
+        "start": "2017-10-14",
+        "era": "r2015",
+        "holdout": false,
+        "recordedMG": 4657.6,
+        "passedMG": 7321,
+        "ratio": 1.5718,
+        "csoMG": 9063,
+        "peakPooledMG": 1305,
+        "majewskiFillLogged": true,
+        "majewskiPeakFill": 0.1452,
+        "stations": {
+          "ps-racine": 4721,
+          "ps-north-branch": 1547,
+          "ps-95th": 0,
+          "ps-122nd": 0,
+          "ps-125th": 0,
+          "ps-westchester": 157,
+          "ps-wilmette": 896
+        },
+        "groups": {
+          "CENTRAL": {
+            "modelMG": 4878,
+            "recordedMG": 3746.8,
+            "ratio": 1.2999
+          },
+          "NORTH": {
+            "modelMG": 2443,
+            "recordedMG": 910.8,
+            "ratio": 2.6373
+          },
+          "SOUTH": {
+            "modelMG": 0,
+            "recordedMG": 0,
+            "ratio": 1
+          }
+        }
+      },
+      {
+        "start": "2009-06-16",
+        "era": "tunnels",
+        "holdout": false,
+        "recordedMG": 1716.6,
+        "passedMG": 794,
+        "ratio": 0.4624,
+        "csoMG": 807,
+        "peakPooledMG": 0,
+        "majewskiFillLogged": false,
+        "majewskiPeakFill": 0,
+        "stations": {
+          "ps-racine": 188,
+          "ps-north-branch": 309,
+          "ps-95th": 40,
+          "ps-122nd": 18,
+          "ps-125th": 54,
+          "ps-westchester": 6,
+          "ps-wilmette": 179
+        },
+        "groups": {
+          "CENTRAL": {
+            "modelMG": 194,
+            "recordedMG": 930.4,
+            "ratio": 0.2291
+          },
+          "NORTH": {
+            "modelMG": 488,
+            "recordedMG": 786.2,
+            "ratio": 0.6324
+          },
+          "SOUTH": {
+            "modelMG": 112,
+            "recordedMG": 0,
+            "ratio": 5.4781
+          }
+        }
+      }
+    ]
+  },
+  "fitted": {
+    "params": {
+      "runoffC": 0.15,
+      "runoffMax": 0.6378,
+      "amcK": 0.9696,
+      "routeN": 3,
+      "routeK": 0.5018,
+      "reliefFactor": 4
+    },
+    "J": 0.5911,
+    "primary": 0.3205,
+    "secondary": 0.7732,
+    "gmeanRatio": 0.9931,
+    "rmsLogAll": 0.3526,
+    "perStorm": [
+      {
+        "start": "2011-07-22",
+        "era": "tunnels",
+        "holdout": false,
+        "recordedMG": 2477.5,
+        "passedMG": 3496,
+        "ratio": 1.4111,
+        "csoMG": 6183,
+        "peakPooledMG": 1548,
+        "majewskiFillLogged": true,
+        "majewskiPeakFill": 0.4868,
+        "stations": {
+          "ps-racine": 1684,
+          "ps-north-branch": 799,
+          "ps-95th": 179,
+          "ps-122nd": 78,
+          "ps-125th": 238,
+          "ps-westchester": 56,
+          "ps-wilmette": 463
+        },
+        "groups": {
+          "CENTRAL": {
+            "modelMG": 1740,
+            "recordedMG": 1859.2,
+            "ratio": 0.9367
+          },
+          "NORTH": {
+            "modelMG": 1261,
+            "recordedMG": 409.1,
+            "ratio": 2.9631
+          },
+          "SOUTH": {
+            "modelMG": 495,
+            "recordedMG": 209.2,
+            "ratio": 2.2187
+          }
+        }
+      },
+      {
+        "start": "2008-09-12",
+        "era": "tunnels",
+        "holdout": false,
+        "recordedMG": 6313.9,
+        "passedMG": 10374,
+        "ratio": 1.643,
+        "csoMG": 21743,
+        "peakPooledMG": 542,
+        "majewskiFillLogged": true,
+        "majewskiPeakFill": 1,
+        "stations": {
+          "ps-racine": 4907,
+          "ps-north-branch": 1915,
+          "ps-95th": 823,
+          "ps-122nd": 360,
+          "ps-125th": 1097,
+          "ps-westchester": 163,
+          "ps-wilmette": 1109
+        },
+        "groups": {
+          "CENTRAL": {
+            "modelMG": 5070,
+            "recordedMG": 4024,
+            "ratio": 1.2584
+          },
+          "NORTH": {
+            "modelMG": 3024,
+            "recordedMG": 1348.9,
+            "ratio": 2.2191
+          },
+          "SOUTH": {
+            "modelMG": 2280,
+            "recordedMG": 941,
+            "ratio": 2.3861
+          }
+        }
+      },
+      {
+        "start": "2010-07-23",
+        "era": "tunnels",
+        "holdout": false,
+        "recordedMG": 4015.3,
+        "passedMG": 4199,
+        "ratio": 1.0458,
+        "csoMG": 10402,
+        "peakPooledMG": 951,
+        "majewskiFillLogged": true,
+        "majewskiPeakFill": 0.4245,
+        "stations": {
+          "ps-racine": 2035,
+          "ps-north-branch": 843,
+          "ps-95th": 276,
+          "ps-122nd": 121,
+          "ps-125th": 368,
+          "ps-westchester": 68,
+          "ps-wilmette": 489
+        },
+        "groups": {
+          "CENTRAL": {
+            "modelMG": 2103,
+            "recordedMG": 2905.5,
+            "ratio": 0.7261
+          },
+          "NORTH": {
+            "modelMG": 1332,
+            "recordedMG": 575.9,
+            "ratio": 2.2586
+          },
+          "SOUTH": {
+            "modelMG": 764,
+            "recordedMG": 533.9,
+            "ratio": 1.4118
+          }
+        }
+      },
+      {
+        "start": "2020-05-14",
+        "era": "today",
+        "holdout": false,
+        "recordedMG": 7501.4,
+        "passedMG": 4410,
+        "ratio": 0.5879,
+        "csoMG": 7556,
+        "peakPooledMG": 211,
+        "majewskiFillLogged": true,
+        "majewskiPeakFill": 0.1461,
+        "stations": {
+          "ps-racine": 2851,
+          "ps-north-branch": 927,
+          "ps-95th": 0,
+          "ps-122nd": 0,
+          "ps-125th": 0,
+          "ps-westchester": 95,
+          "ps-wilmette": 537
+        },
+        "groups": {
+          "CENTRAL": {
+            "modelMG": 2946,
+            "recordedMG": 6322.4,
+            "ratio": 0.468
+          },
+          "NORTH": {
+            "modelMG": 1464,
+            "recordedMG": 1179,
+            "ratio": 1.2369
+          },
+          "SOUTH": {
+            "modelMG": 0,
+            "recordedMG": 0,
+            "ratio": 1
+          }
+        }
+      },
+      {
+        "start": "2011-05-22",
+        "era": "tunnels",
+        "holdout": false,
+        "recordedMG": 3548.6,
+        "passedMG": 3717,
+        "ratio": 1.0474,
+        "csoMG": 4967,
+        "peakPooledMG": 0,
+        "majewskiFillLogged": true,
+        "majewskiPeakFill": 0,
+        "stations": {
+          "ps-racine": 1776,
+          "ps-north-branch": 648,
+          "ps-95th": 310,
+          "ps-122nd": 136,
+          "ps-125th": 413,
+          "ps-westchester": 59,
+          "ps-wilmette": 375
+        },
+        "groups": {
+          "CENTRAL": {
+            "modelMG": 1835,
+            "recordedMG": 2717.2,
+            "ratio": 0.6783
+          },
+          "NORTH": {
+            "modelMG": 1023,
+            "recordedMG": 729.9,
+            "ratio": 1.3882
+          },
+          "SOUTH": {
+            "modelMG": 859,
+            "recordedMG": 101.4,
+            "ratio": 6.9919
+          }
+        }
+      },
+      {
+        "start": "2013-04-15",
+        "era": "tunnels",
+        "holdout": true,
+        "recordedMG": 4897.5,
+        "passedMG": 5604,
+        "ratio": 1.1443,
+        "csoMG": 10980,
+        "peakPooledMG": 514,
+        "majewskiFillLogged": true,
+        "majewskiPeakFill": 0.4946,
+        "stations": {
+          "ps-racine": 2510,
+          "ps-north-branch": 1097,
+          "ps-95th": 462,
+          "ps-122nd": 202,
+          "ps-125th": 615,
+          "ps-westchester": 83,
+          "ps-wilmette": 635
+        },
+        "groups": {
+          "CENTRAL": {
+            "modelMG": 2593,
+            "recordedMG": 3223.4,
+            "ratio": 0.806
+          },
+          "NORTH": {
+            "modelMG": 1732,
+            "recordedMG": 1109.6,
+            "ratio": 1.5484
+          },
+          "SOUTH": {
+            "modelMG": 1279,
+            "recordedMG": 564.6,
+            "ratio": 2.2118
+          }
+        }
+      },
+      {
+        "start": "2014-08-21",
+        "era": "tunnels",
+        "holdout": true,
+        "recordedMG": 4005.9,
+        "passedMG": 2122,
+        "ratio": 0.5298,
+        "csoMG": 4467,
+        "peakPooledMG": 98,
+        "majewskiFillLogged": false,
+        "majewskiPeakFill": 0.0214,
+        "stations": {
+          "ps-racine": 1083,
+          "ps-north-branch": 239,
+          "ps-95th": 226,
+          "ps-122nd": 99,
+          "ps-125th": 301,
+          "ps-westchester": 36,
+          "ps-wilmette": 138
+        },
+        "groups": {
+          "CENTRAL": {
+            "modelMG": 1119,
+            "recordedMG": 3473,
+            "ratio": 0.3269
+          },
+          "NORTH": {
+            "modelMG": 378,
+            "recordedMG": 300.1,
+            "ratio": 1.2381
+          },
+          "SOUTH": {
+            "modelMG": 626,
+            "recordedMG": 232.9,
+            "ratio": 2.5245
+          }
+        }
+      },
+      {
+        "start": "2007-08-18",
+        "era": "tunnels",
+        "holdout": false,
+        "recordedMG": 4651.9,
+        "passedMG": 5087,
+        "ratio": 1.0935,
+        "csoMG": 7930,
+        "peakPooledMG": 70,
+        "majewskiFillLogged": false,
+        "majewskiPeakFill": 0.149,
+        "stations": {
+          "ps-racine": 2161,
+          "ps-north-branch": 749,
+          "ps-95th": 603,
+          "ps-122nd": 264,
+          "ps-125th": 804,
+          "ps-westchester": 72,
+          "ps-wilmette": 434
+        },
+        "groups": {
+          "CENTRAL": {
+            "modelMG": 2232,
+            "recordedMG": 3230.7,
+            "ratio": 0.6934
+          },
+          "NORTH": {
+            "modelMG": 1183,
+            "recordedMG": 896.3,
+            "ratio": 1.3115
+          },
+          "SOUTH": {
+            "modelMG": 1671,
+            "recordedMG": 525,
+            "ratio": 3.0835
+          }
+        }
+      },
+      {
+        "start": "2017-10-14",
+        "era": "r2015",
+        "holdout": false,
+        "recordedMG": 4657.6,
+        "passedMG": 6004,
+        "ratio": 1.289,
+        "csoMG": 10972,
+        "peakPooledMG": 140,
+        "majewskiFillLogged": true,
+        "majewskiPeakFill": 0.2418,
+        "stations": {
+          "ps-racine": 3921,
+          "ps-north-branch": 1236,
+          "ps-95th": 0,
+          "ps-122nd": 0,
+          "ps-125th": 0,
+          "ps-westchester": 130,
+          "ps-wilmette": 716
+        },
+        "groups": {
+          "CENTRAL": {
+            "modelMG": 4051,
+            "recordedMG": 3746.8,
+            "ratio": 1.0807
+          },
+          "NORTH": {
+            "modelMG": 1952,
+            "recordedMG": 910.8,
+            "ratio": 2.1131
+          },
+          "SOUTH": {
+            "modelMG": 0,
+            "recordedMG": 0,
+            "ratio": 1
+          }
+        }
+      },
+      {
+        "start": "2009-06-16",
+        "era": "tunnels",
+        "holdout": false,
+        "recordedMG": 1716.6,
+        "passedMG": 1256,
+        "ratio": 0.7315,
+        "csoMG": 1460,
+        "peakPooledMG": 0,
+        "majewskiFillLogged": false,
+        "majewskiPeakFill": 0,
+        "stations": {
+          "ps-racine": 418,
+          "ps-north-branch": 450,
+          "ps-95th": 41,
+          "ps-122nd": 18,
+          "ps-125th": 55,
+          "ps-westchester": 14,
+          "ps-wilmette": 261
+        },
+        "groups": {
+          "CENTRAL": {
+            "modelMG": 432,
+            "recordedMG": 930.4,
+            "ratio": 0.4779
+          },
+          "NORTH": {
+            "modelMG": 710,
+            "recordedMG": 786.2,
+            "ratio": 0.9063
+          },
+          "SOUTH": {
+            "modelMG": 114,
+            "recordedMG": 0,
+            "ratio": 5.5549
+          }
+        }
+      }
+    ]
+  },
+  "routeNSweep": [
+    {
+      "stationSet": "loggedSix",
+      "routeN": 1,
+      "J": 0.5638,
+      "params": {
+        "runoffC": 0.15,
+        "runoffMax": 0.674,
+        "amcK": 0.9565,
+        "routeN": 1,
+        "routeK": 0.9731,
+        "reliefFactor": 4
+      }
+    },
+    {
+      "stationSet": "loggedSix",
+      "routeN": 2,
+      "J": 0.5618,
+      "params": {
+        "runoffC": 0.15,
+        "runoffMax": 0.6795,
+        "amcK": 0.9663,
+        "routeN": 2,
+        "routeK": 0.7189,
+        "reliefFactor": 4
+      }
+    },
+    {
+      "stationSet": "loggedSix",
+      "routeN": 3,
+      "J": 0.5631,
+      "params": {
+        "runoffC": 0.15,
+        "runoffMax": 0.6818,
+        "amcK": 0.9911,
+        "routeN": 3,
+        "routeK": 0.5,
+        "reliefFactor": 4
+      }
+    },
+    {
+      "stationSet": "passedMG",
+      "routeN": 1,
+      "J": 0.5931,
+      "params": {
+        "runoffC": 0.15,
+        "runoffMax": 0.6115,
+        "amcK": 0.8258,
+        "routeN": 1,
+        "routeK": 0.687,
+        "reliefFactor": 4
+      }
+    },
+    {
+      "stationSet": "passedMG",
+      "routeN": 2,
+      "J": 0.5924,
+      "params": {
+        "runoffC": 0.15,
+        "runoffMax": 0.6415,
+        "amcK": 0.9844,
+        "routeN": 2,
+        "routeK": 0.604,
+        "reliefFactor": 4
+      }
+    },
+    {
+      "stationSet": "passedMG",
+      "routeN": 3,
+      "J": 0.5911,
+      "params": {
+        "runoffC": 0.15,
+        "runoffMax": 0.6378,
+        "amcK": 0.9696,
+        "routeN": 3,
+        "routeK": 0.5018,
+        "reliefFactor": 4
+      }
+    }
+  ],
+  "stationSets": {
+    "note": "summary.passedMG sums seven stations; MWRD logs six. Wilmette PS is the North Shore Channel lake-diversion controlling works, not a CSO relief station, and has no row in data/mwrd-ps-cso-activity.csv -- but the model routes 646/1761 = 37% of the North basin's discharge through it and counts it as passed. This is a structural mismatch in the comparison, not a parameter, and it is reported here rather than fixed.",
+    "wilmetteShareOfPassedMG": {
+      "mean": 0.1169,
+      "min": 0.065,
+      "max": 0.2079
+    },
+    "loggedSixFit": {
+      "params": {
+        "runoffC": 0.15,
+        "runoffMax": 0.6795,
+        "amcK": 0.9663,
+        "routeN": 2,
+        "routeK": 0.7189,
+        "reliefFactor": 4
+      },
+      "J": 0.5618,
+      "primary": 0.2929,
+      "secondary": 0.7682,
+      "holdoutRmsLog": 0.4155,
+      "defaultsHoldoutRmsLog": 0.3925,
+      "gmeanRatioDefaults": 1.0039,
+      "gmeanRatioFitted": 0.9839,
+      "ratios": [
+        [
+          "2011-07-22",
+          1.3668
+        ],
+        [
+          "2008-09-12",
+          1.5551
+        ],
+        [
+          "2010-07-23",
+          1.0349
+        ],
+        [
+          "2020-05-14",
+          0.5992
+        ],
+        [
+          "2011-05-22",
+          1.0334
+        ],
+        [
+          "2013-04-15",
+          1.0848
+        ],
+        [
+          "2014-08-21",
+          0.5588
+        ],
+        [
+          "2007-08-18",
+          1.1326
+        ],
+        [
+          "2017-10-14",
+          1.2044
+        ],
+        [
+          "2009-06-16",
+          0.7547
+        ]
+      ]
+    }
+  },
+  "holdout": {
+    "storms": [
+      "2013-04-15",
+      "2014-08-21"
+    ],
+    "fitted": {
+      "rmsLog": 0.4592488662958809,
+      "ratios": [
+        [
+          "2013-04-15",
+          1.1443
+        ],
+        [
+          "2014-08-21",
+          0.5298
+        ]
+      ]
+    },
+    "defaults": {
+      "rmsLog": 0.4058590160824843,
+      "ratios": [
+        [
+          "2013-04-15",
+          1.5481
+        ],
+        [
+          "2014-08-21",
+          0.6893
+        ]
+      ]
+    }
+  },
+  "leaveOneOut": {
+    "rmsLogFitted": 0.4419,
+    "rmsLogDefaults": 0.5327,
+    "folds": [
+      {
+        "start": "2011-07-22",
+        "x": {
+          "runoffC": 0.15,
+          "runoffMax": 0.6686,
+          "amcK": 1.0302,
+          "routeN": 3,
+          "routeK": 1.1153,
+          "reliefFactor": 4
+        },
+        "ratio": 1.3412,
+        "logRatio": 0.29356028026515263
+      },
+      {
+        "start": "2008-09-12",
+        "x": {
+          "runoffC": 0.15,
+          "runoffMax": 0.6685,
+          "amcK": 1.0155,
+          "routeN": 3,
+          "routeK": 1.1811,
+          "reliefFactor": 4
+        },
+        "ratio": 1.764,
+        "logRatio": 0.5675843187993665
+      },
+      {
+        "start": "2010-07-23",
+        "x": {
+          "runoffC": 0.1501,
+          "runoffMax": 0.6415,
+          "amcK": 0.9272,
+          "routeN": 3,
+          "routeK": 1.156,
+          "reliefFactor": 4
+        },
+        "ratio": 1.0213,
+        "logRatio": 0.021032059118404504
+      },
+      {
+        "start": "2020-05-14",
+        "x": {
+          "runoffC": 0.15,
+          "runoffMax": 0.544,
+          "amcK": 0.5032,
+          "routeN": 3,
+          "routeK": 1.22,
+          "reliefFactor": 4
+        },
+        "ratio": 0.512,
+        "logRatio": -0.6694591932552229
+      },
+      {
+        "start": "2011-05-22",
+        "x": {
+          "runoffC": 0.15,
+          "runoffMax": 0.6192,
+          "amcK": 0.8057,
+          "routeN": 3,
+          "routeK": 1.1686,
+          "reliefFactor": 4
+        },
+        "ratio": 1.2085,
+        "logRatio": 0.1894053638009944
+      },
+      {
+        "start": "2013-04-15",
+        "x": {
+          "runoffC": 0.15,
+          "runoffMax": 0.6237,
+          "amcK": 0.8307,
+          "routeN": 3,
+          "routeK": 1.1753,
+          "reliefFactor": 4
+        },
+        "ratio": 1.165,
+        "logRatio": 0.15269312294014245
+      },
+      {
+        "start": "2014-08-21",
+        "x": {
+          "runoffC": 0.15,
+          "runoffMax": 0.6308,
+          "amcK": 0.9485,
+          "routeN": 3,
+          "routeK": 0.5,
+          "reliefFactor": 4
+        },
+        "ratio": 0.5233,
+        "logRatio": -0.6475593044458821
+      },
+      {
+        "start": "2007-08-18",
+        "x": {
+          "runoffC": 0.15,
+          "runoffMax": 0.6181,
+          "amcK": 0.7744,
+          "routeN": 3,
+          "routeK": 1.2692,
+          "reliefFactor": 4
+        },
+        "ratio": 1.2901,
+        "logRatio": 0.2547217022149789
+      },
+      {
+        "start": "2017-10-14",
+        "x": {
+          "runoffC": 0.15,
+          "runoffMax": 0.6131,
+          "amcK": 0.7751,
+          "routeN": 3,
+          "routeK": 1.1811,
+          "reliefFactor": 4
+        },
+        "ratio": 1.3329,
+        "logRatio": 0.287357715744266
+      },
+      {
+        "start": "2009-06-16",
+        "x": {
+          "runoffC": 0.15,
+          "runoffMax": 0.66,
+          "amcK": 1.3123,
+          "routeN": 3,
+          "routeK": 1.4639,
+          "reliefFactor": 4
+        },
+        "ratio": 0.5039,
+        "logRatio": -0.6853875647412876
+      }
+    ]
+  },
+  "sensitivity": [
+    {
+      "param": "runoffC",
+      "value": 0.15,
+      "lo": 0.15,
+      "hi": 0.6,
+      "minus25": {
+        "value": 0.15,
+        "J": 0.5911,
+        "dJ": 0,
+        "clipped": true
+      },
+      "plus25": {
+        "value": 0.1875,
+        "J": 0.6447,
+        "dJ": 0.0536,
+        "clipped": false
+      }
+    },
+    {
+      "param": "dMax",
+      "value": 0.4878,
+      "lo": 0,
+      "hi": 0.75,
+      "minus25": {
+        "value": 0.3659,
+        "J": 0.8642,
+        "dJ": 0.2731,
+        "clipped": false
+      },
+      "plus25": {
+        "value": 0.6098,
+        "J": 0.7827,
+        "dJ": 0.1916,
+        "clipped": false
+      }
+    },
+    {
+      "param": "amcK",
+      "value": 0.9696,
+      "lo": 0.5,
+      "hi": 8,
+      "minus25": {
+        "value": 0.7272,
+        "J": 0.6374,
+        "dJ": 0.0463,
+        "clipped": false
+      },
+      "plus25": {
+        "value": 1.212,
+        "J": 0.6368,
+        "dJ": 0.0457,
+        "clipped": false
+      }
+    },
+    {
+      "param": "routeK",
+      "value": 0.5018,
+      "lo": 0.5,
+      "hi": 6,
+      "minus25": {
+        "value": 0.5,
+        "J": 0.5911,
+        "dJ": 0,
+        "clipped": true
+      },
+      "plus25": {
+        "value": 0.6273,
+        "J": 0.5913,
+        "dJ": 0.0002,
+        "clipped": false
+      }
+    },
+    {
+      "param": "reliefFactor",
+      "value": 4,
+      "lo": 1,
+      "hi": 4,
+      "minus25": {
+        "value": 3,
+        "J": 0.6774,
+        "dJ": 0.0863,
+        "clipped": false
+      },
+      "plus25": {
+        "value": 4,
+        "J": 0.5911,
+        "dJ": 0,
+        "clipped": true
+      }
+    },
+    {
+      "param": "routeN",
+      "value": 3,
+      "alt": 1,
+      "J": 0.5973,
+      "dJ": 0.0062
+    },
+    {
+      "param": "routeN",
+      "value": 3,
+      "alt": 2,
+      "J": 0.5958,
+      "dJ": 0.0047
+    }
+  ],
+  "conditioning": {
+    "note": "Hessian of J at the optimum, parameters rescaled to their unit box. A near-zero eigenvalue is a direction the data does not constrain. Where a parameter sits on a bound the curvature along it is an artefact of the box, not of the data.",
+    "order": [
+      "runoffC",
+      "dMax",
+      "amcK",
+      "routeK",
+      "reliefFactor"
+    ],
+    "eigen": [
+      {
+        "value": 109.2005,
+        "vector": [
+          -0.1848,
+          -0.4199,
+          0.8881,
+          0.021,
+          0.0169
+        ]
+      },
+      {
+        "value": 8.5186,
+        "vector": [
+          0.7443,
+          0.4663,
+          0.3835,
+          -0.2713,
+          -0.0885
+        ]
+      },
+      {
+        "value": 6.1799,
+        "vector": [
+          0.6219,
+          -0.7254,
+          -0.2191,
+          0.0926,
+          0.1747
+        ]
+      },
+      {
+        "value": 4.7247,
+        "vector": [
+          -0.039,
+          0.1805,
+          0.0593,
+          -0.0328,
+          0.9805
+        ]
+      },
+      {
+        "value": 2.4932,
+        "vector": [
+          0.1535,
+          0.2177,
+          0.1124,
+          0.9572,
+          -0.0087
+        ]
+      }
+    ],
+    "conditionNumber": 43.7993,
+    "atBounds": [
+      {
+        "param": "runoffC",
+        "value": 0.15,
+        "at": "lower"
+      },
+      {
+        "param": "routeK",
+        "value": 0.5018,
+        "at": "lower"
+      },
+      {
+        "param": "reliefFactor",
+        "value": 4,
+        "at": "upper"
+      }
+    ]
+  },
+  "runoffCProfile": [
+    {
+      "runoffC": 0.15,
+      "reliefFactor": 4,
+      "runoffMax": 0.6378,
+      "amcK": 0.9696,
+      "routeK": 0.5018,
+      "J": 0.5911,
+      "dJ": 0
+    },
+    {
+      "runoffC": 0.2,
+      "reliefFactor": 4,
+      "runoffMax": 0.6486,
+      "amcK": 1.1613,
+      "routeK": 0.5,
+      "J": 0.5957,
+      "dJ": 0.0046
+    },
+    {
+      "runoffC": 0.25,
+      "reliefFactor": 4,
+      "runoffMax": 0.654,
+      "amcK": 1.3492,
+      "routeK": 0.6442,
+      "J": 0.6006,
+      "dJ": 0.0095
+    },
+    {
+      "runoffC": 0.32,
+      "reliefFactor": 4,
+      "runoffMax": 0.6681,
+      "amcK": 1.9006,
+      "routeK": 0.5781,
+      "J": 0.6098,
+      "dJ": 0.0187
+    },
+    {
+      "runoffC": 0.4,
+      "reliefFactor": 4,
+      "runoffMax": 0.6915,
+      "amcK": 3.437,
+      "routeK": 0.5247,
+      "J": 0.626,
+      "dJ": 0.0349
+    },
+    {
+      "runoffC": 0.5,
+      "reliefFactor": 4,
+      "runoffMax": 0.5662,
+      "amcK": 8,
+      "routeK": 0.5,
+      "J": 0.6642,
+      "dJ": 0.0731
+    },
+    {
+      "runoffC": 0.6,
+      "reliefFactor": 4,
+      "runoffMax": 0.6,
+      "amcK": 6.5977,
+      "routeK": 0.5,
+      "J": 0.8181,
+      "dJ": 0.227
+    }
+  ],
+  "residualsByGroup": {
+    "CENTRAL": {
+      "meanLogBefore": -0.2731,
+      "meanLogAfter": -0.3664,
+      "rmsBefore": 0.6729,
+      "rmsAfter": 0.5356
+    },
+    "NORTH": {
+      "meanLogBefore": 0.7072,
+      "meanLogAfter": 0.481,
+      "rmsBefore": 0.8867,
+      "rmsAfter": 0.5926
+    },
+    "SOUTH": {
+      "meanLogBefore": 0.9725,
+      "meanLogAfter": 0.8517,
+      "rmsBefore": 1.1355,
+      "rmsAfter": 1.0482
+    }
+  },
+  "majewski": {
+    "loggedFills": 7,
+    "modelFillsBefore": 1,
+    "modelFillsAfter": 1,
+    "peaks": [
+      {
+        "start": "2011-07-22",
+        "logged": true,
+        "before": 0.3458,
+        "after": 0.4868
+      },
+      {
+        "start": "2008-09-12",
+        "logged": true,
+        "before": 0.8704,
+        "after": 1
+      },
+      {
+        "start": "2010-07-23",
+        "logged": true,
+        "before": 0.3047,
+        "after": 0.4245
+      },
+      {
+        "start": "2020-05-14",
+        "logged": true,
+        "before": 0.0667,
+        "after": 0.1461
+      },
+      {
+        "start": "2011-05-22",
+        "logged": true,
+        "before": 0,
+        "after": 0
+      },
+      {
+        "start": "2013-04-15",
+        "logged": true,
+        "before": 0.3705,
+        "after": 0.4946
+      },
+      {
+        "start": "2014-08-21",
+        "logged": false,
+        "before": 0,
+        "after": 0.0214
+      },
+      {
+        "start": "2007-08-18",
+        "logged": false,
+        "before": 0.0661,
+        "after": 0.149
+      },
+      {
+        "start": "2017-10-14",
+        "logged": true,
+        "before": 0.1452,
+        "after": 0.2418
+      },
+      {
+        "start": "2009-06-16",
+        "logged": false,
+        "before": 0,
+        "after": 0
+      }
+    ]
+  }
+}
