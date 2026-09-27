@@ -234,13 +234,71 @@ def shape_from(g, measured):
     return best
 
 
-def main():
-    top = json.load(open(os.path.join(SCR, 'events_top.json')))[:10]
+def read_log():
+    """MWRD's pumping-station discharge log, per day per station, MG.
+
+    The CSV reproduces its source spreadsheets row for row, quirks included, and
+    those spreadsheets repeat some blocks verbatim: 51 rows are exact duplicates,
+    six of them dated (Westchester, October 2017, which would double-count 14.3 MG
+    into the 2017-10-14 storm). An exact repeat of station, date, span and raw
+    volume is read once."""
     log = collections.defaultdict(lambda: collections.defaultdict(float))
+    seen = set()
     for r in csv.DictReader(open(os.path.join(ROOT, 'data', 'mwrd-ps-cso-activity.csv'))):
         if r['row_type'] != 'event' or not r['volume_mg'] or not r['date_iso']: continue
+        key = (r['station'], r['date_raw'], r['date_iso'], r['span_days'], r['volume_raw'], r['unit'])
+        if key in seen: continue
+        seen.add(key)
         st = CSO_STATION.get(r['station'])
         if st: log[r['date_iso']][st] += float(r['volume_mg'])
+    return log
+
+
+def recorded_for(log, start, end):
+    """Discharge MWRD logged from the storm's first day to two days after its
+    last (for lag). The seven-day lead-in is deliberately excluded: the model
+    counts its own passed flow from the same moment (sim.js, leadHr)."""
+    rec = collections.defaultdict(float)
+    d = start
+    while d <= end + datetime.timedelta(days=2):
+        for st, v in log.get(d.isoformat(), {}).items(): rec[st] += v
+        d += datetime.timedelta(days=1)
+    return rec
+
+
+def era_for(start):
+    """The build-out state a storm met, by date (see CONFIGS in sim.js)."""
+    if start < datetime.date(2007, 1, 1): return 'pre'
+    if start < datetime.date(2015, 1, 1): return 'tunnels'
+    if start < datetime.date(2017, 12, 4): return 'r2015'      # McCook Stage 1 dedicated 4 Dec 2017
+    if start < datetime.date(2021, 10, 1): return 'mccook1'    # Des Plaines Inflow Tunnel, Oct 2021
+    return 'today'
+
+
+def refresh():
+    """Recompute each storm's era and recorded discharge from the log, and
+    re-merge MWRD's observations, in the storms.json already on disk -- no
+    rainfall refetch needed."""
+    out = json.load(open(os.path.join(ROOT, 'map-data', 'storms.json')))
+    log = read_log()
+    for s in out['storms']:
+        start = datetime.date.fromisoformat(s['start']); end = datetime.date.fromisoformat(s['end'])
+        rec = recorded_for(log, start, end)
+        before = (s['era'], s['recordedTotalMG'])
+        s['era'] = era_for(start)
+        s['recordedCsoMG'] = {k: round(v, 1) for k, v in rec.items()}
+        s['recordedTotalMG'] = round(sum(rec.values()), 1)
+        if before != (s['era'], s['recordedTotalMG']):
+            print(f"  {s['start']}: era {before[0]} -> {s['era']}, recorded {before[1]:,} -> {s['recordedTotalMG']:,} MG")
+    out['meta']['recorded'] = ('MWRD pumping-station discharge log in data/mwrd-ps-cso-activity.csv, summed from the '
+                               'storm start through two days after its end; exact duplicate rows read once')
+    print('merged observations into', merge_observed(out), 'of', len(out['storms']), 'storms')
+    write(out)
+
+
+def main():
+    top = json.load(open(os.path.join(SCR, 'events_top.json')))[:10]
+    log = read_log()
     storms = []
     drops = {}
     for e in top:
@@ -304,14 +362,8 @@ def main():
         for g in gauges:
             assert 'hourly' in g or g['shapeFrom'] in shaped, \
                 f"{e['start']}: {g['id']} borrows its shape from {g.get('shapeFrom')}, which has none"
-        # recorded discharge within the window (plus two days for lag)
-        rec = collections.defaultdict(float)
-        d = start
-        while d <= end + datetime.timedelta(days=2):
-            for st, v in log.get(d.isoformat(), {}).items(): rec[st] += v
-            d += datetime.timedelta(days=1)
-        yr = start.year
-        era = 'pre' if yr < 2007 else 'tunnels' if yr < 2015 else 'r2015' if yr < 2018 else 'today'
+        rec = recorded_for(log, start, end)
+        era = era_for(start)
         storms.append(dict(
             id=e['start'], start=e['start'], end=e['end'], t0=t0.isoformat(), hours=hours, leadHr=LEAD * 24,
             stormHr=int((datetime.datetime.combine(end + datetime.timedelta(days=1), datetime.time(0)) - t0).total_seconds() // 3600) - LEAD * 24,
@@ -375,4 +427,6 @@ def main():
     write(out)
 
 if __name__ == '__main__':
-    observed_only() if '--observed-only' in sys.argv else main()
+    if '--refresh' in sys.argv: refresh()
+    elif '--observed-only' in sys.argv: observed_only()
+    else: main()

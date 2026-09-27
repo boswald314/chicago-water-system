@@ -16,8 +16,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
-import { SewerModel, CONFIGS } from './sim.js?v=11';
-import * as SC from './scene.js?v=11';
+import { SewerModel, CONFIGS } from './sim.js?v=12';
+import * as SC from './scene.js?v=12';
 
 const D = window.SYS3D;
 const FT = SC.FT;
@@ -50,7 +50,7 @@ const speedHrs = () => SPEEDS[ST.speedIx][0];
 const ST = {
   vExag: 18, dExag: 34, route: 'corridor',
   playing: false, speedIx: 3, pos: 0, run: null,
-  storm: { inches: 2.0, hours: 24, shape: 'peaked', runoffC: 0.32, config: 'today', pumpLimit: 'plant' },
+  storm: { inches: 2.0, hours: 24, shape: 'peaked', runoffC: 0.51, config: 'today', pumpLimit: 'plant' },   // runoffC: fitted, see map-data/calibration.json
   layers: { geo: 1, contours: 1, flood: 1, tunnels: 1, water: 1, shafts: 1, connections: 0, links: 1, reservoirs: 1, plants: 1,
             pumps: 1, outfalls: 0, basins: 1, labels: 1, flow: 1 },
   storms: null, pools: null, recorded: null,
@@ -66,7 +66,18 @@ const host = $('#view');
 /* Phones and small tablets: coarse pointer or a narrow window. Drives the
  * bottom-sheet layout, touch gestures and a lighter render budget. */
 const MOBILE = matchMedia('(max-width: 900px), (pointer: coarse) and (max-width: 1100px)').matches;
-const renderer = new THREE.WebGLRenderer({ antialias: !MOBILE, powerPreference: 'high-performance' });
+/* No WebGL (GPU disabled, an old phone, a locked-down browser): say so plainly
+ * instead of throwing and leaving an empty page. */
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ antialias: !MOBILE, powerPreference: MOBILE ? 'default' : 'high-performance' });
+} catch (e) {
+  host.innerHTML = '<div class="nogl"><b>This 3D model needs WebGL, which this browser could not start.</b>' +
+    '<span>Try another browser, turn on hardware acceleration, or close other 3D tabs and reload. The research ' +
+    'it draws on is all in the <a href="docs/">documents</a> and the <a href="geo.html">geographic map</a>.</span></div>';
+  document.body.classList.add('nogl-mode');
+  throw e;
+}
 renderer.setPixelRatio(Math.min(devicePixelRatio, MOBILE ? 1.5 : 2));
 renderer.setSize(host.clientWidth, host.clientHeight);
 host.appendChild(renderer.domElement);
@@ -759,7 +770,8 @@ function applyBuildOut() {
     r.grp.visible = cap > 0 || (r.f.retired && ST.storm.config === 'r2015');
     r.built = cap > 0; r.shown = -1;
   }
-  for (const l of links) if (l.res) l.mesh.visible = !!(resObjects[l.res] && resObjects[l.res].built);
+  const unl = (ST.run.config && ST.run.config.unlinked) || {};
+  for (const l of links) if (l.res) l.mesh.visible = !!(resObjects[l.res] && resObjects[l.res].built) && !(l.kind === 'inflow' && unl[l.sid]);
 }
 
 /* -------------------------------------------------------------- plants */
@@ -1324,7 +1336,7 @@ function renderSummary() {
     const rec = D.sim.events.find(e => e.date === '2008-09-13');
     if (rec) {
       const four = ['ps-north-branch', 'ps-racine', 'ps-westchester', 'ps-125th'].reduce((a, k) => a + (s.csoByStation[k] || 0), 0);
-      val = `<div class="valid"><b>Against the record.</b> MWRD logged ${rec.totalMG.toLocaleString()} MG of discharge across four pumping stations on 13 Sept 2008. This model puts those same four at <b>${num(four)} MG</b>. The runoff coefficient (0.32) was chosen to make that comparison line up — it is the model’s one calibrated parameter.</div>`;
+      val = `<div class="valid"><b>Against the record.</b> MWRD logged ${rec.totalMG.toLocaleString()} MG of discharge across four pumping stations on 13 Sept 2008. This model puts those same four at <b>${num(four)} MG</b>. The runoff coefficient (0.51) was fitted across eight recorded storms, the September 2008 storms among them, with two more held out — it is the model’s one calibrated parameter.</div>`;
     }
   }
   $('#summary').innerHTML = `
@@ -1453,7 +1465,7 @@ function buildUI() {
   for (const e of D.sim.events.slice(0, 12)) {
     const b = el('button', 'evbtn', `<b>${e.date}</b><span>${e.totalMG.toLocaleString()} MG recorded</span>`);
     b.addEventListener('click', () => {
-      const yr = +e.date.slice(0, 4), cfg = yr < 2007 ? 'pre' : yr < 2015 ? 'tunnels' : yr < 2017 ? 'r2015' : 'today';
+      const cfg = e.date < '2007' ? 'pre' : e.date < '2015' ? 'tunnels' : e.date < '2017-12-04' ? 'r2015' : e.date < '2021-10' ? 'mccook1' : 'today';
       $('#config').value = cfg; ST.storm.config = cfg;
       $('#recnote').innerHTML = `Recorded on <b>${e.date}</b>: ${e.totalMG.toLocaleString()} MG across ${Object.keys(e.stations).length} MWRD pumping stations (` +
         Object.entries(e.stations).map(([k, v]) => { const f = facById(k); return `${f ? f.short : k} ${v.toLocaleString()} MG`; }).join(', ') + `). Set a rainfall above and compare.`;

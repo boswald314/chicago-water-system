@@ -309,6 +309,12 @@
     #intro p { font-size:12px; }
     .stormbtn { font-size:11px; }
   }
+  .nogl { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+    padding:24px; text-align:center; color:var(--ink2); font-size:13.5px; line-height:1.55; }
+  .nogl b { color:var(--ink); font-size:15px; max-width:420px; }
+  body.nogl-mode #intro, body.nogl-mode #legend, body.nogl-mode #legendBtn, body.nogl-mode #hud, body.nogl-mode #navhud,
+  body.nogl-mode #timeline, body.nogl-mode #exagbadge, body.nogl-mode #keyhelp { display:none !important; }
+  .nogl span { max-width:440px; }
   #legendBtn { display:none; position:absolute; right:8px; top:8px; z-index:11; border:1px solid var(--line); background:var(--panel);
     color:var(--ink2); border-radius:6px; padding:4px 9px; font-size:11px; cursor:pointer; }
 </style>
@@ -425,11 +431,10 @@
         <select id="shape"><option value="peaked">Centre-peaked (realistic)</option>
           <option value="uniform">Uniform intensity</option></select></div>
       </div>
-      <div class="ctl"><label>Runoff coefficient (dry ground) <b id="runoffv">0.32</b></label>
-        <input id="runoff" type="range" min="10" max="90" step="1" value="32"></div>
-      <p class="hint">Runoff rises toward 0.62 as the ground saturates, on the rain of the previous 72 hours
-        — an antecedent-moisture adjustment in the NRCS style. Without it a long wet week produces far too
-        little flow.</p>
+      <div class="ctl"><label>Runoff coefficient <b id="runoffv">0.51</b></label>
+        <input id="runoff" type="range" min="10" max="90" step="1" value="51"></div>
+      <p class="hint">The share of rain that reaches the sewers. 0.51 is fitted to MWRD's own discharge log for
+        eight recorded storms, with two more held out to check it — see Model notes.</p>
       <div class="ctl"><label>Dewatering limited by</label>
         <select id="pumplimit"><option value="plant">Receiving plant's spare capacity</option>
           <option value="nameplate">Pump nameplate only</option></select></div>
@@ -531,7 +536,10 @@
         The comparison is against MWRD's own pumping-station discharge log, summed over the event window
         plus two days. The log covers only the six stations, not the gravity outfalls, so the model's
         "passed through the stations" figure is the like-for-like number. Across the ten storms the
-        geometric-mean ratio of modelled to recorded is about 1.1, with individual storms from 0.6× to 2.8×.</p>
+        geometric-mean ratio of modelled to recorded is 1.08, with individual storms from 0.58× to 1.94×.
+        What remains is structured by basin — the Central basin reads low and the South high — which a
+        single runoff coefficient cannot fix; MWRD's outfall gate times suggest why: outfalls open well
+        before the tunnels and McCook fill, while the model spills only once they have.</p>
       <h4>Checking the model past the six pumping stations</h4>
       <p class="hint">The discharge log above covers six stations. It cannot say which gravity outfalls
         opened, whether the system was pushed to reverse into the lake, or where water stood. Three
@@ -582,12 +590,6 @@
         could deliver it," not as a flood forecast. Against the harder, coarser observable — how much
         water MWRD was forced to send back into Lake Michigan — the model does far better, ranking the
         ten storms at about +0.88.</p>
-
-        geometric-mean ratio of modelled to recorded is about 1.25, with individual storms from 0.6× to 2.6×.
-        That ratio sat nearer 1.0 while the model was reading ten ASOS gauges: the denser field finds more
-        rain than the airports did, so the 0.32 runoff coefficient — fitted back when the rain was
-        under-sampled — is now carrying a bias that belongs to the runoff, not the rainfall, and is due
-        a fresh calibration.</p>
       <h4>Standing water</h4>
       <p class="hint">When a basin's overflow exceeds what its outfalls are rated to pass, the surplus
         surcharges the collection system and stands in the streets. The model pools that volume in the
@@ -612,9 +614,15 @@
         storage capacities, plant design flows and pump capacities, and it routes each basin's excess
         down the tunnel system that actually serves it. It does not solve for head, velocity, air
         entrainment, surge or travel time, so it will not tell you when a particular shaft chokes or
-        where a pressure wave goes. Its one fitted parameter is the runoff coefficient, set to 0.32
-        because that is the value that reproduces MWRD's recorded pumping-station discharge for
-        13 September 2008.</p>
+        where a pressure wave goes. Its one fitted parameter is the runoff coefficient, 0.51, fitted
+        to MWRD's pumping-station discharge log for eight recorded storms, with 13 April 2013 and
+        21 August 2014 held out before fitting: on that pair the error fell from 0.47 to 0.30 (RMS of the
+        log ratio) against the hand-set 0.32 it replaced, and a leave-one-out refit lands between 0.49
+        and 0.52 whichever storm is dropped. Two earlier attempts that freed more knobs were declined —
+        the parameters ran onto their bounds or switched themselves off — and are kept, with the
+        structural corrections made between attempts, in <code>map-data/calibration.json</code>.
+        Everything else is a sourced capacity; every plant's dry-weather flow is its 2024 average from
+        a single MWRD report.</p>
       <h4>Sources</h4>
       <div id="sourcelist"></div>
     </div>
@@ -641,7 +649,7 @@
   document.getElementById('introGo').addEventListener('click', hide);
   addEventListener('keydown', e => { if (e.key === 'Escape') hide(); });
 </script>
-<script src="map-data/system3d.js?v=11"></script>
+<script src="map-data/system3d.js?v=12"></script>
 <script type="importmap">
 { "imports": {
   "three": "./assets/vendor/three/three.module.js",
@@ -655,6 +663,6 @@
     .map(([k, v]) => '<div class="srow"><span>' + v[0] + '</span><a href="' + v[1] + '">' + k + '</a></div>')
     .join('');
 </script>
-<script type="module" src="assets/js/system3d/app.js?v=11"></script>
+<script type="module" src="assets/js/system3d/app.js?v=14"></script>
 </body>
 </html>

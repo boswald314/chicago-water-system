@@ -27,10 +27,19 @@ export const CONFIGS = [
     tunnels: { mainstream: 1, desplaines: 1, calumet: 1, udp: 1 },
     reservoirs: { 'res-majewski': 1, 'res-thornton': 1 },
     note: 'Thornton Composite Reservoir gives the Calumet system 4.8 BG of CSO storage. No CSO has been recorded in its service area since 2020.' },
+  { id: 'mccook1', year: 2018, label: 'McCook Stage 1 (2018–21)',
+    tunnels: { mainstream: 1, desplaines: 1, calumet: 1, udp: 1 },
+    reservoirs: { 'res-majewski': 1, 'res-thornton': 1, 'res-mccook': 1 },
+    // McCook Stage 1 was dedicated 4 Dec 2017, fed from the Mainstream tunnel;
+    // the Des Plaines Inflow Tunnel that connects the Des Plaines system to it
+    // reached substantial completion only in Oct 2021 (docs/10). Until then a
+    // full Des Plaines tunnel had nowhere to spill but the river.
+    unlinked: { desplaines: true },
+    note: 'McCook Stage 1 (3.5 BG) in service from December 2017, but fed only from the Mainstream tunnel: the Des Plaines Inflow Tunnel was not complete until October 2021. The May 2020 storms met this system.' },
   { id: 'today', year: 2026, label: 'Today (2026)', dflt: true,
     tunnels: { mainstream: 1, desplaines: 1, calumet: 1, udp: 1 },
     reservoirs: { 'res-majewski': 1, 'res-thornton': 1, 'res-mccook': 1 },
-    note: 'McCook Stage 1 (3.5 BG) added in December 2017. Total in-service storage about 10.97 BG.' },
+    note: 'McCook Stage 1 (3.5 BG), fed from both the Mainstream and, since October 2021, the Des Plaines tunnels. Total in-service storage about 10.97 BG.' },
   { id: 'design', year: 2032, label: 'Design complete (2032)',
     tunnels: { mainstream: 1, desplaines: 1, calumet: 1, udp: 1 },
     reservoirs: { 'res-majewski': 1, 'res-thornton': 1, 'res-mccook': 2 },
@@ -148,36 +157,34 @@ export class SewerModel {
    *  be scrubbed and charted without re-simulating. */
   run(opts) {
     const o = Object.assign({
-      inches: 2.0, hours: 24, shape: 'peaked', runoffC: 0.32,
+      inches: 2.0, hours: 24, shape: 'peaked', runoffC: 0.51,
       config: 'today', dtHr: 0.25, tailHr: 264, pumpLimit: 'plant',
-      // Antecedent moisture: the volumetric runoff coefficient rises toward
-      // runoffMax as the ground saturates, on the rain of the previous 72 h
-      // (an NRCS-AMC-style adjustment). Set amcK to 0 to switch it off.
+      // runoffC is FITTED: a constant volumetric runoff coefficient, 0.51,
+      // calibrated 27 Sept 2026 against MWRD's six-station discharge log for
+      // eight recorded storms, with 2013-04-15 and 2014-08-21 held out before
+      // fitting (scripts/fit_runoff.mjs; record in map-data/calibration.json).
+      // Interior minimum (bounds 0.05-0.60); every leave-one-out fold lands at
+      // 0.49-0.52. Held-out RMS log error 0.47 -> 0.30, leave-one-out
+      // 0.58 -> 0.46, against the hand-set 0.32 it replaces.
       //
-      // The 0.32 base was fitted years ago against a single day, 13 Sept 2008.
-      // Two refits against MWRD's log for all ten recorded storms have found
-      // nothing worth adopting, so these values stand unchanged.
-      // The first (24 Sept 2026) freed six knobs, drove three onto their
-      // bounds, did WORSE on the two storms held out before fitting, and
-      // bought most of its gain by pushing reliefFactor to 4 -- spilling the
-      // surplus through gravity outfalls the stations never log.
-      // The second (27 Sept 2026) first fixed two structural errors --
-      // Calumet's dry-weather base was its design flow, not the flow it
-      // treats, and the lead-in week was counted against a log that starts
-      // on the storm date -- then fitted runoffC, runoffMax and amcK alone on
-      // eight storms, over the six logged stations, with reliefFactor and
-      // routing held fixed. It beat these values on the two held-out storms
-      // and under leave-one-out, but only by switching the moisture ramp off:
-      // runoffMax fell onto runoffC (a constant C of 0.51) and amcK stopped
-      // mattering. A fit that answers by deleting the mechanism does not
-      // calibrate it, so it was declined. What is left is basin-structured --
-      // about 0.75x in the Central basin, 1.27x North, 1.66x South -- and
-      // MWRD's tide-gate times suggest why: outfalls open days before the
-      // tunnels and McCook fill, while this model spills only once they have.
-      // scripts/calibrate.mjs regenerates map-data/calibration.json, which
-      // keeps both attempts: the structural tests, fits, profiles, hold-out
-      // and leave-one-out results behind that decision.
-      runoffMax: 0.62, amcK: 2.5,
+      // Antecedent moisture is OFF by default (amcK 0). The coefficient can
+      // be made to rise toward runoffMax on the rain of the previous 72 h
+      // (NRCS-AMC style, amcK in inches), but fitted freely the data set
+      // runoffMax equal to runoffC and leave amcK unconstrained -- with real
+      // gauge density and a seven-day lead-in there is nothing for the ramp
+      // to explain. Kept as an option, not a default.
+      //
+      // Two earlier attempts were declined and are kept in calibration.json:
+      // six free knobs (24 Sept) ran three onto their bounds and did worse on
+      // the held-out storms; three knobs (27 Sept) found the ramp redundant.
+      // The model was corrected between attempts -- Wilmette excluded from the
+      // log comparison, every plant's dry-weather base taken from the same
+      // 2024 MWRD report, the lead-in week kept out of the tally, and the Des
+      // Plaines tunnel cut off from McCook before Oct 2021 -- and it is those
+      // fixes, not the coefficient, that close most of the gap. What remains
+      // is basin-structured (Central under, South over) and does not respond
+      // to a global coefficient: see calibration.json.
+      runoffMax: 0.62, amcK: 0,
       // Runoff routing: a catchment does not hand its rain to the interceptor
       // the instant it falls. Water needs a time of concentration to reach a
       // sewer, and the collection system stores it on the way, so the flow
@@ -339,7 +346,7 @@ export class SewerModel {
         tunVol[sid] += into;
         q -= into;
         if (q > 0) {                                  // tunnel full -> reservoir
-          const rid = s.reservoir;
+          const rid = (cfg.unlinked || {})[sid] ? null : s.reservoir;
           const rroom = (resCap[rid] || 0) - (resVol[rid] || 0);
           const intoRes = Math.min(q, Math.max(0, rroom));
           if (rid) resVol[rid] += intoRes;
@@ -366,7 +373,7 @@ export class SewerModel {
         const fromTun = Math.min(vol, tunVol[sid]);
         tunVol[sid] -= fromTun;
         vol -= fromTun;
-        const rid = s.reservoir;
+        const rid = (cfg.unlinked || {})[sid] ? null : s.reservoir;
         const fromRes = rid ? Math.min(vol, resVol[rid] || 0) : 0;
         if (rid) resVol[rid] -= fromRes;
         const moved = fromTun + fromRes;
