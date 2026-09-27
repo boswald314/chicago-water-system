@@ -165,7 +165,10 @@ FAC_SPEC = {
     'wrp-calumet': dict(
         kind='wrp', label='Calumet WRP', short='Calumet',
         daf=S(354, 'MGD', 'doc12'), dmf=S(430, 'MGD', 'doc12'),
-        avg=S(354, 'MGD', 'doc12', 'MWRD labels 354 MGD the "average" volume; the NPDES permit defines it as design average flow'),
+        avg=S(244, 'MGD', 'doc11',
+              '2024 annual average treated flow, from the same MWRD report and year as Stickney’s 685 '
+              '(M&R Report 25-28, Annual Biosolids Management Report for 2024, doc11 source 21). The 354 MGD '
+              'MWRD’s fact sheet labels "average" is the NPDES design average flow (doc12), not a measured flow'),
         acres=S(275.4, 'acre', 'doc12', 'MWRD’s 2025 fact sheet; its locations page says 470 acres'),
         basin='SOUTH', doc='doc12',
         note='Receives South-basin dry-weather flow and everything the Calumet TARP Pumping Station lifts out of the Calumet tunnel and Thornton Composite Reservoir.',
