@@ -1025,6 +1025,14 @@ function buildGeoLabels() {
 
 /* =================================== 5. the live view of the simulation */
 const model = new SewerModel(D);
+/* The calibration verdict (map-data/calibration.json, written by
+ * scripts/calibrate.mjs) is shown with the comparison, so the ratios are read
+ * knowing whether the model's runoff parameters were fitted or hand-set. */
+async function loadCalibration() {
+  try { ST.calibration = await (await fetch('map-data/calibration.json')).json(); } catch (e) { ST.calibration = null; }
+  if (ST.recorded) renderCompare();
+}
+
 async function buildStorms() {
   let data;
   try { data = await (await fetch('map-data/storms.json')).json(); } catch (e) { console.warn('storms unavailable', e); return; }
@@ -1066,6 +1074,8 @@ function renderCompare() {
   const rt = recT > 0 ? modT / recT : null;
   h += `<tr class="tot"><td>Six stations</td><td class="n">${num(recT)}</td><td class="n">${num(modT)}</td><td class="ratio${rt && (rt > 2 || rt < 0.5) ? ' far' : ''}">${rt ? rt.toFixed(2) + '×' : '—'}</td></tr></table>`;
   h += `<p class="hint">Modelled total overflow including gravity outfalls the log does not cover: <b>${num(s.csoMG)} MG</b>; peak standing water <b>${num(s.peakPooledMG)} MG</b>.</p>`;
+  const cal = ST.calibration && ST.calibration.verdict;
+  if (cal && cal.viewerNote) h += `<div class="cfgnote"><b>Calibration.</b> ${esc(cal.viewerNote)}</div>`;
   // reservoirs and tunnels: the model's peak beside what MWRD's own monitoring reports logged
   const obs = st.observed || {};
   const rrows = [];
@@ -1581,7 +1591,7 @@ function animate(now) {
 }
 
 buildUI(); buildGround(); buildGeo(); buildSurface(); buildContours(); buildTunnels(); buildShafts(); buildReservoirs(); buildPlants(); buildPumps(); buildLinks();
-buildStorms(); buildPools();
+buildStorms(); buildPools(); loadCalibration();
 frameAll();
 $('#scennote').textContent = D.sim.scenarios.find(s => s.id === 'design').note;
 runSim();
