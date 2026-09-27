@@ -448,7 +448,8 @@ export class SewerModel {
         csoByBasin: Object.assign({}, csoCum),
         csoByStation: Object.assign({}, csoByStation),
         passedByStation,
-        passedMG: Object.values(passedByStation).reduce((a, b) => a + b, 0),
+        // like-for-like with MWRD's log: only the stations the log records
+        passedMG: Object.entries(passedByStation).reduce((a, [id, v]) => a + (D.relief[id] && D.relief[id].logged === false ? 0 : v), 0),
         treatedMG: treatedCum,
         capturePct: excessCum > 0 ? 100 * (1 - csoTotal / excessCum) : 100,
         peakTunnelFill: Object.fromEntries(Object.keys(D.systems).map(sid =>

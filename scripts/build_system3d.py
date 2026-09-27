@@ -1291,7 +1291,13 @@ def build_sim(basins, facs):
     for f in facs:
         if f['kind'] != 'sewage-ps':
             continue
+        # `logged`: whether MWRD's pumping-station discharge log (data/
+        # mwrd-ps-cso-activity.csv) has a series for this station. Wilmette is
+        # the North Shore Channel's controlling works -- screw pumps and lake
+        # reversal gates, not a CSO relief station -- and has none, so its flow
+        # must stay out of any figure compared against that log.
         relief[f['id']] = dict(id=f['id'], name=f['short'], basin=f.get('basin'),
+                               logged=f['id'] in set(CSO_STATION.values()),
                                capMGD=f['spec'].get('capMGD', {}).get('v', 100))
     return dict(
         plants=plants, systems=systems, pumps=pumps, reservoirs=reservoirs, relief=relief,
