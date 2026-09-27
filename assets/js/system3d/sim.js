@@ -155,21 +155,28 @@ export class SewerModel {
       // (an NRCS-AMC-style adjustment). Set amcK to 0 to switch it off.
       //
       // The 0.32 base was fitted years ago against a single day, 13 Sept 2008.
-      // Refitting runoffC, runoffMax, amcK, routeN, routeK and reliefFactor
-      // against all ten recorded storms on 24 Sept 2026 produced no set worth
-      // adopting, so these values stand unchanged. The fit drove three of the
-      // five knobs onto their bounds, did WORSE than these defaults on the two
-      // storms held out before fitting, and bought most of its improvement by
-      // pushing reliefFactor to 4 -- which routes the surplus out through
-      // gravity outfalls the stations never log and cuts the standing-water
-      // layer by three quarters, in a model already known to under-read
-      // basement flooding. The residuals it could not touch are the real
-      // problem and they are basin-structured, not global: against MWRD's log
-      // the Central basin runs about 0.76x and the South about 2.6x, a spread
-      // no single runoff coefficient can close.
+      // Two refits against MWRD's log for all ten recorded storms have found
+      // nothing worth adopting, so these values stand unchanged.
+      // The first (24 Sept 2026) freed six knobs, drove three onto their
+      // bounds, did WORSE on the two storms held out before fitting, and
+      // bought most of its gain by pushing reliefFactor to 4 -- spilling the
+      // surplus through gravity outfalls the stations never log.
+      // The second (27 Sept 2026) first fixed two structural errors --
+      // Calumet's dry-weather base was its design flow, not the flow it
+      // treats, and the lead-in week was counted against a log that starts
+      // on the storm date -- then fitted runoffC, runoffMax and amcK alone on
+      // eight storms, over the six logged stations, with reliefFactor and
+      // routing held fixed. It beat these values on the two held-out storms
+      // and under leave-one-out, but only by switching the moisture ramp off:
+      // runoffMax fell onto runoffC (a constant C of 0.51) and amcK stopped
+      // mattering. A fit that answers by deleting the mechanism does not
+      // calibrate it, so it was declined. What is left is basin-structured --
+      // about 0.75x in the Central basin, 1.27x North, 1.66x South -- and
+      // MWRD's tide-gate times suggest why: outfalls open days before the
+      // tunnels and McCook fill, while this model spills only once they have.
       // scripts/calibrate.mjs regenerates map-data/calibration.json, which
-      // holds the fitted set, the hold-out and leave-one-out results, the
-      // sensitivities and the trade-off profile behind that decision.
+      // keeps both attempts: the structural tests, fits, profiles, hold-out
+      // and leave-one-out results behind that decision.
       runoffMax: 0.62, amcK: 2.5,
       // Runoff routing: a catchment does not hand its rain to the interceptor
       // the instant it falls. Water needs a time of concentration to reach a
@@ -237,6 +244,10 @@ export class SewerModel {
     const rain72 = [];                              // (t, inches) area-weighted, for antecedent moisture
     const passedByStation = {};
     for (const rid of Object.keys(D.relief)) passedByStation[rid] = 0;
+    // MWRD's log is summed from a recorded storm's start date to two days after
+    // it ends (scripts/build_storms.py). Discharge in the lead-in week is in the
+    // log too, but on earlier dates, so it stays out of the like-for-like figure.
+    const logFromHr = o.hyeto ? (o.hyeto.leadHr || 0) : 0;
     const pooled = {};                              // MG standing in the streets, per basin
     for (const bid of Object.keys(this.basins)) pooled[bid] = 0;
     let rainCum = 0;
@@ -404,7 +415,7 @@ export class SewerModel {
           csoByStation[x.id] += r * (x.capMGD / tot) * o.dtHr / 24;
           // what MWRD's log can see: the station actually passing flow, capped
           // at its rating, plus its share of the backed-up water draining out later
-          passedByStation[x.id] += (Math.min(r * (x.capMGD / tot), x.capMGD) + fr.basins[bid]._drainRate * (x.capMGD / tot)) * o.dtHr / 24;
+          if (t >= logFromHr) passedByStation[x.id] += (Math.min(r * (x.capMGD / tot), x.capMGD) + fr.basins[bid]._drainRate * (x.capMGD / tot)) * o.dtHr / 24;
         }
       }
 
